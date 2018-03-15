@@ -3,7 +3,7 @@
  {:1.8 {:override-deps {org.clojure/clojure {:mvn/version "1.8.0"}}}
   :1.9 {:override-deps {org.clojure/clojure {:mvn/version "1.9.0"}}}
   :master {:override-deps {org.clojure/clojure {:mvn/version "1.10.0-master-SNAPSHOT"}}}
-  :test {:extra-paths ["test"]
+  :test {:extra-paths ["test" "src/test/clojure"]
          :extra-deps {org.clojure/test.check {:mvn/version "RELEASE"}}}
   :expect {:extra-deps {expectations {:mvn/version "RELEASE"}}}
   :bench {:extra-deps {criterium {:mvn/version "RELEASE"}}}
