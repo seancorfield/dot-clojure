@@ -3,22 +3,35 @@
  {:1.8 {:override-deps {org.clojure/clojure {:mvn/version "1.8.0"}}}
   :1.9 {:override-deps {org.clojure/clojure {:mvn/version "1.9.0"}}}
   :master {:override-deps {org.clojure/clojure {:mvn/version "1.10.0-master-SNAPSHOT"}}}
+
   :test {:extra-paths ["test" "src/test/clojure"]
          :extra-deps {org.clojure/test.check {:mvn/version "RELEASE"}}}
-  :expect {:extra-deps {expectations {:mvn/version "RELEASE"}}}
+
   :bench {:extra-deps {criterium {:mvn/version "RELEASE"}}}
+
+  :expect {:extra-deps {expectations {:mvn/version "RELEASE"}}}
+
   ;; (require '[clj-memory-meter.core :as mm])
   :measure {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "RELEASE"}}}
+
+  :new {:extra-deps {seancorfield/clj-new
+                     {:git/url "https://github.com/seancorfield/clj-new"
+                      :sha "5f52765aef0000ef5e27e6b97dbda61679197e47"}}
+        :main-opts ["-m" "clj-new.create"]}
+
+  :nrepl {:extra-deps {org.clojure/tools.nrepl {:mvn/version "0.2.12"}}
+          :main-opts ["-e" "(require,'[clojure.tools.nrepl.server,:refer,[start-server]]),(start-server,:port,60606)"]}
+
   :proto {:extra-deps {proto-repl {:mvn/version "RELEASE"}}}
-  :socket {:jvm-opts ["-Dclojure.server.repl={:port,5555,:accept,clojure.core.server/repl}"]}
+
   :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
           :main-opts ["-m" "rebel-readline.main"]}
-  :nrepl {:extra-deps {org.clojure/tools.nrepl {:mvn/version "0.2.12"}}
-          :main-opts ["-e" "(require,'[clojure.tools.nrepl.server,:refer,[start-server]]),(start-server,:port,5555)"]}
-  :runner
-  {:extra-deps {com.cognitect/test-runner
-                {:git/url "https://github.com/cognitect-labs/test-runner"
-                 :sha "76568540e7f40268ad2b646110f237a60295fa3c"}}
-   :main-opts ["-m" "cognitect.test-runner"
-               "-d" "test"
-               "-d" "src/test/clojure"]}}}
+
+  :socket {:jvm-opts ["-Dclojure.server.repl={:port,50505,:accept,clojure.core.server/repl}"]}
+
+  :runner {:extra-deps {com.cognitect/test-runner
+                        {:git/url "https://github.com/cognitect-labs/test-runner"
+                         :sha "76568540e7f40268ad2b646110f237a60295fa3c"}}
+           :main-opts ["-m" "cognitect.test-runner"
+                       "-d" "test"
+                       "-d" "src/test/clojure"]}}}
