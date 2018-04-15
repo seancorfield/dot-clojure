@@ -16,7 +16,7 @@
 
   :new {:extra-deps {seancorfield/clj-new
                      {:git/url "https://github.com/seancorfield/clj-new"
-                      :sha "5f52765aef0000ef5e27e6b97dbda61679197e47"}}
+                      :sha "025f678af79c460e23f762aeb33dbb4af16f7ec7"}}
         :main-opts ["-m" "clj-new.create"]}
 
   :nrepl {:extra-deps {org.clojure/tools.nrepl {:mvn/version "0.2.12"}}
