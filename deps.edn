@@ -1,37 +1,60 @@
+;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
  :aliases
- {:1.8 {:override-deps {org.clojure/clojure {:mvn/version "1.8.0"}}}
+ {;; pull in specific versions of Clojure:
+  :1.8 {:override-deps {org.clojure/clojure {:mvn/version "1.8.0"}}}
   :1.9 {:override-deps {org.clojure/clojure {:mvn/version "1.9.0"}}}
   :master {:override-deps {org.clojure/clojure {:mvn/version "1.10.0-master-SNAPSHOT"}}}
 
+  ;; testing and debugging tools:
   :test {:extra-paths ["test" "src/test/clojure"]
          :extra-deps {org.clojure/test.check {:mvn/version "RELEASE"}}}
-
-  :bench {:extra-deps {criterium {:mvn/version "RELEASE"}}}
-
-  :expect {:extra-deps {expectations {:mvn/version "RELEASE"}}}
-
-  ;; (require '[clj-memory-meter.core :as mm])
-  :measure {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "RELEASE"}}}
-
-  :new {:extra-deps {seancorfield/clj-new
-                     {:git/url "https://github.com/seancorfield/clj-new"
-                      :sha "025f678af79c460e23f762aeb33dbb4af16f7ec7"}}
-        :main-opts ["-m" "clj-new.create"]}
-
-  :nrepl {:extra-deps {org.clojure/tools.nrepl {:mvn/version "0.2.12"}}
-          :main-opts ["-e" "(require,'[clojure.tools.nrepl.server,:refer,[start-server]]),(start-server,:port,60606)"]}
-
-  :proto {:extra-deps {proto-repl {:mvn/version "RELEASE"}}}
-
-  :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
-          :main-opts ["-m" "rebel-readline.main"]}
-
-  :socket {:jvm-opts ["-Dclojure.server.repl={:port,50505,:accept,clojure.core.server/repl}"]}
-
+  ;; - see https://github.com/cognitect-labs/test-runner
+  ;; - run your tests: clj -A:test:runner
   :runner {:extra-deps {com.cognitect/test-runner
                         {:git/url "https://github.com/cognitect-labs/test-runner"
                          :sha "76568540e7f40268ad2b646110f237a60295fa3c"}}
            :main-opts ["-m" "cognitect.test-runner"
                        "-d" "test"
-                       "-d" "src/test/clojure"]}}}
+                       "-d" "src/test/clojure"]}
+  ;; - see https://github.com/clojure-expectations/expectations
+  ;; - run your expectations: clj -A:test:expect:runner
+  :expect {:extra-deps {expectations {:mvn/version "RELEASE"}}}
+  ;; - see https://github.com/hugoduncan/criterium/
+  ;; - (require '[criterium.core :refer [bench]])
+  ;; - (bench (your-expression))
+  :bench {:extra-deps {criterium {:mvn/version "RELEASE"}}}
+  ;; - see https://github.com/clojure-goes-fast/clj-memory-meter
+  ;; - (require '[clj-memory-meter.core :as mm])
+  ;; - (mm/measure (your-expression))
+  :measure {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "RELEASE"}}}
+
+  ;; REPL-related tools:
+  ;; - start an nREPL server on port 60606:
+  :nrepl {:extra-deps {org.clojure/tools.nrepl {:mvn/version "0.2.12"}}
+          :main-opts ["-e" "(require,'[clojure.tools.nrepl.server,:refer,[start-server]]),(start-server,:port,60606)"]}
+  ;; - start a Socket REPL on port 50505:
+  :socket {:jvm-opts ["-Dclojure.server.repl={:port,50505,:accept,clojure.core.server/repl}"]}
+  ;; - see https://atom.io/packages/proto-repl
+  ;; - for use with Atom/ProtoREPL: clj -A:proto:nrepl
+  :proto {:extra-deps {proto-repl {:mvn/version "RELEASE"}}}
+  ;; - see https://github.com/bhauman/rebel-readline
+  ;; - start a Rebel Readline REPL:
+  :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
+          :main-opts ["-m" "rebel-readline.main"]}
+
+  ;; project creation from templates:
+  ;; - see https://github.com/seancorfield/clj-new
+  ;; - create an application project:
+  ;;   - clj -A:new app myname/myapp
+  ;;   - cd myapp
+  ;;   - clj -m myname.myapp # run it!
+  ;;   - clj -A:test:runner # run the tests!
+  ;; - create a library project:
+  ;;   - clj -A:new lib myname/my-cool-lib
+  ;;   - cd my-cool-lib
+  ;;   - clj -A:test:runner # run the tests!
+  :new {:extra-deps {seancorfield/clj-new
+                     {:git/url "https://github.com/seancorfield/clj-new"
+                      :sha "025f678af79c460e23f762aeb33dbb4af16f7ec7"}}
+        :main-opts ["-m" "clj-new.create"]}}}
