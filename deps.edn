@@ -56,5 +56,5 @@
   ;;   - clj -A:test:runner # run the tests!
   :new {:extra-deps {seancorfield/clj-new
                      {:git/url "https://github.com/seancorfield/clj-new"
-                      :sha "025f678af79c460e23f762aeb33dbb4af16f7ec7"}}
+                      :sha "108f27159501f8ce12564b398b0ea50def3892b1"}}
         :main-opts ["-m" "clj-new.create"]}}}
