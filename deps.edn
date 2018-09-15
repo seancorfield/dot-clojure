@@ -41,6 +41,9 @@
           :main-opts ["-e" "(require,'[clojure.tools.nrepl.server,:refer,[start-server]]),(start-server,:port,60606)"]}
   ;; - start a Socket REPL on port 50505:
   :socket {:jvm-opts ["-Dclojure.server.repl={:port,50505,:accept,clojure.core.server/repl}"]}
+  ;; - inspired by Ruby's -pne command line option which lets you process lines of stdin bound to $_
+  ;; - usage: cat file-of-numbers.txt | clj -Mpne -e '($ (-> $_ Long/parseLong inc))'
+  :pne {:main-opts,["-e","(defmacro,$,[&,body],(list,'while,(list,'when-let,'[$_,(read-line)],(let,[v,(gensym)],(list,'let,(vector,v,(list*,'do,body)),(list,'println,v))),'$_)))"]}
   ;; - see https://atom.io/packages/proto-repl
   ;; - for use with Atom/ProtoREPL: clj -A:proto:nrepl
   :proto {:extra-deps {proto-repl {:mvn/version "RELEASE"}}}
