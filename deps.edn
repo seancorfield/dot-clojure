@@ -23,6 +23,11 @@
            :main-opts ["-m" "cognitect.test-runner"
                        "-d" "test"
                        "-d" "src/test/clojure"]}
+  ;; see https://github.com/jonase/eastwood#running-eastwood-in-a-repl
+  :eastwood {:extra-deps {jonase/eastwood {:mvn/version "0.2.8"}}
+             :main-opts ["-e" "(require,'[eastwood.lint,:as,e])"
+                         "-e" "(e/eastwood,{:source-paths,[\"src\"],:test-paths,[\"test\"]})"]}
+
   ;; - see https://github.com/clojure-expectations/expectations
   ;; - run your expectations: clj -A:test:expect:runner
   :expect {:extra-deps {expectations {:mvn/version "RELEASE"}}}
@@ -66,4 +71,11 @@
   :new {:extra-deps {seancorfield/clj-new
                      {:git/url "https://github.com/seancorfield/clj-new"
                       :sha "108f27159501f8ce12564b398b0ea50def3892b1"}}
-        :main-opts ["-m" "clj-new.create"]}}}
+        :main-opts ["-m" "clj-new.create"]}
+
+  ;; uberjar building: clj -A:depstar result.jar
+  :depstar {:extra-deps
+            {com.healthfinch/depstar
+             {:git/url "https://github.com/healthfinch/depstar.git"
+              :sha "4aa7b35189693feebc7d7e4a180b8af0326c9164"}}
+            :main-opts ["-m" "hf.depstar.uberjar"]}}}
