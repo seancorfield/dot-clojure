@@ -10,6 +10,7 @@
   :1.7 {:override-deps {org.clojure/clojure {:mvn/version "1.7.0"}}}
   :1.8 {:override-deps {org.clojure/clojure {:mvn/version "1.8.0"}}}
   :1.9 {:override-deps {org.clojure/clojure {:mvn/version "1.9.0"}}}
+  :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.0-beta1"}}}
   :master {:override-deps {org.clojure/clojure {:mvn/version "1.10.0-master-SNAPSHOT"}}}
 
   ;; testing and debugging tools:
@@ -24,7 +25,7 @@
                        "-d" "test"
                        "-d" "src/test/clojure"]}
   ;; see https://github.com/jonase/eastwood#running-eastwood-in-a-repl
-  :eastwood {:extra-deps {jonase/eastwood {:mvn/version "0.2.8"}}
+  :eastwood {:extra-deps {jonase/eastwood {:mvn/version "0.2.9"}}
              :main-opts ["-e" "(require,'[eastwood.lint,:as,e])"
                          "-e" "(e/eastwood,{:source-paths,[\"src\"],:test-paths,[\"test\"]})"]}
 
