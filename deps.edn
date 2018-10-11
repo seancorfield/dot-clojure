@@ -75,15 +75,15 @@
 
   ;; uberjar building:
   ;; - see https://github.com/healthfinch/depstar for a minimalist approach:
-  ;;   - clj -A:depstar result.jar
-  ;; - and then you need to create a manifest file containing:
-  ;;   - Main-Class: clojure.main
-  ;; - and then add it to your uberjar:
-  ;;   - jar ufm result.jar mymanifest
+  ;; - uses my fork that adds manifest support
+  ;;   - clj -A:depstar result.jar -m
+  ;;     - sets clojure.main-main as the entry point
+  ;;   - clj -A:depstar result.jar my.project
+  ;;     - sets my.project/-main as the entry point
   :depstar {:extra-deps
             {com.healthfinch/depstar
-             {:git/url "https://github.com/healthfinch/depstar.git"
-              :sha "4aa7b35189693feebc7d7e4a180b8af0326c9164"}}
+             {:git/url "https://github.com/seancorfield/depstar.git"
+              :sha "a328136da59ea9b83483189451fb71aafd13bdb1"}}
             :main-opts ["-m" "hf.depstar.uberjar"]}
   ;; - see https://github.com/luchiniatwork/cambada for full-featured option:
   ;;   - clj -A:cambada -m myproject.main
