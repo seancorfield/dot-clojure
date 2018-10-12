@@ -72,7 +72,7 @@
   ;;   - clj -A:test:runner # run the tests!
   :new {:extra-deps {seancorfield/clj-new
                      {:git/url "https://github.com/seancorfield/clj-new"
-                      :sha "108f27159501f8ce12564b398b0ea50def3892b1"}}
+                      :sha "21ca1b27f46dc324be084ba839beca555aeda387"}}
         :main-opts ["-m" "clj-new.create"]}
 
   ;; uberjar building:
