@@ -43,13 +43,14 @@
 
   ;; REPL-related tools:
   ;; - start an nREPL server on port 60606:
-  :nrepl {:extra-deps {org.clojure/tools.nrepl {:mvn/version "0.2.12"}}
-          :main-opts ["-e" "(require,'[clojure.tools.nrepl.server,:refer,[start-server]]),(start-server,:port,60606)"]}
+  :nrepl {:extra-deps {nrepl {:mvn/version "0.4.5"}}
+          :main-opts ["-e" "(require,'[nrepl.server,:refer,[start-server]]),(start-server,:port,60606)"]}
+  :nrepl/old {:extra-deps {org.clojure/tools.nrepl {:mvn/version "RELEASE"}}
+              :main-opts ["-e" "(require,'[clojure.tools.nrepl.server,:refer,[start-server]]),(start-server,:port,60606)"]}
   ;; - start a Socket REPL on port 50505:
   :socket {:jvm-opts ["-Dclojure.server.repl={:port,50505,:accept,clojure.core.server/repl}"]}
-  ;; - inspired by Ruby's -pne command line option which lets you process lines of stdin bound to $_
-  ;; - usage: cat file-of-numbers.txt | clj -Mpne -e '($ (-> $_ Long/parseLong inc))'
-  :pne {:main-opts,["-e","(defmacro,$,[&,body],(list,'while,(list,'when-let,'[$_,(read-line)],(let,[v,(gensym)],(list,'let,(vector,v,(list*,'do,body)),(list,'println,v))),'$_)))"]}
+  ;; - start a Socket pREPL on port 40404:
+  :prepl {:jvm-opts ["-Dclojure.server.repl={:port,40404,:accept,clojure.core.server/io-prepl}"]}
   ;; - see https://atom.io/packages/proto-repl
   ;; - for use with Atom/ProtoREPL: clj -A:proto:nrepl
   :proto {:extra-deps {proto-repl {:mvn/version "RELEASE"}}}
@@ -76,19 +77,15 @@
 
   ;; uberjar building:
   ;; - see https://github.com/healthfinch/depstar for a minimalist approach:
-  ;; - uses my fork that adds manifest support
-  ;;   - clj -A:depstar result.jar -m
-  ;;     - sets clojure.main-main as the entry point
-  ;;   - clj -A:depstar result.jar my.project
-  ;;     - sets my.project/-main as the entry point
+  ;;   - clj -A:depstar result.jar
+  ;; - to run it:
+  ;;   - java -cp result.jar clojure.main -m mymain.namespace
   :depstar {:extra-deps
             {com.healthfinch/depstar
-             {:git/url "https://github.com/seancorfield/depstar.git"
-              :sha "a328136da59ea9b83483189451fb71aafd13bdb1"}}
+             {:git/url "https://github.com/healthfinch/depstar.git"
+              :sha "68f3a04f75c988fa032974e8c600c9086812e9ef"}}
             :main-opts ["-m" "hf.depstar.uberjar"]}
-  ;; - see https://github.com/luchiniatwork/cambada for full-featured option:
-  ;;   - clj -A:cambada -m myproject.main
-  ;; - see all the available options:
-  ;;   - clj -A:camdada --help
-  :cambada {:extra-deps {luchiniatwork/cambada {:mvn/version "1.0.0"}}
-            :main-opts ["-m" "cambada.uberjar"]}}}
+
+  ;; - inspired by Ruby's -pne command line option which lets you process lines of stdin bound to $_
+  ;; - usage: cat file-of-numbers.txt | clj -Mpne -e '($ (-> $_ Long/parseLong inc))'
+  :pne {:main-opts,["-e","(defmacro,$,[&,body],(list,'while,(list,'when-let,'[$_,(read-line)],(let,[v,(gensym)],(list,'let,(vector,v,(list*,'do,body)),(list,'println,v))),'$_)))"]}}}
