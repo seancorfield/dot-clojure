@@ -79,14 +79,14 @@
         :main-opts ["-m" "clj-new.create"]}
 
   ;; uberjar building:
-  ;; - see https://github.com/healthfinch/depstar for a minimalist approach:
+  ;; - see https://github.com/seancorfield/depstar for a minimalist approach:
   ;;   - clj -A:depstar result.jar
   ;; - to run it:
   ;;   - java -cp result.jar clojure.main -m mymain.namespace
   :depstar {:extra-deps
-            {com.healthfinch/depstar
-             {:git/url "https://github.com/healthfinch/depstar.git"
-              :sha "68f3a04f75c988fa032974e8c600c9086812e9ef"}}
+            {seancorfield/depstar
+             {:git/url "https://github.com/seancorfield/depstar.git"
+              :sha "22859a04cc99ce38c391a569b771e8a65afa6aad"}}
             :main-opts ["-m" "hf.depstar.uberjar"]}
 
   ;; - inspired by Ruby's -pne command line option which lets you process lines of stdin bound to $_
