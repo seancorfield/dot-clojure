@@ -73,21 +73,20 @@
   ;;   - clj -A:new lib myname/my-cool-lib
   ;;   - cd my-cool-lib
   ;;   - clj -A:test:runner # run the tests!
-  :new {:extra-deps {seancorfield/clj-new
-                     {:git/url "https://github.com/seancorfield/clj-new"
-                      :sha "21ca1b27f46dc324be084ba839beca555aeda387"}}
+  :new {:extra-deps {seancorfield/clj-new {:mvn/version "RELEASE"}}
         :main-opts ["-m" "clj-new.create"]}
 
   ;; uberjar building:
   ;; - see https://github.com/seancorfield/depstar for a minimalist approach:
-  ;;   - clj -A:depstar result.jar
+  ;;   - clj -A:uberjar result.jar
   ;; - to run it:
   ;;   - java -cp result.jar clojure.main -m mymain.namespace
-  :depstar {:extra-deps
-            {seancorfield/depstar
-             {:git/url "https://github.com/seancorfield/depstar.git"
-              :sha "22859a04cc99ce38c391a569b771e8a65afa6aad"}}
+  ;; - build a library JAR:
+  ;;   - clj -A:jar result-lib.jar
+  :uberjar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}
             :main-opts ["-m" "hf.depstar.uberjar"]}
+  :jar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}
+        :main-opts ["-m" "hf.depstar.jar"]}
 
   ;; - inspired by Ruby's -pne command line option which lets you process lines of stdin bound to $_
   ;; - usage: cat file-of-numbers.txt | clj -Mpne -e '($ (-> $_ Long/parseLong inc))'
