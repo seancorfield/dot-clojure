@@ -62,6 +62,13 @@
   :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
           :main-opts ["-m" "rebel-readline.main"]}
 
+  :deps ; to get access to clojure.tools.deps.alpha.repl/add-lib
+  ;; (require '[clojure.tools.deps.alpha.repl :refer [add-lib]])
+  ;; (add-lib 'some/library {:mvn/version "RELEASE"})
+  {:extra-deps {org.clojure/tools.deps.alpha
+                {:git/url "https://github.com/clojure/tools.deps.alpha"
+                 :sha "5140fe0b510f6aeda517711bc6433bef978d6cf6"}}}
+
   ;; project creation from templates:
   ;; - see https://github.com/seancorfield/clj-new
   ;; - create an application project:
