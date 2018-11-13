@@ -4,17 +4,18 @@ This is my `.clojure/deps.edn` file providing useful `clj` aliases drawn from a 
 
 There are aliases to pull in specific versions of Clojure:
 * `:master` -- Clojure 1.10.0-master-SNAPSHOT
-* `:1.10` -- Clojure 1.10-RC1
+* `:1.10` -- Clojure 1.10-beta5
 * `:1.9` -- Clojure 1.9.0
 * ... back to `:1.2`
 
 There are aliases to pull in various useful testing and debugging tools:
 * `:test` -- adds both `test` and `src/test/clojure` to your classpath and pulls in the latest stable version of `test.check`
 * `:runner` -- pulls in [Cognitect Labs' `test-runner`](https://github.com/cognitect-labs/test-runner) project and runs any tests it can find
-* `:eastwood` -- pulls in the 0.2.9 release of [Eastwood](https://github.com/jonase/eastwood) on your `src` and `test` folders; use with `:test` above
+* `:eastwood` -- pulls in the latest stable release of [Eastwood](https://github.com/jonase/eastwood) on your `src` and `test` folders; use with `:test` above
 * `:expect` -- pulls in the latest stable release of [Expectations](https://github.com/clojure-expectations/expectations)
 * `:bench` -- pulls in the latest stable release of [Criterium](https://github.com/hugoduncan/criterium/) for benchmarking your code
 * `:measure` -- pulls in the latest stable release of [Memory Meter](https://github.com/clojure-goes-fast/clj-memory-meter)
+* `:outdated` -- pulls in the latest stable release of [Depot](https://github.com/Olical/depot) and reports on outdated dependencies
 
 There are aliases to pull in and start various REPL-related tools:
 * `:nrepl` -- pulls in the latest stable release of [nREPL](https://github.com/nrepl/nREPL) and starts an nREPL server on port 60606; some tooling may not yet be compatible with the standalone nREPL library
@@ -24,11 +25,15 @@ There are aliases to pull in and start various REPL-related tools:
 * `:proto` -- adds the latest stable release of the [protorepl](https://atom.io/packages/proto-repl) library for Atom/ProtoREPL usage (with `:nrepl` or `:nrepl/old`)
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
 
+For the `add-lib` function (`clojure.tools.deps.alpha.repl/add-lib`):
+* `:deps` -- pulls in a branch of [org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha)
+
 An alias to pull in my template creation tool:
-* `:new` -- pulls in and runs [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates
+* `:new` -- pulls in and runs the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates
 
 An alias to build uberjar files:
-* `:depstar` -- pulls in and runs [depstar](https://github.com/healthfinch/depstar) to create an uberjar; `clj -A:depstar MyProject.jar`; `java -cp MyProject.jar clojure.main -m project.core`
+* `:uberjar` -- pulls in and runs the latest stable release of my fork of [depstar](https://github.com/seancorfield/depstar) to create an uberjar; `clj -A:uberjar MyProject.jar`; `java -cp MyProject.jar clojure.main -m project.core`
+* `:jar` -- pulls in and runs the latest stable release of my fork of [depstar](https://github.com/seancorfield/depstar) to create a "thin" JAR; `clj -A:jar MyProject.jar`; along with a `pom.xml` (created via `clj -Spom`), this can be deployed to Clojars etc (via `mvn deploy:deploy-file ...`)
 
 And finally, a gnarly little macro, inspired by Ruby's `-pne` command line option
 that lets you process lines of standard input:
