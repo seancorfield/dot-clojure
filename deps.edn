@@ -60,6 +60,8 @@
   ;; - start a Rebel Readline REPL:
   :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
           :main-opts ["-m" "rebel-readline.main"]}
+  ;; - see https://github.com/bbatsov/compliment
+  :comp {:extra-deps {compliment {:mvn/version "RELEASE"}}}
 
   :deps ; to get access to clojure.tools.deps.alpha.repl/add-lib
   ;; (require '[clojure.tools.deps.alpha.repl :refer [add-lib]])

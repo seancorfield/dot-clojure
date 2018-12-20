@@ -3,8 +3,8 @@
 This is my `.clojure/deps.edn` file providing useful `clj` aliases drawn from a variety of projects.
 
 There are aliases to pull in specific versions of Clojure:
-* `:master` -- Clojure 1.10.0-master-SNAPSHOT
-* `:1.10` -- Clojure 1.10-beta5
+* `:master` -- Clojure 1.11.0-master-SNAPSHOT
+* `:1.10` -- Clojure 1.10
 * `:1.9` -- Clojure 1.9.0
 * ... back to `:1.2`
 
@@ -15,7 +15,7 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:expect` -- pulls in the latest stable release of [Expectations](https://github.com/clojure-expectations/expectations)
 * `:bench` -- pulls in the latest stable release of [Criterium](https://github.com/hugoduncan/criterium/) for benchmarking your code
 * `:measure` -- pulls in the latest stable release of [Memory Meter](https://github.com/clojure-goes-fast/clj-memory-meter)
-* `:outdated` -- pulls in the latest stable release of [Depot](https://github.com/Olical/depot) and reports on outdated dependencies
+* `:outdated` -- pulls in and runs the latest stable release of [Depot](https://github.com/Olical/depot) and reports on outdated dependencies
 
 There are aliases to pull in and start various REPL-related tools:
 * `:nrepl` -- pulls in the latest stable release of [nREPL](https://github.com/nrepl/nREPL) and starts an nREPL server on port 60606; some tooling may not yet be compatible with the standalone nREPL library
@@ -24,6 +24,7 @@ There are aliases to pull in and start various REPL-related tools:
 * `:prepl` -- starts a Socket pREPL on port 40404; can be combined with other aliases since this is just a JVM option; requires a recent Clojure 1.10 build!
 * `:proto` -- adds the latest stable release of the [protorepl](https://atom.io/packages/proto-repl) library for Atom/ProtoREPL usage (with `:nrepl` or `:nrepl/old`)
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
+* `:comp` -- adds the latest stable release of [compliment](https://github.com/bbatsov/compliment); useful with a Socket REPL for Unravel or Chlorine for Atom
 
 For the `add-lib` function (`clojure.tools.deps.alpha.repl/add-lib`):
 * `:deps` -- pulls in a branch of [org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha)
