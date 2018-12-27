@@ -69,6 +69,11 @@
   {:extra-deps {org.clojure/tools.deps.alpha
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
                  :sha "5140fe0b510f6aeda517711bc6433bef978d6cf6"}}}
+  ;; start the Liquid Clojure editor
+  ;; - see https://github.com/mogenslund/liquid
+  :liquid
+  {:extra-deps {mogenslund/liquid {:mvn/version "RELEASE"}}
+   :main-opts ["-m" "dk.salza.liq.core"]}
 
   ;; project creation from templates:
   ;; - see https://github.com/seancorfield/clj-new
