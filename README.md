@@ -26,6 +26,9 @@ There are aliases to pull in and start various REPL-related tools:
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
 * `:comp` -- adds the latest stable release of [compliment](https://github.com/bbatsov/compliment); useful with a Socket REPL for Unravel or Chlorine for Atom
 
+An alias for the [Liquid Clojure editor](https://github.com/mogenslund/liquid):
+* `:liquid` -- pulls in and runs the latest stable release of Liquid
+
 For the `add-lib` function (`clojure.tools.deps.alpha.repl/add-lib`):
 * `:deps` -- pulls in a branch of [org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha)
 
