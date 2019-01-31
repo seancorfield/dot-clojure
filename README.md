@@ -24,13 +24,16 @@ There are aliases to pull in and start various REPL-related tools:
 * `:prepl` -- starts a Socket pREPL on port 40404; can be combined with other aliases since this is just a JVM option; requires a recent Clojure 1.10 build!
 * `:proto` -- adds the latest stable release of the [protorepl](https://atom.io/packages/proto-repl) library for Atom/ProtoREPL usage (with `:nrepl` or `:nrepl/old`)
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
+* `:reflect` -- adds Stuart Halloway's reflector utility (best used with REBL)
+* `:rebl-8` -- starts Cognitect's REBL (if you have it installed); compatible with OracleJDK 8 (which includes JavaFX)
+* `:rebl-11` -- starts Cognitect's REBL (if you have it installed); compatible with OpenJDK 11
 * `:comp` -- adds the latest stable release of [compliment](https://github.com/bbatsov/compliment); useful with a Socket REPL for Unravel or Chlorine for Atom
 
 An alias for the [Liquid Clojure editor](https://github.com/mogenslund/liquid):
 * `:liquid` -- pulls in and runs the latest stable release of Liquid
 
 For the `add-lib` function (`clojure.tools.deps.alpha.repl/add-lib`):
-* `:deps` -- pulls in a branch of [org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha)
+* `:deps` -- pulls in a branch of [org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha); see the example `load-master` function in the comments in my `deps.edn`
 
 An alias to pull in my template creation tool:
 * `:new` -- pulls in and runs the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates

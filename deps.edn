@@ -60,15 +60,51 @@
   ;; - start a Rebel Readline REPL:
   :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
           :main-opts ["-m" "rebel-readline.main"]}
+  ;; - see https://github.com/stuarthalloway/reflector
+  ;; - my fork includes this https://github.com/stuarthalloway/reflector/pull/1
+  :reflect
+  {:extra-deps {com.stuarthalloway/reflector
+                {:git/url "https://github.com/seancorfield/reflector"
+                 :sha "67d81dbdcab64956abffc128f47b837a2d707b58"}}}
   ;; - see https://github.com/bbatsov/compliment
   :comp {:extra-deps {compliment {:mvn/version "RELEASE"}}}
+  ;; - see https://github.com/cognitect-labs/REBL-distro
+  ;; - you need to download the REBL JAR (and update the local/root below)
+  ;; - you need to be using Clojure 1.10 and either
+  ;; - - Oracle JDK 8 -- use :rebl-8
+  ;; - - OpenJDK 11 -- use :rebl-11
+  :rebl-8
+  {:extra-deps {org.clojure/core.async {:mvn/version "0.4.490"}
+                com.cognitect/rebl
+                ;; adjust to match your install location
+                {:local/root "/Developer/REBL-0.9.109/REBL-0.9.109.jar"}}
+   :main-opts ["-m" "cognitect.rebl"]}
+  :rebl-11
+  {:extra-deps {org.clojure/core.async {:mvn/version "0.4.490"}
+                com.cognitect/rebl
+                ;; adjust to match your install location
+                {:local/root "/Developer/REBL-0.9.109/REBL-0.9.109.jar"}
+                org.openjfx/javafx-fxml     {:mvn/version "11.0.1"}
+                org.openjfx/javafx-controls {:mvn/version "11.0.1"}
+                org.openjfx/javafx-swing    {:mvn/version "11.0.1"}
+                org.openjfx/javafx-base     {:mvn/version "11.0.1"}
+                org.openjfx/javafx-web      {:mvn/version "11.0.1"}}
+   :main-opts ["-m" "cognitect.rebl"]}
 
   :deps ; to get access to clojure.tools.deps.alpha.repl/add-lib
+  ;; - now you can add new deps to a running REPL:
   ;; (require '[clojure.tools.deps.alpha.repl :refer [add-lib]])
   ;; (add-lib 'some/library {:mvn/version "RELEASE"})
+  ;; - and you can git deps too; here's how to get the master version of a lib:
+  ;; (require '[clojure.tools.gitlibs :as gitlibs])
+  ;; (defn load-master [lib]
+  ;;   (let [git (str "https://github.com/" lib ".git")]
+  ;;    (add-lib lib {:git/url git :sha (gitlibs/resolve git "master")})))
+  ;; - e.g., using the GitHub path (not the usual Maven group/artifact):
+  ;; (load-master 'clojure/tools.trace)
   {:extra-deps {org.clojure/tools.deps.alpha
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
-                 :sha "5140fe0b510f6aeda517711bc6433bef978d6cf6"}}}
+                 :sha "e160f184f051f120014244679831a9bccb37c9de"}}}
   ;; start the Liquid Clojure editor
   ;; - see https://github.com/mogenslund/liquid
   :liquid
