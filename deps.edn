@@ -75,15 +75,23 @@
   ;; - - OpenJDK 11 -- use :rebl-11
   :rebl-8
   {:extra-deps {org.clojure/core.async {:mvn/version "0.4.490"}
+                ;; deps for file datafication (0.9.149 or later)
+                org.clojure/data.csv {:mvn/version "0.1.4"}
+                org.clojure/data.json {:mvn/version "0.2.3"}
+                org.yaml/snakeyaml {:mvn/version "1.23"}
                 com.cognitect/rebl
                 ;; adjust to match your install location
-                {:local/root "/Developer/REBL-0.9.109/REBL-0.9.109.jar"}}
+                {:local/root "/Developer/REBL/latest/REBL.jar"}}
    :main-opts ["-m" "cognitect.rebl"]}
   :rebl-11
   {:extra-deps {org.clojure/core.async {:mvn/version "0.4.490"}
+                ;; deps for file datafication (0.9.149 or later)
+                org.clojure/data.csv {:mvn/version "0.1.4"}
+                org.clojure/data.json {:mvn/version "0.2.3"}
+                org.yaml/snakeyaml {:mvn/version "1.23"}
                 com.cognitect/rebl
                 ;; adjust to match your install location
-                {:local/root "/Developer/REBL-0.9.109/REBL-0.9.109.jar"}
+                {:local/root "/Developer/REBL/latest/REBL.jar"}
                 org.openjfx/javafx-fxml     {:mvn/version "11.0.1"}
                 org.openjfx/javafx-controls {:mvn/version "11.0.1"}
                 org.openjfx/javafx-swing    {:mvn/version "11.0.1"}
@@ -106,7 +114,7 @@
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
                  :sha "e160f184f051f120014244679831a9bccb37c9de"}}}
   :spec2 ; to get access to the latest spec-alpha2
-  {:extra-deps {org.clojure/spec-alpha2 
+  {:extra-deps {org.clojure/spec-alpha2
                 {:git/url "https://github.com/clojure/spec-alpha2"
                  :sha "a3474645b88c0467cad90abe8298c6b1e4a2e636"}}}
   ;; start the Liquid Clojure editor
