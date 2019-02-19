@@ -18,7 +18,7 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:outdated` -- pulls in and runs the latest stable release of [Depot](https://github.com/Olical/depot) and reports on outdated dependencies
 
 There are aliases to pull in and start various REPL-related tools:
-* `:nrepl` -- pulls in the latest stable release of [nREPL](https://github.com/nrepl/nREPL) and starts an nREPL server on port 60606; some tooling may not yet be compatible with the standalone nREPL library
+* `:nrepl` -- pulls in the latest stable release of [nREPL](https://github.com/nrepl/nREPL) and starts an nREPL server on a random available port
 * `:nrepl/old` -- pulls in the latest stable release of [org.clojure/tools.nrepl](https://github.com/clojure/tools.nrepl) and starts an nREPL server on port 60606; this is provided to support legacy tooling
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
 * `:prepl` -- starts a Socket pREPL on port 40404; can be combined with other aliases since this is just a JVM option; requires a recent Clojure 1.10 build!

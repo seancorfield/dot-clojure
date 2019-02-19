@@ -44,9 +44,10 @@
              :main-opts ["-m" "depot.outdated.main"]}
 
   ;; REPL-related tools:
-  ;; - start an nREPL server on port 60606:
+  ;; - start a modern nREPL server on a random available port:
   :nrepl {:extra-deps {nrepl {:mvn/version "RELEASE"}}
-          :main-opts ["-e" "(require,'[nrepl.server,:refer,[start-server]]),(start-server,:port,60606)"]}
+          :main-opts ["-m" "nrepl.cmdline"]}
+  ;; - start a legacy nREPL server on port 60606:
   :nrepl/old {:extra-deps {org.clojure/tools.nrepl {:mvn/version "RELEASE"}}
               :main-opts ["-e" "(require,'[clojure.tools.nrepl.server,:refer,[start-server]]),(start-server,:port,60606)"]}
   ;; - start a Socket REPL on port 50505:
