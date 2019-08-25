@@ -116,7 +116,7 @@
   ;; (load-master 'clojure/tools.trace)
   {:extra-deps {org.clojure/tools.deps.alpha
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
-                 :sha "d0b33e0d346736aa985c150145b332f97b92135e"}}}
+                 :sha "148cab8f154711f8495bd632ebdc53a14dff7f09"}}}
   :spec2 ; to get access to the latest spec-alpha2
   {:extra-deps {org.clojure/spec-alpha2
                 {:git/url "https://github.com/clojure/spec-alpha2"
