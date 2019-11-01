@@ -2,6 +2,8 @@
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
  :aliases
  {;; pull in specific versions of Clojure:
+  :1.0 {:override-deps {org.clojure/clojure {:mvn/version "1.0.0"}}}
+  :1.1 {:override-deps {org.clojure/clojure {:mvn/version "1.1.0"}}}
   :1.2 {:override-deps {org.clojure/clojure {:mvn/version "1.2.1"}}}
   :1.3 {:override-deps {org.clojure/clojure {:mvn/version "1.3.0"}}}
   :1.4 {:override-deps {org.clojure/clojure {:mvn/version "1.4.0"}}}
@@ -30,8 +32,10 @@
              :main-opts ["-m" "eastwood.lint" "{:source-paths,[\"src\"],:test-paths,[\"test\"]}"]}
 
   ;; - see https://github.com/clojure-expectations/expectations
+  ;; - and https://github.com/clojure-expectations/clojure-test
   ;; - run your expectations: clj -A:test:expect:runner
-  :expect {:extra-deps {expectations {:mvn/version "RELEASE"}}}
+  :expect {:extra-deps {expectations {:mvn/version "RELEASE"}
+                        expectations/clojure-test {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/hugoduncan/criterium/
   ;; - (require '[criterium.core :refer [bench]])
   ;; - (bench (your-expression))
@@ -41,7 +45,7 @@
   ;; - (mm/measure (your-expression))
   :measure {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/Olical/depot
-  :outdated {:extra-deps {olical/depot {:mvn/version "RELEASE"}}
+  :outdated {:extra-deps {olical/depot {:mvn/version "1.8.4"}}
              :main-opts ["-m" "depot.outdated.main"]}
 
   ;; REPL-related tools:

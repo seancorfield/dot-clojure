@@ -4,18 +4,19 @@ This is my `.clojure/deps.edn` file providing useful `clj` aliases drawn from a 
 
 There are aliases to pull in specific versions of Clojure:
 * `:master` -- Clojure 1.11.0-master-SNAPSHOT
-* `:1.10` -- Clojure 1.10
+* `:1.10.1` -- Clojure 1.10.1
+* `:1.10` -- Clojure 1.10.0
 * `:1.9` -- Clojure 1.9.0
-* ... back to `:1.2`
+* ... back to `:1.0` (note: `:1.5` is actually Clojure 1.5.1 to avoid a bug in Clojure 1.5.0)
 
 There are aliases to pull in various useful testing and debugging tools:
 * `:test` -- adds both `test` and `src/test/clojure` to your classpath and pulls in the latest stable version of `test.check`
 * `:runner` -- pulls in [Cognitect Labs' `test-runner`](https://github.com/cognitect-labs/test-runner) project and runs any tests it can find
 * `:eastwood` -- pulls in the latest stable release of [Eastwood](https://github.com/jonase/eastwood) on your `src` and `test` folders; use with `:test` above
-* `:expect` -- pulls in the latest stable release of [Expectations](https://github.com/clojure-expectations/expectations)
+* `:expect` -- pulls in the latest stable releases of [Expectations](https://github.com/clojure-expectations/expectations) and [expectations/clojure-test](https://github.com/clojure-expectations/clojure-test) -- the latter is the `clojure.test`-compatible version of the former
 * `:bench` -- pulls in the latest stable release of [Criterium](https://github.com/hugoduncan/criterium/) for benchmarking your code
 * `:measure` -- pulls in the latest stable release of [Memory Meter](https://github.com/clojure-goes-fast/clj-memory-meter)
-* `:outdated` -- pulls in and runs the latest stable release of [Depot](https://github.com/Olical/depot) and reports on outdated dependencies
+* `:outdated` -- pulls in and runs version 1.8.4 of [Depot](https://github.com/Olical/depot) and reports on outdated dependencies
 
 There are aliases to pull in and start various REPL-related tools:
 * `:nrepl` -- pulls in the latest stable release of [nREPL](https://github.com/nrepl/nREPL) and starts an nREPL server on a random available port
@@ -24,9 +25,9 @@ There are aliases to pull in and start various REPL-related tools:
 * `:prepl` -- starts a Socket pREPL on port 40404; can be combined with other aliases since this is just a JVM option; requires a recent Clojure 1.10 build!
 * `:proto` -- adds the latest stable release of the [protorepl](https://atom.io/packages/proto-repl) library for Atom/ProtoREPL usage (with `:nrepl` or `:nrepl/old`)
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
-* `:reflect` -- adds Stuart Halloway's reflector utility (best used with REBL)
-* `:rebl-8` -- starts Cognitect's REBL (if you have it installed); compatible with OracleJDK 8 (which includes JavaFX)
-* `:rebl-11` -- starts Cognitect's REBL (if you have it installed); compatible with OpenJDK 11
+* `:reflect` -- adds (my fork of) Stuart Halloway's reflector utility (best used with REBL)
+* `:rebl-8` -- starts Cognitect's REBL (if you have it installed); compatible with OracleJDK 8 and Azul Zulu OpenJDK 8 (both of which include JavaFX); also `:rebl-8-win` for Windows
+* `:rebl-11` -- starts Cognitect's REBL (if you have it installed); compatible with OpenJDK 11 (JavaFX is added as a separate set of dependencies); also `:rebl-11-win` for Windows
 * `:comp` -- adds the latest stable release of [compliment](https://github.com/bbatsov/compliment); useful with a Socket REPL for Unravel or Chlorine for Atom
 
 An alias for the [Liquid Clojure editor](https://github.com/mogenslund/liquid):
@@ -34,6 +35,9 @@ An alias for the [Liquid Clojure editor](https://github.com/mogenslund/liquid):
 
 For the `add-lib` function (`clojure.tools.deps.alpha.repl/add-lib`):
 * `:deps` -- pulls in a branch of [org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha); see the example `load-master` function in the comments in my `deps.edn`
+
+For Spec 2:
+* `:spec2` -- pulls in [org.clojure/spec-alpha2](https://github.com/clojure/spec-alpha2) via GitHub
 
 An alias to pull in my template creation tool:
 * `:new` -- pulls in and runs the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates
