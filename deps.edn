@@ -67,11 +67,10 @@
   :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
           :main-opts ["-m" "rebel-readline.main"]}
   ;; - see https://github.com/stuarthalloway/reflector
-  ;; - my fork includes this https://github.com/stuarthalloway/reflector/pull/1
   :reflect
   {:extra-deps {com.stuarthalloway/reflector
-                {:git/url "https://github.com/seancorfield/reflector"
-                 :sha "67d81dbdcab64956abffc128f47b837a2d707b58"}}}
+                {:git/url "https://github.com/stuarthalloway/reflector"
+                 :sha "93a0c19b4526c1180959e940202928d35e5c3cef"}}}
   ;; - see https://github.com/bbatsov/compliment
   :comp {:extra-deps {compliment {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/cognitect-labs/REBL-distro
