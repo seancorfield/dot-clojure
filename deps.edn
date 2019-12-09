@@ -153,7 +153,7 @@
   :spec2 ; to get access to the latest spec-alpha2
   {:extra-deps {org.clojure/spec-alpha2
                 {:git/url "https://github.com/clojure/spec-alpha2"
-                 :sha "2a0a7c49c86e31b528be857ed004a4931a0c2551"}}}
+                 :sha "9dc3344bfe6d13213bdb15ca2e7680cd8eb439e3"}}}
   ;; start the Liquid Clojure editor
   ;; - see https://github.com/mogenslund/liquid
   :liquid
