@@ -82,58 +82,58 @@
   ;; - - (assumes you have REBL as /Developer/REBL/latest/REBL.jar
   ;; - - on macOS/Linux and C:\Developer\REBL\latest\REBL.jar on Windows)
   :rebl-8
-  {:extra-deps {org.clojure/core.async {:mvn/version "0.4.490"}
+  {:extra-deps {org.clojure/core.async {:mvn/version "0.6.532"}
                 ;; deps for file datafication (0.9.149 or later)
                 org.clojure/data.csv {:mvn/version "0.1.4"}
-                org.clojure/data.json {:mvn/version "0.2.3"}
-                org.yaml/snakeyaml {:mvn/version "1.23"}
+                org.clojure/data.json {:mvn/version "0.2.7"}
+                org.yaml/snakeyaml {:mvn/version "1.25"}
                 com.cognitect/rebl
                 ;; adjust to match your install location
                 {:local/root "/Developer/REBL/latest/REBL.jar"}}
    :main-opts ["-m" "cognitect.rebl"]}
   :rebl-11
-  {:extra-deps {org.clojure/core.async {:mvn/version "0.4.490"}
+  {:extra-deps {org.clojure/core.async {:mvn/version "0.6.532"}
                 ;; deps for file datafication (0.9.149 or later)
                 org.clojure/data.csv {:mvn/version "0.1.4"}
-                org.clojure/data.json {:mvn/version "0.2.3"}
-                org.yaml/snakeyaml {:mvn/version "1.23"}
+                org.clojure/data.json {:mvn/version "0.2.7"}
+                org.yaml/snakeyaml {:mvn/version "1.25"}
                 com.cognitect/rebl
                 ;; adjust to match your install location
                 {:local/root "/Developer/REBL/latest/REBL.jar"}
-                org.openjfx/javafx-fxml     {:mvn/version "11.0.1"}
-                org.openjfx/javafx-controls {:mvn/version "11.0.1"}
-                org.openjfx/javafx-graphics {:mvn/version "11.0.1"}
-                org.openjfx/javafx-media    {:mvn/version "11.0.1"}
-                org.openjfx/javafx-swing    {:mvn/version "11.0.1"}
-                org.openjfx/javafx-base     {:mvn/version "11.0.1"}
-                org.openjfx/javafx-web      {:mvn/version "11.0.1"}}
+                org.openjfx/javafx-fxml     {:mvn/version "11.0.2"}
+                org.openjfx/javafx-controls {:mvn/version "11.0.2"}
+                org.openjfx/javafx-graphics {:mvn/version "11.0.2"}
+                org.openjfx/javafx-media    {:mvn/version "11.0.2"}
+                org.openjfx/javafx-swing    {:mvn/version "11.0.2"}
+                org.openjfx/javafx-base     {:mvn/version "11.0.2"}
+                org.openjfx/javafx-web      {:mvn/version "11.0.2"}}
    :main-opts ["-m" "cognitect.rebl"]}
   :rebl-8-win
-  {:extra-deps {org.clojure/core.async {:mvn/version "0.4.490"}
+  {:extra-deps {org.clojure/core.async {:mvn/version "0.6.532"}
                 ;; deps for file datafication (0.9.149 or later)
                 org.clojure/data.csv {:mvn/version "0.1.4"}
-                org.clojure/data.json {:mvn/version "0.2.3"}
-                org.yaml/snakeyaml {:mvn/version "1.23"}
+                org.clojure/data.json {:mvn/version "0.2.7"}
+                org.yaml/snakeyaml {:mvn/version "1.25"}
                 com.cognitect/rebl
                 ;; adjust to match your install location
                 {:local/root "C:\\Developer\\REBL\\latest\\REBL.jar"}}
    :main-opts ["-m" "cognitect.rebl"]}
   :rebl-11-win
-  {:extra-deps {org.clojure/core.async {:mvn/version "0.4.490"}
+  {:extra-deps {org.clojure/core.async {:mvn/version "0.6.532"}
                 ;; deps for file datafication (0.9.149 or later)
                 org.clojure/data.csv {:mvn/version "0.1.4"}
-                org.clojure/data.json {:mvn/version "0.2.3"}
-                org.yaml/snakeyaml {:mvn/version "1.23"}
+                org.clojure/data.json {:mvn/version "0.2.7"}
+                org.yaml/snakeyaml {:mvn/version "1.25"}
                 com.cognitect/rebl
                 ;; adjust to match your install location
                 {:local/root "C:\\Developer\\REBL\\latest\\REBL.jar"}
-                org.openjfx/javafx-fxml     {:mvn/version "11.0.1"}
-                org.openjfx/javafx-controls {:mvn/version "11.0.1"}
-                org.openjfx/javafx-graphics {:mvn/version "11.0.1"}
-                org.openjfx/javafx-media    {:mvn/version "11.0.1"}
-                org.openjfx/javafx-swing    {:mvn/version "11.0.1"}
-                org.openjfx/javafx-base     {:mvn/version "11.0.1"}
-                org.openjfx/javafx-web      {:mvn/version "11.0.1"}}
+                org.openjfx/javafx-fxml     {:mvn/version "11.0.2"}
+                org.openjfx/javafx-controls {:mvn/version "11.0.2"}
+                org.openjfx/javafx-graphics {:mvn/version "11.0.2"}
+                org.openjfx/javafx-media    {:mvn/version "11.0.2"}
+                org.openjfx/javafx-swing    {:mvn/version "11.0.2"}
+                org.openjfx/javafx-base     {:mvn/version "11.0.2"}
+                org.openjfx/javafx-web      {:mvn/version "11.0.2"}}
    :main-opts ["-m" "cognitect.rebl"]}
 
   :deps ; to get access to clojure.tools.deps.alpha.repl/add-lib
@@ -149,11 +149,11 @@
   ;; (load-master 'clojure/tools.trace)
   {:extra-deps {org.clojure/tools.deps.alpha
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
-                 :sha "148cab8f154711f8495bd632ebdc53a14dff7f09"}}}
+                 :sha "19d197ab221d37db750423eb970880cb87a91100"}}}
   :spec2 ; to get access to the latest spec-alpha2
   {:extra-deps {org.clojure/spec-alpha2
                 {:git/url "https://github.com/clojure/spec-alpha2"
-                 :sha "9dc3344bfe6d13213bdb15ca2e7680cd8eb439e3"}}}
+                 :sha "b644e4d8c5553e10544d920306690fffe9b53e15"}}}
   ;; start the Liquid Clojure editor
   ;; - see https://github.com/mogenslund/liquid
   :liquid
