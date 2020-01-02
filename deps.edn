@@ -40,6 +40,11 @@
   ;; - (require '[criterium.core :refer [bench]])
   ;; - (bench (your-expression))
   :bench {:extra-deps {criterium {:mvn/version "RELEASE"}}}
+  ;; - see https://github.com/clojure-goes-fast/clj-java-decompiler
+  ;; - note: this only seems to work on JDK 8
+  ;; - (require '[clj-java-decompiler.core :refer [decompile]])
+  ;; - (decompile (your-expression))
+  :decompile {:extra-deps {com.clojure-goes-fast/clj-java-decompiler {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/clojure-goes-fast/clj-memory-meter
   ;; - (require '[clj-memory-meter.core :as mm])
   ;; - (mm/measure (your-expression))
