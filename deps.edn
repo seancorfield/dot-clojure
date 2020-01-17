@@ -155,6 +155,8 @@
   {:extra-deps {org.clojure/tools.deps.alpha
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
                  :sha "19d197ab221d37db750423eb970880cb87a91100"}}}
+  :graph {:deps {org.clojure/tools.deps.graph {:mvn/version "0.2.24"}}
+          :main-opts ["-m" "clojure.tools.deps.graph"]}
   :spec2 ; to get access to the latest spec-alpha2
   {:extra-deps {org.clojure/spec-alpha2
                 {:git/url "https://github.com/clojure/spec-alpha2"
