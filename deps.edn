@@ -191,6 +191,17 @@
   :jar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}
         :main-opts ["-m" "hf.depstar.jar"]}
 
+  ;; jar installation and deployment:
+  ;; - see https://github.com/slipset/deps-deploy
+  ;;   - clj -A:install project.jar
+  ;;   - clj -A:deploy project.jar
+  ;; - these rely on having a pom.xml file and, for deployment, these two
+  ;;   environment variables: CLOJARS_USERNAME, CLOJARS_PASSWORD
+  :install {:extra-deps {deps-deploy {:mvn/version "RELEASE"}}
+            :main-opts ["-m" "deps-deploy.deps-deploy" "install"]}
+  :deploy {:extra-deps {deps-deploy {:mvn/version "RELEASE"}}
+           :main-opts ["-m" "deps-deploy.deps-deploy" "deploy"]}
+
   ;; - inspired by Ruby's -pne command line option which lets you process lines of stdin bound to $_
   ;; - usage: cat file-of-numbers.txt | clj -Mpne -e '($ (-> $_ Long/parseLong inc))'
   :pne {:main-opts,["-e","(defmacro,$,[&,body],(list,'while,(list,'when-let,'[$_,(read-line)],(let,[v,(gensym)],(list,'let,(vector,v,(list*,'do,body)),(list,'println,v))),'$_)))"]}}}
