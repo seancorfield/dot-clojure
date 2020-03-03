@@ -27,7 +27,10 @@
            :main-opts ["-m" "cognitect.test-runner"
                        "-d" "test"
                        "-d" "src/test/clojure"]}
-  ;; see https://github.com/jonase/eastwood#running-eastwood-in-a-repl
+  ;; - see https://github.com/seancorfield/readme
+  :readme {:extra-deps {seancorfield/readme {:mvn/version "RELEASE"}}
+           :main-opts ["-m" "seancorfield.readme"]}
+  ;; - see https://github.com/jonase/eastwood#running-eastwood-in-a-repl
   :eastwood {:extra-deps {jonase/eastwood {:mvn/version "RELEASE"}}
              :main-opts ["-m" "eastwood.lint" "{:source-paths,[\"src\"],:test-paths,[\"test\"]}"]}
 
