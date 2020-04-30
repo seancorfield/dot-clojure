@@ -157,7 +157,11 @@
   ;; (load-master 'clojure/tools.trace)
   {:extra-deps {org.clojure/tools.deps.alpha
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
-                 :sha "19d197ab221d37db750423eb970880cb87a91100"}}}
+                 :sha "19d197ab221d37db750423eb970880cb87a91100"}}
+   ;; this ensures we have a DynamicClassLoader, which is needed for
+   ;; add-lib to work, if we're starting other processes via aliases
+   ;; such as a socket REPL or Cognitect's REBL etc
+   :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"]}
   :graph {:deps {org.clojure/tools.deps.graph {:mvn/version "0.2.24"}}
           :main-opts ["-m" "clojure.tools.deps.graph"]}
   :spec2 ; to get access to the latest spec-alpha2
