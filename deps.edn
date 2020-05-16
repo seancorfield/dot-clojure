@@ -98,7 +98,11 @@
                 com.cognitect/rebl
                 ;; adjust to match your install location
                 {:local/root "/Developer/REBL/latest/REBL.jar"}}
-   :main-opts ["-m" "cognitect.rebl"]}
+   ;; this ensures we have a DynamicClassLoader, which is needed for
+   ;; add-lib to work, if we're starting other processes via aliases
+   ;; such as a socket REPL or Cognitect's REBL etc
+   :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"
+               "-m" "cognitect.rebl"]}
   :rebl-11
   {:extra-deps {org.clojure/core.async {:mvn/version "0.6.532"}
                 ;; deps for file datafication (0.9.149 or later)
@@ -115,7 +119,11 @@
                 org.openjfx/javafx-swing    {:mvn/version "11.0.2"}
                 org.openjfx/javafx-base     {:mvn/version "11.0.2"}
                 org.openjfx/javafx-web      {:mvn/version "11.0.2"}}
-   :main-opts ["-m" "cognitect.rebl"]}
+   ;; this ensures we have a DynamicClassLoader, which is needed for
+   ;; add-lib to work, if we're starting other processes via aliases
+   ;; such as a socket REPL or Cognitect's REBL etc
+   :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"
+               "-m" "cognitect.rebl"]}
   :rebl-8-win
   {:extra-deps {org.clojure/core.async {:mvn/version "0.6.532"}
                 ;; deps for file datafication (0.9.149 or later)
@@ -125,7 +133,11 @@
                 com.cognitect/rebl
                 ;; adjust to match your install location
                 {:local/root "C:\\Developer\\REBL\\latest\\REBL.jar"}}
-   :main-opts ["-m" "cognitect.rebl"]}
+   ;; this ensures we have a DynamicClassLoader, which is needed for
+   ;; add-lib to work, if we're starting other processes via aliases
+   ;; such as a socket REPL or Cognitect's REBL etc
+   :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"
+               "-m" "cognitect.rebl"]}
   :rebl-11-win
   {:extra-deps {org.clojure/core.async {:mvn/version "0.6.532"}
                 ;; deps for file datafication (0.9.149 or later)
@@ -142,7 +154,11 @@
                 org.openjfx/javafx-swing    {:mvn/version "11.0.2"}
                 org.openjfx/javafx-base     {:mvn/version "11.0.2"}
                 org.openjfx/javafx-web      {:mvn/version "11.0.2"}}
-   :main-opts ["-m" "cognitect.rebl"]}
+   ;; this ensures we have a DynamicClassLoader, which is needed for
+   ;; add-lib to work, if we're starting other processes via aliases
+   ;; such as a socket REPL or Cognitect's REBL etc
+   :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"
+               "-m" "cognitect.rebl"]}
 
   :deps ; to get access to clojure.tools.deps.alpha.repl/add-lib
   ;; - now you can add new deps to a running REPL:
