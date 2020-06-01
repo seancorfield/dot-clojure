@@ -227,6 +227,11 @@
   :deploy {:extra-deps {deps-deploy {:mvn/version "RELEASE"}}
            :main-opts ["-m" "deps-deploy.deps-deploy" "deploy"]}
 
+  ;; closh
+  :closh {:extra-deps {closh {:git/url "https://github.com/dundalek/closh.git"
+                              :tag "v0.5.0" :sha "6a7c0aa293616e2d28f7f735e915a301e44d2121"}}
+          :main-opts ["-m" "closh.zero.frontend.rebel"]}
+
   ;; - inspired by Ruby's -pne command line option which lets you process lines of stdin bound to $_
   ;; - usage: cat file-of-numbers.txt | clj -Mpne -e '($ (-> $_ Long/parseLong inc))'
   :pne {:main-opts,["-e","(defmacro,$,[&,body],(list,'while,(list,'when-let,'[$_,(read-line)],(let,[v,(gensym)],(list,'let,(vector,v,(list*,'do,body)),(list,'println,v))),'$_)))"]}}}
