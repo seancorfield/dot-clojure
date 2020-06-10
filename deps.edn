@@ -188,7 +188,7 @@
   ;; - see https://github.com/mogenslund/liquid
   :liquid
   {:extra-deps {mogenslund/liquid {:mvn/version "RELEASE"}}
-   :main-opts ["-m" "dk.salza.liq.core"]}
+   :main-opts ["-m" "liq.core"]}
 
   ;; project creation from templates:
   ;; - see https://github.com/seancorfield/clj-new
