@@ -32,7 +32,7 @@ There are aliases to pull in and start various REPL-related tools:
 * `:socket-zero` -- starts a Socket REPL on an available and displays the selected port number (using a `-e` option); if you want to start a REPL as well, you will need to specify the `-r` option: `clj -A:socket-zero -r`
 * `:prepl` -- starts a Socket pREPL on port 40404; can be combined with other aliases since this is just a JVM option; requires a recent Clojure 1.10 build!
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
-* `:reflect` -- adds (my fork of) Stuart Halloway's reflector utility (best used with REBL)
+* `:reflect` -- adds Stuart Halloway's reflector utility (best used with REBL)
 * `:comp` -- adds the latest stable release of [compliment](https://github.com/bbatsov/compliment); useful with a Socket REPL for Unravel or Chlorine for Atom
 * `:rebl` -- starts Cognitect's REBL on macOS/Linux; needs to be updated to reflect where you have it installed!
 * `:rebl-win` -- starts Cognitect's REBL on Windows; needs to be updated to reflect where you have it installed!
