@@ -106,6 +106,9 @@
   {:extra-deps {com.stuarthalloway/reflector
                 {:git/url "https://github.com/stuarthalloway/reflector"
                  :sha "93a0c19b4526c1180959e940202928d35e5c3cef"}}}
+  ;; - see https://github.com/vlaaad/reveal
+  :reveal
+  {:extra-deps {vlaaad/reveal {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/bbatsov/compliment
   :comp {:extra-deps {compliment/compliment {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/cognitect-labs/REBL-distro
