@@ -33,7 +33,8 @@ There are aliases to pull in and start various REPL-related tools:
 * `:prepl` -- starts a Socket pREPL on port 40404; can be combined with other aliases since this is just a JVM option; requires a recent Clojure 1.10 build!
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
 * `:reflect` -- adds Stuart Halloway's reflector utility (best used with REBL)
-* `:reveal` -- pulls in the latest stable release of [Reveal](https://github.com/vlaaad/reveal) -- see the Reveal web site for usage options
+* `:reveal` -- pulls in the latest stable release of the [Reveal](https://github.com/vlaaad/reveal) data visualization tool -- see the Reveal web site for usage options
+* `:portal` -- pulls in the latest stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
 
 * `:comp` -- adds the latest stable release of [compliment](https://github.com/bbatsov/compliment); useful with a Socket REPL for Unravel or Chlorine for Atom
 * `:rebl` -- starts Cognitect's REBL on macOS/Linux; needs to be updated to reflect where you have it installed!

@@ -109,6 +109,9 @@
   ;; - see https://github.com/vlaaad/reveal
   :reveal
   {:extra-deps {vlaaad/reveal {:mvn/version "RELEASE"}}}
+  ;; - see https://github.com/djblue/portal
+  :portal
+  {:extra-deps {djblue/portal {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/bbatsov/compliment
   :comp {:extra-deps {compliment/compliment {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/cognitect-labs/REBL-distro
