@@ -114,38 +114,23 @@
   {:extra-deps {djblue/portal {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/bbatsov/compliment
   :comp {:extra-deps {compliment/compliment {:mvn/version "RELEASE"}}}
-  ;; - see https://github.com/cognitect-labs/REBL-distro
-  ;; - you need to download the REBL JAR (and update the local/root below)
-  ;; - you need to be using at least Clojure 1.10
-  ;; - assumes you are either using:
-  ;; - - a JDK 8 that bundles OpenJFX, or
-  ;; - - a more modern JDK and relying on REBL providing deps for OpenJFX
-  ;; - on Windows, use the :rebl-win alias
+  ;; - see https://cognitect.com/dev-tools/
+  ;; - and https://github.com/cognitect-labs/REBL-distro
+  ;; - assumes you have installed the tools in your local mvn repo
   :rebl
   {:extra-deps {org.clojure/core.async {:mvn/version "0.6.532"}
-                ;; deps for file datafication (0.9.149 or later)
+                ;; deps for file datafication (REBL 0.9.149 or later)
                 org.clojure/data.csv {:mvn/version "0.1.4"}
                 org.clojure/data.json {:mvn/version "0.2.7"}
                 org.yaml/snakeyaml {:mvn/version "1.25"}
-                com.cognitect/rebl
-                ;; adjust to match your install location
-                #_{:local/root "/Developer/REBL/REBL-0.9.226/java8"}
-                {:local/root "/Developer/REBL/REBL-0.9.226/openjfx15ea"}}
-   ;; this ensures we have a DynamicClassLoader, which is needed for
-   ;; add-lib to work, if we're starting other processes via aliases
-   ;; such as a socket REPL or Cognitect's REBL etc
-   :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"
-               "-m" "cognitect.rebl"]}
-  :rebl-win
-  {:extra-deps {org.clojure/core.async {:mvn/version "0.6.532"}
-                ;; deps for file datafication (0.9.149 or later)
-                org.clojure/data.csv {:mvn/version "0.1.4"}
-                org.clojure/data.json {:mvn/version "0.2.7"}
-                org.yaml/snakeyaml {:mvn/version "1.25"}
-                com.cognitect/rebl
-                ;; adjust to match your install location
-                #_{:local/root "C:\\Developer\\REBL\\REBL-0.9.226\\java8"}
-                {:local/root "C:\\Developer\\REBL\\REBL-0.9.226\\openjfx15ea"}}
+                ;; assumes you've installed the latest Cognitect dev-tools:
+                com.cognitect/rebl {:mvn/version "0.9.240"}
+                ;; openjfx (remove these if your JDK bundles openjfx):
+                org.openjfx/javafx-fxml     {:mvn/version "15-ea+6"}
+                org.openjfx/javafx-controls {:mvn/version "15-ea+6"}
+                org.openjfx/javafx-swing    {:mvn/version "15-ea+6"}
+                org.openjfx/javafx-base     {:mvn/version "15-ea+6"}
+                org.openjfx/javafx-web      {:mvn/version "15-ea+6"}}
    ;; this ensures we have a DynamicClassLoader, which is needed for
    ;; add-lib to work, if we're starting other processes via aliases
    ;; such as a socket REPL or Cognitect's REBL etc
