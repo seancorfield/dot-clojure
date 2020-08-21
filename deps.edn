@@ -124,7 +124,7 @@
                 org.clojure/data.json {:mvn/version "0.2.7"}
                 org.yaml/snakeyaml {:mvn/version "1.25"}
                 ;; assumes you've installed the latest Cognitect dev-tools:
-                com.cognitect/rebl {:mvn/version "0.9.240"}
+                com.cognitect/rebl {:mvn/version "0.9.241"}
                 ;; openjfx (remove these if your JDK bundles openjfx):
                 org.openjfx/javafx-fxml     {:mvn/version "15-ea+6"}
                 org.openjfx/javafx-controls {:mvn/version "15-ea+6"}
