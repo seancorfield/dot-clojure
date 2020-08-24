@@ -29,11 +29,12 @@ There are aliases to pull in and start various REPL-related tools:
 * `:nrepl` -- pulls in the latest stable release of [nREPL](https://github.com/nrepl/nREPL) and starts an nREPL server on a random available port
 * `:nrepl/old` -- pulls in the latest stable release of [org.clojure/tools.nrepl](https://github.com/clojure/tools.nrepl) and starts an nREPL server on port 60606; this is provided to support legacy tooling
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
+* `:socket-rebl` -- starts a Socket REPL on port 50123; assumes you have Cognitect's REBL on your classpath (see `:rebl` below); everything sent to this Socket REPL will also be `submit`ted to the REBL
 * `:socket-zero` -- starts a Socket REPL on an available and displays the selected port number (using a `-e` option); if you want to start a REPL as well, you will need to specify the `-r` option: `clj -A:socket-zero -r`
 * `:prepl` -- starts a Socket pREPL on port 40404; can be combined with other aliases since this is just a JVM option; requires a recent Clojure 1.10 build!
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
 
-* `:rebl` -- starts [Cognitect's REBL](https://github.com/cognitect-labs/REBL-distro) (assumes latest [Cognitect dev-tools](https://cognitect.com/dev-tools/) installed)
+* `:rebl` -- starts [Cognitect's REBL](https://github.com/cognitect-labs/REBL-distro) (assumes latest [Cognitect dev-tools](https://cognitect.com/dev-tools/) installed); also includes my [Socket REPL middleware](https://github.com/seancorfield/socket-rebl) in case you want to use a Socket REPL with REBL
 * `:reflect` -- adds Stuart Halloway's reflector utility (best used with REBL)
 * `:reveal` -- pulls in the latest stable release of the [Reveal](https://github.com/vlaaad/reveal) data visualization tool -- see the Reveal web site for usage options
 * `:portal` -- pulls in the latest stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options

@@ -95,6 +95,8 @@
   ;; - specify -r as well if you want a repl
   :socket-zero {:jvm-opts ["-Dclojure.server.repl={:port,0,:accept,clojure.core.server/repl}"]
                 :main-opts ["-e" "(.getLocalPort,(get-in,@#'clojure.core.server/servers,[\"repl\",:socket]))"]}
+  ;; - start a Socket REPL on port 50123, that will submit everything to REBL:
+  :socket-rebl {:jvm-opts ["-Dclojure.server.repl={:port,50123,:accept,socket.rebl/repl}"]}
   ;; - start a Socket pREPL on port 40404:
   :prepl {:jvm-opts ["-Dclojure.server.repl={:port,40404,:accept,clojure.core.server/io-prepl}"]}
   ;; - see https://github.com/bhauman/rebel-readline
@@ -125,6 +127,10 @@
                 org.yaml/snakeyaml {:mvn/version "1.25"}
                 ;; assumes you've installed the latest Cognitect dev-tools:
                 com.cognitect/rebl {:mvn/version "0.9.241"}
+                ;; Socket REPL that submits to REBL:
+                seancorfield/socket-rebl
+                {:git/url "https://github.com/seancorfield/socket-rebl"
+                 :sha "60dd65cb8d03a9cf5eba21081cdfad5e27f72a8b"}
                 ;; openjfx (remove these if your JDK bundles openjfx):
                 org.openjfx/javafx-fxml     {:mvn/version "15-ea+6"}
                 org.openjfx/javafx-controls {:mvn/version "15-ea+6"}
