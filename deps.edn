@@ -13,6 +13,8 @@
   ;;   - cd my-cool-lib
   ;;   - clj -A:test:runner # run the tests!
   :new {:extra-deps {seancorfield/clj-new {:mvn/version "RELEASE"}}
+        :exec-fn clj-new/create
+        :exec-args {:template lib} ; default
         :main-opts ["-m" "clj-new.create"]}
 
   ;; uberjar building:
