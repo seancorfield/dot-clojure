@@ -35,9 +35,9 @@
   ;;   - clj -A:deploy project.jar
   ;; - these rely on having a pom.xml file and, for deployment, these two
   ;;   environment variables: CLOJARS_USERNAME, CLOJARS_PASSWORD
-  :install {:extra-deps {deps-deploy/deps-deploy {:mvn/version "RELEASE"}}
+  :install {:extra-deps {slipset/deps-deploy {:mvn/version "RELEASE"}}
             :main-opts ["-m" "deps-deploy.deps-deploy" "install"]}
-  :deploy {:extra-deps {deps-deploy/deps-deploy {:mvn/version "RELEASE"}}
+  :deploy {:extra-deps {slipset/deps-deploy {:mvn/version "RELEASE"}}
            :main-opts ["-m" "deps-deploy.deps-deploy" "deploy"]}
 
   ;; testing and debugging tools:
@@ -133,7 +133,7 @@
                 org.clojure/data.json {:mvn/version "0.2.7"}
                 org.yaml/snakeyaml {:mvn/version "1.25"}
                 ;; assumes you've installed the latest Cognitect dev-tools:
-                com.cognitect/rebl {:mvn/version "0.9.241"}
+                com.cognitect/rebl {:mvn/version "0.9.242"}
                 ;; openjfx (remove these if your JDK bundles openjfx):
                 org.openjfx/javafx-fxml     {:mvn/version "15-ea+6"}
                 org.openjfx/javafx-controls {:mvn/version "15-ea+6"}
