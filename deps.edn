@@ -92,7 +92,7 @@
   :nrepl/old {:extra-deps {org.clojure/tools.nrepl {:mvn/version "RELEASE"}}
               :main-opts ["-e" "(require,'[clojure.tools.nrepl.server,:refer,[start-server]]),(start-server,:port,60606)"]}
   ;; - start a Socket REPL on port 50505:
-  :socket {:jvm-opts ["-Dclojure.server.repl={:port,50505,:accept,clojure.core.server/repl}"]}
+  :socket {:jvm-opts ["-Dclojure.server.repl={:address,\"0.0.0.0\",:port,50505,:accept,clojure.core.server/repl}"]}
   ;; - start a Socket REPL on an available port, and display that port:
   ;; - specify -r as well if you want a repl
   :socket-zero {:jvm-opts ["-Dclojure.server.repl={:port,0,:accept,clojure.core.server/repl}"]
@@ -117,7 +117,8 @@
                  :sha "93a0c19b4526c1180959e940202928d35e5c3cef"}}}
   ;; - see https://github.com/vlaaad/reveal
   :reveal
-  {:extra-deps {vlaaad/reveal {:mvn/version "RELEASE"}}}
+  {:extra-deps {vlaaad/reveal {:mvn/version "RELEASE"}}
+   :main-opts ["-m" "vlaaad.reveal" "repl"]}
   ;; - see https://github.com/djblue/portal
   :portal
   {:extra-deps {djblue/portal {:mvn/version "RELEASE"}}}
