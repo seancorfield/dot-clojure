@@ -4,14 +4,14 @@
  {;; project creation from templates:
   ;; - see https://github.com/seancorfield/clj-new
   ;; - create an application project:
-  ;;   - clj -A:new app myname/myapp
+  ;;   - clj -X:new :template app :name myname/myapp
   ;;   - cd myapp
-  ;;   - clj -m myname.myapp # run it!
-  ;;   - clj -A:test:runner # run the tests!
+  ;;   - clj -M -m myname.myapp # run it!
+  ;;   - clj -M:test:runner # run the tests!
   ;; - create a library project:
-  ;;   - clj -A:new lib myname/my-cool-lib
+  ;;   - clj -X:new :name myname/my-cool-lib
   ;;   - cd my-cool-lib
-  ;;   - clj -A:test:runner # run the tests!
+  ;;   - clj -M:test:runner # run the tests!
   :new {:extra-deps {seancorfield/clj-new {:mvn/version "RELEASE"}}
         :exec-fn clj-new/create
         :exec-args {:template lib} ; default
@@ -19,11 +19,11 @@
 
   ;; uberjar building:
   ;; - see https://github.com/seancorfield/depstar for a minimalist approach:
-  ;;   - clj -A:uberjar result.jar
+  ;;   - clj -M:uberjar result.jar
   ;; - to run it:
   ;;   - java -cp result.jar clojure.main -m mymain.namespace
   ;; - build a library JAR:
-  ;;   - clj -A:jar result-lib.jar
+  ;;   - clj -M:jar result-lib.jar
   :uberjar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}
             :main-opts ["-m" "hf.depstar.uberjar"]}
   :jar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}
@@ -31,8 +31,8 @@
 
   ;; jar installation and deployment:
   ;; - see https://github.com/slipset/deps-deploy
-  ;;   - clj -A:install project.jar
-  ;;   - clj -A:deploy project.jar
+  ;;   - clj -M:install project.jar
+  ;;   - clj -M:deploy project.jar
   ;; - these rely on having a pom.xml file and, for deployment, these two
   ;;   environment variables: CLOJARS_USERNAME, CLOJARS_PASSWORD
   :install {:extra-deps {slipset/deps-deploy {:mvn/version "RELEASE"}}
@@ -44,7 +44,7 @@
   :test {:extra-paths ["test" "src/test/clojure"]
          :extra-deps {org.clojure/test.check {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/cognitect-labs/test-runner
-  ;; - run your tests: clj -A:test:runner
+  ;; - run your tests: clj -M:test:runner
   :runner {:extra-deps {com.cognitect/test-runner
                         {:git/url "https://github.com/cognitect-labs/test-runner"
                          :sha "3cb0a9daf1cb746259dc8309b218f9211ad3b33b"}}
@@ -64,7 +64,7 @@
           :main-opts ["-m" "clj-check.check"]}
   ;; - see https://github.com/clojure-expectations/expectations
   ;; - and https://github.com/clojure-expectations/clojure-test
-  ;; - run your expectations: clj -A:test:expect:runner
+  ;; - run your expectations: clj -M:test:expect:runner
   :expect {:extra-deps {expectations/expectations {:mvn/version "RELEASE"}
                         expectations/clojure-test {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/hugoduncan/criterium/
