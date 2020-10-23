@@ -33,7 +33,6 @@ There are aliases to pull in various useful testing and debugging tools:
 
 There are aliases to pull in and start various REPL-related tools:
 * `:nrepl` -- pulls in the latest stable release of [nREPL](https://github.com/nrepl/nREPL) and starts an nREPL server on a random available port
-* `:nrepl/old` -- pulls in the latest stable release of [org.clojure/tools.nrepl](https://github.com/clojure/tools.nrepl) and starts an nREPL server on port 60606; this is provided to support legacy tooling
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
 * `:socket-rebl` -- starts a Socket REPL on port 50123; assumes you have Cognitect's REBL on your classpath (see `:rebl` below); everything sent to this Socket REPL will also be `submit`ted to the REBL
 * `:socket-zero` -- starts a Socket REPL on an available and displays the selected port number (using a `-e` option); if you want to start a REPL as well, you will need to specify the `-r` option: `clj -M:socket-zero -r`
@@ -48,14 +47,15 @@ There are aliases to pull in and start various REPL-related tools:
 * `:comp` -- adds the latest stable release of [compliment](https://github.com/bbatsov/compliment); useful with a Socket REPL for Unravel or Chlorine for Atom
 
 There are aliases to pull in specific versions of Clojure:
-* `:master` -- Clojure 1.11.0-master-SNAPSHOT
+* `:master` -- Clojure 1.10.2-master-SNAPSHOT
+* `:1.10.2` -- Clojure 1.10.2-alpha2
 * `:1.10.1` -- Clojure 1.10.1
 * `:1.10` -- Clojure 1.10.0
 * `:1.9` -- Clojure 1.9.0
 * ... back to `:1.0` (note: `:1.5` is actually Clojure 1.5.1 to avoid a bug in Clojure 1.5.0)
 
-For the _EXPERIMENTAL_ `add-lib` function (`clojure.tools.deps.alpha.repl/add-lib`):
-* `:add-lib` -- pulls in an (old) branch of [org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha); see the example `load-master` function in the comments in my `deps.edn`; this was previously called `:deps` but I realized that conflicted with the default `:deps` alias in the Clojure CLI install; be aware that `add-lib` is unsupported and likely to break or go away as `tools.deps.alpha` and Clojure both evolve.
+For the _EXPERIMENTAL_ `add-libs` function (`clojure.tools.deps.alpha.repl/add-libs`):
+* `:add-libs` -- pulls in the `add-lib3` branch of [org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha); see the example `load-master` function in the comments in my `deps.edn`; this was previously called `:deps` but I realized that conflicted with the default `:deps` alias in the Clojure CLI install; be aware that `add-libs` is unsupported and likely to break or go away as `tools.deps.alpha` and Clojure both evolve. _[recently renamed from `:add-lib` to `:add-libs` to reflect the name change in the `add-lib3` branch!]_
 
 For `tools.deps.graph`:
 * `:graph` -- pulls in a recent version of [tools.deps.graph](https://github.com/clojure/tools.deps.graph) to help you visualize dependency graphs

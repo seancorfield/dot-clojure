@@ -47,7 +47,7 @@
   ;; - run your tests: clj -M:test:runner
   :runner {:extra-deps {com.cognitect/test-runner
                         {:git/url "https://github.com/cognitect-labs/test-runner"
-                         :sha "3cb0a9daf1cb746259dc8309b218f9211ad3b33b"}}
+                         :sha "b6b3193fcc42659d7e46ecd1884a228993441182"}}
            :main-opts ["-m" "cognitect.test-runner"
                        "-d" "test"
                        "-d" "src/test/clojure"]}
@@ -60,7 +60,7 @@
   ;; - see https://github.com/athos/clj-check
   :check {:extra-deps {athos/clj-check
                        {:git/url "https://github.com/athos/clj-check"
-                        :sha "46214bb33fccf30df797fc15ad818f7151f3f44c"}}
+                        :sha "cd1f25456de5eebda0a69602dd3445905382b3a4"}}
           :main-opts ["-m" "clj-check.check"]}
   ;; - see https://github.com/clojure-expectations/expectations
   ;; - and https://github.com/clojure-expectations/clojure-test
@@ -88,9 +88,6 @@
   ;; - start a modern nREPL server on a random available port:
   :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "RELEASE"}}
           :main-opts ["-m" "nrepl.cmdline"]}
-  ;; - start a legacy nREPL server on port 60606:
-  :nrepl/old {:extra-deps {org.clojure/tools.nrepl {:mvn/version "RELEASE"}}
-              :main-opts ["-e" "(require,'[clojure.tools.nrepl.server,:refer,[start-server]]),(start-server,:port,60606)"]}
   ;; - start a Socket REPL on port 50505:
   :socket {:jvm-opts ["-Dclojure.server.repl={:address,\"0.0.0.0\",:port,50505,:accept,clojure.core.server/repl}"]}
   ;; - start a Socket REPL on an available port, and display that port:
@@ -142,7 +139,7 @@
                 org.openjfx/javafx-base     {:mvn/version "15-ea+6"}
                 org.openjfx/javafx-web      {:mvn/version "15-ea+6"}}
    ;; this ensures we have a DynamicClassLoader, which is needed for
-   ;; add-lib to work, if we're starting other processes via aliases
+   ;; add-libs to work, if we're starting other processes via aliases
    ;; such as a socket REPL or Cognitect's REBL etc
    :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"
                "-m" "cognitect.rebl"]}
@@ -160,29 +157,33 @@
   :1.9 {:override-deps {org.clojure/clojure {:mvn/version "1.9.0"}}}
   :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.0"}}}
   :1.10.1 {:override-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
-  :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-master-SNAPSHOT"}}}
+  ;; latest release is alpha2:
+  :1.10.2 {:override-deps {org.clojure/clojure {:mvn/version "1.10.2-alpha2"}}}
+  ;; master is currently 1.10.2:
+  :master {:override-deps {org.clojure/clojure {:mvn/version "1.10.2-master-SNAPSHOT"}}}
 
-  :add-lib ; to get access to clojure.tools.deps.alpha.repl/add-lib
-  ;; IMPORTANT NOTE: this is an old branch now and likely to break as work
+  :add-libs ; to get access to clojure.tools.deps.alpha.repl/add-libs
+  ;; IMPORTANT NOTE: this is the new add-lib3 branch but is still a work
+  ;; in progress and likely to break/change as the core team's work
   ;; continues on integrating some add-lib-like functionality officially
   ;; into either t.d.a or perhaps Clojure itself; in addition, the default
   ;; install of the Clojure CLI includes a :deps alias to the version of
   ;; t.d.a that is included in the install, so I renamed :deps to :add-lib!
   ;; - now you can add new deps to a running REPL:
-  ;; (require '[clojure.tools.deps.alpha.repl :refer [add-lib]])
-  ;; (add-lib 'some/library {:mvn/version "RELEASE"})
+  ;; (require '[clojure.tools.deps.alpha.repl :refer [add-libs]])
+  ;; (add-libs '{some/library {:mvn/version "RELEASE"}})
   ;; - and you can git deps too; here's how to get the master version of a lib:
   ;; (require '[clojure.tools.gitlibs :as gitlibs])
   ;; (defn load-master [lib]
   ;;   (let [git (str "https://github.com/" lib ".git")]
-  ;;    (add-lib lib {:git/url git :sha (gitlibs/resolve git "master")})))
+  ;;    (add-libs {lib {:git/url git :sha (gitlibs/resolve git "master")}})))
   ;; - e.g., using the GitHub path (not the usual Maven group/artifact):
   ;; (load-master 'clojure/tools.trace)
-  {:extra-deps {org.clojure/tools.deps.alpha
+  {:extra-deps {org.clojure/tools.deps.alpha ; add-lib3 branch
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
-                 :sha "19d197ab221d37db750423eb970880cb87a91100"}}
+                 :sha "adb9bb47c7954cd32310ffcb5d128a736e5a495d"}}
    ;; this ensures we have a DynamicClassLoader, which is needed for
-   ;; add-lib to work, if we're starting other processes via aliases
+   ;; add-libs to work, if we're starting other processes via aliases
    ;; such as a socket REPL or Cognitect's REBL etc
    :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"]}
   :graph {:deps {org.clojure/tools.deps.graph {:mvn/version "1.0.46"}}
@@ -190,7 +191,7 @@
   :spec2 ; to get access to the latest spec-alpha2
   {:extra-deps {org.clojure/spec-alpha2
                 {:git/url "https://github.com/clojure/spec-alpha2"
-                 :sha "2f84e3a37cab76d44c58785ff4481597429bc1d3"}}}
+                 :sha "8ba5dc543872369129181c4432f438c82b6cd297"}}}
 
   ;; start the Liquid Clojure editor
   ;; - see https://github.com/mogenslund/liquid
