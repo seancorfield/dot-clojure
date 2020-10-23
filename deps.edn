@@ -115,7 +115,9 @@
   ;; - see https://github.com/vlaaad/reveal
   :reveal
   {:extra-deps {vlaaad/reveal {:mvn/version "RELEASE"}}
-   :main-opts ["-m" "vlaaad.reveal" "repl"]}
+   :main-opts ["-m" "vlaaad.reveal" "repl"]
+   ;; make the font more readable:
+   :jvm-opts ["-Dvlaaad.reveal.prefs={:font-size,18}"]}
   ;; - see https://github.com/djblue/portal
   :portal
   {:extra-deps {djblue/portal {:mvn/version "RELEASE"}}}
