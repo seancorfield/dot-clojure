@@ -183,7 +183,7 @@
   ;; (load-master 'clojure/tools.trace)
   {:extra-deps {org.clojure/tools.deps.alpha ; add-lib3 branch
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
-                 :sha "adb9bb47c7954cd32310ffcb5d128a736e5a495d"}}
+                 :sha "d77476f3d5f624249462e275ae62d26da89f320b"}}
    ;; this ensures we have a DynamicClassLoader, which is needed for
    ;; add-libs to work, if we're starting other processes via aliases
    ;; such as a socket REPL or Cognitect's REBL etc
