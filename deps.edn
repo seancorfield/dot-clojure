@@ -14,20 +14,21 @@
   ;;   - clj -M:test:runner # run the tests!
   :new {:extra-deps {seancorfield/clj-new {:mvn/version "RELEASE"}}
         :exec-fn clj-new/create
-        :exec-args {:template lib} ; default
-        :main-opts ["-m" "clj-new.create"]}
+        :exec-args {:template lib}}
 
   ;; uberjar building:
   ;; - see https://github.com/seancorfield/depstar for a minimalist approach:
-  ;;   - clj -M:uberjar result.jar
+  ;;   - clj -X:uberjar :jar result.jar :main-class mymain.namespace
   ;; - to run it:
-  ;;   - java -cp result.jar clojure.main -m mymain.namespace
+  ;;   - java -jar result.jar 
   ;; - build a library JAR:
-  ;;   - clj -M:jar result-lib.jar
+  ;;   - clj -X:jar :jar result-lib.jar
   :uberjar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}
-            :main-opts ["-m" "hf.depstar.uberjar"]}
+            :exec-fn hf.depstar/uberjar
+            :exec-args {:aot true}}
   :jar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}
-        :main-opts ["-m" "hf.depstar.jar"]}
+        :exec-fn hf.depstar/jar
+        :exec-args {}}
 
   ;; jar installation and deployment:
   ;; - see https://github.com/slipset/deps-deploy
@@ -117,7 +118,7 @@
   {:extra-deps {vlaaad/reveal {:mvn/version "RELEASE"}}
    :main-opts ["-m" "vlaaad.reveal" "repl"]
    ;; make the font more readable:
-   :jvm-opts ["-Dvlaaad.reveal.prefs={:font-size,18}"]}
+   :jvm-opts ["-Dvlaaad.reveal.prefs={:font-size,24}"]}
   ;; - see https://github.com/djblue/portal
   :portal
   {:extra-deps {djblue/portal {:mvn/version "RELEASE"}}}

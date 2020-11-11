@@ -12,8 +12,8 @@ An alias to pull in my template creation tool:
 * `:new` -- pulls in and runs the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates
 
 Aliases to build jar & uberjar files:
-* `:uberjar` -- pulls in and runs the latest stable release of my fork of [depstar](https://github.com/seancorfield/depstar) to create an uberjar; `clj -M:uberjar MyProject.jar`; `java -cp MyProject.jar clojure.main -m project.core`
-* `:jar` -- pulls in and runs the latest stable release of my fork of [depstar](https://github.com/seancorfield/depstar) to create a "thin" JAR; `clj -M:jar MyProject.jar`; along with a `pom.xml` (created via `clj -Spom`), this can be deployed to Clojars etc (via `mvn deploy:deploy-file ...`)
+* `:uberjar` -- pulls in and runs the latest stable release of my fork of [depstar](https://github.com/seancorfield/depstar) to create an uberjar; `clojure -X:uberjar :jar MyProject.jar :main-class project.core`; `java -jar MyProject.jar` (you'll need a `pom.xml` for this: `clojure -Spom`)
+* `:jar` -- pulls in and runs the latest stable release of my fork of [depstar](https://github.com/seancorfield/depstar) to create a "thin" JAR; `clojure -X:jar :jar MyProject.jar`; along with a `pom.xml` (created via `clojure -Spom`), this can be deployed to Clojars etc (via `clojure -M:deploy ...` -- see below)
 
 And install or deploy jar files:
 * `:install` -- pulls in and runs the latest stable release of Erik Assum's [deps-deploy](https://github.com/slipset/deps-deploy) and installs the specified JAR file locally, based on your `pom.xml`
@@ -71,6 +71,6 @@ For shell-related stuff:
 
 And finally, a gnarly little macro, inspired by Ruby's `-pne` command line option
 that lets you process lines of standard input:
-* `:pne` -- `cat file-of-numbers.txt | clj -Mpne -e '($ (-> $_ Long/parseLong inc))'`; `$` reads stdin and evaluates the expression repeatedly with `$_` bound to each line, printing the results to stdout.
+* `:pne` -- `cat file-of-numbers.txt | clojure -M:pne -e '($ (-> $_ Long/parseLong inc))'`; `$` reads stdin and evaluates the expression repeatedly with `$_` bound to each line, printing the results to stdout.
 
 > Note: if you're using `closh`, you can do the same thing as `:pne` directly in the shell: `cat file-of-numbers.txt |> (run! #(-> % Long/parseLong inc println))`
