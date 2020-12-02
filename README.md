@@ -32,6 +32,7 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:outdated` -- pulls in and runs version 1.8.4 of [Depot](https://github.com/Olical/depot) and reports on outdated dependencies
 
 There are aliases to pull in and start various REPL-related tools:
+* `:dev` -- depending on what is on your classpath, start Cognitect's REBL or Reveal or Rebel Readline (or a plain Clojure REPL), with a Socket REPL (on port 50505, but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time); if Reveal is started, adds an auto-table view for `tap>`'d values; usage: `clj -M:rebl:dev` or `clj -M:reveal:dev` or `clj -M:rebel:dev`
 * `:nrepl` -- pulls in the latest stable release of [nREPL](https://github.com/nrepl/nREPL) and starts an nREPL server on a random available port
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
 * `:socket-rebl` -- starts a Socket REPL on port 50123; assumes you have Cognitect's REBL on your classpath (see `:rebl` below); everything sent to this Socket REPL will also be `submit`ted to the REBL

@@ -20,7 +20,7 @@
   ;; - see https://github.com/seancorfield/depstar for a minimalist approach:
   ;;   - clj -X:uberjar :jar result.jar :main-class mymain.namespace
   ;; - to run it:
-  ;;   - java -jar result.jar 
+  ;;   - java -jar result.jar
   ;; - build a library JAR:
   ;;   - clj -X:jar :jar result-lib.jar
   :uberjar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}
@@ -86,6 +86,9 @@
              :main-opts ["-m" "depot.outdated.main"]}
 
   ;; REPL-related tools:
+  ;; - start REBL or Reveal or Rebel Readline, with a socket REPL:
+  ;;   - clj -M:rebl:dev OR clj -M:reveal:dev OR clj -M:rebel:dev
+  :dev {:main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
   ;; - start a modern nREPL server on a random available port:
   :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "RELEASE"}}
           :main-opts ["-m" "nrepl.cmdline"]}
