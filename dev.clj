@@ -3,6 +3,18 @@
   file looks at what tooling you have available on your
   classpath and starts a REPL.")
 
+;; see if Rebel Readline is available so we can use when-sym:
+(try (require 'rebel-readline.core) (catch Throwable _))
+
+(defmacro when-sym
+  "Usage: (when-sym some/thing (some/thing ...))
+
+  Allows for conditional compilation of code that depends on a
+  symbol being available (in our case below, a macro)."
+  [sym expr]
+  (when (resolve sym)
+    `~expr))
+
 (defn- ->long
   "Attempt to parse a string as a Long and return nil if it fails."
   [s]
@@ -72,6 +84,9 @@
 
   Then pick a REPL as follows:
   * if Cognitect's REBL is on the classpath then start that, else
+  * if Reveal and Rebel Readline are both on the classpath then
+    start Rebel Readline with Reveal's REPL (so you get both the
+    Reveal UI and the fancy Rebel terminal REPL!), else
   * if Reveal is on the classpath then start that, else
   * if Rebel Readline is on the classpath then start that, else
   * start a plain ol' Clojure REPL.
@@ -109,18 +124,37 @@
 
   (let [[repl-name repl-fn]
         (or (try ["Cognitect REBL" (requiring-resolve 'cognitect.rebl/-main)]
-                 (catch Throwable _))
-            (try ["Reveal"
-                  (when-let [reveal (requiring-resolve 'vlaaad.reveal/repl)]
-                    ;; a five second delay should be sufficient:
-                    (future (Thread/sleep 6000)
-                            (tap> (install-reveal-extras)))
-                    reveal)]
-                 (catch Throwable _))
+              (catch Throwable _))
+            (try (when-let [reveal (requiring-resolve 'vlaaad.reveal/repl)]
+                   (let [kickstart-reveal
+                         (fn [label repl-fn]
+                           ;; a six second delay should be sufficient:
+                           (future (Thread/sleep 6000)
+                                   (tap> (install-reveal-extras)))
+                           [label repl-fn])]
+                     ;; if Rebel is also available, use it as Reveal's REPL
+                     ;; courtesy of didibus on Slack (plus when-sym above):
+                     (if (resolve 'rebel-readline.core/with-line-reader)
+                       (when-sym rebel-readline.core/with-line-reader
+                         (let [rebel-create-line-reader
+                               (requiring-resolve 'rebel-readline.clojure.line-reader/create)
+                               rebel-create-service
+                               (requiring-resolve 'rebel-readline.clojure.service.local/create)
+                               rebel-create-repl-read
+                               (requiring-resolve 'rebel-readline.clojure.main/create-repl-read)]
+                           (kickstart-reveal "Reveal+Rebel Readline"
+                                             #(rebel-readline.core/with-line-reader
+                                                (rebel-create-line-reader (rebel-create-service))
+                                                (reveal :prompt (fn []) :read (rebel-create-repl-read))))))
+                       (kickstart-reveal "Reveal" reveal))))
+              (catch Throwable _ (println _)))
             (try ["Rebel Readline" (requiring-resolve 'rebel-readline.main/-main)]
-                 (catch Throwable _))
+              (catch Throwable _))
             ["clojure.main" (resolve 'clojure.main/main)])]
     (println "Starting" repl-name "as the REPL...")
     (repl-fn)))
 
 (start-repl)
+
+;; ensure we get a clean exit when the REPL exits:
+(System/exit 0)
