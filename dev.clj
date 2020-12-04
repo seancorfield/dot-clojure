@@ -147,7 +147,7 @@
                                                 (rebel-create-line-reader (rebel-create-service))
                                                 (reveal :prompt (fn []) :read (rebel-create-repl-read))))))
                        (kickstart-reveal "Reveal" reveal))))
-              (catch Throwable _ (println _)))
+              (catch Throwable _))
             (try ["Rebel Readline" (requiring-resolve 'rebel-readline.main/-main)]
               (catch Throwable _))
             ["clojure.main" (resolve 'clojure.main/main)])]
