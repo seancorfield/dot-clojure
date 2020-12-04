@@ -91,6 +91,8 @@
   ;; - start REBL or Reveal or Rebel Readline, with a socket REPL:
   ;;   - clj -M:rebl:dev OR clj -M:reveal:dev OR clj -M:rebel:dev
   :dev {:main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
+  ;; - in case you need precompiled code on your classpath:
+  :classes {:extra-paths ["classes"]}
   ;; - start a modern nREPL server on a random available port:
   :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "RELEASE"}}
           :main-opts ["-m" "nrepl.cmdline"]}
