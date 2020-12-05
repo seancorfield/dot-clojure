@@ -44,11 +44,16 @@
                      c  (class x') ; class of underlying value
                      m  (meta x)   ; original metadata
                      m' (when (var? x) (meta x')) ; underlying Var metadata (if any)
-                     ;; if the underlying value is a function or namespace
-                     ;; and it has a docstring, use that as the value instead:
-                     x' (if (and (or (fn? x') (= clojure.lang.Namespace c))
-                                 (or (:doc m) (:doc m')))
-                          (:doc m)
+                     ;; if the underlying value is a function
+                     ;; and it has a docstring, use that; if
+                     ;; the underlying value is a namespace,
+                     ;; run ns-publics and display that map:
+                     x' (cond
+                          (and (fn? x') (or (:doc m) (:doc m')))
+                          (or (:doc m) (:doc m'))
+                          (= clojure.lang.Namespace c)
+                          (ns-publics x')
+                          :else
                           x')]
                  {:fx/type :v-box
                   :children
