@@ -2,9 +2,13 @@
 
 This is my personal `.clojure/deps.edn` file providing useful `clj` aliases drawn from a variety of projects. It is published to GitHub so I can keep all my computers sync'd up -- and to provide a range of examples that folks new to the Clojure CLI might find helpful.
 
-_Since it is my personal file, it may make assumptions about my own environment. For example, I have a locally-installed, up-to-date version of [Cognitect's dev-tools](https://www.cognitect.com/dev-tools/) (Datomic `dev-local` & REBL). It uses `"RELEASE"` for several tools so I can always get the latest stable version of any dev/test tool I use. I make no effort at backward-compatibility and may add, delete, or change aliases as they benefit me personally. Caveat Programmer!_
+The main alias I use here is `:dev` which starts various combinations of REPL tooling. See [**The `:dev` Alias**](#the-dev-alias) below for more details.
+
+_Since it is my personal file, it may make assumptions about my own environment. For example, it uses `"RELEASE"` for several tools so I can always get the latest stable version of any dev/test tool I use. I make no effort at backward-compatibility and may add, delete, or change aliases as they benefit me personally. Caveat Programmer!_
 
 **If you want a really well-documented, well-maintained alternative that actually tracks versions of tools, I would recommend you use the [Practicalli Clojure `deps.edn`](https://github.com/practicalli/clojure-deps-edn) project instead!**
+
+## Basic Aliases
 
 With that caveat out of the way, here is some basic documentation about my aliases (there are additional examples in the comments in the `deps.edn` file itself):
 
@@ -75,3 +79,32 @@ that lets you process lines of standard input:
 * `:pne` -- `cat file-of-numbers.txt | clojure -M:pne -e '($ (-> $_ Long/parseLong inc))'`; `$` reads stdin and evaluates the expression repeatedly with `$_` bound to each line, printing the results to stdout.
 
 > Note: if you're using `closh`, you can do the same thing as `:pne` directly in the shell: `cat file-of-numbers.txt |> (run! #(-> % Long/parseLong inc println))`
+
+## The `:dev` Alias
+
+The `:dev` alias uses `load-file` to load the [`dev.clj` file](https://github.com/seancorfield/dot-clojure/blob/develop/dev.clj) from this repo. That does a number of things (see the `start-repl` docstring for more details):
+
+* Starts a Socket REPL server (with the port selected via an environment variable, a JVM property, or a dot-file created on a previous run).
+* Starts [Cognitect's REBL](https://github.com/cognitect-labs/REBL-distro), if present on the classpath, else
+* Starts [Reveal](https://github.com/vlaaad/reveal/), if present on the classpath, else
+* Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath.
+
+If both Reveal and Rebel Readline are present on the classpath, it starts both of them, using Rebel Readline for the primary REPL, with everything input there appearing in Reveal. In addition, everything `tap>`'d will be displayed inside Reveal.
+
+If the `dev.clj` starts Reveal, it also `tap>`'s a Reveal view into it, which you can activate by right-clicking and selecting the `view` option (instead of right-click, you can press `space` which the name of the view -- `right-click > view` -- is highlighted).
+
+This view provides a number of features that apply automatically to anything that is `tap>`'d -- the view automatically updates each time a new value is submitted.
+
+If a `Var` is submitted, the view `deref`'s it so that the associated value is displayed (along with the metadata from the `Var` itself). If a function or namespace value is submitted, the docstring is displayed, if available.
+
+The view shows two panels:
+
+* Metadata as a hash map. This also contains `:_class` with the `class` of the value submitted. If a `Var` was submitted, and its value has metadata, that will be present as `:_meta`.
+* The underlying value itself, displayed as follows:
+  * Strings are displayed in their "raw" form so they are laid out as they would print (without `"` and with `\n` as actual newlines etc),
+  * `java.net.URL`'s are rendered inline as web pages, so you can browse documentation easily, for example. If you are using this with either my [Atom/Chlorine setup](https://github.com/seancorfield/atom-chlorine-setup) or my [VS Code/Clover setup](https://github.com/seancorfield/vscode-clover-setup), the `ctrl-; j` key will show the Javadoc page for the type of an expression if it is part of the Java standard library, and the `ctrl-; ?` key will show the ClojureDocs page for any symbol that is part of Clojure's core libraries.
+  * Things that are not `seqable?` are displayed as a table with one row containing that value in the first column and its string representation in the second column.
+  * Anything else is assumed to be some sort of sequence or collection, and is displayed in a table, with a row for each value in the collection:
+    * A hash map is treated as a collection of `MapEntry`'s which are displayed with a column for the key and a column for the value (and thus one row for each key/value pair of the hash map).
+    * A collection of maps is displayed with a column for each key (based on the first map in the sequence, like `clojure.pprint/print-table`).
+    * A collection of indexed values is displayed with each row showing one of those values with up to 1,024 columns for the indexed elements (based on the number of elements in the first value in the sequence: an arbitrary, large limit to avoid problems with infinite sequences). The column headings are the indices of those elements.

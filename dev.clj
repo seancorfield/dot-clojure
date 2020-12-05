@@ -61,17 +61,23 @@
                   [{:fx/type rx-value-view
                     :v-box/vgrow :always
                     :value (cond-> (assoc m :_class c) m' (assoc :_meta m'))}
-                   (cond ; display a string in raw form for easier reading:
+                   (cond
+                     ;; display a string in raw form for easier reading:
                      (string? x')
                      {:fx/type rx-value-view
                       :v-box/vgrow :always
                       :value (rx-stream-as-is (rx-as x' (rx-raw-string x' {:fill :string})))}
+                     ;; automatically display URLs using the internal browser:
+                     (instance? java.net.URL x')
+                     {:fx/type :web-view
+                      :url (str x')}
                      ;; else display simple values as a single item in a table:
                      (or (nil? x') (not (seqable? x')))
                      {:fx/type rx-table-view
                       :items [x']
                       :v-box/vgrow :always
-                      :columns [{:fn identity :header 'value}]}
+                      :columns [{:fn identity :header 'value}
+                                {:fn str :header 'string}]}
                      :else ; display the value in a reasonable table form:
                      (let [head (first x')]
                        {:fx/type rx-table-view
@@ -80,7 +86,7 @@
                         :columns (cond
                                    (map? head) (for [k (keys head)] {:header k :fn #(get % k)})
                                    (map-entry? head) [{:header 'key :fn key} {:header 'val :fn val}]
-                                   (indexed? head) (for [i (range (count head))] {:header i :fn #(nth % i)})
+                                   (indexed? head) (for [i (range (bounded-count 1024 head))] {:header i :fn #(nth % i)})
                                    :else [{:header 'item :fn identity}])}))]}))}
         (rx-raw-string "right-click > view" {:fill :object}))))
     (catch Throwable t
