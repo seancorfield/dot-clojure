@@ -2,7 +2,7 @@
 
 This is my personal `.clojure/deps.edn` file providing useful `clj` aliases drawn from a variety of projects. It is published to GitHub so I can keep all my computers sync'd up -- and to provide a range of examples that folks new to the Clojure CLI might find helpful.
 
-The main alias I use here is `:dev` which starts various combinations of REPL tooling. See **The `:dev` Alias** below for more details.
+The main alias I use here is `:dev` which starts various combinations of REPL tooling. See [**The `:dev` Alias**](#the-dev-alias) below for more details.
 
 _Since it is my personal file, it may make assumptions about my own environment. For example, it uses `"RELEASE"` for several tools so I can always get the latest stable version of any dev/test tool I use. I make no effort at backward-compatibility and may add, delete, or change aliases as they benefit me personally. Caveat Programmer!_
 
