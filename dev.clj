@@ -40,19 +40,34 @@
         {:fx/type rx-obs-view
          :ref last-tap
          :fn (fn [x]
-               (let [x' (if (var? x) (deref x) x)]
+               (let [x' (if (var? x) (deref x) x) ; get Var's value
+                     c  (class x') ; class of underlying value
+                     m  (meta x)   ; original metadata
+                     m' (when (var? x) (meta x')) ; underlying Var metadata (if any)
+                     ;; if the underlying value is a function or namespace
+                     ;; and it has a docstring, use that as the value instead:
+                     x' (if (and (or (fn? x') (= clojure.lang.Namespace c))
+                                 (or (:doc m) (:doc m')))
+                          (:doc m)
+                          x')]
                  {:fx/type :v-box
                   :children
+                  ;; in the top box, display metadata
                   [{:fx/type rx-value-view
                     :v-box/vgrow :always
-                    :value (assoc (meta x)
-                                  :_meta (meta x')
-                                  :_class (class x'))}
-                   (if (or (nil? x') (string? x') (not (seqable? x')))
+                    :value (cond-> (assoc m :_class c) m' (assoc :_meta m'))}
+                   (cond ; display a string in raw form for easier reading:
+                     (string? x')
+                     {:fx/type rx-value-view
+                      :v-box/vgrow :always
+                      :value (rx-stream-as-is (rx-as x' (rx-raw-string x' {:fill :string})))}
+                     ;; else display simple values as a single item in a table:
+                     (or (nil? x') (not (seqable? x')))
                      {:fx/type rx-table-view
                       :items [x']
                       :v-box/vgrow :always
                       :columns [{:fn identity :header 'value}]}
+                     :else ; display the value in a reasonable table form:
                      (let [head (first x')]
                        {:fx/type rx-table-view
                         :items x'
