@@ -33,7 +33,7 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:bench` -- pulls in the latest stable release of [Criterium](https://github.com/hugoduncan/criterium/) for benchmarking your code
 * `:decompile` -- pulls in the latest stable release of [Clojure Goes Fast's decompiler](https://github.com/clojure-goes-fast/clj-java-decompiler); requires JDK 8 (not later)
 * `:measure` -- pulls in the latest stable release of [Memory Meter](https://github.com/clojure-goes-fast/clj-memory-meter)
-* `:outdated` -- pulls in and runs version 1.8.4 of [Depot](https://github.com/Olical/depot) and reports on outdated dependencies
+* `:outdated` -- pulls in and runs the latest stable release of [antq](https://github.com/antq/antq) and reports on outdated dependencies
 
 There are aliases to pull in and start various REPL-related tools:
 * `:dev` -- depending on what is on your classpath, start Cognitect's REBL or Reveal or Rebel Readline (or a plain Clojure REPL), with a Socket REPL (on port 50505, but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time); if Reveal is started, adds an auto-table view for `tap>`'d values; usage: `clj -M:rebl:dev` or `clj -M:reveal:dev` or `clojure -M:rebel:dev` or `clojure -M:rebel:reveal:dev` (for both of them together)

@@ -81,9 +81,9 @@
   ;; - (require '[clj-memory-meter.core :as mm])
   ;; - (mm/measure (your-expression))
   :measure {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "RELEASE"}}}
-  ;; - see https://github.com/Olical/depot
-  :outdated {:extra-deps {olical/depot {:mvn/version "1.8.4"}}
-             :main-opts ["-m" "depot.outdated.main"]}
+  ;; - see https://github.com/liquidz/antq
+  :outdated {:extra-deps {antq/antq {:mvn/version "RELEASE"}}
+             :main-opts ["-m" "antq.core"]}
   :j14 ; add (sometimes) useful Java 14 option
   {:jvm-opts ["-XX:+ShowCodeDetailsInExceptionMessages"]}
 
