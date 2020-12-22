@@ -16,8 +16,8 @@ An alias to pull in my template creation tool:
 * `:new` -- pulls in and runs the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates
 
 Aliases to build jar & uberjar files:
-* `:uberjar` -- pulls in and runs the latest stable release of my fork of [depstar](https://github.com/seancorfield/depstar) to create an uberjar; `clojure -X:uberjar :jar MyProject.jar :main-class project.core`; `java -jar MyProject.jar` (you'll need a `pom.xml` for this: `clojure -Spom`)
-* `:jar` -- pulls in and runs the latest stable release of my fork of [depstar](https://github.com/seancorfield/depstar) to create a "thin" JAR; `clojure -X:jar :jar MyProject.jar`; along with a `pom.xml` (created via `clojure -Spom`), this can be deployed to Clojars etc (via `clojure -M:deploy ...` -- see below)
+* `:uberjar` -- pulls in and runs the latest stable release of [depstar](https://github.com/seancorfield/depstar) to create an uberjar; `clojure -X:uberjar :jar MyProject.jar :main-class project.core`; `java -jar MyProject.jar`
+* `:jar` -- pulls in and runs the latest stable release of [depstar](https://github.com/seancorfield/depstar) to create a "thin" JAR; `clojure -X:jar :jar MyProject.jar`; along with a `pom.xml`, this can be deployed to Clojars etc (via `clojure -M:deploy ...` -- see below)
 
 And install or deploy jar files:
 * `:install` -- pulls in and runs the latest stable release of Erik Assum's [deps-deploy](https://github.com/slipset/deps-deploy) and installs the specified JAR file locally, based on your `pom.xml`

@@ -17,16 +17,16 @@
         :exec-args {:template lib}}
 
   ;; uberjar building:
-  ;; - see https://github.com/seancorfield/depstar for a minimalist approach:
+  ;; - see https://github.com/seancorfield/depstar for more details:
   ;;   - clj -X:uberjar :jar result.jar :main-class mymain.namespace
   ;; - to run it:
   ;;   - java -jar result.jar
   ;; - build a library JAR:
   ;;   - clj -X:jar :jar result-lib.jar
-  :uberjar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}
+  :uberjar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.160"}}
             :exec-fn hf.depstar/uberjar
             :exec-args {:aot true}}
-  :jar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}
+  :jar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.160"}}
         :exec-fn hf.depstar/jar
         :exec-args {}}
 
