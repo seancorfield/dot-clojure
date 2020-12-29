@@ -23,10 +23,10 @@
   ;;   - java -jar result.jar
   ;; - build a library JAR:
   ;;   - clj -X:jar :jar result-lib.jar
-  :uberjar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.160"}}
+  :uberjar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.165"}}
             :exec-fn hf.depstar/uberjar
             :exec-args {:aot true}}
-  :jar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.160"}}
+  :jar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.165"}}
         :exec-fn hf.depstar/jar
         :exec-args {}}
 
