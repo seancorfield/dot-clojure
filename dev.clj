@@ -8,7 +8,7 @@
 
 ;; see if Figwheel is available so we can use when-sym:
 (try (require 'figwheel.main) (catch Throwable _ (println _)))
-(println 'main? (resolve 'figwheel.main/-main))
+
 (defmacro when-sym
   "Usage: (when-sym some/thing (some/thing ...))
 
@@ -163,7 +163,6 @@
                            (future (Thread/sleep 6000)
                                    (tap> (install-reveal-extras)))
                            [label repl-fn])]
-                     (println 'before-cond (resolve 'figwheel.main/-main))
                      (cond ;; if we're in Figwheel, just start the Reveal UI
                            (resolve 'figwheel.main/-main)
                            (when-sym figwheel.main/-main
@@ -188,6 +187,9 @@
                                                     (reveal :prompt (fn []) :read (rebel-create-repl-read))))))
                            :else
                            (kickstart-reveal "Reveal" reveal))))
+              (catch Throwable _))
+            (try ["Figwheel Main" #((requiring-resolve 'figwheel.main/-main)
+                                    "-b" "dev" "-r")]
               (catch Throwable _))
             (try ["Rebel Readline" (requiring-resolve 'rebel-readline.main/-main)]
               (catch Throwable _))
