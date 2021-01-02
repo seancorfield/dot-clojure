@@ -6,6 +6,9 @@
 ;; see if Rebel Readline is available so we can use when-sym:
 (try (require 'rebel-readline.core) (catch Throwable _))
 
+;; see if Figwheel is available so we can use when-sym:
+(try (require 'figwheel.main) (catch Throwable _ (println _)))
+(println 'main? (resolve 'figwheel.main/-main))
 (defmacro when-sym
   "Usage: (when-sym some/thing (some/thing ...))
 
@@ -138,7 +141,7 @@
                    (->long (System/getProperty "socket-repl-port"))
                    (->long (try (slurp ".socket-repl-port") (catch Throwable _)))
                    50505)]
-    ;; if there already a 'repl' Socket REPL open, don't open another:
+    ;; if there is already a 'repl' Socket REPL open, don't open another:
     (when-not (get (deref (requiring-resolve 'clojure.core.server/servers)) "repl")
       (println "Selected port" s-port "for the Socket REPL...")
       (spit ".socket-repl-port" (str s-port))
@@ -150,7 +153,7 @@
           (println "Unable to start the Socket REPL on port" s-port)
           (println (ex-message t))))))
 
-  (let [[repl-name repl-fn stay-alive]
+  (let [[repl-name repl-fn]
         (or (try ["Cognitect REBL" (requiring-resolve 'cognitect.rebl/-main)]
               (catch Throwable _))
             (try (when-let [reveal (requiring-resolve 'vlaaad.reveal/repl)]
@@ -160,15 +163,16 @@
                            (future (Thread/sleep 6000)
                                    (tap> (install-reveal-extras)))
                            [label repl-fn])]
+                     (println 'before-cond (resolve 'figwheel.main/-main))
                      (cond ;; if we're in Figwheel, just start the Reveal UI
                            (resolve 'figwheel.main/-main)
-                           (conj
-                            (kickstart-reveal
-                             "Reveal UI"
-                             #(add-tap ((requiring-resolve 'vlaaad.reveal/ui))))
-                            ;; stay alive after starting this!
-                            true)
-                           ;; if Rebel is also available, use it as Reveal's REPL
+                           (when-sym figwheel.main/-main
+                             (kickstart-reveal
+                              "Figwheel+Reveal UI"
+                              #(let [fw-main (requiring-resolve 'figwheel.main/-main)]
+                                 (add-tap ((requiring-resolve 'vlaaad.reveal/ui)))
+                                 (fw-main "-b" "dev" "-r"))))
+                            ;; if Rebel is also available, use it as Reveal's REPL
                            ;; courtesy of didibus on Slack (plus when-sym above):
                            (resolve 'rebel-readline.core/with-line-reader)
                            (when-sym rebel-readline.core/with-line-reader
@@ -189,9 +193,9 @@
               (catch Throwable _))
             ["clojure.main" (resolve 'clojure.main/main)])]
     (println "Starting" repl-name "as the REPL...")
-    (repl-fn)
-    ;; ensure we get a clean exit when the REPL exits:
-    (when-not stay-alive
-      (System/exit 0))))
+    (repl-fn)))
 
 (start-repl)
+
+;; ensure a smooth exit after the REPL is closed
+(System/exit 0)

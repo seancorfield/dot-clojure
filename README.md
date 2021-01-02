@@ -114,13 +114,9 @@ The view shows two panels:
 If you are doing ClojureScript development with Figwheel (`figwheel-main`) then you can do:
 
 ```
-clojure -M:reveal:socket:fig:build
+clojure -M:reveal:fig:build:dev
 ```
 
-You'll get the regular Figwheel build REPL and a browser open on your application, plus a Socket REPL on port 50505.
+You'll get the regular Figwheel build REPL and a browser open on your application, plus a Socket REPL on port 50505 (or whatever you env says).
 
-If you connect to that and then evaluate this expression, to load the `dev.clj` script, it will start a Reveal UI with the view extras:
-
-```
-(load-file (str (System/getProperty "user.home") "/.clojure/dev.clj"))
-```
+Connect to the Socket REPL, write your code as `.cljc` files, and you'll have the full power of your editor, Reveal, and Figwheel!
