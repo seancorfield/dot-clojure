@@ -29,6 +29,10 @@
   :jar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.165"}}
         :exec-fn hf.depstar/jar
         :exec-args {}}
+  ;; this is for consistency with the alias shown in the depstar project:
+  :depstar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.165"}}
+            :ns-default hf.depstar
+            :exec-args {}}
 
   ;; jar installation and deployment:
   ;; - see https://github.com/slipset/deps-deploy
@@ -41,7 +45,9 @@
   :deploy {:extra-deps {slipset/deps-deploy {:mvn/version "RELEASE"}}
            :main-opts ["-m" "deps-deploy.deps-deploy" "deploy"]}
 
-  ;; testing and debugging tools:
+  ;; testing and debugging tools (this would normally be overridden
+  ;; by a :test alias in the project deps.edn file -- but it's a
+  ;; useful default):
   :test {:extra-paths ["test" "src/test/clojure"]
          :extra-deps {org.clojure/test.check {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/cognitect-labs/test-runner
@@ -88,15 +94,20 @@
   {:jvm-opts ["-XX:+ShowCodeDetailsInExceptionMessages"]}
 
   ;; REPL-related tools:
-  ;; - start REBL or Reveal or Rebel Readline, with a socket REPL:
-  ;;   - clj -M:rebl:dev OR clj -M:reveal:dev OR clj -M:rebel:dev
+  ;; - start Figwheel or REBL or Reveal or Rebel Readline, with a socket REPL:
+  ;;   - clj -M:rebl:dev/repl OR clj -M:reveal:dev/repl OR clojure -M:rebel:dev/repl
+  ;;   - clojure -M:fig:build:dev/repl
+  ;; - recently renamed from :dev to be less likely to clash with project-specific
+  ;;   aliases (some projects already have a :dev alias):
+  :dev/repl {:main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
+  ;; - legacy spelling of this alias:
   :dev {:main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
   ;; - in case you need precompiled code on your classpath:
   :classes {:extra-paths ["classes"]}
   ;; - start a modern nREPL server on a random available port:
   :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "RELEASE"}}
           :main-opts ["-m" "nrepl.cmdline"]}
-  ;; - start a Socket REPL on port 50505:
+  ;; - start a Socket REPL on port 50505 (not needed if you use the :dev/repl alias):
   :socket {:jvm-opts ["-Dclojure.server.repl={:address,\"0.0.0.0\",:port,50505,:accept,clojure.core.server/repl}"]}
   ;; - start a Socket REPL on an available port, and display that port:
   ;; - specify -r as well if you want a repl

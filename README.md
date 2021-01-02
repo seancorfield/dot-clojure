@@ -2,7 +2,7 @@
 
 This is my personal `.clojure/deps.edn` file providing useful `clj` aliases drawn from a variety of projects. It is published to GitHub so I can keep all my computers sync'd up -- and to provide a range of examples that folks new to the Clojure CLI might find helpful.
 
-The main alias I use here is `:dev` which starts various combinations of REPL tooling. See [**The `:dev` Alias**](#the-dev-alias) below for more details.
+The main alias I use here is `:dev/repl` which starts various combinations of REPL tooling. See [**The `:dev/repl` Alias**](#the-devrepl-alias) below for more details.
 
 _Since it is my personal file, it may make assumptions about my own environment. For example, it uses `"RELEASE"` for several tools so I can always get the latest stable version of any dev/test tool I use. I make no effort at backward-compatibility and may add, delete, or change aliases as they benefit me personally. Caveat Programmer!_
 
@@ -36,7 +36,7 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:outdated` -- pulls in and runs the latest stable release of [antq](https://github.com/antq/antq) and reports on outdated dependencies
 
 There are aliases to pull in and start various REPL-related tools:
-* `:dev` -- depending on what is on your classpath, start Cognitect's REBL or Reveal or Rebel Readline (or a plain Clojure REPL), with a Socket REPL (on port 50505, but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time); if Reveal is started, adds an auto-table view for `tap>`'d values; usage: `clj -M:rebl:dev` or `clj -M:reveal:dev` or `clojure -M:rebel:dev` or `clojure -M:rebel:reveal:dev` (for both of them together)
+* `:dev/repl` -- depending on what is on your classpath, start Cognitect's REBL or Reveal or Rebel Readline (or a plain Clojure REPL), with a Socket REPL (on port 50505, but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time); if Reveal is started, adds an auto-table view for `tap>`'d values; usage: `clj -M:rebl:dev/repl` or `clj -M:reveal:dev/repl` or `clojure -M:rebel:dev/repl` or `clojure -M:rebel:reveal:dev/repl` (for both of them together). Also works with Figwheel Main (now that I've started doing ClojureScript!): `clojure -M:reveal:fig:build:dev/repl`
 * `:nrepl` -- pulls in the latest stable release of [nREPL](https://github.com/nrepl/nREPL) and starts an nREPL server on a random available port
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
 * `:socket-rebl` -- starts a Socket REPL on port 50123; assumes you have Cognitect's REBL on your classpath (see `:rebl` below); everything sent to this Socket REPL will also be `submit`ted to the REBL
@@ -80,14 +80,17 @@ that lets you process lines of standard input:
 
 > Note: if you're using `closh`, you can do the same thing as `:pne` directly in the shell: `cat file-of-numbers.txt |> (run! #(-> % Long/parseLong inc println))`
 
-## The `:dev` Alias
+## The `:dev/repl` Alias
 
-The `:dev` alias uses `load-file` to load the [`dev.clj` file](https://github.com/seancorfield/dot-clojure/blob/develop/dev.clj) from this repo. That does a number of things (see the `start-repl` docstring for more details):
+The `:dev/repl` alias uses `load-file` to load the [`dev.clj` file](https://github.com/seancorfield/dot-clojure/blob/develop/dev.clj) from this repo. That does a number of things (see the `start-repl` docstring for more details):
 
 * Starts a Socket REPL server (with the port selected via an environment variable, a JVM property, or a dot-file created on a previous run).
 * Starts [Cognitect's REBL](https://github.com/cognitect-labs/REBL-distro), if present on the classpath, else
-* Starts [Reveal](https://github.com/vlaaad/reveal/), if present on the classpath, else
+* Starts [Figwheel Main](https://github.com/bhauman/figwheel-main), if present on the classpath, else
+* Starts [Reveal](https://github.com/vlaaad/reveal), if present on the classpath, else
 * Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath.
+
+If both Reveal and Figwheel Main are present on the classpath, it starts both of them, using Figwheel for the primary (cljs) REPL, with everything input there affecting your running (cljs) app. In addition, everything `tap>`'d from your editor will be displayed inside Reveal (assuming you have `.cljc` files and evaluate that code as Clojure, not ClojureScript). See note about Figwheel usage below.
 
 If both Reveal and Rebel Readline are present on the classpath, it starts both of them, using Rebel Readline for the primary REPL, with everything input there appearing in Reveal. In addition, everything `tap>`'d will be displayed inside Reveal.
 
@@ -114,9 +117,9 @@ The view shows two panels:
 If you are doing ClojureScript development with Figwheel (`figwheel-main`) then you can do:
 
 ```
-clojure -M:reveal:fig:build:dev
+clojure -M:reveal:fig:build:dev/repl
 ```
 
-You'll get the regular Figwheel build REPL and a browser open on your application, plus a Socket REPL on port 50505 (or whatever you env says).
+You'll get the regular Figwheel build REPL (for ClojureScript, which uses Rebel Readline) and a browser open on your application, plus a Socket REPL on port 50505 (or whatever you env says, for Clojure evaluation).
 
-Connect to the Socket REPL, write your code as `.cljc` files, and you'll have the full power of your editor, Reveal, and Figwheel!
+Connect to the Socket REPL, write your code as `.cljc` files, and you'll have the full power of your editor, Reveal, and Figwheel! What you evaluate in your editor will be treated as Clojure code (and can be `tap>`'d into Reveal, for example). What you evaluate at the REPL itself will be treated as ClojureScript code (and will affect your application instead).
