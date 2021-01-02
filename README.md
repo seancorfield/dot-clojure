@@ -108,3 +108,19 @@ The view shows two panels:
     * A hash map is treated as a collection of `MapEntry`'s which are displayed with a column for the key and a column for the value (and thus one row for each key/value pair of the hash map).
     * A collection of maps is displayed with a column for each key (based on the first map in the sequence, like `clojure.pprint/print-table`).
     * A collection of indexed values is displayed with each row showing one of those values with up to 1,024 columns for the indexed elements (based on the number of elements in the first value in the sequence: an arbitrary, large limit to avoid problems with infinite sequences). The column headings are the indices of those elements.
+
+## Use with Figwheel
+
+If you are doing ClojureScript development with Figwheel (`figwheel-main`) then you can do:
+
+```
+clojure -M:reveal:socket:fig:build
+```
+
+You'll get the regular Figwheel build REPL and a browser open on your application, plus a Socket REPL on port 50505.
+
+If you connect to that and then evaluate this expression, to load the `dev.clj` script, it will start a Reveal UI with the view extras:
+
+```
+(load-file (str (System/getProperty "user.home") "/.clojure/dev.clj"))
+```

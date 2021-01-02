@@ -138,17 +138,19 @@
                    (->long (System/getProperty "socket-repl-port"))
                    (->long (try (slurp ".socket-repl-port") (catch Throwable _)))
                    50505)]
-    (println "Selected port" s-port "for the Socket REPL...")
-    (spit ".socket-repl-port" (str s-port))
-    (try
-      ((requiring-resolve 'clojure.core.server/start-server)
-       {:port s-port :name (str "REPL-" s-port)
-        :accept 'clojure.core.server/repl})
-      (catch Throwable t
-        (println "Unable to start the Socket REPL on port" s-port)
-        (println (ex-message t)))))
+    ;; if there already a 'repl' Socket REPL open, don't open another:
+    (when-not (get (deref (requiring-resolve 'clojure.core.server/servers)) "repl")
+      (println "Selected port" s-port "for the Socket REPL...")
+      (spit ".socket-repl-port" (str s-port))
+      (try
+        ((requiring-resolve 'clojure.core.server/start-server)
+         {:port s-port :name (str "REPL-" s-port)
+          :accept 'clojure.core.server/repl})
+        (catch Throwable t
+          (println "Unable to start the Socket REPL on port" s-port)
+          (println (ex-message t))))))
 
-  (let [[repl-name repl-fn]
+  (let [[repl-name repl-fn stay-alive]
         (or (try ["Cognitect REBL" (requiring-resolve 'cognitect.rebl/-main)]
               (catch Throwable _))
             (try (when-let [reveal (requiring-resolve 'vlaaad.reveal/repl)]
@@ -158,29 +160,38 @@
                            (future (Thread/sleep 6000)
                                    (tap> (install-reveal-extras)))
                            [label repl-fn])]
-                     ;; if Rebel is also available, use it as Reveal's REPL
-                     ;; courtesy of didibus on Slack (plus when-sym above):
-                     (if (resolve 'rebel-readline.core/with-line-reader)
-                       (when-sym rebel-readline.core/with-line-reader
-                         (let [rebel-create-line-reader
-                               (requiring-resolve 'rebel-readline.clojure.line-reader/create)
-                               rebel-create-service
-                               (requiring-resolve 'rebel-readline.clojure.service.local/create)
-                               rebel-create-repl-read
-                               (requiring-resolve 'rebel-readline.clojure.main/create-repl-read)]
-                           (kickstart-reveal "Reveal+Rebel Readline"
-                                             #(rebel-readline.core/with-line-reader
-                                                (rebel-create-line-reader (rebel-create-service))
-                                                (reveal :prompt (fn []) :read (rebel-create-repl-read))))))
-                       (kickstart-reveal "Reveal" reveal))))
+                     (cond ;; if we're in Figwheel, just start the Reveal UI
+                           (resolve 'figwheel.main/-main)
+                           (conj
+                            (kickstart-reveal
+                             "Reveal UI"
+                             #(add-tap ((requiring-resolve 'vlaaad.reveal/ui))))
+                            ;; stay alive after starting this!
+                            true)
+                           ;; if Rebel is also available, use it as Reveal's REPL
+                           ;; courtesy of didibus on Slack (plus when-sym above):
+                           (resolve 'rebel-readline.core/with-line-reader)
+                           (when-sym rebel-readline.core/with-line-reader
+                             (let [rebel-create-line-reader
+                                   (requiring-resolve 'rebel-readline.clojure.line-reader/create)
+                                   rebel-create-service
+                                   (requiring-resolve 'rebel-readline.clojure.service.local/create)
+                                   rebel-create-repl-read
+                                   (requiring-resolve 'rebel-readline.clojure.main/create-repl-read)]
+                               (kickstart-reveal "Reveal+Rebel Readline"
+                                                 #(rebel-readline.core/with-line-reader
+                                                    (rebel-create-line-reader (rebel-create-service))
+                                                    (reveal :prompt (fn []) :read (rebel-create-repl-read))))))
+                           :else
+                           (kickstart-reveal "Reveal" reveal))))
               (catch Throwable _))
             (try ["Rebel Readline" (requiring-resolve 'rebel-readline.main/-main)]
               (catch Throwable _))
             ["clojure.main" (resolve 'clojure.main/main)])]
     (println "Starting" repl-name "as the REPL...")
-    (repl-fn)))
+    (repl-fn)
+    ;; ensure we get a clean exit when the REPL exits:
+    (when-not stay-alive
+      (System/exit 0))))
 
 (start-repl)
-
-;; ensure we get a clean exit when the REPL exits:
-(System/exit 0)
