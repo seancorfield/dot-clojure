@@ -181,8 +181,8 @@
   :1.9 {:override-deps {org.clojure/clojure {:mvn/version "1.9.0"}}}
   :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.0"}}}
   :1.10.1 {:override-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
-  ;; latest release is alpha2:
-  :1.10.2 {:override-deps {org.clojure/clojure {:mvn/version "1.10.2-alpha2"}}}
+  ;; latest release is rc2:
+  :1.10.2 {:override-deps {org.clojure/clojure {:mvn/version "1.10.2-rc2"}}}
   ;; master is currently 1.10.2:
   :master {:override-deps {org.clojure/clojure {:mvn/version "1.10.2-master-SNAPSHOT"}}}
 
