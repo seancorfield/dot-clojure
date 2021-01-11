@@ -7,7 +7,7 @@
 (try (require 'rebel-readline.core) (catch Throwable _))
 
 ;; see if Figwheel is available so we can use when-sym:
-(try (require 'figwheel.main) (catch Throwable _ (println _)))
+(try (require 'figwheel.main) (catch Throwable _))
 
 (defmacro when-sym
   "Usage: (when-sym some/thing (some/thing ...))
