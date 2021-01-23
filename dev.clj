@@ -199,8 +199,9 @@
                            :else
                            (kickstart-reveal "Reveal" reveal))))
               (catch Throwable _))
-            (try ["Figwheel Main" #((requiring-resolve 'figwheel.main/-main)
-                                    "-b" "dev" "-r")]
+            (try
+              (let [figgy (requiring-resolve 'figwheel.main/-main)]
+                ["Figwheel Main" #(figgy "-b" "dev" "-r")])
               (catch Throwable _))
             (try ["Rebel Readline" (requiring-resolve 'rebel-readline.main/-main)]
               (catch Throwable _))
