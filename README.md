@@ -20,8 +20,8 @@ Aliases to build jar & uberjar files:
 * `:jar` -- pulls in and runs the latest stable release of [depstar](https://github.com/seancorfield/depstar) to create a "thin" JAR; `clojure -X:jar :jar MyProject.jar`; along with a `pom.xml`, this can be deployed to Clojars etc (via `clojure -M:deploy ...` -- see below)
 
 And install or deploy jar files:
-* `:install` -- pulls in and runs the latest stable release of Erik Assum's [deps-deploy](https://github.com/slipset/deps-deploy) and installs the specified JAR file locally, based on your `pom.xml`
-* `:deploy` -- pulls in and runs the latest stable release of Erik Assum's [deps-deploy](https://github.com/slipset/deps-deploy) and deploys the specified JAR file to Clojars, based on your `pom.xml` and the `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment variables
+* `:install` -- pulls in and runs the latest stable release of Erik Assum's [deps-deploy](https://github.com/slipset/deps-deploy) and installs the specified JAR file locally, based on your `pom.xml`; `clojure -X:install :artifact '"MyProject.jar"'`
+* `:deploy` -- pulls in and runs the latest stable release of Erik Assum's [deps-deploy](https://github.com/slipset/deps-deploy) and deploys the specified JAR file to Clojars, based on your `pom.xml` and the `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment variables; `clojure -X:deploy :artifact '"MyProject.jar"'`
 
 There are aliases to pull in various useful testing and debugging tools:
 * `:test` -- adds both `test` and `src/test/clojure` to your classpath and pulls in the latest stable version of `test.check`
@@ -52,10 +52,11 @@ There are aliases to pull in and start various REPL-related tools:
 * `:comp` -- adds the latest stable release of [compliment](https://github.com/bbatsov/compliment); useful with a Socket REPL for Unravel or Chlorine for Atom
 
 There are aliases to pull in specific versions of Clojure:
-* `:master` -- Clojure 1.10.2-master-SNAPSHOT
-* `:1.10.2` -- Clojure 1.10.2-alpha2
+* `:master` -- Clojure 1.11.0-master-SNAPSHOT
+* `:1.10.2` -- Clojure 1.10.2
 * `:1.10.1` -- Clojure 1.10.1
-* `:1.10` -- Clojure 1.10.0
+* `:1.10.0` -- Clojure 1.10.0
+* `:1.10` -- Clojure 1.10.2
 * `:1.9` -- Clojure 1.9.0
 * ... back to `:1.0` (note: `:1.5` is actually Clojure 1.5.1 to avoid a bug in Clojure 1.5.0)
 
@@ -94,7 +95,7 @@ If both Reveal and Figwheel Main are present on the classpath, it starts both of
 
 If both Reveal and Rebel Readline are present on the classpath, it starts both of them, using Rebel Readline for the primary REPL, with everything input there appearing in Reveal. In addition, everything `tap>`'d will be displayed inside Reveal.
 
-If the `dev.clj` starts Reveal, it also `tap>`'s a Reveal view into it, which you can activate by right-clicking and selecting the `view` option (instead of right-click, you can press `space` which the name of the view -- `right-click > view` -- is highlighted).
+If the `dev.clj` starts Reveal, it also `tap>`'s a Reveal view into it, which you can activate by right-clicking and selecting the `view` option (instead of right-click, you can press `space` when the name of the view -- `right-click > view` -- is highlighted).
 
 This view provides a number of features that apply automatically to anything that is `tap>`'d -- the view automatically updates each time a new value is submitted.
 

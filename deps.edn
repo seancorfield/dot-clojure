@@ -36,14 +36,16 @@
 
   ;; jar installation and deployment:
   ;; - see https://github.com/slipset/deps-deploy
-  ;;   - clj -M:install project.jar
-  ;;   - clj -M:deploy project.jar
+  ;;   - clj -X:install :artifact '"project.jar"'
+  ;;   - clj -X:deploy :artifact '"project.jar"'
   ;; - these rely on having a pom.xml file and, for deployment, these two
   ;;   environment variables: CLOJARS_USERNAME, CLOJARS_PASSWORD
-  :install {:extra-deps {slipset/deps-deploy {:mvn/version "RELEASE"}}
-            :main-opts ["-m" "deps-deploy.deps-deploy" "install"]}
-  :deploy {:extra-deps {slipset/deps-deploy {:mvn/version "RELEASE"}}
-           :main-opts ["-m" "deps-deploy.deps-deploy" "deploy"]}
+  :install {:replace-deps {slipset/deps-deploy {:mvn/version "RELEASE"}}
+            :exec-fn deps-deploy.deps-deploy/deploy
+            :exec-args {:installer :local}}
+  :deploy {:replace-deps {slipset/deps-deploy {:mvn/version "RELEASE"}}
+           :exec-fn deps-deploy.deps-deploy/deploy
+           :exec-args {:installer :remote}}
 
   ;; testing and debugging tools (this would normally be overridden
   ;; by a :test alias in the project deps.edn file -- but it's a
@@ -104,7 +106,7 @@
   :dev {:main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
   ;; - in case you need precompiled code on your classpath:
   :classes {:extra-paths ["classes"]}
-  ;; - start a modern nREPL server on a random available port:
+  ;; - start an nREPL server on a random available port:
   :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "RELEASE"}}
           :main-opts ["-m" "nrepl.cmdline"]}
   ;; - start a Socket REPL on port 50505 (not needed if you use the :dev/repl alias):
