@@ -196,6 +196,9 @@
   ;; into either t.d.a or perhaps Clojure itself; in addition, the default
   ;; install of the Clojure CLI includes a :deps alias to the version of
   ;; t.d.a that is included in the install, so I renamed :deps to :add-lib!
+  ;; CAVEAT: since this is a git dependency, it doesn't bring in any of
+  ;; the compiled Java code so S3 Maven repos are not accessible via this
+  ;; alias (which the released t.d.a provides).
   ;; - now you can add new deps to a running REPL:
   ;; (require '[clojure.tools.deps.alpha.repl :refer [add-libs]])
   ;; (add-libs '{some/library {:mvn/version "RELEASE"}})
