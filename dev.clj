@@ -1,7 +1,9 @@
 (ns dev
   "Invoked via load-file from ~/.clojure/deps.edn, this
   file looks at what tooling you have available on your
-  classpath and starts a REPL.")
+  classpath and starts a REPL."
+  (:require [clojure.repl :refer [demunge]]
+            [clojure.string :as str]))
 
 ;; see if Rebel Readline is available so we can use when-sym:
 (try (require 'rebel-readline.core) (catch Throwable _))
@@ -36,8 +38,8 @@
   chars so they make a nice, neat table."
   [[c f file line]]
   [(symbol (ellipsis (-> (name c)
-                         (clojure.repl/demunge)
-                         (clojure.string/replace #"--[0-9]{1,}" ""))
+                         (demunge)
+                         (str/replace #"--[0-9]{1,}" ""))
                      24))
    f
    (ellipsis file 24)
