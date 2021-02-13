@@ -101,9 +101,11 @@
   ;;   - clojure -M:fig:build:dev/repl
   ;; - recently renamed from :dev to be less likely to clash with project-specific
   ;;   aliases (some projects already have a :dev alias):
-  :dev/repl {:main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
+  :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
+             :main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
   ;; - legacy spelling of this alias:
-  :dev {:main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
+  :dev {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
+        :main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
   ;; - in case you need precompiled code on your classpath:
   :classes {:extra-paths ["classes"]}
   ;; - start an nREPL server on a random available port:
