@@ -5,6 +5,12 @@
   (:require [clojure.repl :refer [demunge]]
             [clojure.string :as str]))
 
+(defn up-since
+  "Return the date this REPL (Java process) was started."
+  []
+  (java.util.Date. (- (.getTime (java.util.Date.))
+                      (.getUptime (java.lang.management.ManagementFactory/getRuntimeMXBean)))))
+
 ;; see if Rebel Readline is available so we can use when-sym:
 (try (require 'rebel-readline.core) (catch Throwable _))
 
