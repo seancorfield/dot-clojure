@@ -4,17 +4,23 @@
  {;; project creation from templates:
   ;; - see https://github.com/seancorfield/clj-new
   ;; - create an application project:
-  ;;   - clj -X:new :template app :name myname/myapp
+  ;;   - clj -X:new :name myname/myapp
   ;;   - cd myapp
   ;;   - clj -M -m myname.myapp # run it!
   ;;   - clj -M:test:runner # run the tests!
   ;; - create a library project:
-  ;;   - clj -X:new :name myname/my-cool-lib
+  ;;   - clj -X:new :template lib :name myname/my-cool-lib
   ;;   - cd my-cool-lib
   ;;   - clj -M:test:runner # run the tests!
   :new {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.264"}}
         :exec-fn clj-new/create
-        :exec-args {:template lib}}
+        :exec-args {:template app}}
+  :new-app {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.264"}}
+            :exec-fn clj-new/create
+            :exec-args {:template app}}
+  :new-lib {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.264"}}
+            :exec-fn clj-new/create
+            :exec-args {:template lib}}
 
   ;; uberjar building:
   ;; - see https://github.com/seancorfield/depstar for more details:
