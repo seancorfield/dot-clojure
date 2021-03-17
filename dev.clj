@@ -199,12 +199,17 @@
                    50505)]
     ;; if there is already a 'repl' Socket REPL open, don't open another:
     (when-not (get (deref (requiring-resolve 'clojure.core.server/servers)) "repl")
-      (println "Selected port" s-port "for the Socket REPL...")
-      (spit ".socket-repl-port" (str s-port))
       (try
-        ((requiring-resolve 'clojure.core.server/start-server)
-         {:port s-port :name (str "REPL-" s-port)
-          :accept 'clojure.core.server/repl})
+        (let [server-name (str "REPL-" s-port)]
+          ((requiring-resolve 'clojure.core.server/start-server)
+           {:port s-port :name server-name
+            :accept 'clojure.core.server/repl})
+          (let [s-port' (.getLocalPort
+                         (get-in @(requiring-resolve 'clojure.core.server/servers)
+                                 [server-name :socket]))]
+            (println "Selected port" s-port' "for the Socket REPL...")
+            ;; still write original port to file (so zero is preserved):
+            (spit ".socket-repl-port" (str s-port))))
         (catch Throwable t
           (println "Unable to start the Socket REPL on port" s-port)
           (println (ex-message t))))))
