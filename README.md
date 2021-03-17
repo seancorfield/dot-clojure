@@ -36,7 +36,7 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:outdated` -- pulls in and runs the latest stable release of [antq](https://github.com/antq/antq) and reports on outdated dependencies
 
 There are aliases to pull in and start various REPL-related tools:
-* `:dev/repl` -- depending on what is on your classpath, start Cognitect's REBL or Reveal or Rebel Readline (or a plain Clojure REPL), with a Socket REPL (on port 50505, but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time); if Reveal is started, adds an auto-table view for `tap>`'d values; usage: `clj -M:rebl:dev/repl` or `clj -M:reveal:dev/repl` or `clojure -M:rebel:dev/repl` or `clojure -M:rebel:reveal:dev/repl` (for both of them together). Also works with Figwheel Main (now that I've started doing ClojureScript!): `clojure -M:reveal:fig:build:dev/repl`
+* `:dev/repl` -- depending on what is on your classpath, start Cognitect's REBL or Reveal or Rebel Readline (or a plain Clojure REPL), with a Socket REPL (on "port 0" which will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time); if Reveal is started, adds an auto-table view for `tap>`'d values; usage: `clj -M:rebl:dev/repl` or `clj -M:reveal:dev/repl` or `clojure -M:rebel:dev/repl` or `clojure -M:rebel:reveal:dev/repl` (for both of them together). Also works with Figwheel Main (now that I've started doing ClojureScript!): `clojure -M:reveal:fig:build:dev/repl`
 * `:nrepl` -- pulls in the latest stable release of [nREPL](https://github.com/nrepl/nREPL) and starts an nREPL server on a random available port
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
 * `:socket-rebl` -- starts a Socket REPL on port 50123; assumes you have Cognitect's REBL on your classpath (see `:rebl` below); everything sent to this Socket REPL will also be `submit`ted to the REBL
@@ -121,6 +121,6 @@ If you are doing ClojureScript development with Figwheel (`figwheel-main`) then 
 clojure -M:reveal:fig:build:dev/repl
 ```
 
-You'll get the regular Figwheel build REPL (for ClojureScript, which uses Rebel Readline) and a browser open on your application, plus a Socket REPL on port 50505 (or whatever you env says, for Clojure evaluation).
+You'll get the regular Figwheel build REPL (for ClojureScript, which uses Rebel Readline) and a browser open on your application, plus a Socket REPL on an available port (or whatever your env says, for Clojure evaluation).
 
 Connect to the Socket REPL, write your code as `.cljc` files, and you'll have the full power of your editor, Reveal, and Figwheel! What you evaluate in your editor will be treated as Clojure code (and can be `tap>`'d into Reveal, for example). What you evaluate at the REPL itself will be treated as ClojureScript code (and will affect your application instead).

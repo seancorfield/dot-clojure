@@ -164,7 +164,7 @@
   * SOCKET_REPL_PORT environment variable if present, else
   * socket-repl-port JVM property if present, else
   * .socket-repl-port file if present, else
-  * defaults to 50505
+  * defaults to 0 (which will automatically pick an available port)
   Writes the selected port back to .socket-repl-port for next time.
 
   Then pick a REPL as follows:
@@ -196,7 +196,7 @@
   (let [s-port (or (->long (System/getenv "SOCKET_REPL_PORT"))
                    (->long (System/getProperty "socket-repl-port"))
                    (->long (try (slurp ".socket-repl-port") (catch Throwable _)))
-                   50505)]
+                   0)]
     ;; if there is already a 'repl' Socket REPL open, don't open another:
     (when-not (get (deref (requiring-resolve 'clojure.core.server/servers)) "repl")
       (try
@@ -208,8 +208,8 @@
                          (get-in @(requiring-resolve 'clojure.core.server/servers)
                                  [server-name :socket]))]
             (println "Selected port" s-port' "for the Socket REPL...")
-            ;; still write original port to file (so zero is preserved):
-            (spit ".socket-repl-port" (str s-port))))
+            ;; write the actual port we selected (for Chlorine/Clover to read):
+            (spit ".socket-repl-port" (str s-port'))))
         (catch Throwable t
           (println "Unable to start the Socket REPL on port" s-port)
           (println (ex-message t))))))
