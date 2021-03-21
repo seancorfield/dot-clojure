@@ -70,6 +70,7 @@
   :readme {:extra-deps {seancorfield/readme {:mvn/version "RELEASE"}}
            :main-opts ["-m" "seancorfield.readme"]}
   ;; - see https://github.com/jonase/eastwood#running-eastwood-in-a-repl
+  ;; - note: eastwood 0.3.14 requires Clojure 1.10 and will not run on 1.9!
   :eastwood {:extra-deps {jonase/eastwood {:mvn/version "RELEASE"}}
              :main-opts ["-m" "eastwood.lint" "{:source-paths,[\"src\"],:test-paths,[\"test\"]}"]}
   ;; - see https://github.com/athos/clj-check
