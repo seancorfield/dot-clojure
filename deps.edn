@@ -29,14 +29,14 @@
   ;;   - java -jar result.jar
   ;; - build a library JAR:
   ;;   - clj -X:jar :jar result-lib.jar
-  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.193"}}
+  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.206"}}
             :exec-fn hf.depstar/uberjar
             :exec-args {:aot true}}
-  :jar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.193"}}
+  :jar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.206"}}
         :exec-fn hf.depstar/jar
         :exec-args {}}
   ;; this is for consistency with the alias shown in the depstar project:
-  :depstar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.193"}}
+  :depstar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.206"}}
             :ns-default hf.depstar
             :exec-args {}}
 
@@ -75,7 +75,7 @@
   ;; - see https://github.com/athos/clj-check
   :check {:extra-deps {athos/clj-check
                        {:git/url "https://github.com/athos/clj-check"
-                        :sha "cd1f25456de5eebda0a69602dd3445905382b3a4"}}
+                        :sha "518d5a1cbfcd7c952f548e6dbfcb9a4a5faf9062"}}
           :main-opts ["-m" "clj-check.check"]}
   ;; - see https://github.com/clojure-expectations/expectations
   ;; - and https://github.com/clojure-expectations/clojure-test
@@ -96,7 +96,7 @@
   ;; - (mm/measure (your-expression))
   :measure {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/liquidz/antq
-  :outdated {:extra-deps {antq/antq {:mvn/version "RELEASE"}}
+  :outdated {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
              :main-opts ["-m" "antq.core"]}
   :j14 ; add (sometimes) useful Java 14 option
   {:jvm-opts ["-XX:+ShowCodeDetailsInExceptionMessages"]}
@@ -138,7 +138,7 @@
           :main-opts ["-m" "rebel-readline.main"]}
   ;; - see https://github.com/jimpil/jedi-time
   :jedi-time
-  {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.0"}}}
+  {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.1"}}}
   ;; - see https://github.com/stuarthalloway/reflector
   :reflect
   {:extra-deps {com.stuarthalloway/reflector
@@ -159,11 +159,11 @@
   ;; - and https://github.com/cognitect-labs/REBL-distro
   ;; - assumes you have installed the tools in your local mvn repo
   :rebl
-  {:extra-deps {org.clojure/core.async {:mvn/version "0.6.532"}
+  {:extra-deps {org.clojure/core.async {:mvn/version "1.3.610"}
                 ;; deps for file datafication (REBL 0.9.149 or later)
-                org.clojure/data.csv {:mvn/version "0.1.4"}
-                org.clojure/data.json {:mvn/version "0.2.7"}
-                org.yaml/snakeyaml {:mvn/version "1.25"}
+                org.clojure/data.csv {:mvn/version "1.0.0"}
+                org.clojure/data.json {:mvn/version "2.0.1"}
+                org.yaml/snakeyaml {:mvn/version "1.28"}
                 ;; assumes you've installed the latest Cognitect dev-tools:
                 com.cognitect/rebl {:mvn/version "0.9.242"}
                 ;; openjfx (remove these if your JDK bundles openjfx):
@@ -195,7 +195,7 @@
   :1.10.1 {:override-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
   :1.10.2 {:override-deps {org.clojure/clojure {:mvn/version "1.10.2"}}}
   ;; master has just become 1.11:
-  :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-master-SNAPSHOT"}}}
+  :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.1-master-SNAPSHOT"}}}
 
   :add-libs ; to get access to clojure.tools.deps.alpha.repl/add-libs
   ;; IMPORTANT NOTE: this is the new add-lib3 branch but is still a work
@@ -224,12 +224,12 @@
    ;; add-libs to work, if we're starting other processes via aliases
    ;; such as a socket REPL or Cognitect's REBL etc
    :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"]}
-  :graph {:deps {org.clojure/tools.deps.graph {:mvn/version "1.0.46"}}
+  :graph {:deps {org.clojure/tools.deps.graph {:mvn/version "1.0.56"}}
           :main-opts ["-m" "clojure.tools.deps.graph"]}
   :spec2 ; to get access to the latest spec-alpha2
   {:extra-deps {org.clojure/spec-alpha2
                 {:git/url "https://github.com/clojure/spec-alpha2"
-                 :sha "8ba5dc543872369129181c4432f438c82b6cd297"}}}
+                 :sha "9118b766b3fd8451995182264f3b2eb04d7a1167"}}}
 
   ;; start the Liquid Clojure editor
   ;; - see https://github.com/mogenslund/liquid
@@ -239,7 +239,7 @@
 
   ;; closh
   :closh {:extra-deps {closh/closh {:git/url "https://github.com/dundalek/closh.git"
-                                    :tag "v0.5.0" :sha "6a7c0aa293616e2d28f7f735e915a301e44d2121"}}
+                                    :sha "b1a7fd310b6511048fbacb8e496f574c8ccfa291"}}
           :main-opts ["-m" "closh.zero.frontend.rebel"]}
 
   ;; - inspired by Ruby's -pne command line option which lets you process lines of stdin bound to $_
