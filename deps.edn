@@ -195,6 +195,8 @@
   :1.10.0 {:override-deps {org.clojure/clojure {:mvn/version "1.10.0"}}}
   :1.10.1 {:override-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
   :1.10.2 {:override-deps {org.clojure/clojure {:mvn/version "1.10.2"}}}
+  ;; 1.11 Alpha 1 is out!
+  :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-alpha1"}}}
   ;; master has just become 1.11:
   :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.1-master-SNAPSHOT"}}}
 
