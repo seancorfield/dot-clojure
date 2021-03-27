@@ -71,6 +71,9 @@ For `tools.deps.graph`:
 For Spec 2 (unstable, buggy -- not ready for production use):
 * `:spec2` -- pulls in [org.clojure/spec-alpha2](https://github.com/clojure/spec-alpha2) via GitHub
 
+An alias for the [Polylith tool](https://github.com/polyfy/polylith/tree/issue-66) (currently tracking the `issue-66` branch which is adapting to recent changes in the Clojure CLI and `tools.deps.alpha`):
+* `:poly` -- pulls in and runs the Polylith command-line tool
+
 An alias for the [Liquid Clojure editor](https://github.com/mogenslund/liquid):
 * `:liquid` -- pulls in and runs the latest stable release of Liquid
 

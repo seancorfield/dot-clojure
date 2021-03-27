@@ -234,6 +234,15 @@
                 {:git/url "https://github.com/clojure/spec-alpha2"
                  :sha "9118b766b3fd8451995182264f3b2eb04d7a1167"}}}
 
+  ;; Polylith command-line tool
+  ;; - see https://github.com/polyfy/polylith
+  ;; - this SHA is the issue-66 branch as of 2021-03-27
+  :poly  {:replace-deps {polylith/clj-poly
+                         {:git/url   "https://github.com/polyfy/polylith.git"
+                          :sha       "2d89676724e98d4c1b858c28c452cf2a64fc1b1c"
+                          :deps/root "projects/poly"}}
+          :main-opts  ["-m" "polylith.clj.core.poly-cli.core"]}
+
   ;; start the Liquid Clojure editor
   ;; - see https://github.com/mogenslund/liquid
   :liquid
