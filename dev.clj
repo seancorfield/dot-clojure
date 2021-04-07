@@ -16,7 +16,6 @@
 
 (defn- rewrite-cause
   [{:clojure.error/keys [cause] :as triage-data}]
-  (println 'rewrite-cause cause)
   (if cause
     (assoc triage-data :clojure.error/cause
            (-> cause
@@ -283,9 +282,8 @@
                 ["Figwheel Main" #(figgy "-b" "dev" "-r")])
               (catch Throwable _))
             (try
-              (let [rr     (requiring-resolve 'rebel-readline.clojure.main/repl)
-                    ensure (requiring-resolve 'rebel-readline.core/ensure-terminal)]
-                ["Rebel Readline" #(ensure (rr :caught repl-caught))])
+              (let [rr (requiring-resolve 'rebel-readline.clojure.main/repl)]
+                ["Rebel Readline" #(rr :caught repl-caught)])
               (catch Throwable _))
             ["clojure.main" (resolve 'clojure.main/main)])]
     (println "Starting" repl-name "as the REPL...")
