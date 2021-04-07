@@ -19,10 +19,15 @@
   (if cause
     (assoc triage-data :clojure.error/cause
            (-> cause
+               ;; arity exception would be better if it said how many args it got
                (str/replace #"(.*) cannot be cast to class clojure.lang.IFn.*"
                             "Expected function, found value of $1")
                (str/replace #"Don't know how to create ISeq from: (.*)"
-                            "Expected sequence, found: $1")))
+                            "Expected sequence, found: $1")
+               (str/replace #"(.*) cannot be cast to class java.util.concurrent.Future.*"
+                            "Expected something derefable, found value of $1")
+               (str/replace #"(.*) cannot be cast to class java.lang.Number.*"
+                            "Expected a number, found value of $1")))
     triage-data))
 
 ;; copied from clojure.main:
