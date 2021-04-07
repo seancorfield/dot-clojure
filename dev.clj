@@ -2,7 +2,8 @@
   "Invoked via load-file from ~/.clojure/deps.edn, this
   file looks at what tooling you have available on your
   classpath and starts a REPL."
-  (:require [clojure.repl :refer [demunge]]
+  (:require [clojure.main :refer [ex-triage ex-str]]
+            [clojure.repl :refer [demunge]]
             [clojure.string :as str]))
 
 (defn up-since
@@ -10,6 +11,34 @@
   []
   (java.util.Date. (- (.getTime (java.util.Date.))
                       (.getUptime (java.lang.management.ManagementFactory/getRuntimeMXBean)))))
+
+;; experiment with cleaning up certain exceptions:
+
+(defn- rewrite-cause
+  [{:clojure.error/keys [cause] :as triage-data}]
+  (println 'rewrite-cause cause)
+  (if cause
+    (assoc triage-data :clojure.error/cause
+           (-> cause
+               (str/replace #"(.*) cannot be cast to class clojure.lang.IFn.*"
+                            "Expected function, found value of $1")
+               (str/replace #"Don't know how to create ISeq from: (.*)"
+                            "Expected sequence, found: $1")))
+    triage-data))
+
+;; copied from clojure.main:
+(defn- err->msg
+  "Helper to return an error message string from an exception."
+  [^Throwable e]
+  (-> e Throwable->map ex-triage rewrite-cause ex-str))
+
+;; copied from clojure.main:
+(defn- repl-caught
+  "Default :caught hook for repl"
+  [e]
+  (binding [*out* *err*]
+    (print (err->msg e))
+    (flush)))
 
 ;; see if Rebel Readline is available so we can use when-sym:
 (try (require 'rebel-readline.core) (catch Throwable _))
@@ -245,7 +274,7 @@
                                (kickstart-reveal "Reveal+Rebel Readline"
                                                  #(rebel-readline.core/with-line-reader
                                                     (rebel-create-line-reader (rebel-create-service))
-                                                    (reveal :prompt (fn []) :read (rebel-create-repl-read))))))
+                                                    (reveal :caught repl-caught :prompt (fn []) :read (rebel-create-repl-read))))))
                            :else
                            (kickstart-reveal "Reveal" reveal))))
               (catch Throwable _))
@@ -253,7 +282,10 @@
               (let [figgy (requiring-resolve 'figwheel.main/-main)]
                 ["Figwheel Main" #(figgy "-b" "dev" "-r")])
               (catch Throwable _))
-            (try ["Rebel Readline" (requiring-resolve 'rebel-readline.main/-main)]
+            (try
+              (let [rr     (requiring-resolve 'rebel-readline.clojure.main/repl)
+                    ensure (requiring-resolve 'rebel-readline.core/ensure-terminal)]
+                ["Rebel Readline" #(ensure (rr :caught repl-caught))])
               (catch Throwable _))
             ["clojure.main" (resolve 'clojure.main/main)])]
     (println "Starting" repl-name "as the REPL...")
