@@ -17,6 +17,10 @@
 ;; see if Figwheel is available so we can use when-sym:
 (try (require 'figwheel.main) (catch Throwable _))
 
+(when-not (resolve 'requiring-resolve)
+  (throw (ex-info ":dev/repl and dev.clj require at least Clojure 1.10"
+                  *clojure-version*)))
+
 (defmacro when-sym
   "Usage: (when-sym some/thing (some/thing ...))
 
