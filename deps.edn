@@ -12,13 +12,13 @@
   ;;   - clj -X:new :template lib :name myname/my-cool-lib
   ;;   - cd my-cool-lib
   ;;   - clj -M:test:runner # run the tests!
-  :new {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.264"}}
+  :new {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.297"}}
         :exec-fn clj-new/create
         :exec-args {:template app}}
-  :new-app {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.264"}}
+  :new-app {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.297"}}
             :exec-fn clj-new/create
             :exec-args {:template app}}
-  :new-lib {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.264"}}
+  :new-lib {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.297"}}
             :exec-fn clj-new/create
             :exec-args {:template lib}}
 
@@ -29,14 +29,14 @@
   ;;   - java -jar result.jar
   ;; - build a library JAR:
   ;;   - clj -X:jar :jar result-lib.jar
-  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.206"}}
+  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.216"}}
             :exec-fn hf.depstar/uberjar
             :exec-args {:aot true}}
-  :jar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.206"}}
+  :jar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.216"}}
         :exec-fn hf.depstar/jar
         :exec-args {}}
   ;; this is for consistency with the alias shown in the depstar project:
-  :depstar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.206"}}
+  :depstar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.216"}}
             :ns-default hf.depstar
             :exec-args {}}
 
