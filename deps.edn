@@ -7,18 +7,18 @@
   ;;   - clj -X:new :name myname/myapp
   ;;   - cd myapp
   ;;   - clj -M -m myname.myapp # run it!
-  ;;   - clj -M:test:runner # run the tests!
+  ;;   - clj -X:test:runner # run the tests!
   ;; - create a library project:
   ;;   - clj -X:new :template lib :name myname/my-cool-lib
   ;;   - cd my-cool-lib
-  ;;   - clj -M:test:runner # run the tests!
-  :new {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.297"}}
+  ;;   - clj -X:test:runner # run the tests!
+  :new {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.309"}}
         :exec-fn clj-new/create
         :exec-args {:template app}}
-  :new-app {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.297"}}
+  :new-app {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.309"}}
             :exec-fn clj-new/create
             :exec-args {:template app}}
-  :new-lib {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.297"}}
+  :new-lib {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.309"}}
             :exec-fn clj-new/create
             :exec-args {:template lib}}
 
@@ -59,13 +59,12 @@
   :test {:extra-paths ["test" "src/test/clojure"]
          :extra-deps {org.clojure/test.check {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/cognitect-labs/test-runner
-  ;; - run your tests: clj -M:test:runner
+  ;; - run your tests: clj -X:test:runner
   :runner {:extra-deps {com.cognitect/test-runner
                         {:git/url "https://github.com/cognitect-labs/test-runner"
-                         :sha "b6b3193fcc42659d7e46ecd1884a228993441182"}}
-           :main-opts ["-m" "cognitect.test-runner"
-                       "-d" "test"
-                       "-d" "src/test/clojure"]}
+                         :sha "2d69f33d7980c3353b246c28f72ffeafbd9f2fab"}}
+           :exec-fn cognitect.test-runner.api/test
+           :exec-args {:dirs ["test" "src/test/clojure"]}}
   ;; - see https://github.com/seancorfield/readme
   :readme {:extra-deps {seancorfield/readme {:mvn/version "RELEASE"}}
            :main-opts ["-m" "seancorfield.readme"]}
@@ -236,10 +235,10 @@
 
   ;; Polylith command-line tool
   ;; - see https://github.com/polyfy/polylith
-  ;; - this SHA is the issue-66 branch as of 2021-04-10
+  ;; - this SHA is the issue-66 branch as of 2021-05-18
   :poly  {:replace-deps {polylith/clj-poly
                          {:git/url   "https://github.com/polyfy/polylith.git"
-                          :sha       "65a7918bb6de886cda7a9b8a5fe7dbdf10996bf8"
+                          :sha       "2de60069edbba960b8ab9e71dc6c2341615a52ec"
                           :deps/root "projects/poly"}}
           :main-opts  ["-m" "polylith.clj.core.poly-cli.core"]}
 
