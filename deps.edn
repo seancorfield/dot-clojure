@@ -1,46 +1,7 @@
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
  :aliases
- {;; project creation from templates:
-  ;; - see https://github.com/seancorfield/clj-new
-  ;; - create an application project:
-  ;;   - clj -X:new :name myname/myapp
-  ;;   - cd myapp
-  ;;   - clj -M -m myname.myapp # run it!
-  ;;   - clj -X:test:runner # run the tests!
-  ;; - create a library project:
-  ;;   - clj -X:new :template lib :name myname/my-cool-lib
-  ;;   - cd my-cool-lib
-  ;;   - clj -X:test:runner # run the tests!
-  :new {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.314"}}
-        :exec-fn clj-new/create
-        :exec-args {:template app}}
-  :new-app {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.314"}}
-            :exec-fn clj-new/create
-            :exec-args {:template app}}
-  :new-lib {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.314"}}
-            :exec-fn clj-new/create
-            :exec-args {:template lib}}
-
-  ;; uberjar building:
-  ;; - see https://github.com/seancorfield/depstar for more details:
-  ;;   - clj -X:uberjar :jar result.jar :main-class mymain.namespace
-  ;; - to run it:
-  ;;   - java -jar result.jar
-  ;; - build a library JAR:
-  ;;   - clj -X:jar :jar result-lib.jar
-  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.1.250"}}
-            :exec-fn hf.depstar/uberjar
-            :exec-args {:aot true}}
-  :jar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.1.250"}}
-        :exec-fn hf.depstar/jar
-        :exec-args {}}
-  ;; this is for consistency with the alias shown in the depstar project:
-  :depstar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.1.250"}}
-            :ns-default hf.depstar
-            :exec-args {}}
-
-  ;; jar installation and deployment:
+ {;; jar installation and deployment:
   ;; - see https://github.com/slipset/deps-deploy
   ;;   - clj -X:install :artifact '"project.jar"'
   ;;   - clj -X:deploy :artifact '"project.jar"'
@@ -62,7 +23,7 @@
   ;; - run your tests: clj -X:test:runner
   :runner {:extra-deps {com.cognitect/test-runner
                         {:git/url "https://github.com/cognitect-labs/test-runner"
-                         :sha "62ef1de18e076903374306060ac0e8a752e57c86"}}
+                         :sha "f597341b6ca7bb4cf027e0a34a6710ca9cb969da"}}
            :exec-fn cognitect.test-runner.api/test
            :exec-args {:dirs ["test" "src/test/clojure"]}}
   ;; - see https://github.com/seancorfield/readme
@@ -235,10 +196,10 @@
 
   ;; Polylith command-line tool
   ;; - see https://github.com/polyfy/polylith
-  ;; - this SHA is the issue-66 branch as of 2021-06-07
+  ;; - this SHA is the issue-66 branch as of 2021-07-12
   :poly  {:replace-deps {polylith/clj-poly
                          {:git/url   "https://github.com/polyfy/polylith.git"
-                          :sha       "887e4237cec8f42eaa15be3501f134732602bb41"
+                          :sha       "54a10e0a0d444af9cc44106d6670cec827ad8012"
                           :deps/root "projects/poly"}}
           :main-opts  ["-m" "polylith.clj.core.poly-cli.core"]}
 
