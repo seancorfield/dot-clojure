@@ -1,0 +1,5 @@
+{:lib com.github.seancorfield/depstar,
+ :coord
+ {:git/tag "v2.1.253",
+  :git/sha "a970a33990baf2203b9619cf5dd690d0efa19da1",
+  :git/url "https://github.com/seancorfield/depstar.git"}}
