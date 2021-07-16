@@ -23,7 +23,7 @@
   ;; - run your tests: clj -X:test:runner
   :runner {:extra-deps {com.cognitect/test-runner
                         {:git/url "https://github.com/cognitect-labs/test-runner"
-                         :sha "f597341b6ca7bb4cf027e0a34a6710ca9cb969da"}}
+                         :sha "4e7e1c0dfd5291fa2134df052443dc29695d8cbe"}}
            :exec-fn cognitect.test-runner.api/test
            :exec-args {:dirs ["test" "src/test/clojure"]}}
   ;; - see https://github.com/seancorfield/readme
@@ -199,7 +199,7 @@
   ;; - this SHA is the issue-66 branch as of 2021-07-12
   :poly  {:replace-deps {polylith/clj-poly
                          {:git/url   "https://github.com/polyfy/polylith.git"
-                          :sha       "54a10e0a0d444af9cc44106d6670cec827ad8012"
+                          :sha       "99a044b02f2bcc0b6525dbee3dca3fa5f2966cea"
                           :deps/root "projects/poly"}}
           :main-opts  ["-m" "polylith.clj.core.poly-cli.core"]}
 
