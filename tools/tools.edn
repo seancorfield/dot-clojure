@@ -1,3 +1,3 @@
 {:lib io.github.clojure/tools.tools
- :coord {:git/tag "v0.1.0"
-         :git/sha "1a9d9770719e46dd33cc2e6e1e22609209c3c16d"}}
+ :coord {:git/tag "v0.2.0"
+         :git/sha "5495cb81af4b07743374bad5f533f03e349190b7"}}
