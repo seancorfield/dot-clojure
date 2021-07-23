@@ -1,3 +1,4 @@
 .cpcache
 .lsp
 clj.cp
+tools/tools.edn
