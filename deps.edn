@@ -196,10 +196,9 @@
 
   ;; Polylith command-line tool
   ;; - see https://github.com/polyfy/polylith
-  ;; - this SHA is the issue-66 branch as of 2021-07-12
   :poly  {:replace-deps {polylith/clj-poly
                          {:git/url   "https://github.com/polyfy/polylith.git"
-                          :sha       "99a044b02f2bcc0b6525dbee3dca3fa5f2966cea"
+                          :sha       "594b9bb6df31af1944ff1a90c42f457061df22ab"
                           :deps/root "projects/poly"}}
           :main-opts  ["-m" "polylith.clj.core.poly-cli.core"]}
 
