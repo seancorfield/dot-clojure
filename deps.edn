@@ -21,9 +21,8 @@
          :extra-deps {org.clojure/test.check {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/cognitect-labs/test-runner
   ;; - run your tests: clj -X:test:runner
-  :runner {:extra-deps {com.cognitect/test-runner
-                        {:git/url "https://github.com/cognitect-labs/test-runner"
-                         :sha "4e7e1c0dfd5291fa2134df052443dc29695d8cbe"}}
+  :runner {:extra-deps {io.github.cognitect-labs/test-runner
+                        {:git/tag "v0.4.0" :git/sha "334f2e2"}}
            :exec-fn cognitect.test-runner.api/test
            :exec-args {:dirs ["test" "src/test/clojure"]}}
   ;; - see https://github.com/seancorfield/readme
@@ -34,9 +33,8 @@
   :eastwood {:extra-deps {jonase/eastwood {:mvn/version "RELEASE"}}
              :main-opts ["-m" "eastwood.lint" "{:source-paths,[\"src\"],:test-paths,[\"test\"]}"]}
   ;; - see https://github.com/athos/clj-check
-  :check {:extra-deps {athos/clj-check
-                       {:git/url "https://github.com/athos/clj-check"
-                        :sha "518d5a1cbfcd7c952f548e6dbfcb9a4a5faf9062"}}
+  :check {:extra-deps {io.github.athos/clj-check
+                       {:git/tag "0.10" :git/sha "0ca84df"}}
           :main-opts ["-m" "clj-check.check"]}
   ;; - see https://github.com/clojure-expectations/expectations
   ;; - and https://github.com/clojure-expectations/clojure-test
@@ -87,7 +85,7 @@
   ;; - start a Socket REPL on port 50123, that will submit everything to REBL:
   ;; - assumes you have REBL on your classpath (see :rebl below)
   :socket-rebl {:extra-deps
-                {seancorfield/socket-rebl
+                {io.github.seancorfield/socket-rebl
                  {:git/url "https://github.com/seancorfield/socket-rebl"
                   :sha "60dd65cb8d03a9cf5eba21081cdfad5e27f72a8b"}}
                 :jvm-opts ["-Dclojure.server.repl={:port,50123,:accept,socket.rebl/repl}"]}
@@ -102,7 +100,7 @@
   {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.1"}}}
   ;; - see https://github.com/stuarthalloway/reflector
   :reflect
-  {:extra-deps {com.stuarthalloway/reflector
+  {:extra-deps {io.github.stuarthalloway/reflector
                 {:git/url "https://github.com/stuarthalloway/reflector"
                  :sha "93a0c19b4526c1180959e940202928d35e5c3cef"}}}
   ;; - see https://github.com/vlaaad/reveal
@@ -182,7 +180,7 @@
   ;; (load-master 'clojure/tools.trace)
   {:extra-deps {org.clojure/tools.deps.alpha ; add-lib3 branch
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
-                 :sha "241cd24c35ba770aea4773ea161d45276e5d3a73"}}
+                 :sha "02809dbd41d4fe6e269ee67316d054a04bc70678"}}
    ;; this ensures we have a DynamicClassLoader, which is needed for
    ;; add-libs to work, if we're starting other processes via aliases
    ;; such as a socket REPL or Cognitect's REBL etc
@@ -196,9 +194,8 @@
 
   ;; Polylith command-line tool
   ;; - see https://github.com/polyfy/polylith
-  :poly  {:replace-deps {polylith/clj-poly
-                         {:git/url   "https://github.com/polyfy/polylith.git"
-                          :sha       "594b9bb6df31af1944ff1a90c42f457061df22ab"
+  :poly  {:replace-deps {io.github.polyfy/polylith
+                         {:git/tag "v0.2.0-alpha11" :git/sha "f7bae45"
                           :deps/root "projects/poly"}}
           :main-opts  ["-m" "polylith.clj.core.poly-cli.core"]}
 
@@ -208,9 +205,11 @@
   {:extra-deps {mogenslund/liquid {:mvn/version "RELEASE"}}
    :main-opts ["-m" "liq.core"]}
 
-  ;; closh
-  :closh {:extra-deps {closh/closh {:git/url "https://github.com/dundalek/closh.git"
-                                    :sha "b1a7fd310b6511048fbacb8e496f574c8ccfa291"}}
+  ;; closh -- a Clojure shell
+  ;; - see https://github.com/dundalek/closh
+  :closh {:extra-deps {io.github.dundalek/closh
+                       {:git/url "https://github.com/dundalek/closh"
+                        :sha "b1a7fd310b6511048fbacb8e496f574c8ccfa291"}}
           :main-opts ["-m" "closh.zero.frontend.rebel"]}
 
   ;; - inspired by Ruby's -pne command line option which lets you process lines of stdin bound to $_

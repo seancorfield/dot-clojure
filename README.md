@@ -2,7 +2,9 @@
 
 This is my personal `.clojure/deps.edn` file providing useful `clj` aliases drawn from a variety of projects. It is published to GitHub so I can keep all my computers sync'd up -- and to provide a range of examples that folks new to the Clojure CLI might find helpful.
 
-In addition, my `.clojure/tools/` folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI prerelease 1.10.3.912 -- see [Tool installation and invocation](https://clojure.org/reference/deps_and_cli#tool_install) in the Deps and CLI Reference. As I add global tools, I am removing them as aliases.
+**Several git dependencies here assume you have at least Clojure CLI 1.10.3.933!**
+
+In addition, my `.clojure/tools/` folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (1.10.3.933) -- see [Tool installation and invocation](https://clojure.org/reference/deps_and_cli#tool_install) in the Deps and CLI Reference. As I add global tools, I am removing them as aliases.
 
 The main alias I use here is `:dev/repl` which starts various combinations of REPL tooling. See [**The `:dev/repl` Alias**](#the-devrepl-alias) below for more details.
 
@@ -16,14 +18,18 @@ With that caveat out of the way, here is some basic documentation about my tools
 
 These are installed via `clojure -Ttools install ...` and usable via `clojure -T` with the tool name.
 
+* `deps-new` -- the latest **work-in-progress** version of [deps-new](https://github.com/seancorfield/deps-new) to create new CLI/`deps.edn` projects: _[This uses a different (simpler!) templating system to `clj-new`, below, and therefore does not recognize Leiningen or Boot templates!]_
+  * `clojure -Tdeps-new app :name myname/myapp` -- creates a new `deps.edn`-based application project,
+  * `clojure -Tdeps-new lib :name myname/mylib` -- creates a new `deps.edn`-based library project,
+  * `clojure -A:somealias -Tdeps-new create :template some/thing :name myname/myapp` -- locates a template for `some/thing` on the classpath, based on `:somealias`, and uses it to create a new `deps.edn`-based project.
+* `depstar` -- the latest stable release of [depstar](https://github.com/seancorfield/depstar) to build JAR files:
+  * `clojure -Tdepstar jar :jar MyLib.jar` -- build a (thin) library JAR from the current project,
+  * `clojure -Tdepstar uberjar :jar MyProject.jar` -- build an (uber) application JAR from the current project.
 * `new` -- the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates:
   * `clojure -Tnew app :name myname/myapp` -- creates a new `deps.edn`-based application project,
   * `clojure -Tnew lib :name myname/mylib` -- creates a new `deps.edn`-based library project,
   * `clojure -Tnew template :name myname/mytemplate` -- creates a new `deps.edn`-based template project,
   * `clojure -Tnew create :template something :name myname/myapp` -- locates a template for `something` and uses it to create a new project (which might be `deps.edn`-based or `lein`-based, depending on the template).
-* `depstar` -- the latest stable release of [depstar](https://github.com/seancorfield/depstar) to build JAR files:
-  * `clojure -Tdepstar jar :jar MyLib.jar` -- build a (thin) library JAR from the current project,
-  * `clojure -Tdepstar uberjar :jar MyProject.jar` -- build an (uber) application JAR from the current project.
 
 More tools will be added to this section over time (as more tools add `:tools/usage` to their `deps.edn` files).
 
