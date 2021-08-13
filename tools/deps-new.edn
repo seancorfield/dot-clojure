@@ -1,4 +1,0 @@
-{:lib com.github.seancorfield/deps-new,
- :coord
- {:git/url "https://github.com/seancorfield/deps-new.git",
-  :git/sha "3c91e547d9acf591652fe3824e1964e73f9cd011"}}
