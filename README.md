@@ -29,6 +29,10 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
   * `clojure -Tdepstar jar :jar MyLib.jar` -- build a (thin) library JAR from the current project,
   * `clojure -Tdepstar uberjar :jar MyProject.jar` -- build an (uber) application JAR from the current project,
   * `clojure -A:deps -Tdepstar help/doc` -- for more information and other functions.
+* `poly` -- a PR version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
+  * `clojure -Tpoly info :loc true` -- display information about a Polylith workspace, including lines of code,
+  * `clojure -Tpoly create c user` -- create a `user` component in a Polylith workspace,
+  * `clojure -Tpoly test :dev true` -- run tests in the `dev` project context, in a Polylith workspace.
 * `clj-new` -- the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates:
   * `clojure -Tclj-new app :name myname/myapp` -- creates a new `deps.edn`-based application project,
   * `clojure -Tclj-new lib :name myname/mylib` -- creates a new `deps.edn`-based library project,
@@ -91,9 +95,6 @@ For `tools.deps.graph`:
 
 For Spec 2 (unstable, buggy -- not ready for production use):
 * `:spec2` -- pulls in [org.clojure/spec-alpha2](https://github.com/clojure/spec-alpha2) via GitHub
-
-An alias for the [Polylith tool](https://github.com/polyfy/polylith/tree/issue-66) (currently tracking the `issue-66` branch which is adapting to recent changes in the Clojure CLI and `tools.deps.alpha`):
-* `:poly` -- pulls in and runs the Polylith command-line tool
 
 An alias for the [Liquid Clojure editor](https://github.com/mogenslund/liquid):
 * `:liquid` -- pulls in and runs the latest stable release of Liquid

@@ -192,13 +192,6 @@
                 {:git/url "https://github.com/clojure/spec-alpha2"
                  :sha "c087ded910b3532a938b37e853df79fc3b9c48c1"}}}
 
-  ;; Polylith command-line tool
-  ;; - see https://github.com/polyfy/polylith
-  :poly  {:replace-deps {io.github.polyfy/polylith
-                         {:git/tag "v0.2.0-alpha11" :git/sha "f7bae45"
-                          :deps/root "projects/poly"}}
-          :main-opts  ["-m" "polylith.clj.core.poly-cli.core"]}
-
   ;; start the Liquid Clojure editor
   ;; - see https://github.com/mogenslund/liquid
   :liquid
