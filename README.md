@@ -32,7 +32,8 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
 * `poly` -- a PR version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
   * `clojure -Tpoly info :loc true` -- display information about a Polylith workspace, including lines of code,
   * `clojure -Tpoly create c user` -- create a `user` component in a Polylith workspace,
-  * `clojure -Tpoly test :dev true` -- run tests in the `dev` project context, in a Polylith workspace.
+  * `clojure -Tpoly test :dev true` -- run tests in the `dev` project context, in a Polylith workspace,
+  * `clojure -A:deps -Tpoly help/doc` -- for more information and other functions.
 * `clj-new` -- the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates:
   * `clojure -Tclj-new app :name myname/myapp` -- creates a new `deps.edn`-based application project,
   * `clojure -Tclj-new lib :name myname/mylib` -- creates a new `deps.edn`-based library project,
