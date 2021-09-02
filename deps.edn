@@ -55,7 +55,11 @@
   ;; - (mm/measure (your-expression))
   :measure {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/liquidz/antq
-  :outdated {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
+  :outdated {:extra-deps {com.github.liquidz/antq
+                          ;; depend on recent dev branch version to pick up
+                          ;; ability to deduce :git/url from lib-name:
+                          {:sha "f99a107897889a37cdfd300592f1ebd2a1db600d"
+                           #_#_:mvn/version "RELEASE"}}
              :main-opts ["-m" "antq.core"]}
   :j14 ; add (sometimes) useful Java 14 option
   {:jvm-opts ["-XX:+ShowCodeDetailsInExceptionMessages"]}
