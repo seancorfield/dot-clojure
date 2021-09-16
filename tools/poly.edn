@@ -2,4 +2,4 @@
  :coord
  {:deps/root "projects/poly",
   :git/url "https://github.com/polyfy/polylith.git",
-  :git/sha "adb8617af2df33361e9eb5715693b5c8a08e0b43"}}
+  :git/sha "ad5693b5f0a7ec7bdbab56e94c02ca7df120f1a9"}}

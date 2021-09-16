@@ -1,4 +1,5 @@
+.clj-kondo/.cache
 .cpcache
-.lsp
+.lsp/.cache
 clj.cp
 tools/tools.edn

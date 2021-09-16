@@ -25,10 +25,6 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
   * `clojure -Tnew lib :name myname/mylib` -- creates a new `deps.edn`-based library project,
   * `clojure -A:somealias -Tnew create :template some/thing :name myname/myapp` -- locates a template for `some/thing` on the classpath, based on `:somealias`, and uses it to create a new `deps.edn`-based project,
   * `clojure -A:deps -Tnew help/doc` -- for more information and other functions.
-* `depstar` -- the latest stable release of [depstar](https://github.com/seancorfield/depstar) to build JAR files:
-  * `clojure -Tdepstar jar :jar MyLib.jar` -- build a (thin) library JAR from the current project,
-  * `clojure -Tdepstar uberjar :jar MyProject.jar` -- build an (uber) application JAR from the current project,
-  * `clojure -A:deps -Tdepstar help/doc` -- for more information and other functions.
 * `poly` -- a PR version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
   * `clojure -Tpoly info :loc true` -- display information about a Polylith workspace, including lines of code,
   * `clojure -Tpoly create c user` -- create a `user` component in a Polylith workspace,
