@@ -25,15 +25,15 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
   * `clojure -Tnew lib :name myname/mylib` -- creates a new `deps.edn`-based library project,
   * `clojure -A:somealias -Tnew create :template some/thing :name myname/myapp` -- locates a template for `some/thing` on the classpath, based on `:somealias`, and uses it to create a new `deps.edn`-based project,
   * `clojure -A:deps -Tnew help/doc` -- for more information and other functions.
-* `poly` -- a PR version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
+* `poly` -- a recent master version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
   * `clojure -Tpoly info :loc true` -- display information about a Polylith workspace, including lines of code,
   * `clojure -Tpoly create c user` -- create a `user` component in a Polylith workspace,
   * `clojure -Tpoly test :dev true` -- run tests in the `dev` project context, in a Polylith workspace,
   * `clojure -A:deps -Tpoly help/doc` -- for more information and other functions.
 * `clj-new` -- the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates:
-  * `clojure -Tclj-new app :name myname/myapp` -- creates a new `deps.edn`-based application project,
-  * `clojure -Tclj-new lib :name myname/mylib` -- creates a new `deps.edn`-based library project,
-  * `clojure -Tclj-new template :name myname/mytemplate` -- creates a new `deps.edn`-based template project,
+  * `clojure -Tclj-new app :name myname/myapp` -- creates a new `deps.edn`-based application project (but still uses `depstar` for uberjar building -- this will change soon to `tools.build`!),
+  * `clojure -Tclj-new lib :name myname/mylib` -- creates a new `deps.edn`-based library project (but still uses `depstar` for JAR building -- this will change soon to `tools.build`!),
+  * `clojure -Tclj-new template :name myname/mytemplate` -- creates a new `deps.edn`-based template project (but still uses `depstar` for JAR building -- this will change soon to `tools.build`!),
   * `clojure -Tclj-new create :template something :name myname/myapp` -- locates a template for `something` and uses it to create a new project (which might be `deps.edn`-based or `lein`-based, depending on the template),
   * `clojure -A:deps -Tclj-new help/doc` -- for more information and other functions.
 
@@ -60,12 +60,13 @@ There are aliases to pull in and start various REPL-related tools:
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
 
+* `:jedi-time` -- adds `datafy`/`nav` support for Java Time objects via [jedi-time](https://github.com/jimpil/jedi-time)
 * `:reflect` -- adds Stuart Halloway's reflector utility (best used with REBL/Reveal)
 * `:reveal` -- pulls in the latest stable release of the [Reveal](https://github.com/vlaaad/reveal) data visualization tool -- see the Reveal web site for usage options
 
 There are aliases to pull in specific versions of Clojure:
 * `:master` -- Clojure 1.11.0-master-SNAPSHOT
-* `:1.11` -- Clojure 1.11.0-alpha1 with the new named argument calling feature!
+* `:1.11` -- Clojure 1.11.0-alpha2 with `:as-alias`, `update-keys`, `update-vals` (Alpha 1 introduced the new named argument calling feature)
 * `:1.10` -- Clojure 1.10.3
   * `:1.10.2` -- Clojure 1.10.2
   * `:1.10.1` -- Clojure 1.10.1
