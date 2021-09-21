@@ -42,7 +42,6 @@ More tools will be added to this section over time (as more tools add `:tools/us
 ## Basic Aliases
 
 And install or deploy jar files:
-* `:install` -- pulls in and runs the latest stable release of Erik Assum's [deps-deploy](https://github.com/slipset/deps-deploy) and installs the specified JAR file locally, based on your `pom.xml`; `clojure -X:install :artifact '"MyProject.jar"'`
 * `:deploy` -- pulls in and runs the latest stable release of Erik Assum's [deps-deploy](https://github.com/slipset/deps-deploy) and deploys the specified JAR file to Clojars, based on your `pom.xml` and the `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment variables; `clojure -X:deploy :artifact '"MyProject.jar"'`
 
 There are aliases to pull in various useful testing and debugging tools:
@@ -55,12 +54,13 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:outdated` -- pulls in and runs the latest stable release of [antq](https://github.com/antq/antq) and reports on outdated dependencies
 
 There are aliases to pull in and start various REPL-related tools:
-* `:dev/repl` -- depending on what is on your classpath, start Cognitect's REBL or Reveal or Rebel Readline (or a plain Clojure REPL), with a Socket REPL (on "port 0" which will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time); if Reveal is started, adds an auto-table view for `tap>`'d values; usage: `clj -M:rebl:dev/repl` or `clj -M:reveal:dev/repl` or `clojure -M:rebel:dev/repl` or `clojure -M:rebel:reveal:dev/repl` (for both of them together). Also works with Figwheel Main (now that I've started doing ClojureScript!): `clojure -M:reveal:fig:build:dev/repl`
+* `:dev/repl` -- depending on what is on your classpath, start Rebel Readline and/or any of Portal, Reveal, Cognitect's REBL (or a plain Clojure REPL), with a Socket REPL (on "port 0" which will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time); if Portal is started, adds a few extra commands to the palette; if Reveal is started, adds an auto-table view for `tap>`'d values; usage: `clj -M:portal:dev/repl` or `clj -M:rebl:dev/repl` or `clj -M:reveal:dev/repl` or `clojure -M:rebel:dev/repl` or `clojure -M:rebel:portal:dev/repl` or `clojure -M:rebel:reveal:dev/repl` (for both of them together). Also works with Figwheel Main (now that I've started doing ClojureScript!): `clojure -M:portal:fig:build:dev/repl` or `clojure -M:reveal:fig:build:dev/repl`
 * `:classes` -- adds the `classes` folder to your classpath to pick up compiled code (e.g., see https://clojure.org/guides/dev_startup_time)
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
 
 * `:jedi-time` -- adds `datafy`/`nav` support for Java Time objects via [jedi-time](https://github.com/jimpil/jedi-time)
+* `:portal` -- pulls in the latest stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
 * `:reflect` -- adds Stuart Halloway's reflector utility (best used with REBL/Reveal)
 * `:reveal` -- pulls in the latest stable release of the [Reveal](https://github.com/vlaaad/reveal) data visualization tool -- see the Reveal web site for usage options
 
@@ -83,14 +83,28 @@ For the _EXPERIMENTAL_ `add-libs` function (`clojure.tools.deps.alpha.repl/add-l
 The `:dev/repl` alias uses `load-file` to load the [`dev.clj` file](https://github.com/seancorfield/dot-clojure/blob/develop/dev.clj) from this repo. That does a number of things (see the `start-repl` docstring for more details):
 
 * Starts a Socket REPL server (with the port selected via an environment variable, a JVM property, or a dot-file created on a previous run).
+* Starts [Portal](https://github.com/djblue/portal), if present on the classpath (sets the window title to the current directory, adds a `tap>` listener, and adds a few extra commands to the palette).
 * Starts [Cognitect's REBL](https://github.com/cognitect-labs/REBL-distro), if present on the classpath, else
 * Starts [Figwheel Main](https://github.com/bhauman/figwheel-main), if present on the classpath, else
 * Starts [Reveal](https://github.com/vlaaad/reveal), if present on the classpath, else
 * Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath.
 
+### Portal Custom Commands
+
+* `dev/->html` -- attempts to `slurp` the value (a filename or URL) and display it inline as HTML with a white background (so web pages are readable even in dark themes),
+* `dev/->map` -- pours the value into a hash map (useful for dealing with Java `Properties` objects etc),
+* `dev/->set` -- pours the value into a set,
+* `dev/->vector` -- pours the value into a vector.
+
+### Reveal and Figwheel Main
+
 If both Reveal and Figwheel Main are present on the classpath, it starts both of them, using Figwheel for the primary (cljs) REPL, with everything input there affecting your running (cljs) app. In addition, everything `tap>`'d from your editor will be displayed inside Reveal (assuming you have `.cljc` files and evaluate that code as Clojure, not ClojureScript). See note about Figwheel usage below.
 
+### Reveal and Rebel Readline
+
 If both Reveal and Rebel Readline are present on the classpath, it starts both of them, using Rebel Readline for the primary REPL, with everything input there appearing in Reveal. In addition, everything `tap>`'d will be displayed inside Reveal.
+
+### Reveal Custom View
 
 If the `dev.clj` starts Reveal, it also `tap>`'s a Reveal view into it, which you can activate by right-clicking and selecting the `view` option (instead of right-click, you can press `space` when the name of the view -- `right-click > view` -- is highlighted).
 

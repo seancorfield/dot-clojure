@@ -219,18 +219,28 @@
           (println (ex-message t))))))
 
   (try
-    (let [t  (requiring-resolve 'portal.api/tap)
-          o  (requiring-resolve 'portal.api/open)
-          f1 (requiring-resolve 'portal.runtime/fns)
-          f2 (requiring-resolve 'portal.runtime/public-fns)]
+    (let [o    (requiring-resolve 'portal.api/open)
+          s    (requiring-resolve 'portal.api/submit)
+          ;; undocumented internal hash maps:
+          f1   (requiring-resolve 'portal.runtime/fns)
+          f2   (requiring-resolve 'portal.runtime/public-fns)
+          html (fn [url]
+                 (with-meta
+                   [:div
+                    {:style {:background :white}}
+                    [:portal.viewer/html (slurp url)]]
+                   {:portal.viewer/default :portal.viewer/hiccup}))]
       ;; install extra functions:
       (run! (fn [[k f]]
               (alter-var-root f1 assoc k f)
               (alter-var-root f2 assoc k f))
-            {'dev/->map (partial into {})
-             'dev/slurp slurp})
-      (def portal "dev/portal behaves as an atom." (o))
-      (t))
+            {'dev/->html   html
+             'dev/->map    (partial into {})
+             'dev/->set    (partial into #{})
+             'dev/->vector (partial into [])})
+      (def portal "dev/portal behaves as an atom."
+        (o {:portal.launcher/window-title (System/getProperty "user.dir")}))
+      (add-tap s))
     (catch Throwable _))
 
   (let [[repl-name repl-fn]
