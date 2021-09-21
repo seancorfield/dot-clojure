@@ -38,6 +38,7 @@
     (catch Throwable _)))
 
 (defn- ellipsis [s n] (if (< n (count s)) (str "..." (subs s (- (count s) n))) s))
+
 (comment
   (ellipsis "this is a long string" 10)
   (ellipsis "short string" 20)
@@ -171,6 +172,9 @@
   * defaults to 0 (which will automatically pick an available port)
   Writes the selected port back to .socket-repl-port for next time.
 
+  If Portal is on the classpath, start it up, register it as a tap>
+  listener, and install some extra commands.
+
   Then pick a REPL as follows:
   * if Cognitect's REBL is on the classpath then start that, else
   * if Reveal and Rebel Readline are both on the classpath then
@@ -197,6 +201,7 @@
     (println "Java Time is Datafiable...")
     (catch Throwable _))
 
+  ;; socket repl handling:
   (let [s-port (or (->long (System/getenv "SOCKET_REPL_PORT"))
                    (->long (System/getProperty "socket-repl-port"))
                    (->long (try (slurp ".socket-repl-port") (catch Throwable _)))
@@ -218,6 +223,7 @@
           (println "Unable to start the Socket REPL on port" s-port)
           (println (ex-message t))))))
 
+  ;; start and setup Portal if present:
   (try
     (let [o    (requiring-resolve 'portal.api/open)
           s    (requiring-resolve 'portal.api/submit)
@@ -243,6 +249,7 @@
       (add-tap s))
     (catch Throwable _))
 
+  ;; select and start a main REPL:
   (let [[repl-name repl-fn]
         (or (try ["Cognitect REBL" (requiring-resolve 'cognitect.rebl/-main)]
               (catch Throwable _))
