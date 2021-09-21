@@ -218,6 +218,21 @@
           (println "Unable to start the Socket REPL on port" s-port)
           (println (ex-message t))))))
 
+  (try
+    (let [t  (requiring-resolve 'portal.api/tap)
+          o  (requiring-resolve 'portal.api/open)
+          f1 (requiring-resolve 'portal.runtime/fns)
+          f2 (requiring-resolve 'portal.runtime/public-fns)]
+      ;; install extra functions:
+      (run! (fn [[k f]]
+              (alter-var-root f1 assoc k f)
+              (alter-var-root f2 assoc k f))
+            {'dev/->map (partial into {})
+             'dev/slurp slurp})
+      (def portal "dev/portal behaves as an atom." (o))
+      (t))
+    (catch Throwable _))
+
   (let [[repl-name repl-fn]
         (or (try ["Cognitect REBL" (requiring-resolve 'cognitect.rebl/-main)]
               (catch Throwable _))

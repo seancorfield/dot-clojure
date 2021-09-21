@@ -76,6 +76,8 @@
    :main-opts ["-m" "vlaaad.reveal" "repl"]
    ;; make the font more readable:
    :jvm-opts ["-Dvlaaad.reveal.prefs={:font-size,24}"]}
+  :portal
+  {:extra-deps {djblue/portal {:mvn/version "RELEASE"}}}
 
   ;; pull in specific versions of Clojure:
   :1.0 {:override-deps {org.clojure/clojure {:mvn/version "1.0.0"}}}
