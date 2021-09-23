@@ -157,6 +157,29 @@
   (tap> (install-reveal-extras))
   ,)
 
+(defn- install-portal-extras
+  []
+  (try
+    (let [;; undocumented internal hash maps:
+          f1   (requiring-resolve 'portal.runtime/fns)
+          f2   (requiring-resolve 'portal.runtime/public-fns)
+          html (fn [url]
+                 (with-meta
+                   [:div
+                    {:style {:background :white}}
+                    [:portal.viewer/html (slurp url)]]
+                   {:portal.viewer/default :portal.viewer/hiccup}))]
+      ;; install extra functions:
+      (run! (fn [[k f]]
+              (alter-var-root f1 assoc k f)
+              (alter-var-root f2 assoc k f))
+            {'dev/->file   (requiring-resolve 'clojure.java.io/file)
+             'dev/->html   html
+             'dev/->map    (partial into {})
+             'dev/->set    (partial into #{})
+             'dev/->vector (partial into [])}))
+    (catch Throwable _)))
+
 (defn- start-repl
   "Ensures we have a DynamicClassLoader, in case we want to use
   add-libs from the add-lib3 branch of clojure.tools.deps.alpha (to
@@ -226,24 +249,8 @@
   ;; start and setup Portal if present:
   (try
     (let [o    (requiring-resolve 'portal.api/open)
-          s    (requiring-resolve 'portal.api/submit)
-          ;; undocumented internal hash maps:
-          f1   (requiring-resolve 'portal.runtime/fns)
-          f2   (requiring-resolve 'portal.runtime/public-fns)
-          html (fn [url]
-                 (with-meta
-                   [:div
-                    {:style {:background :white}}
-                    [:portal.viewer/html (slurp url)]]
-                   {:portal.viewer/default :portal.viewer/hiccup}))]
-      ;; install extra functions:
-      (run! (fn [[k f]]
-              (alter-var-root f1 assoc k f)
-              (alter-var-root f2 assoc k f))
-            {'dev/->html   html
-             'dev/->map    (partial into {})
-             'dev/->set    (partial into #{})
-             'dev/->vector (partial into [])})
+          s    (requiring-resolve 'portal.api/submit)]
+      (install-portal-extras)
       (def portal "dev/portal behaves as an atom."
         (o {:portal.launcher/window-title (System/getProperty "user.dir")}))
       (add-tap s))
