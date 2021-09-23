@@ -1,5 +1,5 @@
 {:lib com.github.seancorfield/clj-new,
  :coord
- {:git/tag "v1.2.359",
-  :git/sha "7fafc79c2ef79d93563700e42f50dd47df1345da",
+ {:git/tag "v1.2.362",
+  :git/sha "4ab680eb74651b2762df4e5bff7ed99fda1bf91d",
   :git/url "https://github.com/seancorfield/clj-new.git"}}
