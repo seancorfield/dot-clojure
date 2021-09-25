@@ -54,7 +54,19 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:outdated` -- pulls in and runs the latest stable release of [antq](https://github.com/antq/antq) and reports on outdated dependencies
 
 There are aliases to pull in and start various REPL-related tools:
-* `:dev/repl` -- depending on what is on your classpath, start Rebel Readline and/or any of Portal, Reveal, Cognitect's REBL (or a plain Clojure REPL), with a Socket REPL (on "port 0" which will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time); if Portal is started, adds a few extra commands to the palette; if Reveal is started, adds an auto-table view for `tap>`'d values; usage: `clj -M:portal:dev/repl` or `clj -M:rebl:dev/repl` or `clj -M:reveal:dev/repl` or `clojure -M:rebel:dev/repl` or `clojure -M:rebel:portal:dev/repl` or `clojure -M:rebel:reveal:dev/repl` (for both of them together). Also works with Figwheel Main (now that I've started doing ClojureScript!): `clojure -M:portal:fig:build:dev/repl` or `clojure -M:reveal:fig:build:dev/repl`
+* `:dev/repl` -- depending on what is on your classpath, start Rebel Readline and/or any of Portal, Reveal, Cognitect's REBL (or a plain Clojure REPL), with a Socket REPL (on "port 0" which will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time);
+  * if Portal is started, adds a few extra commands to the palette;
+  * if Reveal is started, adds an auto-table view for `tap>`'d values;
+  * usage:
+    * `clj -M:portal:dev/repl` or
+    * `clj -M:rebl:dev/repl` or
+    * `clj -M:reveal:dev/repl` or
+    * `clojure -M:rebel:dev/repl` or
+    * `clojure -M:rebel:portal:dev/repl` or
+    * `clojure -M:rebel:reveal:dev/repl` (for both of them together).
+  * Also works with Figwheel Main (now that I've started doing ClojureScript!):
+    * `clojure -M:portal:fig:build:dev/repl` or
+    * `clojure -M:reveal:fig:build:dev/repl`
 * `:classes` -- adds the `classes` folder to your classpath to pick up compiled code (e.g., see https://clojure.org/guides/dev_startup_time)
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
