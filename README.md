@@ -41,7 +41,7 @@ More tools will be added to this section over time (as more tools add `:tools/us
 
 ## Basic Aliases
 
-And install or deploy jar files:
+Deploy jar files (if you don't have a `build.clj` file):
 * `:deploy` -- pulls in and runs the latest stable release of Erik Assum's [deps-deploy](https://github.com/slipset/deps-deploy) and deploys the specified JAR file to Clojars, based on your `pom.xml` and the `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment variables; `clojure -X:deploy :artifact '"MyProject.jar"'`
 
 There are aliases to pull in various useful testing and debugging tools:
