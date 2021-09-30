@@ -38,7 +38,10 @@
   ;; - see https://github.com/liquidz/antq
   :outdated {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
              :main-opts ["-m" "antq.core"]}
-
+  ;; - see https://github.com/rm-hull/nvd-clojure
+  ;; - clojure -M:nvd "" "$(clojure -Spath -A:any:aliases)"
+  :nvd {:extra-deps {nvd-clojure/nvd-clojure {:mvn/version "RELEASE"}}
+        :main-opts ["-m" "nvd.task.check"]}
   ;; REPL-related tools:
   ;; - start Figwheel or Portal or REBL or Reveal or Rebel Readline, with a socket REPL:
   ;;   - clj -M:portal:dev/repl OR clojure -M:rebel:portal:dev/repl
