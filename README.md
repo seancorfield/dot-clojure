@@ -30,6 +30,8 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
   * `clojure -Tpoly create c user` -- create a `user` component in a Polylith workspace,
   * `clojure -Tpoly test :dev true` -- run tests in the `dev` project context, in a Polylith workspace,
   * `clojure -A:deps -Tpoly help/doc` -- for more information and other functions.
+* `nvd` -- based on a pull request to allow the [nvd-clojure](https://github.com/rm-hull/nvd-clojure) security checker to be installed as a tool:
+  * `clojure -Tnvd check :classpath '"'$(clojure -Spath)'"'` will check all the JARs on that classpath for security vulnerabilities.
 * `clj-new` -- the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates:
   * `clojure -Tclj-new app :name myname/myapp` -- creates a new `deps.edn`-based application project (but still uses `depstar` for uberjar building -- this will change soon to `tools.build`!),
   * `clojure -Tclj-new lib :name myname/mylib` -- creates a new `deps.edn`-based library project (but still uses `depstar` for JAR building -- this will change soon to `tools.build`!),
