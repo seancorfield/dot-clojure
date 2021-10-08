@@ -23,6 +23,7 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
 * `new` -- the latest **work-in-progress** version of [deps-new](https://github.com/seancorfield/deps-new) to create new CLI/`deps.edn` projects: _[This uses a different (simpler!) templating system to `clj-new`, below, and therefore does not recognize Leiningen or Boot templates!]_
   * `clojure -Tnew app :name myname/myapp` -- creates a new `deps.edn`-based application project,
   * `clojure -Tnew lib :name myname/mylib` -- creates a new `deps.edn`-based library project,
+  * `clojure -Tnew template :name myname/mytemplate` -- creates a new `deps.edn`-based template project,
   * `clojure -A:somealias -Tnew create :template some/thing :name myname/myapp` -- locates a template for `some/thing` on the classpath, based on `:somealias`, and uses it to create a new `deps.edn`-based project,
   * `clojure -A:deps -Tnew help/doc` -- for more information and other functions.
 * `poly` -- a recent master version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
@@ -54,7 +55,7 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:expect` -- pulls in the latest stable release of [expectations/clojure-test](https://github.com/clojure-expectations/clojure-test) -- the `clojure.test`-compatible version of Expectations
 * `:bench` -- pulls in the latest stable release of [Criterium](https://github.com/hugoduncan/criterium/) for benchmarking your code
 * `:outdated` -- pulls in and runs the latest stable release of [antq](https://github.com/antq/antq) and reports on outdated dependencies
-* `:nvd' -- pulls in the latest stable release of [NVD for Clojure](https://github.com/rm-hull/nvd-clojure) for checking CVE vulnerabilities
+* `:nvd` -- pulls in the latest stable release of [NVD for Clojure](https://github.com/rm-hull/nvd-clojure) for checking CVE vulnerabilities
 
 There are aliases to pull in and start various REPL-related tools:
 * `:dev/repl` -- depending on what is on your classpath, start Rebel Readline and/or any of Portal, Reveal, Cognitect's REBL (or a plain Clojure REPL), with a Socket REPL (on "port 0" which will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time);
@@ -76,7 +77,7 @@ There are aliases to pull in and start various REPL-related tools:
 
 * `:jedi-time` -- adds `datafy`/`nav` support for Java Time objects via [jedi-time](https://github.com/jimpil/jedi-time)
 * `:portal` -- pulls in the latest stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
-* `:reflect` -- adds Stuart Halloway's reflector utility (best used with REBL/Reveal)
+* `:reflect` -- adds Stuart Halloway's reflector utility (best used with Portal/REBL/Reveal)
 * `:reveal` -- pulls in the latest stable release of the [Reveal](https://github.com/vlaaad/reveal) data visualization tool -- see the Reveal web site for usage options
 
 There are aliases to pull in specific versions of Clojure:
