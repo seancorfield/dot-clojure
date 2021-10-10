@@ -43,9 +43,9 @@
   :nvd {:extra-deps {nvd-clojure/nvd-clojure {:mvn/version "RELEASE"}}
         :main-opts ["-m" "nvd.task.check"]}
   ;; REPL-related tools:
-  ;; - start Figwheel or Portal or REBL or Reveal or Rebel Readline, with a socket REPL:
+  ;; - start Figwheel and/or Rebel Readline, with a socket REPL:
   ;;   - clj -M:portal:dev/repl OR clojure -M:rebel:portal:dev/repl
-  ;;   - clj -M:rebl:dev/repl OR clj -M:reveal:dev/repl OR clojure -M:rebel:dev/repl
+  ;;   - clojure -M:rebel:dev/repl
   ;;   - clojure -M:fig:build:dev/repl
   :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
              :main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
@@ -65,12 +65,6 @@
   {:extra-deps {io.github.stuarthalloway/reflector
                 {:git/url "https://github.com/stuarthalloway/reflector"
                  :sha "93a0c19b4526c1180959e940202928d35e5c3cef"}}}
-  ;; - see https://github.com/vlaaad/reveal
-  :reveal
-  {:extra-deps {vlaaad/reveal {:mvn/version "RELEASE"}}
-   :main-opts ["-m" "vlaaad.reveal" "repl"]
-   ;; make the font more readable:
-   :jvm-opts ["-Dvlaaad.reveal.prefs={:font-size,24}"]}
   ;; - see https://github.com/djblue/portal
   :portal
   {:extra-deps {djblue/portal {:mvn/version "RELEASE"}}}

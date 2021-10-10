@@ -58,27 +58,20 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:nvd` -- pulls in the latest stable release of [NVD for Clojure](https://github.com/rm-hull/nvd-clojure) for checking CVE vulnerabilities
 
 There are aliases to pull in and start various REPL-related tools:
-* `:dev/repl` -- depending on what is on your classpath, start Rebel Readline and/or any of Portal, Reveal, Cognitect's REBL (or a plain Clojure REPL), with a Socket REPL (on "port 0" which will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time);
-  * if Portal is started, adds a few extra commands to the palette;
-  * if Reveal is started, adds an auto-table view for `tap>`'d values;
+* `:dev/repl` -- depending on what is on your classpath, start Rebel Readline, with a Socket REPL (on "port 0" which will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time);
   * usage:
     * `clj -M:portal:dev/repl` or
-    * `clj -M:rebl:dev/repl` or
-    * `clj -M:reveal:dev/repl` or
     * `clojure -M:rebel:dev/repl` or
     * `clojure -M:rebel:portal:dev/repl` or
-    * `clojure -M:rebel:reveal:dev/repl` (for both of them together).
   * Also works with Figwheel Main (now that I've started doing ClojureScript!):
     * `clojure -M:portal:fig:build:dev/repl` or
-    * `clojure -M:reveal:fig:build:dev/repl`
 * `:classes` -- adds the `classes` folder to your classpath to pick up compiled code (e.g., see https://clojure.org/guides/dev_startup_time)
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
 
 * `:jedi-time` -- adds `datafy`/`nav` support for Java Time objects via [jedi-time](https://github.com/jimpil/jedi-time)
 * `:portal` -- pulls in the latest stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
-* `:reflect` -- adds Stuart Halloway's reflector utility (best used with Portal/REBL/Reveal)
-* `:reveal` -- pulls in the latest stable release of the [Reveal](https://github.com/vlaaad/reveal) data visualization tool -- see the Reveal web site for usage options
+* `:reflect` -- adds Stuart Halloway's reflector utility (best used with Portal)
 
 There are aliases to pull in specific versions of Clojure:
 * `:master` -- Clojure 1.11.0-master-SNAPSHOT
@@ -99,10 +92,7 @@ For the _EXPERIMENTAL_ `add-libs` function (`clojure.tools.deps.alpha.repl/add-l
 The `:dev/repl` alias uses `load-file` to load the [`dev.clj` file](https://github.com/seancorfield/dot-clojure/blob/develop/dev.clj) from this repo. That does a number of things (see the `start-repl` docstring for more details):
 
 * Starts a Socket REPL server (with the port selected via an environment variable, a JVM property, or a dot-file created on a previous run).
-* Starts [Portal](https://github.com/djblue/portal), if present on the classpath (sets the window title to the current directory, adds a `tap>` listener, and adds a few extra commands to the palette).
-* Starts [Cognitect's REBL](https://github.com/cognitect-labs/REBL-distro), if present on the classpath, else
 * Starts [Figwheel Main](https://github.com/bhauman/figwheel-main), if present on the classpath, else
-* Starts [Reveal](https://github.com/vlaaad/reveal), if present on the classpath, else
 * Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath.
 
 ### Portal Custom Commands
@@ -112,42 +102,14 @@ The `:dev/repl` alias uses `load-file` to load the [`dev.clj` file](https://gith
 * `dev/->set` -- pours the value into a set,
 * `dev/->vector` -- pours the value into a vector.
 
-### Reveal and Figwheel Main
-
-If both Reveal and Figwheel Main are present on the classpath, it starts both of them, using Figwheel for the primary (cljs) REPL, with everything input there affecting your running (cljs) app. In addition, everything `tap>`'d from your editor will be displayed inside Reveal (assuming you have `.cljc` files and evaluate that code as Clojure, not ClojureScript). See note about Figwheel usage below.
-
-### Reveal and Rebel Readline
-
-If both Reveal and Rebel Readline are present on the classpath, it starts both of them, using Rebel Readline for the primary REPL, with everything input there appearing in Reveal. In addition, everything `tap>`'d will be displayed inside Reveal.
-
-### Reveal Custom View
-
-If the `dev.clj` starts Reveal, it also `tap>`'s a Reveal view into it, which you can activate by right-clicking and selecting the `view` option (instead of right-click, you can press `space` when the name of the view -- `right-click > view` -- is highlighted).
-
-This view provides a number of features that apply automatically to anything that is `tap>`'d -- the view automatically updates each time a new value is submitted.
-
-If a `Var` is submitted, the view `deref`'s it so that the associated value is displayed (along with the metadata from the `Var` itself). If a function or namespace value is submitted, the docstring is displayed, if available.
-
-The view shows two panels:
-
-* Metadata as a hash map. This also contains `:_class` with the `class` of the value submitted. If a `Var` was submitted, and its value has metadata, that will be present as `:_meta`.
-* The underlying value itself, displayed as follows:
-  * Strings are displayed in their "raw" form so they are laid out as they would print (without `"` and with `\n` as actual newlines etc),
-  * `java.net.URL`'s are rendered inline as web pages, so you can browse documentation easily, for example. If you are using this with either my [Atom/Chlorine setup](https://github.com/seancorfield/atom-chlorine-setup) or my [VS Code/Clover setup](https://github.com/seancorfield/vscode-clover-setup), the `ctrl-; j` key will show the Javadoc page for the type of an expression if it is part of the Java standard library, and the `ctrl-; ?` key will show the ClojureDocs page for any symbol that is part of Clojure's core libraries.
-  * Things that are not `seqable?` are displayed as a table with one row containing that value in the first column and its string representation in the second column.
-  * Anything else is assumed to be some sort of sequence or collection, and is displayed in a table, with a row for each value in the collection:
-    * A hash map is treated as a collection of `MapEntry`'s which are displayed with a column for the key and a column for the value (and thus one row for each key/value pair of the hash map).
-    * A collection of maps is displayed with a column for each key (based on the first map in the sequence, like `clojure.pprint/print-table`).
-    * A collection of indexed values is displayed with each row showing one of those values with up to 1,024 columns for the indexed elements (based on the number of elements in the first value in the sequence: an arbitrary, large limit to avoid problems with infinite sequences). The column headings are the indices of those elements.
-
 ## Use with Figwheel
 
 If you are doing ClojureScript development with Figwheel (`figwheel-main`) then you can do:
 
 ```
-clojure -M:reveal:fig:build:dev/repl
+clojure -M:portal:fig:build:dev/repl
 ```
 
 You'll get the regular Figwheel build REPL (for ClojureScript, which uses Rebel Readline) and a browser open on your application, plus a Socket REPL on an available port (or whatever your env says, for Clojure evaluation).
 
-Connect to the Socket REPL, write your code as `.cljc` files, and you'll have the full power of your editor, Reveal, and Figwheel! What you evaluate in your editor will be treated as Clojure code (and can be `tap>`'d into Reveal, for example). What you evaluate at the REPL itself will be treated as ClojureScript code (and will affect your application instead).
+Connect to the Socket REPL, write your code as `.cljc` files, and you'll have the full power of your editor, Portal, and Figwheel! What you evaluate in your editor will be treated as Clojure code (and can be `tap>`'d into Portal, for example). What you evaluate at the REPL itself will be treated as ClojureScript code (and will affect your application instead).
