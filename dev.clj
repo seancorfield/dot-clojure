@@ -10,25 +10,9 @@
   []
   (java.util.Date. (- (.getTime (java.util.Date.))
                       (.getUptime (java.lang.management.ManagementFactory/getRuntimeMXBean)))))
-
-;; see if Rebel Readline is available so we can use when-sym:
-(try (require 'rebel-readline.core) (catch Throwable _))
-
-;; see if Figwheel is available so we can use when-sym:
-(try (require 'figwheel.main) (catch Throwable _))
-
 (when-not (resolve 'requiring-resolve)
   (throw (ex-info ":dev/repl and dev.clj require at least Clojure 1.10"
                   *clojure-version*)))
-
-(defmacro when-sym
-  "Usage: (when-sym some/thing (some/thing ...))
-
-  Allows for conditional compilation of code that depends on a
-  symbol being available (in our case below, a macro)."
-  [sym expr]
-  (when (resolve sym)
-    `~expr))
 
 (defn- ->long
   "Attempt to parse a string as a Long and return nil if it fails."
@@ -100,6 +84,7 @@
   listener, and install some extra commands.
 
   Then pick a REPL as follows:
+  * if Figwheel Main is on the classpath then start that, else
   * if Rebel Readline is on the classpath then start that, else
   * start a plain ol' Clojure REPL."
   []
