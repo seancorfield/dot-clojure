@@ -158,11 +158,11 @@
   ,)
 
 (defn- install-portal-extras
+  "This can be run from the dev namespace to add a few useful
+  commands to Portal (although it is awesome on its own!)."
   []
   (try
-    (let [;; undocumented internal hash maps:
-          f1   (requiring-resolve 'portal.runtime/fns)
-          f2   (requiring-resolve 'portal.runtime/public-fns)
+    (let [r!   (requiring-resolve 'portal.runtime/register!)
           html (fn [url]
                  (with-meta
                    [:div
@@ -170,9 +170,7 @@
                     [:portal.viewer/html (slurp url)]]
                    {:portal.viewer/default :portal.viewer/hiccup}))]
       ;; install extra functions:
-      (run! (fn [[k f]]
-              (alter-var-root f1 assoc k f)
-              (alter-var-root f2 assoc k f))
+      (run! (fn [[k f]] (r! f {:name k}))
             {'dev/->file   (requiring-resolve 'clojure.java.io/file)
              'dev/->html   html
              'dev/->map    (partial into {})
@@ -245,16 +243,6 @@
         (catch Throwable t
           (println "Unable to start the Socket REPL on port" s-port)
           (println (ex-message t))))))
-
-  ;; start and setup Portal if present:
-  (try
-    (let [o    (requiring-resolve 'portal.api/open)
-          s    (requiring-resolve 'portal.api/submit)]
-      (install-portal-extras)
-      (def portal "dev/portal behaves as an atom."
-        (o {:portal.launcher/window-title (System/getProperty "user.dir")}))
-      (add-tap s))
-    (catch Throwable _))
 
   ;; select and start a main REPL:
   (let [[repl-name repl-fn]
