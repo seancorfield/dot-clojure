@@ -26,7 +26,8 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
   * `clojure -Tnew template :name myname/mytemplate` -- creates a new `deps.edn`-based template project,
   * `clojure -A:somealias -Tnew create :template some/thing :name myname/myapp` -- locates a template for `some/thing` on the classpath, based on `:somealias`, and uses it to create a new `deps.edn`-based project,
   * `clojure -A:deps -Tnew help/doc` -- for more information and other functions.
-* `poly` -- a recent master version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
+* `poly` -- a recent `shell` version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
+  * `clojure -Tpoly shell` -- start an interactive Polylith shell,
   * `clojure -Tpoly info :loc true` -- display information about a Polylith workspace, including lines of code,
   * `clojure -Tpoly create c user` -- create a `user` component in a Polylith workspace,
   * `clojure -Tpoly test :dev true` -- run tests in the `dev` project context, in a Polylith workspace,
