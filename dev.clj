@@ -44,27 +44,6 @@
   (mapv clean-trace (-> (ex-info "Test" {}) (Throwable->map) :trace))
   ,)
 
-(defn- install-portal-extras
-  "This can be run from the dev namespace to add a few useful
-  commands to Portal (although it is awesome on its own!)."
-  []
-  (try
-    (let [r!   (requiring-resolve 'portal.runtime/register!)
-          html (fn [url]
-                 (with-meta
-                   [:div
-                    {:style {:background :white}}
-                    [:portal.viewer/html (slurp url)]]
-                   {:portal.viewer/default :portal.viewer/hiccup}))]
-      ;; install extra functions:
-      (run! (fn [[k f]] (r! f {:name k}))
-            {'dev/->file   (requiring-resolve 'clojure.java.io/file)
-             'dev/->html   html
-             'dev/->map    (partial into {})
-             'dev/->set    (partial into #{})
-             'dev/->vector (partial into [])}))
-    (catch Throwable _)))
-
 (defn- start-repl
   "Ensures we have a DynamicClassLoader, in case we want to use
   add-libs from the add-lib3 branch of clojure.tools.deps.alpha (to
@@ -79,9 +58,6 @@
   * .socket-repl-port file if present, else
   * defaults to 0 (which will automatically pick an available port)
   Writes the selected port back to .socket-repl-port for next time.
-
-  If Portal is on the classpath, start it up, register it as a tap>
-  listener, and install some extra commands.
 
   Then pick a REPL as follows:
   * if Figwheel Main is on the classpath then start that, else

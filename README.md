@@ -96,13 +96,6 @@ The `:dev/repl` alias uses `load-file` to load the [`dev.clj` file](https://gith
 * Starts [Figwheel Main](https://github.com/bhauman/figwheel-main), if present on the classpath, else
 * Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath.
 
-### Portal Custom Commands
-
-* `dev/->html` -- attempts to `slurp` the value (a filename or URL) and display it inline as HTML with a white background (so web pages are readable even in dark themes),
-* `dev/->map` -- pours the value into a hash map (useful for dealing with Java `Properties` objects etc),
-* `dev/->set` -- pours the value into a set,
-* `dev/->vector` -- pours the value into a vector.
-
 ## Use with Figwheel
 
 If you are doing ClojureScript development with Figwheel (`figwheel-main`) then you can do:
