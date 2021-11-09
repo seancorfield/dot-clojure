@@ -100,6 +100,30 @@
           (println "Unable to start the Socket REPL on port" s-port)
           (println (ex-message t))))))
 
+  ;; if Portal and clojure.tools.logging are both present,
+  ;; cause all (successful) logging to also be tap>'d:
+  (try
+    ;; if we have Portal on the classpath...
+    (require 'portal.console)
+    ;; ...then install a tap> ahead of tools.logging:
+    (let [log-star (requiring-resolve 'clojure.tools.logging/log*)
+          log*-fn  (deref log-star)]
+      (alter-var-root log-star
+                      (constantly (fn [logger level throwable message]
+                                    ;; only called for enabled log levels:
+                                    (tap>
+                                     {:form     '()
+                                      :level    level
+                                      :result   (or throwable message)
+                                      :ns       (symbol (str *ns*))
+                                      :file     *file*
+                                      :line     0
+                                      :column   0
+                                      :time     (java.util.Date.)
+                                      :runtime  :clj})
+                                    (log*-fn logger level throwable message)))))
+    (catch Throwable _))
+
   ;; select and start a main REPL:
   (let [[repl-name repl-fn]
         (or (try
@@ -107,7 +131,7 @@
                 ["Figwheel Main" #(figgy "-b" "dev" "-r")])
               (catch Throwable _))
             (try ["Rebel Readline" (requiring-resolve 'rebel-readline.main/-main)]
-              (catch Throwable _))
+                 (catch Throwable _))
             ["clojure.main" (resolve 'clojure.main/main)])]
     (println "Starting" repl-name "as the REPL...")
     (repl-fn)))
