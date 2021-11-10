@@ -21,29 +21,6 @@
     (and s (Long/parseLong s))
     (catch Throwable _)))
 
-(defn- ellipsis [s n] (if (< n (count s)) (str "..." (subs s (- (count s) n))) s))
-
-(comment
-  (ellipsis "this is a long string" 10)
-  (ellipsis "short string" 20)
-  ,)
-
-(defn- clean-trace
-  "Given a stack trace frame, trim class and file to the rightmost 24
-  chars so they make a nice, neat table."
-  [[c f file line]]
-  [(symbol (ellipsis (-> (name c)
-                         (demunge)
-                         (str/replace #"--[0-9]{1,}" ""))
-                     24))
-   f
-   (ellipsis file 24)
-   line])
-
-(comment
-  (mapv clean-trace (-> (ex-info "Test" {}) (Throwable->map) :trace))
-  ,)
-
 (defn- start-repl
   "Ensures we have a DynamicClassLoader, in case we want to use
   add-libs from the add-lib3 branch of clojure.tools.deps.alpha (to
