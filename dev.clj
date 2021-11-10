@@ -100,7 +100,7 @@
                 :ns       (symbol (or (namespace class-name)
                                       ;; fully-qualified classname - strip class:
                                       (str/replace (name class-name) #"\.[^\.]*$" "")))
-                :file     (str class-name)
+                :file     (.getFileName frame)
                 :line     (.getLineNumber frame)
                 :column   0
                 :time     (java.util.Date.)
