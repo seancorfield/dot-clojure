@@ -85,20 +85,28 @@
     ;; ...then install a tap> ahead of tools.logging:
     (let [log-star (requiring-resolve 'clojure.tools.logging/log*)
           log*-fn  (deref log-star)]
-      (alter-var-root log-star
-                      (constantly (fn [logger level throwable message]
-                                    ;; only called for enabled log levels:
-                                    (tap>
-                                     {:form     '()
-                                      :level    level
-                                      :result   (or throwable message)
-                                      :ns       (symbol (str *ns*))
-                                      :file     *file*
-                                      :line     0
-                                      :column   0
-                                      :time     (java.util.Date.)
-                                      :runtime  :clj})
-                                    (log*-fn logger level throwable message)))))
+      (alter-var-root
+       log-star
+       (constantly
+        (fn [logger level throwable message]
+          (try
+            (let [^StackTraceElement frame (nth (.getStackTrace (Throwable. "")) 2)
+                  class-name (symbol (demunge (.getClassName frame)))]
+              ;; only called for enabled log levels:
+              (tap>
+               {:form     '()
+                :level    level
+                :result   (or throwable message)
+                :ns       (symbol (or (namespace class-name)
+                                      ;; fully-qualified classname - strip class:
+                                      (str/replace (name class-name) #"\.[^\.]*$" "")))
+                :file     (str class-name)
+                :line     (.getLineNumber frame)
+                :column   0
+                :time     (java.util.Date.)
+                :runtime  :clj}))
+            (catch Throwable _))
+          (log*-fn logger level throwable message)))))
     (catch Throwable _))
 
   ;; select and start a main REPL:
