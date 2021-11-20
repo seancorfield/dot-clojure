@@ -4,7 +4,7 @@ This is my personal `.clojure/deps.edn` file providing useful `clj` aliases draw
 
 **Several git dependencies here assume you have at least Clojure CLI 1.10.3.933!**
 
-In addition, my `.clojure/tools/` folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (1.10.3.967) -- see [Tool installation and invocation](https://clojure.org/reference/deps_and_cli#tool_install) in the Deps and CLI Reference. As I add global tools, I am removing them as aliases.
+In addition, my `.clojure/tools/` folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (was 1.10.3.967 when I wrote this) -- see [Tool installation and invocation](https://clojure.org/reference/deps_and_cli#tool_install) in the Deps and CLI Reference. As I add global tools, I am removing them as aliases.
 
 The main alias I use here is `:dev/repl` which starts various combinations of REPL tooling. See [**The `:dev/repl` Alias**](#the-devrepl-alias) below for more details.
 
@@ -18,22 +18,28 @@ With that caveat out of the way, here is some basic documentation about my tools
 
 These are installed via `clojure -Ttools install ...` and usable via `clojure -T` with the tool name.
 
-> Note the following renamings compared to previous `dot-clojure` versions: `new` => `clj-new`, `deps-new` => `new` (as I am focusing work on `deps-new` and want that to be my default `-Tnew` command).
-
-* `new` -- the latest **work-in-progress** version of [deps-new](https://github.com/seancorfield/deps-new) to create new CLI/`deps.edn` projects: _[This uses a different (simpler!) templating system to `clj-new`, below, and therefore does not recognize Leiningen or Boot templates!]_
+* `antq` -- the outdated dependencies checker:
+  * `clojure -Tantq outdated` -- check the current project's dependencies,
+  * `clojure -A:deps -Tantq help/doc` -- for more information and other functions.
+* `new` -- the latest version of [deps-new](https://github.com/seancorfield/deps-new) to create new CLI/`deps.edn` projects: _[This uses a different (simpler!) templating system to `clj-new`, below, and therefore does not recognize Leiningen or Boot templates!]_
   * `clojure -Tnew app :name myname/myapp` -- creates a new `deps.edn`-based application project,
   * `clojure -Tnew lib :name myname/mylib` -- creates a new `deps.edn`-based library project,
   * `clojure -Tnew template :name myname/mytemplate` -- creates a new `deps.edn`-based template project,
   * `clojure -A:somealias -Tnew create :template some/thing :name myname/myapp` -- locates a template for `some/thing` on the classpath, based on `:somealias`, and uses it to create a new `deps.edn`-based project,
   * `clojure -A:deps -Tnew help/doc` -- for more information and other functions.
+* `nvd` -- the National Vulnerability Database checker: [nvd-clojure](https://github.com/rm-hull/nvd-clojure):
+  * `clojure -Tnvd check :classpath '"'$(clojure -Spath)'"'` will check all the JARs on that classpath for security vulnerabilities,
+  * `clojure -A:deps -Tnvd help/doc` -- for more information and other functions.
+  * _Note: if you install `nvd-clojure` yourself, following the instructions on the repo, you'll use the Maven (Clojars) coordinates and that will not have `:tools/usage` so you'll need to use `nvd.task/check` instead of just `check`._
 * `poly` -- a recent `shell` version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
   * `clojure -Tpoly shell` -- start an interactive Polylith shell,
   * `clojure -Tpoly info :loc true` -- display information about a Polylith workspace, including lines of code,
   * `clojure -Tpoly create c user` -- create a `user` component in a Polylith workspace,
   * `clojure -Tpoly test :dev true` -- run tests in the `dev` project context, in a Polylith workspace,
   * `clojure -A:deps -Tpoly help/doc` -- for more information and other functions.
-* `nvd` -- based on a pull request to allow the [nvd-clojure](https://github.com/rm-hull/nvd-clojure) security checker to be installed as a tool:
-  * `clojure -Tnvd check :classpath '"'$(clojure -Spath)'"'` will check all the JARs on that classpath for security vulnerabilities.
+
+And the older `clj-new` tool:
+
 * `clj-new` -- the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates:
   * `clojure -Tclj-new app :name myname/myapp` -- creates a new `deps.edn`-based application project (but still uses `depstar` for uberjar building -- this will change soon to `tools.build`!),
   * `clojure -Tclj-new lib :name myname/mylib` -- creates a new `deps.edn`-based library project (but still uses `depstar` for JAR building -- this will change soon to `tools.build`!),
@@ -55,8 +61,6 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:check` -- pulls in [Athos' Check](https://github.com/athos/clj-check) project to compile all your namespaces to check for syntax errors and reflection warnings like `lein check`
 * `:expect` -- pulls in the latest stable release of [expectations/clojure-test](https://github.com/clojure-expectations/clojure-test) -- the `clojure.test`-compatible version of Expectations
 * `:bench` -- pulls in the latest stable release of [Criterium](https://github.com/hugoduncan/criterium/) for benchmarking your code
-* `:outdated` -- pulls in and runs the latest stable release of [antq](https://github.com/antq/antq) and reports on outdated dependencies
-* `:nvd` -- pulls in the latest stable release of [NVD for Clojure](https://github.com/rm-hull/nvd-clojure) for checking CVE vulnerabilities
 
 There are aliases to pull in and start various REPL-related tools:
 * `:dev/repl` -- depending on what is on your classpath, start Rebel Readline, with a Socket REPL (on "port 0" which will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time);
@@ -93,12 +97,17 @@ For the _EXPERIMENTAL_ `add-libs` function (`clojure.tools.deps.alpha.repl/add-l
 The `:dev/repl` alias uses `load-file` to load the [`dev.clj` file](https://github.com/seancorfield/dot-clojure/blob/develop/dev.clj) from this repo. That does a number of things (see the `start-repl` docstring for more details):
 
 * Starts a Socket REPL server (with the port selected via an environment variable, a JVM property, or a dot-file created on a previous run).
+* If both Portal and `org.clojure/tools.logging` are on the classpath, it patch `tools.logging` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry).
 * Starts [Figwheel Main](https://github.com/bhauman/figwheel-main), if present on the classpath, else
 * Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath.
 
+_Note 1: since the `dev.clj` code uses `requiring-resolve`, it requires at least Clojure 1.10.0!_
+
+_Note 2: the `:dev/repl` alias assumes the `dev.clj` file can be loaded from `~/.clojure/dev.clj` which is not correct for XDG systems (it'll be `~/.config/clojure`)._
+
 ## Use with Figwheel
 
-If you are doing ClojureScript development with Figwheel (`figwheel-main`) then you can do:
+If you are doing ClojureScript development with Figwheel (`figwheel-main`) then you can do something like:
 
 ```
 clojure -M:portal:fig:build:dev/repl
@@ -107,3 +116,9 @@ clojure -M:portal:fig:build:dev/repl
 You'll get the regular Figwheel build REPL (for ClojureScript, which uses Rebel Readline) and a browser open on your application, plus a Socket REPL on an available port (or whatever your env says, for Clojure evaluation).
 
 Connect to the Socket REPL, write your code as `.cljc` files, and you'll have the full power of your editor, Portal, and Figwheel! What you evaluate in your editor will be treated as Clojure code (and can be `tap>`'d into Portal, for example). What you evaluate at the REPL itself will be treated as ClojureScript code (and will affect your application instead).
+
+# License
+
+Copyright © 2018-2021 Sean Corfield
+
+Distributed under the Apache Software License version 2.0.

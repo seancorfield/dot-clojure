@@ -1,3 +1,5 @@
+;; copyright (c) 2018-2021 sean corfield, all rights reserved
+
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
  :aliases
@@ -35,13 +37,7 @@
   ;; - (require '[criterium.core :refer [bench]])
   ;; - (bench (your-expression))
   :bench {:extra-deps {criterium/criterium {:mvn/version "RELEASE"}}}
-  ;; - see https://github.com/liquidz/antq
-  :outdated {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
-             :main-opts ["-m" "antq.core"]}
-  ;; - see https://github.com/rm-hull/nvd-clojure
-  ;; - clojure -M:nvd "" "$(clojure -Spath -A:any:aliases)"
-  :nvd {:extra-deps {nvd-clojure/nvd-clojure {:mvn/version "RELEASE"}}
-        :main-opts ["-m" "nvd.task.check"]}
+
   ;; REPL-related tools:
   ;; - start Figwheel and/or Rebel Readline, with a socket REPL:
   ;;   - clj -M:portal:dev/repl OR clojure -M:rebel:portal:dev/repl
@@ -57,17 +53,18 @@
   ;; - start a Rebel Readline REPL:
   :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
           :main-opts ["-m" "rebel-readline.main"]}
+
   ;; - see https://github.com/jimpil/jedi-time
   :jedi-time
   {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.1"}}}
+  ;; - see https://github.com/djblue/portal
+  :portal
+  {:extra-deps {djblue/portal {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/stuarthalloway/reflector
   :reflect
   {:extra-deps {io.github.stuarthalloway/reflector
                 {:git/url "https://github.com/stuarthalloway/reflector"
                  :sha "93a0c19b4526c1180959e940202928d35e5c3cef"}}}
-  ;; - see https://github.com/djblue/portal
-  :portal
-  {:extra-deps {djblue/portal {:mvn/version "RELEASE"}}}
 
   ;; pull in specific versions of Clojure:
   :1.0 {:override-deps {org.clojure/clojure {:mvn/version "1.0.0"}}}

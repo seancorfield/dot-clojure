@@ -1,3 +1,5 @@
+;; copyright (c) 2018-2021 sean corfield, all rights reserved
+
 (ns dev
   "Invoked via load-file from ~/.clojure/deps.edn, this
   file looks at what tooling you have available on your
@@ -5,14 +7,15 @@
   (:require [clojure.repl :refer [demunge]]
             [clojure.string :as str]))
 
+(when-not (resolve 'requiring-resolve)
+  (throw (ex-info ":dev/repl and dev.clj require at least Clojure 1.10"
+                  *clojure-version*)))
+
 (defn up-since
   "Return the date this REPL (Java process) was started."
   []
   (java.util.Date. (- (.getTime (java.util.Date.))
                       (.getUptime (java.lang.management.ManagementFactory/getRuntimeMXBean)))))
-(when-not (resolve 'requiring-resolve)
-  (throw (ex-info ":dev/repl and dev.clj require at least Clojure 1.10"
-                  *clojure-version*)))
 
 (defn- ->long
   "Attempt to parse a string as a Long and return nil if it fails."
