@@ -41,9 +41,9 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
 And the older `clj-new` tool:
 
 * `clj-new` -- the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates:
-  * `clojure -Tclj-new app :name myname/myapp` -- creates a new `deps.edn`-based application project (but still uses `depstar` for uberjar building -- this will change soon to `tools.build`!),
-  * `clojure -Tclj-new lib :name myname/mylib` -- creates a new `deps.edn`-based library project (but still uses `depstar` for JAR building -- this will change soon to `tools.build`!),
-  * `clojure -Tclj-new template :name myname/mytemplate` -- creates a new `deps.edn`-based template project (but still uses `depstar` for JAR building -- this will change soon to `tools.build`!),
+  * `clojure -Tclj-new app :name myname/myapp` -- creates a new `deps.edn`-based application project (using `tools.build` for the uberjar),
+  * `clojure -Tclj-new lib :name myname/mylib` -- creates a new `deps.edn`-based library project (using `tools.build` for the jar),
+  * `clojure -Tclj-new template :name myname/mytemplate` -- creates a new `deps.edn`-based template project (using `tools.build` for the jar),
   * `clojure -Tclj-new create :template something :name myname/myapp` -- locates a template for `something` and uses it to create a new project (which might be `deps.edn`-based or `lein`-based, depending on the template),
   * `clojure -A:deps -Tclj-new help/doc` -- for more information and other functions.
 
