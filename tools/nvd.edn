@@ -1,4 +1,5 @@
 {:lib io.github.rm-hull/nvd-clojure,
  :coord
- {:git/sha "40b2610c9d7eff1d08e5c2b4b09a60fec91a0c0b",
+ {:git/tag "2.0.0",
+  :git/sha "4b4a529f90ffb6008435b3a06d2bd557bbbe5648",
   :git/url "https://github.com/rm-hull/nvd-clojure.git"}}
