@@ -82,10 +82,10 @@
   :1.10.0 {:override-deps {org.clojure/clojure {:mvn/version "1.10.0"}}}
   :1.10.1 {:override-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
   :1.10.2 {:override-deps {org.clojure/clojure {:mvn/version "1.10.2"}}}
-  ;; 1.11 Alpha 2 is out!
-  :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-alpha2"}}}
+  ;; 1.11 Alpha 4 is out!
+  :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-alpha4"}}}
   ;; master has just become 1.11:
-  :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.1-master-SNAPSHOT"}}}
+  :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-master-SNAPSHOT"}}}
 
   :add-libs ; to get access to clojure.tools.deps.alpha.repl/add-libs
   ;; IMPORTANT NOTE: this is the new add-lib3 branch but is still a work
