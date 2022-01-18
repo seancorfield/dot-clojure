@@ -29,7 +29,7 @@
   ;;   - java -jar result.jar
   ;; - build a library JAR:
   ;;   - clj -X:jar :jar result-lib.jar
-  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.216"}}
+  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.245"}}
             :exec-fn hf.depstar/uberjar
             :exec-args {:aot true}}
   :jar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.216"}}
@@ -163,7 +163,7 @@
                 ;; deps for file datafication (REBL 0.9.149 or later)
                 org.clojure/data.csv {:mvn/version "1.0.0"}
                 org.clojure/data.json {:mvn/version "2.3.1"}
-                org.yaml/snakeyaml {:mvn/version "1.28"}
+                org.yaml/snakeyaml {:mvn/version "1.29"}
                 ;; assumes you've installed the latest Cognitect dev-tools:
                 com.cognitect/rebl {:mvn/version "0.9.242"}
                 ;; openjfx (remove these if your JDK bundles openjfx):
