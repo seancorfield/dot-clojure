@@ -1,54 +1,12 @@
+;; copyright (c) 2018-2021 sean corfield, all rights reserved
+
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
  :aliases
- {;; project creation from templates:
-  ;; - see https://github.com/seancorfield/clj-new
-  ;; - create an application project:
-  ;;   - clj -X:new :name myname/myapp
-  ;;   - cd myapp
-  ;;   - clj -M -m myname.myapp # run it!
-  ;;   - clj -X:test:runner # run the tests!
-  ;; - create a library project:
-  ;;   - clj -X:new :template lib :name myname/my-cool-lib
-  ;;   - cd my-cool-lib
-  ;;   - clj -X:test:runner # run the tests!
-  :new {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.309"}}
-        :exec-fn clj-new/create
-        :exec-args {:template app}}
-  :new-app {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.309"}}
-            :exec-fn clj-new/create
-            :exec-args {:template app}}
-  :new-lib {:extra-deps {com.github.seancorfield/clj-new {:mvn/version "1.1.309"}}
-            :exec-fn clj-new/create
-            :exec-args {:template lib}}
-
-  ;; uberjar building:
-  ;; - see https://github.com/seancorfield/depstar for more details:
-  ;;   - clj -X:uberjar :jar result.jar :main-class mymain.namespace
-  ;; - to run it:
-  ;;   - java -jar result.jar
-  ;; - build a library JAR:
-  ;;   - clj -X:jar :jar result-lib.jar
-  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.245"}}
-            :exec-fn hf.depstar/uberjar
-            :exec-args {:aot true}}
-  :jar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.216"}}
-        :exec-fn hf.depstar/jar
-        :exec-args {}}
-  ;; this is for consistency with the alias shown in the depstar project:
-  :depstar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.216"}}
-            :ns-default hf.depstar
-            :exec-args {}}
-
-  ;; jar installation and deployment:
   ;; - see https://github.com/slipset/deps-deploy
-  ;;   - clj -X:install :artifact '"project.jar"'
   ;;   - clj -X:deploy :artifact '"project.jar"'
-  ;; - these rely on having a pom.xml file and, for deployment, these two
+  ;; - this relies on having a pom.xml file and, for deployment, these two
   ;;   environment variables: CLOJARS_USERNAME, CLOJARS_PASSWORD
-  :install {:replace-deps {slipset/deps-deploy {:mvn/version "RELEASE"}}
-            :exec-fn deps-deploy.deps-deploy/deploy
-            :exec-args {:installer :local}}
   :deploy {:replace-deps {slipset/deps-deploy {:mvn/version "RELEASE"}}
            :exec-fn deps-deploy.deps-deploy/deploy
            :exec-args {:installer :remote}}
@@ -60,96 +18,44 @@
          :extra-deps {org.clojure/test.check {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/cognitect-labs/test-runner
   ;; - run your tests: clj -X:test:runner
-  :runner {:extra-deps {com.cognitect/test-runner
-                        {:git/url "https://github.com/cognitect-labs/test-runner"
-                         :sha "62ef1de18e076903374306060ac0e8a752e57c86"}}
+  :runner {:extra-deps {io.github.cognitect-labs/test-runner
+                        {:git/tag "v0.5.0" :git/sha "48c3c67"}}
            :exec-fn cognitect.test-runner.api/test
            :exec-args {:dirs ["test" "src/test/clojure"]}}
-  ;; - see https://github.com/seancorfield/readme
-  :readme {:extra-deps {seancorfield/readme {:mvn/version "RELEASE"}}
-           :main-opts ["-m" "seancorfield.readme"]}
   ;; - see https://github.com/jonase/eastwood#running-eastwood-in-a-repl
-  ;; - note: eastwood 0.3.14 requires Clojure 1.10 and will not run on 1.9!
   :eastwood {:extra-deps {jonase/eastwood {:mvn/version "RELEASE"}}
              :main-opts ["-m" "eastwood.lint" "{:source-paths,[\"src\"],:test-paths,[\"test\"]}"]}
   ;; - see https://github.com/athos/clj-check
-  :check {:extra-deps {athos/clj-check
-                       {:git/url "https://github.com/athos/clj-check"
-                        :sha "518d5a1cbfcd7c952f548e6dbfcb9a4a5faf9062"}}
+  :check {:extra-deps {io.github.athos/clj-check
+                       {:git/tag "0.1.0" :git/sha "0ca84df"}}
           :main-opts ["-m" "clj-check.check"]}
-  ;; - see https://github.com/clojure-expectations/expectations
-  ;; - and https://github.com/clojure-expectations/clojure-test
+  ;; - see https://github.com/clojure-expectations/clojure-test
   ;; - run your expectations: clj -M:test:expect:runner
-  :expect {:extra-deps {expectations/expectations {:mvn/version "RELEASE"}
-                        expectations/clojure-test {:mvn/version "RELEASE"}}}
+  :expect {:extra-deps {com.github.seancorfield/expectations {:mvn/version "RELEASE"}}}
   ;; - see https://github.com/hugoduncan/criterium/
   ;; - (require '[criterium.core :refer [bench]])
   ;; - (bench (your-expression))
   :bench {:extra-deps {criterium/criterium {:mvn/version "RELEASE"}}}
-  ;; - see https://github.com/clojure-goes-fast/clj-java-decompiler
-  ;; - note: this only seems to work on JDK 8
-  ;; - (require '[clj-java-decompiler.core :refer [decompile]])
-  ;; - (decompile (your-expression))
-  :decompile {:extra-deps {com.clojure-goes-fast/clj-java-decompiler {:mvn/version "RELEASE"}}}
-  ;; - see https://github.com/clojure-goes-fast/clj-memory-meter
-  ;; - (require '[clj-memory-meter.core :as mm])
-  ;; - (mm/measure (your-expression))
-  :measure {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "RELEASE"}}}
-  ;; - see https://github.com/liquidz/antq
-  :outdated {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
-             :main-opts ["-m" "antq.core"]}
-  :j14 ; add (sometimes) useful Java 14 option
-  {:jvm-opts ["-XX:+ShowCodeDetailsInExceptionMessages"]}
 
   ;; REPL-related tools:
-  ;; - start Figwheel or REBL or Reveal or Rebel Readline, with a socket REPL:
-  ;;   - clj -M:rebl:dev/repl OR clj -M:reveal:dev/repl OR clojure -M:rebel:dev/repl
+  ;; - start Figwheel and/or Rebel Readline, with a socket REPL:
+  ;;   - clj -M:portal:dev/repl OR clojure -M:rebel:portal:dev/repl
+  ;;   - clojure -M:rebel:dev/repl
   ;;   - clojure -M:fig:build:dev/repl
-  ;; - recently renamed from :dev to be less likely to clash with project-specific
-  ;;   aliases (some projects already have a :dev alias):
   :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
              :main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
-  ;; - legacy spelling of this alias:
-  :dev {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
-        :main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
   ;; - in case you need precompiled code on your classpath:
   :classes {:extra-paths ["classes"]}
-  ;; - start an nREPL server on a random available port:
-  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "RELEASE"}}
-          :main-opts ["-m" "nrepl.cmdline"]}
   ;; - start a Socket REPL on port 50505 (not needed if you use the :dev/repl alias):
   :socket {:jvm-opts ["-Dclojure.server.repl={:address,\"0.0.0.0\",:port,50505,:accept,clojure.core.server/repl}"]}
-  ;; - start a Socket REPL on an available port, and display that port:
-  ;; - specify -r as well if you want a repl
-  :socket-zero {:jvm-opts ["-Dclojure.server.repl={:port,0,:accept,clojure.core.server/repl}"]
-                :main-opts ["-e" "(.getLocalPort,(get-in,@#'clojure.core.server/servers,[\"repl\",:socket]))"]}
-  ;; - start a Socket REPL on port 50123, that will submit everything to REBL:
-  ;; - assumes you have REBL on your classpath (see :rebl below)
-  :socket-rebl {:extra-deps
-                {seancorfield/socket-rebl
-                 {:git/url "https://github.com/seancorfield/socket-rebl"
-                  :sha "60dd65cb8d03a9cf5eba21081cdfad5e27f72a8b"}}
-                :jvm-opts ["-Dclojure.server.repl={:port,50123,:accept,socket.rebl/repl}"]}
-  ;; - start a Socket pREPL on port 40404:
-  :prepl {:jvm-opts ["-Dclojure.server.repl={:port,40404,:accept,clojure.core.server/io-prepl}"]}
   ;; - see https://github.com/bhauman/rebel-readline
   ;; - start a Rebel Readline REPL:
   :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
           :main-opts ["-m" "rebel-readline.main"]}
+
   ;; - see https://github.com/jimpil/jedi-time
   :jedi-time
   {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.1"}}}
-  ;; - see https://github.com/stuarthalloway/reflector
-  :reflect
-  {:extra-deps {com.stuarthalloway/reflector
-                {:git/url "https://github.com/stuarthalloway/reflector"
-                 :sha "93a0c19b4526c1180959e940202928d35e5c3cef"}}}
-  ;; - see https://github.com/vlaaad/reveal
-  :reveal
-  {:extra-deps {vlaaad/reveal {:mvn/version "RELEASE"}}
-   :main-opts ["-m" "vlaaad.reveal" "repl"]
-   ;; make the font more readable:
-   :jvm-opts ["-Dvlaaad.reveal.prefs={:font-size,24}"]}
   ;; - see https://github.com/djblue/portal
   :portal
   {:extra-deps {djblue/portal {:mvn/version "RELEASE"}}}
@@ -177,6 +83,13 @@
    ;; such as a socket REPL or Cognitect's REBL etc
    :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"
                "-m" "cognitect.rebl"]}
+=======
+  ;; - see https://github.com/stuarthalloway/reflector
+  :reflect
+  {:extra-deps {io.github.stuarthalloway/reflector
+                {:git/url "https://github.com/stuarthalloway/reflector"
+                 :sha "93a0c19b4526c1180959e940202928d35e5c3cef"}}}
+>>>>>>> upstream/develop
 
   ;; pull in specific versions of Clojure:
   :1.0 {:override-deps {org.clojure/clojure {:mvn/version "1.0.0"}}}
@@ -194,10 +107,10 @@
   :1.10.0 {:override-deps {org.clojure/clojure {:mvn/version "1.10.0"}}}
   :1.10.1 {:override-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
   :1.10.2 {:override-deps {org.clojure/clojure {:mvn/version "1.10.2"}}}
-  ;; 1.11 Alpha 1 is out!
-  :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-alpha1"}}}
+  ;; 1.11 Alpha 4 is out!
+  :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-alpha4"}}}
   ;; master has just become 1.11:
-  :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.1-master-SNAPSHOT"}}}
+  :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-master-SNAPSHOT"}}}
 
   :add-libs ; to get access to clojure.tools.deps.alpha.repl/add-libs
   ;; IMPORTANT NOTE: this is the new add-lib3 branch but is still a work
@@ -221,38 +134,8 @@
   ;; (load-master 'clojure/tools.trace)
   {:extra-deps {org.clojure/tools.deps.alpha ; add-lib3 branch
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
-                 :sha "241cd24c35ba770aea4773ea161d45276e5d3a73"}}
+                 :sha "83a477b305839c697666401508c395cfed29506a"}}
    ;; this ensures we have a DynamicClassLoader, which is needed for
    ;; add-libs to work, if we're starting other processes via aliases
    ;; such as a socket REPL or Cognitect's REBL etc
-   :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"]}
-  :graph {:deps {org.clojure/tools.deps.graph {:mvn/version "1.0.63"}}
-          :main-opts ["-m" "clojure.tools.deps.graph"]}
-  :spec2 ; to get access to the latest spec-alpha2
-  {:extra-deps {org.clojure/spec-alpha2
-                {:git/url "https://github.com/clojure/spec-alpha2"
-                 :sha "c087ded910b3532a938b37e853df79fc3b9c48c1"}}}
-
-  ;; Polylith command-line tool
-  ;; - see https://github.com/polyfy/polylith
-  ;; - this SHA is the issue-66 branch as of 2021-06-07
-  :poly  {:replace-deps {polylith/clj-poly
-                         {:git/url   "https://github.com/polyfy/polylith.git"
-                          :sha       "887e4237cec8f42eaa15be3501f134732602bb41"
-                          :deps/root "projects/poly"}}
-          :main-opts  ["-m" "polylith.clj.core.poly-cli.core"]}
-
-  ;; start the Liquid Clojure editor
-  ;; - see https://github.com/mogenslund/liquid
-  :liquid
-  {:extra-deps {mogenslund/liquid {:mvn/version "RELEASE"}}
-   :main-opts ["-m" "liq.core"]}
-
-  ;; closh
-  :closh {:extra-deps {closh/closh {:git/url "https://github.com/dundalek/closh.git"
-                                    :sha "b1a7fd310b6511048fbacb8e496f574c8ccfa291"}}
-          :main-opts ["-m" "closh.zero.frontend.rebel"]}
-
-  ;; - inspired by Ruby's -pne command line option which lets you process lines of stdin bound to $_
-  ;; - usage: cat file-of-numbers.txt | clj -Mpne -e '($ (-> $_ Long/parseLong inc))'
-  :pne {:main-opts,["-e","(defmacro,$,[&,body],(list,'while,(list,'when-let,'[$_,(read-line)],(let,[v,(gensym)],(list,'let,(vector,v,(list*,'do,body)),(list,'println,v))),'$_)))"]}}}
+   :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"]}}}
