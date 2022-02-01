@@ -31,7 +31,7 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
   * `clojure -Tnvd check :classpath '"'$(clojure -Spath)'"'` will check all the JARs on that classpath for security vulnerabilities,
   * `clojure -A:deps -Tnvd help/doc` -- for more information and other functions.
   * _Note: if you install `nvd-clojure` yourself, following the instructions on the repo, you'll use the Maven (Clojars) coordinates and that will not have `:tools/usage` so you'll need to use `nvd.task/check` instead of just `check`._
-* `poly` -- a recent `shell` version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
+* `poly` -- a recent **master**** version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
   * `clojure -Tpoly shell` -- start an interactive Polylith shell,
   * `clojure -Tpoly info :loc true` -- display information about a Polylith workspace, including lines of code,
   * `clojure -Tpoly create c user` -- create a `user` component in a Polylith workspace,
