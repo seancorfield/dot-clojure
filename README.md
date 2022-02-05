@@ -80,7 +80,7 @@ There are aliases to pull in and start various REPL-related tools:
 
 There are aliases to pull in specific versions of Clojure:
 * `:master` -- Clojure 1.11.0-master-SNAPSHOT
-* `:1.11` -- Clojure 1.11.0-alpha2 with `:as-alias`, `update-keys`, `update-vals` (Alpha 1 introduced the new named argument calling feature)
+* `:1.11` -- Clojure 1.11.0-beta1 with `:as-alias`, `update-keys`, `update-vals` (Alpha 1 introduced the new named argument calling feature)
 * `:1.10` -- Clojure 1.10.3
   * `:1.10.2` -- Clojure 1.10.2
   * `:1.10.1` -- Clojure 1.10.1
