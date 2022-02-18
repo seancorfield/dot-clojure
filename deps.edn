@@ -1,4 +1,4 @@
-;; copyright (c) 2018-2021 sean corfield, all rights reserved
+;; copyright (c) 2018-2022 sean corfield, all rights reserved
 
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
@@ -82,9 +82,9 @@
   :1.10.0 {:override-deps {org.clojure/clojure {:mvn/version "1.10.0"}}}
   :1.10.1 {:override-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
   :1.10.2 {:override-deps {org.clojure/clojure {:mvn/version "1.10.2"}}}
-  ;; 1.11 Alpha 4 is out!
-  :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-alpha4"}}}
-  ;; master has just become 1.11:
+  ;; 1.11 RC 1 is out!
+  :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-rc1"}}}
+  ;; master is currently 1.11:
   :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-master-SNAPSHOT"}}}
 
   :add-libs ; to get access to clojure.tools.deps.alpha.repl/add-libs

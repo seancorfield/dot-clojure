@@ -1,4 +1,4 @@
-;; copyright (c) 2018-2021 sean corfield, all rights reserved
+;; copyright (c) 2018-2022 sean corfield, all rights reserved
 
 (ns dev
   "Invoked via load-file from ~/.clojure/deps.edn, this

@@ -80,7 +80,7 @@ There are aliases to pull in and start various REPL-related tools:
 
 There are aliases to pull in specific versions of Clojure:
 * `:master` -- Clojure 1.11.0-master-SNAPSHOT
-* `:1.11` -- Clojure 1.11.0-alpha2 with `:as-alias`, `update-keys`, `update-vals` (Alpha 1 introduced the new named argument calling feature)
+* `:1.11` -- Clojure 1.11.0-rc1 -- see [changes to Clojure in version 1.11.0](https://github.com/clojure/clojure/blob/master/changes.md#changes-to-clojure-in-version-1110)
 * `:1.10` -- Clojure 1.10.3
   * `:1.10.2` -- Clojure 1.10.2
   * `:1.10.1` -- Clojure 1.10.1
@@ -119,6 +119,6 @@ Connect to the Socket REPL, write your code as `.cljc` files, and you'll have th
 
 # License
 
-Copyright © 2018-2021 Sean Corfield
+Copyright © 2018-2022 Sean Corfield
 
 Distributed under the Apache Software License version 2.0.
