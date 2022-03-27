@@ -21,17 +21,15 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
 * `antq` -- the outdated dependencies checker:
   * `clojure -Tantq outdated` -- check the current project's dependencies,
   * `clojure -A:deps -Tantq help/doc` -- for more information and other functions.
+* `clj-watson` -- a software composition analysis scanner, based on the National Vulnerability Database: [clj-watson](https://github.com/clj-holmes/clj-watson)
+  * `clojure -Tclj-watson scan :deps-edn-path '"deps.edn"' :output '"stdout"'`
 * `new` -- the latest version of [deps-new](https://github.com/seancorfield/deps-new) to create new CLI/`deps.edn` projects: _[This uses a different (simpler!) templating system to `clj-new`, below, and therefore does not recognize Leiningen or Boot templates!]_
   * `clojure -Tnew app :name myname/myapp` -- creates a new `deps.edn`-based application project,
   * `clojure -Tnew lib :name myname/mylib` -- creates a new `deps.edn`-based library project,
   * `clojure -Tnew template :name myname/mytemplate` -- creates a new `deps.edn`-based template project,
   * `clojure -A:somealias -Tnew create :template some/thing :name myname/myapp` -- locates a template for `some/thing` on the classpath, based on `:somealias`, and uses it to create a new `deps.edn`-based project,
   * `clojure -A:deps -Tnew help/doc` -- for more information and other functions.
-* `nvd` -- the National Vulnerability Database checker: [nvd-clojure](https://github.com/rm-hull/nvd-clojure):
-  * `clojure -Tnvd check :classpath '"'$(clojure -Spath)'"'` will check all the JARs on that classpath for security vulnerabilities,
-  * `clojure -A:deps -Tnvd help/doc` -- for more information and other functions.
-  * _Note: if you install `nvd-clojure` yourself, following the instructions on the repo, you'll use the Maven (Clojars) coordinates and that will not have `:tools/usage` so you'll need to use `nvd.task/check` instead of just `check`._
-* `poly` -- a recent **master**** version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
+* `poly` -- a recent **master** version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
   * `clojure -Tpoly shell` -- start an interactive Polylith shell,
   * `clojure -Tpoly info :loc true` -- display information about a Polylith workspace, including lines of code,
   * `clojure -Tpoly create c user` -- create a `user` component in a Polylith workspace,
