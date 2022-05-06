@@ -71,6 +71,7 @@ There are aliases to pull in and start various REPL-related tools:
 * `:classes` -- adds the `classes` folder to your classpath to pick up compiled code (e.g., see https://clojure.org/guides/dev_startup_time)
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
+* `:nrepl` -- starts a (headless) n [nREPL server](https://nrepl.org/) on a random available port
 
 * `:jedi-time` -- adds `datafy`/`nav` support for Java Time objects via [jedi-time](https://github.com/jimpil/jedi-time)
 * `:portal` -- pulls in the latest stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
@@ -94,10 +95,11 @@ For the _EXPERIMENTAL_ `add-libs` function (`clojure.tools.deps.alpha.repl/add-l
 
 The `:dev/repl` alias uses `load-file` to load the [`dev.clj` file](https://github.com/seancorfield/dot-clojure/blob/develop/dev.clj) from this repo. That does a number of things (see the `start-repl` docstring for more details):
 
-* Starts a Socket REPL server (with the port selected via an environment variable, a JVM property, or a dot-file created on a previous run).
+* Starts a Socket REPL server (with the port selected via an environment variable, a JVM property, or a dot-file created on a previous run) -- unless `SOCKET_REPL_PORT=none` which suppresses starting it.
 * If both Portal and `org.clojure/tools.logging` are on the classpath, it patch `tools.logging` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry).
 * Starts [Figwheel Main](https://github.com/bhauman/figwheel-main), if present on the classpath, else
-* Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath.
+* Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath, else
+* Starts an [nREPL Server](https://nrepl.org/), if present on the classpath.
 
 _Note 1: since the `dev.clj` code uses `requiring-resolve`, it requires at least Clojure 1.10.0!_
 

@@ -42,6 +42,7 @@
   ;; - start Figwheel and/or Rebel Readline, with a socket REPL:
   ;;   - clj -M:portal:dev/repl OR clojure -M:rebel:portal:dev/repl
   ;;   - clojure -M:rebel:dev/repl
+  ;;   - clojure -M:nrepl:dev/repl
   ;;   - clojure -M:fig:build:dev/repl
   :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
              :main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
@@ -53,6 +54,10 @@
   ;; - start a Rebel Readline REPL:
   :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
           :main-opts ["-m" "rebel-readline.main"]}
+  ;; - see https://nrepl.org/
+  ;; - start an nREPL server on a random available port:
+  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "RELEASE"}}
+          :main-opts ["-m" "nrepl.cmdline"]}
 
   ;; - see https://github.com/jimpil/jedi-time
   :jedi-time
