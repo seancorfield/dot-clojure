@@ -1,5 +1,5 @@
 {:lib io.github.polyfy/polylith,
  :coord
- {:git/sha "6f3777fd1e5ce77ae0b7dc68f6db13d0757d84cd",
+ {:git/sha "f0d38cb71e9d3f7a620a4baecb491da4aab91edd",
   :deps/root "projects/poly",
   :git/url "https://github.com/polyfy/polylith.git"}}

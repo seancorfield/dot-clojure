@@ -20,7 +20,7 @@
   ;; - see https://github.com/cognitect-labs/test-runner
   ;; - run your tests: clj -X:test:runner
   :runner {:extra-deps {io.github.cognitect-labs/test-runner
-                        {:git/tag "v0.5.0" :git/sha "48c3c67"}}
+                        {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
            :exec-fn cognitect.test-runner.api/test
            :exec-args {:dirs ["test" "src/test/clojure"]}}
   ;; - see https://github.com/jonase/eastwood#running-eastwood-in-a-repl
@@ -115,7 +115,7 @@
   ;; (load-master 'clojure/tools.trace)
   {:extra-deps {org.clojure/tools.deps.alpha ; add-lib3 branch
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
-                 :sha "83a477b305839c697666401508c395cfed29506a"}}
+                 :sha "e4fb92eef724fa39e29b39cc2b1a850567d490dd"}}
    ;; this ensures we have a DynamicClassLoader, which is needed for
    ;; add-libs to work, if we're starting other processes via aliases
    ;; such as a socket REPL or Cognitect's REBL etc
