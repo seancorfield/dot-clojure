@@ -55,9 +55,13 @@
   :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
           :main-opts ["-m" "rebel-readline.main"]}
   ;; - see https://nrepl.org/
-  ;; - start an nREPL server on a random available port:
+  ;; - start a basic nREPL server on a random available port:
   :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "RELEASE"}}
           :main-opts ["-m" "nrepl.cmdline"]}
+  ;; - see https://nrepl.org/
+  ;; - start a CIDER-enhanced nREPL server on a random available port:
+  :cider-nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "RELEASE"}}
+                :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
 
   ;; - see https://github.com/jimpil/jedi-time
   :jedi-time

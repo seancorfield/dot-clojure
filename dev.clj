@@ -123,6 +123,15 @@
               (catch Throwable _))
             (try ["Rebel Readline" (requiring-resolve 'rebel-readline.main/-main)]
                  (catch Throwable _))
+            ;; try CIDER-enhanced nREPL first...
+            (try ["CIDER-enhanced nREPL Server"
+                  (do
+                    (require 'cider.nrepl) ; look for middleware
+                    (fn []
+                      ((requiring-resolve 'nrepl.cmdline/-main)
+                       "--middleware" "[cider.nrepl/cider-middleware]")))]
+                 (catch Throwable _))
+            ;; ...then try plain nREPL:
             (try ["nREPL Server" (requiring-resolve 'nrepl.cmdline/-main)]
                  (catch Throwable _))
             ["clojure.main" (resolve 'clojure.main/main)])]
