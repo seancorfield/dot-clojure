@@ -116,7 +116,21 @@
     (catch Throwable _))
 
   ;; select and start a main REPL:
-  (let [[repl-name repl-fn]
+  (let [;; figure out what middleware we might want to supply to nREPL:
+        middleware
+        (into []
+              (comp (filter #(try (require (first %)) true (catch Throwable _)))
+                    (map second))
+              ;; you might like the Portal middleware but I rely on a lot
+              ;; of custom REPL snippets and this middleware submits all
+              ;; evaluations to Portal which interferes with using code
+              ;; to manipulate Portal itself...
+              [;['portal.nrepl 'portal.nrepl/wrap-portal]
+               ['cider.nrepl  'cider.nrepl/cider-middleware]])
+        mw-args
+        (when (seq middleware)
+          ["--middleware" (str middleware)])
+        [repl-name repl-fn]
         (or (try
               (let [figgy (requiring-resolve 'figwheel.main/-main)]
                 ["Figwheel Main" #(figgy "-b" "dev" "-r")])
@@ -128,11 +142,12 @@
                   (do
                     (require 'cider.nrepl) ; look for middleware
                     (fn []
-                      ((requiring-resolve 'nrepl.cmdline/-main)
-                       "--middleware" "[cider.nrepl/cider-middleware]")))]
+                      (apply (requiring-resolve 'nrepl.cmdline/-main) mw-args)))]
                  (catch Throwable _))
             ;; ...then try plain nREPL:
-            (try ["nREPL Server" (requiring-resolve 'nrepl.cmdline/-main)]
+            (try ["nREPL Server"
+                  (fn []
+                    (apply (requiring-resolve 'nrepl.cmdline/-main) mw-args))]
                  (catch Throwable _))
             ["clojure.main" (resolve 'clojure.main/main)])]
     (println "Starting" repl-name "as the REPL...")
