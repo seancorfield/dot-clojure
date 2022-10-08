@@ -146,8 +146,10 @@
                  (catch Throwable _))
             ;; ...then try plain nREPL:
             (try ["nREPL Server"
-                  (fn []
-                    (apply (requiring-resolve 'nrepl.cmdline/-main) mw-args))]
+                  (do
+                    (require 'nrepl.cmdline)
+                    (fn []
+                      (apply (requiring-resolve 'nrepl.cmdline/-main) mw-args)))]
                  (catch Throwable _))
             ["clojure.main" (resolve 'clojure.main/main)])]
     (println "Starting" repl-name "as the REPL...")
