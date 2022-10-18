@@ -24,6 +24,12 @@
     (and s (Long/parseLong s))
     (catch Throwable _)))
 
+(defonce ^:private tap-logging (atom true))
+(defn toggle-logging!
+  "Turn tap>'ing of logging on and off."
+  []
+  (swap! tap-logging not))
+
 (defn- start-repl
   "Ensures we have a DynamicClassLoader, in case we want to use
   add-libs from the add-lib3 branch of clojure.tools.deps.alpha (to
@@ -95,23 +101,24 @@
        log-star
        (constantly
         (fn [logger level throwable message]
-          (try
-            (let [^StackTraceElement frame (nth (.getStackTrace (Throwable. "")) 2)
-                  class-name (symbol (demunge (.getClassName frame)))]
-              ;; only called for enabled log levels:
-              (tap>
-               {:form     '()
-                :level    level
-                :result   (or throwable message)
-                :ns       (symbol (or (namespace class-name)
-                                      ;; fully-qualified classname - strip class:
-                                      (str/replace (name class-name) #"\.[^\.]*$" "")))
-                :file     (.getFileName frame)
-                :line     (.getLineNumber frame)
-                :column   0
-                :time     (java.util.Date.)
-                :runtime  :clj}))
-            (catch Throwable _))
+          (when @tap-logging
+            (try
+              (let [^StackTraceElement frame (nth (.getStackTrace (Throwable. "")) 2)
+                    class-name (symbol (demunge (.getClassName frame)))]
+                ;; only called for enabled log levels:
+                (tap>
+                 {:form     '()
+                  :level    level
+                  :result   (or throwable message)
+                  :ns       (symbol (or (namespace class-name)
+                                        ;; fully-qualified classname - strip class:
+                                        (str/replace (name class-name) #"\.[^\.]*$" "")))
+                  :file     (.getFileName frame)
+                  :line     (.getLineNumber frame)
+                  :column   0
+                  :time     (java.util.Date.)
+                  :runtime  :clj}))
+              (catch Throwable _)))
           (log*-fn logger level throwable message)))))
     (catch Throwable _))
 
@@ -119,13 +126,12 @@
   (let [;; figure out what middleware we might want to supply to nREPL:
         middleware
         (into []
-              (comp (filter #(try (require (first %)) true (catch Throwable _)))
-                    (map second))
-              [['portal.nrepl 'portal.nrepl/wrap-portal]
-               ['cider.nrepl  'cider.nrepl/cider-middleware]])
+              (filter #(try (requiring-resolve (second %)) true (catch Throwable _)))
+              [["Portal" 'portal.nrepl/wrap-portal]
+               ["CIDER"  'cider.nrepl/cider-middleware]])
         mw-args
         (when (seq middleware)
-          ["--middleware" (str middleware)])
+          ["--middleware" (str (mapv second middleware))])
         [repl-name repl-fn]
         (or (try
               (let [figgy (requiring-resolve 'figwheel.main/-main)]
@@ -133,19 +139,12 @@
               (catch Throwable _))
             (try ["Rebel Readline" (requiring-resolve 'rebel-readline.main/-main)]
                  (catch Throwable _))
-            ;; try CIDER-enhanced nREPL first...
-            (try ["CIDER-enhanced nREPL Server"
-                  (do
-                    (require 'cider.nrepl) ; look for middleware
+            (try [(str "nREPL Server"
+                       (when (seq middleware)
+                         (str " with " (str/join ", " (map first middleware)))))
+                  (let [nrepl (requiring-resolve 'nrepl.cmdline/-main)]
                     (fn []
-                      (apply (requiring-resolve 'nrepl.cmdline/-main) mw-args)))]
-                 (catch Throwable _))
-            ;; ...then try plain nREPL:
-            (try ["nREPL Server"
-                  (do
-                    (require 'nrepl.cmdline)
-                    (fn []
-                      (apply (requiring-resolve 'nrepl.cmdline/-main) mw-args)))]
+                      (apply nrepl mw-args)))]
                  (catch Throwable _))
             ["clojure.main" (resolve 'clojure.main/main)])]
     (println "Starting" repl-name "as the REPL...")

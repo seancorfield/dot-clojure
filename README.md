@@ -63,16 +63,20 @@ There are aliases to pull in various useful testing and debugging tools:
 There are aliases to pull in and start various REPL-related tools:
 * `:dev/repl` -- depending on what is on your classpath, start Rebel Readline, with a Socket REPL (on "port 0" which will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var overrides, saves port to `.socket-repl-port` file for next time);
   * usage:
-    * `clj -M:portal:dev/repl` or
-    * `clojure -M:rebel:dev/repl` or
-    * `clojure -M:rebel:portal:dev/repl` or
+    * `clj -M:portal:dev/repl` -- basic REPL with Portal or
+    * `clojure -M:rebel:dev/repl` -- Rebel Readline REPL or
+    * `clojure -M:rebel:portal:dev/repl` -- ...with Portal or
+    * `clojure -M:nrepl:dev/repl` -- basic nREPL server or
+    * `clojure -M:nrepl:portal:dev/repl` -- basic nREPL server with Portal middleware or
+    * `clojure -M:cider-nrepl:dev/repl` -- CIDER nREPL server or
+    * `clojure -M:cider-nrepl:portal:dev/repl` -- CIDER nREPL server with Portal middleware or
   * Also works with Figwheel Main (now that I've started doing ClojureScript!):
     * `clojure -M:portal:fig:build:dev/repl` or
 * `:classes` -- adds the `classes` folder to your classpath to pick up compiled code (e.g., see https://clojure.org/guides/dev_startup_time)
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
-* `:nrepl` -- starts a (headless) [nREPL server](https://nrepl.org/) on a random available port
-* `:cider-nrepl` -- starts a (headless) CIDER-enhanced [nREPL server](https://nrepl.org/) on a random available port
+* `:nrepl` -- starts a (headless) [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:nrepl`
+* `:cider-nrepl` -- starts a (headless) CIDER-enhanced [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:cider-nrepl`
 
 * `:jedi-time` -- adds `datafy`/`nav` support for Java Time objects via [jedi-time](https://github.com/jimpil/jedi-time)
 * `:portal` -- pulls in the latest stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
@@ -99,7 +103,7 @@ For the _EXPERIMENTAL_ `add-libs` function (`clojure.tools.deps.alpha.repl/add-l
 The `:dev/repl` alias uses `load-file` to load the [`dev.clj` file](https://github.com/seancorfield/dot-clojure/blob/develop/dev.clj) from this repo. That does a number of things (see the `start-repl` docstring for more details):
 
 * Starts a Socket REPL server (with the port selected via an environment variable, a JVM property, or a dot-file created on a previous run) -- unless `SOCKET_REPL_PORT=none` which suppresses starting it.
-* If both Portal and `org.clojure/tools.logging` are on the classpath, it patch `tools.logging` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry).
+* If both Portal and `org.clojure/tools.logging` are on the classpath, it patch `tools.logging` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry); call `(dev/toggle-logging!)` to turn this `tap>`'ing on and off.
 * If Portal 0.33.0 or later is on the classpath, use the Portal middleware with nREPL (if CIDER or nREPL are on the classpath).
 * Starts [Figwheel Main](https://github.com/bhauman/figwheel-main), if present on the classpath, else
 * Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath, else
