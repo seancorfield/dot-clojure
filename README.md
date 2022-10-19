@@ -100,6 +100,7 @@ The `:dev/repl` alias uses `load-file` to load the [`dev.clj` file](https://gith
 
 * Starts a Socket REPL server (with the port selected via an environment variable, a JVM property, or a dot-file created on a previous run) -- unless `SOCKET_REPL_PORT=none` which suppresses starting it.
 * If both Portal and `org.clojure/tools.logging` are on the classpath, it patch `tools.logging` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry).
+* If Portal 0.33.0 or later is on the classpath, use the Portal middleware with nREPL (if CIDER or nREPL are on the classpath).
 * Starts [Figwheel Main](https://github.com/bhauman/figwheel-main), if present on the classpath, else
 * Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath, else
 * Starts a CIDER-enhanced [nREPL Server](https://nrepl.org/), if `cider-nrepl` is present on the classpath, else
@@ -108,6 +109,8 @@ The `:dev/repl` alias uses `load-file` to load the [`dev.clj` file](https://gith
 _Note 1: since the `dev.clj` code uses `requiring-resolve`, it requires at least Clojure 1.10.0!_
 
 _Note 2: the `:dev/repl` alias assumes the `dev.clj` file can be loaded from `~/.clojure/dev.clj` which is not correct for XDG systems (it'll be `~/.config/clojure`)._
+
+_Note 3: if the Portal middleware is added to nREPL/CIDER, all evaluated results will be `tap>`'d (if the Portal UI is open and listening); my [VS Code/Calva setup](https://github.com/seancorfield/vscode-calva-setup) has additional configuration for working with Portal when the middleware is enabled!_
 
 ## Use with Figwheel
 

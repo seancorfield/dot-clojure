@@ -121,11 +121,7 @@
         (into []
               (comp (filter #(try (require (first %)) true (catch Throwable _)))
                     (map second))
-              ;; you might like the Portal middleware but I rely on a lot
-              ;; of custom REPL snippets and this middleware submits all
-              ;; evaluations to Portal which interferes with using code
-              ;; to manipulate Portal itself...
-              [;['portal.nrepl 'portal.nrepl/wrap-portal]
+              [['portal.nrepl 'portal.nrepl/wrap-portal]
                ['cider.nrepl  'cider.nrepl/cider-middleware]])
         mw-args
         (when (seq middleware)
