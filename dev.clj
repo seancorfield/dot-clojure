@@ -1,4 +1,4 @@
-;; copyright (c) 2018-2022 sean corfield, all rights reserved
+;; copyright (c) 2018-2023 sean corfield, all rights reserved
 
 (ns dev
   "Invoked via load-file from ~/.clojure/deps.edn, this
@@ -23,12 +23,6 @@
   (try
     (and s (Long/parseLong s))
     (catch Throwable _)))
-
-(defonce ^:private tap-logging (atom true))
-(defn toggle-logging!
-  "Turn tap>'ing of logging on and off."
-  []
-  (swap! tap-logging not))
 
 (defn- start-repl
   "Ensures we have a DynamicClassLoader, in case we want to use
@@ -101,12 +95,12 @@
        log-star
        (constantly
         (fn [logger level throwable message]
-          (when @tap-logging
-            (try
-              (let [^StackTraceElement frame (nth (.getStackTrace (Throwable. "")) 2)
-                    class-name (symbol (demunge (.getClassName frame)))]
+          (try
+            (let [^StackTraceElement frame (nth (.getStackTrace (Throwable. "")) 2)
+                  class-name (symbol (demunge (.getClassName frame)))]
                 ;; only called for enabled log levels:
-                (tap>
+              (tap>
+               (with-meta
                  {:form     '()
                   :level    level
                   :result   (or throwable message)
@@ -117,8 +111,9 @@
                   :line     (.getLineNumber frame)
                   :column   0
                   :time     (java.util.Date.)
-                  :runtime  :clj}))
-              (catch Throwable _)))
+                  :runtime  :clj}
+                 {:dev.repl/logging true})))
+            (catch Throwable _))
           (log*-fn logger level throwable message)))))
     (catch Throwable _))
 
