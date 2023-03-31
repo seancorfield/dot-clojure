@@ -1,4 +1,4 @@
-;; copyright (c) 2018-2022 sean corfield, all rights reserved
+;; copyright (c) 2018-2023 sean corfield, all rights reserved
 
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
@@ -45,7 +45,9 @@
   ;;   - clojure -M:nrepl:dev/repl
   ;;   - clojure -M:fig:build:dev/repl
   :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
-             :main-opts ["-e" "(load-file,(str,(System/getProperty,\"user.home\"),\"/.clojure/dev.clj\"))"]}
+             :extra-deps [io.github.seancorfield/dot-clojure
+                          {:git/sha ""}]
+             :main-opts ["-e" "((requiring-resolve 'org.corfield.dev.repl/start-repl))"]}
   ;; - in case you need precompiled code on your classpath:
   :classes {:extra-paths ["classes"]}
   ;; - start a Socket REPL on port 50505 (not needed if you use the :dev/repl alias):
@@ -63,6 +65,14 @@
   :cider-nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "RELEASE"}}
                 :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
 
+  ;; - see https://github.com/Datomic/dev.datafy
+  :datomic/dev.datafy
+  {com.datomic/dev.datafy {:git/sha "4a9dffb"
+                           :git/tag "v0.1"
+                           :git/url "https://github.com/Datomic/dev.datafy"}}
+  ;; - see https://github.com/donut-party/dbxray
+  :dbxray
+  {party.donut/dbxray {:mvn/version "RELEASE"}}
   ;; - see https://github.com/jimpil/jedi-time
   :jedi-time
   {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.1"}}}
