@@ -20,7 +20,8 @@ TL;DR: add the following dependency and then start a REPL with `clj -M:dev/repl`
 :aliases
 {:dev/repl
  {io.github.seancorfield/dot-clojure
-  {:git/sha "9e52ad127712b3f0646a744af231dce7e61249c5"}}}
+  {:git/tag "v1.0.0"
+   :git/sha "12c4683"}}}
 ```
 
 ## Basic Tools
