@@ -45,8 +45,9 @@
   ;;   - clojure -M:nrepl:dev/repl
   ;;   - clojure -M:fig:build:dev/repl
   :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
-             :extra-deps [io.github.seancorfield/dot-clojure
-                          {:git/sha "06fa9283f12754a541a8f1e1ef29bf86a1fd50f5"}]
+             :extra-deps {io.github.seancorfield/dot-clojure
+                          {:git/tag "v1.0.0"
+                           :git/sha "799b492"}}
              :main-opts ["-e" "((requiring-resolve 'org.corfield.dev.repl/start-repl))"]}
   ;; - in case you need precompiled code on your classpath:
   :classes {:extra-paths ["classes"]}

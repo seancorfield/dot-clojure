@@ -14,6 +14,16 @@ _Since it is my personal file, it may make assumptions about my own environment.
 
 With that caveat out of the way, here is some basic documentation about my tools and aliases (there are additional examples in the comments in the `deps.edn` file itself). _Note: I have recently cleaned this file up and removed a lot of aliases I no longer use!_
 
+TL;DR: add the following dependency and then start a REPL with `clj -M:dev/repl` (optionally with other aliases to bring in more tooling):
+
+```clojure
+:aliases
+{:dev/repl
+ {io.github.seancorfield/dot-clojure
+  {:git/tag "v1.0.0"
+   :git/sha "799b492"}}}
+```
+
 ## Basic Tools
 
 These are installed via `clojure -Ttools install ...` and usable via `clojure -T` with the tool name.
