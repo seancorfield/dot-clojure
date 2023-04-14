@@ -34,11 +34,7 @@
         (catch Throwable _)))))
 
 (defn- start-repl
-  "Ensures we have a DynamicClassLoader, in case we want to use
-  add-libs from the add-lib3 branch of clojure.tools.deps.alpha (to
-  load new libraries at runtime).
-
-  If Jedi Time is on the classpath, require it (so that Java Time
+  "If Jedi Time is on the classpath, require it (so that Java Time
   objects will support datafy/nav).
 
   If Datomic Dev Datafy is on the classpath, require it (so that
@@ -57,14 +53,6 @@
   * if Rebel Readline is on the classpath then start that, else
   * start a plain ol' Clojure REPL."
   []
-  ;; set up the DCL:
-  (try
-    (let [cl (.getContextClassLoader (Thread/currentThread))]
-      (.setContextClassLoader (Thread/currentThread) (clojure.lang.DynamicClassLoader. cl)))
-    (catch Throwable t
-      (println "Unable to establish a DynamicClassLoader!")
-      (println (ex-message t))))
-
   ;; jedi-time?
   (try
     (require 'jedi-time.core)

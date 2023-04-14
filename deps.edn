@@ -105,35 +105,9 @@
   ;; latest 1.11 is 1.11.1 but you can ask for earlier versions:
   :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.1"}}}
   :1.11.0 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0"}}}
-  ;; current 1.12 release is Alpha 1:
-  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-alpha1"}}}
+  ;; current 1.12 release is Alpha 2:
+  ;; - the functionality formerly requiring the :add-libs alias for the
+  ;;   branch of tools.deps.alpha is now a part of clojure itself!
+  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-alpha2"}}}
   ;; master is currently 1.12:
-  :master {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-master-SNAPSHOT"}}}
-
-  :add-libs ; to get access to clojure.tools.deps.alpha.repl/add-libs
-  ;; IMPORTANT NOTE: this is the new add-lib3 branch but is still a work
-  ;; in progress and likely to break/change as the core team's work
-  ;; continues on integrating some add-lib-like functionality officially
-  ;; into either t.d.a or perhaps Clojure itself; in addition, the default
-  ;; install of the Clojure CLI includes a :deps alias to the version of
-  ;; t.d.a that is included in the install, so I renamed :deps to :add-lib!
-  ;; CAVEAT: since this is a git dependency, it doesn't bring in any of
-  ;; the compiled Java code so S3 Maven repos are not accessible via this
-  ;; alias (which the released t.d.a provides).
-  ;; - now you can add new deps to a running REPL:
-  ;; (require '[clojure.tools.deps.alpha.repl :refer [add-libs]])
-  ;; (add-libs '{some/library {:mvn/version "RELEASE"}})
-  ;; - and you can git deps too; here's how to get the master version of a lib:
-  ;; (require '[clojure.tools.gitlibs :as gitlibs])
-  ;; (defn load-master [lib]
-  ;;   (let [git (str "https://github.com/" lib ".git")]
-  ;;    (add-libs {lib {:git/url git :sha (gitlibs/resolve git "master")}})))
-  ;; - e.g., using the GitHub path (not the usual Maven group/artifact):
-  ;; (load-master 'clojure/tools.trace)
-  {:extra-deps {org.clojure/tools.deps.alpha ; add-lib3 branch
-                {:git/url "https://github.com/clojure/tools.deps.alpha"
-                 :sha "e4fb92eef724fa39e29b39cc2b1a850567d490dd"}}
-   ;; this ensures we have a DynamicClassLoader, which is needed for
-   ;; add-libs to work, if we're starting other processes via aliases
-   ;; such as a socket REPL or Cognitect's REBL etc
-   :main-opts ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"]}}}
+  :master {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-master-SNAPSHOT"}}}}}

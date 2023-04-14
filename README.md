@@ -2,9 +2,9 @@
 
 This is my personal `.clojure/deps.edn` file providing useful `clj` aliases drawn from a variety of projects. It is published to GitHub so I can keep all my computers sync'd up -- and to provide a range of examples that folks new to the Clojure CLI might find helpful.
 
-**Several git dependencies here assume you have at least Clojure CLI 1.10.3.933!**
+**Several git dependencies here assume you have at least Clojure CLI 1.11.1.1273!**
 
-In addition, my `.clojure/tools/` folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (was 1.11.1.1129 when I last updated this) -- see [Tool installation and invocation](https://clojure.org/reference/deps_and_cli#tool_install) in the Deps and CLI Reference. As I add global tools, I am removing them as aliases.
+In addition, my `.clojure/tools/` folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (was 1.11.1.1273 when I last updated this) -- see [Tool installation and invocation](https://clojure.org/reference/deps_and_cli#tool_install) in the Deps and CLI Reference. As I add global tools, I am removing them as aliases.
 
 The main alias I use here is `:dev/repl` which starts various combinations of REPL tooling. See [**The `:dev/repl` Alias**](#the-devrepl-alias) below for more details.
 
@@ -73,7 +73,7 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:bench` -- pulls in the latest stable release of [Criterium](https://github.com/hugoduncan/criterium/) for benchmarking your code
 
 There are aliases to pull in and start various REPL-related tools:
-* `:dev/repl` -- depending on what is on your classpath, start Rebel Readline, with a Socket REPL (if requested -- note that "port 0" will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var and `socket-repl-port` property override, saves port to `.socket-repl-port` file for next time);
+* `:dev/repl` -- depending on what is on your classpath, start Rebel Readline, with a Socket REPL (if requested -- note that "port 0" will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var and `socket-repl-port` property override, saves port to `.socket-repl-port` file for next time;
   * usage:
     * `clj -M:portal:dev/repl` -- basic REPL with Portal or
     * `clojure -M:rebel:dev/repl` -- Rebel Readline REPL or
@@ -98,7 +98,7 @@ There are aliases to pull in and start various REPL-related tools:
 
 There are aliases to pull in specific versions of Clojure:
 * `:master` -- Clojure 1.12.0-master-SNAPSHOT
-* `:1.12` -- Clojure 1.12.0-alpha1
+* `:1.12` -- Clojure 1.12.0-alpha2
 * `:1.11` -- Clojure 1.11.1 -- see [changes to Clojure in version 1.11.1](https://github.com/clojure/clojure/blob/master/changes.md)
   * `:1.11.0` -- Clojure 1.11.0
 * `:1.10` -- Clojure 1.10.3
@@ -109,8 +109,7 @@ There are aliases to pull in specific versions of Clojure:
 * `:1.8` -- Clojure 1.8.0
 * ... back to `:1.0` (note: `:1.5` is actually Clojure 1.5.1 to avoid a bug in Clojure 1.5.0, and `:1.2` is 1.2.1)
 
-For the _EXPERIMENTAL_ `add-libs` function (`clojure.tools.deps.alpha.repl/add-libs`):
-* `:add-libs` -- pulls in the `add-lib3` branch of [org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha); see the example `load-master` function in the comments in my `deps.edn`; this was previously called `:deps` but I realized that conflicted with the default `:deps` alias in the Clojure CLI install; be aware that `add-libs` is unsupported and likely to break or go away as `tools.deps.alpha` and Clojure both evolve. _[recently renamed from `:add-lib` to `:add-libs` to reflect the name change in the `add-lib3` branch!]_
+> Note: the _EXPERIMENTAL_ `:add-libs` alias has been removed -- use the [`clojure.repl.deps`](https://clojure.github.io/clojure/branch-master/clojure.repl-api.html#clojure.repl.deps) in Clojure 1.12.0 Alpha 2 or later instead!
 
 ## The `:dev/repl` Alias
 
@@ -142,6 +141,6 @@ Connect to the Socket REPL, write your code as `.cljc` files, and you'll have th
 
 # License
 
-Copyright © 2018-2022 Sean Corfield
+Copyright © 2018-2023 Sean Corfield
 
 Distributed under the Apache Software License version 2.0.
