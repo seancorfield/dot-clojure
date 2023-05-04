@@ -98,7 +98,7 @@ There are aliases to pull in and start various REPL-related tools:
 
 There are aliases to pull in specific versions of Clojure:
 * `:master` -- Clojure 1.12.0-master-SNAPSHOT
-* `:1.12` -- Clojure 1.12.0-alpha2
+* `:1.12` -- Clojure 1.12.0-alpha3
 * `:1.11` -- Clojure 1.11.1 -- see [changes to Clojure in version 1.11.1](https://github.com/clojure/clojure/blob/master/changes.md)
   * `:1.11.0` -- Clojure 1.11.0
 * `:1.10` -- Clojure 1.10.3
