@@ -117,7 +117,7 @@ The `:dev/repl` alias calls `org.corfield.dev.repl/start-repl` in the [`repl.clj
 
 * Optionally, starts a Socket REPL server (with the port selected via an environment variable, a JVM property, or a dot-file created on a previous run).
 * If both Portal and `org.clojure/tools.logging` are on the classpath, it patch `tools.logging` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry); call `(dev/toggle-logging!)` to turn this `tap>`'ing on and off.
-* If Portal 0.33.0 or later is on the classpath, use the Portal middleware with nREPL (if CIDER or nREPL are on the classpath).
+* If Portal 0.33.0 or later is on the classpath, use the Portal middleware with nREPL (if CIDER or nREPL are on the classpath). If using Portal 0.40.0 or later, this also adds the [Portal Notebook middleware](https://cljdoc.org/d/djblue/portal/0.40.0/doc/editors/vs-code/clojure-notebooks#portalnreplwrap-notebook).
 * Starts [Figwheel Main](https://github.com/bhauman/figwheel-main), if present on the classpath, else
 * Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath, else
 * Starts a CIDER-enhanced [nREPL Server](https://nrepl.org/), if `cider-nrepl` is present on the classpath, else

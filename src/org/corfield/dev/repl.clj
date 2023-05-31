@@ -124,8 +124,9 @@
         middleware
         (into []
               (filter #(try (requiring-resolve (second %)) true (catch Throwable _)))
-              [["Portal" 'portal.nrepl/wrap-portal]
-               ["CIDER"  'cider.nrepl/cider-middleware]])
+              [["Portal"   'portal.nrepl/wrap-portal]
+               ["Notebook" 'portal.nrepl/wrap-notebook]
+               ["CIDER"    'cider.nrepl/cider-middleware]])
         mw-args
         (when (seq middleware)
           ["--middleware" (str (mapv second middleware))])
