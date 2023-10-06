@@ -3,7 +3,10 @@
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
  :aliases
- {;; jar installation and deployment:
+ {:deps+ {:extra-deps {org.clojure/tools.deps.cli {:mvn/version "RELEASE"}}
+          :ns-default clojure.tools.deps.cli.api
+          :ns-aliases {help clojure.tools.deps.cli.help}}
+  ;; jar installation and deployment:
   ;; - see https://github.com/slipset/deps-deploy
   ;;   - clj -X:deploy :artifact '"project.jar"'
   ;; - this relies on having a pom.xml file and, for deployment, these two

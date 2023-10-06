@@ -72,6 +72,8 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:expect` -- pulls in the latest stable release of [expectations/clojure-test](https://github.com/clojure-expectations/clojure-test) -- the `clojure.test`-compatible version of Expectations
 * `:bench` -- pulls in the latest stable release of [Criterium](https://github.com/hugoduncan/criterium/) for benchmarking your code
 
+* `:deps+` -- **adds** `tools.deps` to your classpath (the default `:deps` alias **replaces** the default classpath) so you can use `help/doc` on namespaces within your project, e.g., `clojure -X:deps+ help/doc :ns my.app.core`
+
 There are aliases to pull in and start various REPL-related tools:
 * `:dev/repl` -- depending on what is on your classpath, start Rebel Readline, with a Socket REPL (if requested -- note that "port 0" will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var and `socket-repl-port` property override, saves port to `.socket-repl-port` file for next time;
   * usage:
