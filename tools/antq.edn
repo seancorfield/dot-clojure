@@ -1,1 +1,1 @@
-{:lib com.github.liquidz/antq, :coord {:git/tag "2.5.1095", :git/sha "461b526"}}
+{:lib com.github.liquidz/antq, :coord {:git/tag "2.7.1133", :git/sha "4520da2"}}
