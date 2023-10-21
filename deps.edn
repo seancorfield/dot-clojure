@@ -108,9 +108,9 @@
   ;; latest 1.11 is 1.11.1 but you can ask for earlier versions:
   :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.1"}}}
   :1.11.0 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0"}}}
-  ;; current 1.12 release is Alpha 4:
+  ;; current 1.12 release is Alpha 5:
   ;; - the functionality formerly requiring the :add-libs alias for the
   ;;   branch of tools.deps.alpha is now a part of clojure itself!
-  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-alpha4"}}}
+  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-alpha5"}}}
   ;; master is currently 1.12:
   :master {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-master-SNAPSHOT"}}}}}
