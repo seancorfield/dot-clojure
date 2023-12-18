@@ -41,11 +41,10 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
   * `clojure -Tnew template :name myname/mytemplate` -- creates a new `deps.edn`-based template project,
   * `clojure -A:somealias -Tnew create :template some/thing :name myname/myapp` -- locates a template for `some/thing` on the classpath, based on `:somealias`, and uses it to create a new `deps.edn`-based project,
   * `clojure -A:deps -Tnew help/doc` -- for more information and other functions.
-* `poly` -- a recent **master** version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects:
-  * `clojure -Tpoly shell` -- start an interactive Polylith shell,
-  * `clojure -Tpoly info :loc true` -- display information about a Polylith workspace, including lines of code,
-  * `clojure -Tpoly create c user` -- create a `user` component in a Polylith workspace,
-  * `clojure -Tpoly test :dev true` -- run tests in the `dev` project context, in a Polylith workspace,
+
+Consider this tool deprecated and use the `:poly` alias with `-M` instead (see below):
+
+* `poly` -- a recent **master** version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects.
   * `clojure -A:deps -Tpoly help/doc` -- for more information and other functions.
 
 And the older `clj-new` tool:
@@ -110,6 +109,13 @@ There are aliases to pull in specific versions of Clojure:
 * `:1.9` -- Clojure 1.9.0
 * `:1.8` -- Clojure 1.8.0
 * ... back to `:1.0` (note: `:1.5` is actually Clojure 1.5.1 to avoid a bug in Clojure 1.5.0, and `:1.2` is 1.2.1)
+
+To work with the Polylith command-line tool:
+* `:poly` -- a recent master version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) -- example usage:
+  * `clojure -M:poly shell` -- start an interactive Polylith shell,
+  * `clojure -M:poly info :loc` -- display information about a Polylith workspace, including lines of code,
+  * `clojure -M:poly create component name:user` -- create a `user` component in a Polylith workspace,
+  * `clojure -M:poly test :dev` -- run tests in the `dev` project context, in a Polylith workspace.
 
 > Note: the _EXPERIMENTAL_ `:add-libs` alias has been removed -- use the [`clojure.repl.deps`](https://clojure.github.io/clojure/branch-master/clojure.repl-api.html#clojure.repl.deps) in Clojure 1.12.0 Alpha 2 or later instead!
 

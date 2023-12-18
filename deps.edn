@@ -3,9 +3,13 @@
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
  :aliases
- {:deps+ {:extra-deps {org.clojure/tools.deps.cli {:mvn/version "RELEASE"}}
+ {;; ADD tools.deps so you can get help within an existing project:
+  ;; clojure -X:deps replaces the deps/paths
+  ;; clojure -X:deps+ ADDS to the deps/paths
+  :deps+ {:extra-deps {org.clojure/tools.deps.cli {:mvn/version "RELEASE"}}
           :ns-default clojure.tools.deps.cli.api
           :ns-aliases {help clojure.tools.deps.cli.help}}
+
   ;; jar installation and deployment:
   ;; - see https://github.com/slipset/deps-deploy
   ;;   - clj -X:deploy :artifact '"project.jar"'
@@ -15,6 +19,12 @@
            :exec-fn deps-deploy.deps-deploy/deploy
            :exec-args {:installer :remote}}
 
+  ;; polylith tool:
+  :poly {:replace-deps {io.github.polyfy/polylith
+                        {:deps/root "projects/poly",
+                         ;; latest master as of December, 17th 2023:
+                         :git/sha "9e79264981b0c5be6e6cb70c93a540a82c489510"}}
+         :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   ;; testing and debugging tools (this would normally be overridden
   ;; by a :test alias in the project deps.edn file -- but it's a
   ;; useful default):
