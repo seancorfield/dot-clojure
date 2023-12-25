@@ -1,5 +1,0 @@
-{:lib io.github.polyfy/polylith,
- :coord
- {:deps/root "projects/poly",
-  ;; latest master as of December, 17th 2023:
-  :git/sha "9e79264981b0c5be6e6cb70c93a540a82c489510"}}

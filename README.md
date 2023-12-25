@@ -42,11 +42,6 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
   * `clojure -A:somealias -Tnew create :template some/thing :name myname/myapp` -- locates a template for `some/thing` on the classpath, based on `:somealias`, and uses it to create a new `deps.edn`-based project,
   * `clojure -A:deps -Tnew help/doc` -- for more information and other functions.
 
-Consider this tool deprecated and use the `:poly` alias with `-M` instead (see below):
-
-* `poly` -- a recent **master** version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) for working with Polylith projects.
-  * `clojure -A:deps -Tpoly help/doc` -- for more information and other functions.
-
 And the older `clj-new` tool:
 
 * `clj-new` -- the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates:
