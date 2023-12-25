@@ -22,8 +22,7 @@
   ;; polylith tool:
   :poly {:replace-deps {io.github.polyfy/polylith
                         {:deps/root "projects/poly",
-                         ;; latest master as of December, 17th 2023:
-                         :git/sha "9e79264981b0c5be6e6cb70c93a540a82c489510"}}
+                         :git/tag "v0.2.18" :git/sha "e8feb79"}}
          :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   ;; testing and debugging tools (this would normally be overridden
   ;; by a :test alias in the project deps.edn file -- but it's a

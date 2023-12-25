@@ -106,7 +106,7 @@ There are aliases to pull in specific versions of Clojure:
 * ... back to `:1.0` (note: `:1.5` is actually Clojure 1.5.1 to avoid a bug in Clojure 1.5.0, and `:1.2` is 1.2.1)
 
 To work with the Polylith command-line tool:
-* `:poly` -- a recent master version of [Polylith's `poly` tool](https://github.com/polyfy/polylith) -- example usage:
+* `:poly` -- the latest release of [Polylith's `poly` tool](https://github.com/polyfy/polylith) -- example usage:
   * `clojure -M:poly shell` -- start an interactive Polylith shell,
   * `clojure -M:poly info :loc` -- display information about a Polylith workspace, including lines of code,
   * `clojure -M:poly create component name:user` -- create a `user` component in a Polylith workspace,
