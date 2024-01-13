@@ -1,14 +1,14 @@
 # dot-clojure
 
-This is my personal `.clojure/deps.edn` file providing useful `clj` aliases drawn from a variety of projects. It is published to GitHub so I can keep all my computers sync'd up -- and to provide a range of examples that folks new to the Clojure CLI might find helpful.
+This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file providing useful `clj` aliases drawn from a variety of projects. It is published to GitHub so I can keep all my computers sync'd up -- and to provide a range of examples that folks new to the Clojure CLI might find helpful.
 
 **Several git dependencies here assume you have at least Clojure CLI 1.11.1.1273!**
 
-In addition, my `.clojure/tools/` folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (was 1.11.1.1273 when I last updated this) -- see [Tool installation and invocation](https://clojure.org/reference/deps_and_cli#tool_install) in the Deps and CLI Reference. As I add global tools, I am removing them as aliases.
+In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (was 1.11.1.1435 when I last updated this) -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
 
 The main alias I use here is `:dev/repl` which starts various combinations of REPL tooling. See [**The `:dev/repl` Alias**](#the-devrepl-alias) below for more details.
 
-_Since it is my personal file, it may make assumptions about my own environment. For example, it uses `"RELEASE"` for several tools so I can always get the latest stable version of any dev/test tool I use. I make no effort at backward-compatibility and may add, delete, or change aliases as they benefit me personally. Caveat Programmer!_
+_Since it is my personal file, it may make assumptions about my own environment. For example, it uses `"RELEASE"` for several tools -- and for Clojure itself, currently 1.12.0-alpha5 -- so I can always get the latest stable version of any dev/test tool I use. I make no effort at backward-compatibility and may add, delete, or change aliases as they benefit me personally. Caveat Programmer!_
 
 **If you want a really well-documented, well-maintained alternative that actually tracks versions of tools, I would recommend you use the [Practicalli Clojure `deps.edn`](https://github.com/practicalli/clojure-deps-edn) project instead!**
 

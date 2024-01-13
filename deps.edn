@@ -1,7 +1,8 @@
-;; copyright (c) 2018-2023 sean corfield, all rights reserved
+;; copyright (c) 2018-2024 sean corfield, all rights reserved
 
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
+ :deps {org.clojure/clojure {:mvn/version "RELEASE"}}
  :aliases
  {;; ADD tools.deps so you can get help within an existing project:
   ;; clojure -X:deps replaces the deps/paths
