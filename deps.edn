@@ -21,9 +21,7 @@
            :exec-args {:installer :remote}}
 
   ;; polylith tool:
-  :poly {:replace-deps {io.github.polyfy/polylith
-                        {:deps/root "projects/poly",
-                         :git/tag "v0.2.18" :git/sha "e8feb79"}}
+  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.2.19"}}
          :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   ;; testing and debugging tools (this would normally be overridden
   ;; by a :test alias in the project deps.edn file -- but it's a
@@ -118,9 +116,7 @@
   ;; latest 1.11 is 1.11.1 but you can ask for earlier versions:
   :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.1"}}}
   :1.11.0 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0"}}}
-  ;; current 1.12 release is Alpha 7:
+  ;; current 1.12 release is Alpha 8:
   ;; - the functionality formerly requiring the :add-libs alias for the
   ;;   branch of tools.deps.alpha is now a part of clojure itself!
-  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-alpha7"}}}
-  ;; master is currently 1.12:
-  :master {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-master-SNAPSHOT"}}}}}
+  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-alpha8"}}}}}

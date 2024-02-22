@@ -93,8 +93,7 @@ There are aliases to pull in and start various REPL-related tools:
 * `:reflect` -- adds Stuart Halloway's reflector utility (best used with Portal)
 
 There are aliases to pull in specific versions of Clojure:
-* `:master` -- Clojure 1.12.0-master-SNAPSHOT
-* `:1.12` -- Clojure 1.12.0-alpha5
+* `:1.12` -- Clojure 1.12.0-alpha8
 * `:1.11` -- Clojure 1.11.1 -- see [changes to Clojure in version 1.11.1](https://github.com/clojure/clojure/blob/master/changes.md)
   * `:1.11.0` -- Clojure 1.11.0
 * `:1.10` -- Clojure 1.10.3
@@ -105,8 +104,10 @@ There are aliases to pull in specific versions of Clojure:
 * `:1.8` -- Clojure 1.8.0
 * ... back to `:1.0` (note: `:1.5` is actually Clojure 1.5.1 to avoid a bug in Clojure 1.5.0, and `:1.2` is 1.2.1)
 
+> Note: the `:master` alias has been removed since it is rarely different from the most recent (alpha) release of Clojure.
+
 To work with the Polylith command-line tool:
-* `:poly` -- the latest release of [Polylith's `poly` tool](https://github.com/polyfy/polylith) -- example usage:
+* `:poly` -- the latest (stable) release of [Polylith's `poly` tool](https://github.com/polyfy/polylith), as a library from Clojars (previously, this was a git dependency) -- example usage:
   * `clojure -M:poly shell` -- start an interactive Polylith shell,
   * `clojure -M:poly info :loc` -- display information about a Polylith workspace, including lines of code,
   * `clojure -M:poly create component name:user` -- create a `user` component in a Polylith workspace,
