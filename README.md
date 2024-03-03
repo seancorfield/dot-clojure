@@ -93,7 +93,7 @@ There are aliases to pull in and start various REPL-related tools:
 * `:reflect` -- adds Stuart Halloway's reflector utility (best used with Portal)
 
 There are aliases to pull in specific versions of Clojure:
-* `:1.12` -- Clojure 1.12.0-alpha8 -- see [changes to Clojure in prerelease versions 1.12.0](https://clojure.org/releases/devchangelog)
+* `:1.12` -- Clojure 1.12.0-alpha8 -- see [changes to Clojure in prerelease versions of 1.12.0](https://clojure.org/releases/devchangelog)
 * `:1.11` -- Clojure 1.11.1 -- see [changes to Clojure in version 1.11.1](https://github.com/clojure/clojure/blob/master/changes.md)
   * `:1.11.0` -- Clojure 1.11.0
 * `:1.10` -- Clojure 1.10.3
