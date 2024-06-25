@@ -23,6 +23,8 @@
   ;; polylith tool:
   :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.2.19"}}
          :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
+  :poly-next {:replace-deps {polylith/clj-poly {:mvn/version "0.2.20-SNAPSHOT"}}
+              :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   ;; testing and debugging tools (this would normally be overridden
   ;; by a :test alias in the project deps.edn file -- but it's a
   ;; useful default):
@@ -118,7 +120,7 @@
   :1.11.0 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0"}}}
   :1.11.1 {:override-deps {org.clojure/clojure {:mvn/version "1.11.1"}}}
   :1.11.2 {:override-deps {org.clojure/clojure {:mvn/version "1.11.2"}}}
-  ;; current 1.12 release is Alpha 12:
+  ;; current 1.12 release is Beta 1:
   ;; - the functionality formerly requiring the :add-libs alias for the
   ;;   branch of tools.deps.alpha is now a part of clojure itself!
-  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-alpha12"}}}}}
+  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-beta1"}}}}}
