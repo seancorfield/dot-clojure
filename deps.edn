@@ -21,9 +21,9 @@
            :exec-args {:installer :remote}}
 
   ;; polylith tool:
-  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.2.19"}}
+  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.2.20"}}
          :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
-  :poly-next {:replace-deps {polylith/clj-poly {:mvn/version "0.2.20-SNAPSHOT"}}
+  :poly-next {:replace-deps {polylith/clj-poly {:mvn/version "0.3.21-SNAPSHOT"}}
               :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   ;; testing and debugging tools (this would normally be overridden
   ;; by a :test alias in the project deps.edn file -- but it's a
@@ -115,12 +115,13 @@
   :1.10.0 {:override-deps {org.clojure/clojure {:mvn/version "1.10.0"}}}
   :1.10.1 {:override-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
   :1.10.2 {:override-deps {org.clojure/clojure {:mvn/version "1.10.2"}}}
-  ;; latest 1.11 is 1.11.3 but you can ask for earlier versions:
-  :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.3"}}}
+  ;; latest 1.11 is 1.11.4 but you can ask for earlier versions:
+  :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.4"}}}
   :1.11.0 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0"}}}
   :1.11.1 {:override-deps {org.clojure/clojure {:mvn/version "1.11.1"}}}
   :1.11.2 {:override-deps {org.clojure/clojure {:mvn/version "1.11.2"}}}
-  ;; current 1.12 release is Beta 2:
+  :1.11.3 {:override-deps {org.clojure/clojure {:mvn/version "1.11.3"}}}
+  ;; current 1.12 release is RC 1:
   ;; - the functionality formerly requiring the :add-libs alias for the
   ;;   branch of tools.deps.alpha is now a part of clojure itself!
-  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-beta2"}}}}}
+  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-rc1"}}}}}
