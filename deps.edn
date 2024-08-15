@@ -21,7 +21,7 @@
            :exec-args {:installer :remote}}
 
   ;; polylith tool:
-  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.2.20"}}
+  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.2.21"}}
          :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   :poly-next {:replace-deps {polylith/clj-poly {:mvn/version "0.3.21-SNAPSHOT"}}
               :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
