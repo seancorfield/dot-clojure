@@ -1,4 +1,4 @@
-;; copyright (c) 2018-2023 sean corfield, all rights reserved
+;; copyright (c) 2018-2024 sean corfield, all rights reserved
 
 (ns org.corfield.dev.repl
   "Invoke org.corfield.dev.repl/start-repl to start a REPL based on

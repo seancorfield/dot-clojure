@@ -149,6 +149,6 @@ Connect to the Socket REPL, write your code as `.cljc` files, and you'll have th
 
 # License
 
-Copyright © 2018-2023 Sean Corfield
+Copyright © 2018-2024 Sean Corfield
 
 Distributed under the Apache Software License version 2.0.
