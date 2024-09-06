@@ -8,7 +8,7 @@ In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here
 
 The main alias I use here is `:dev/repl` which starts various combinations of REPL tooling. See [**The `:dev/repl` Alias**](#the-devrepl-alias) below for more details.
 
-_Since it is my personal file, it may make assumptions about my own environment. For example, it uses `"RELEASE"` for several tools -- and for Clojure itself, currently 1.12.0-rc2 -- so I can always get the latest stable version of any dev/test tool I use. I make no effort at backward-compatibility and may add, delete, or change aliases as they benefit me personally. Caveat Programmer!_
+_Since it is my personal file, it may make assumptions about my own environment. For example, it uses `"RELEASE"` for several tools -- and for Clojure itself, currently 1.12.0 -- so I can always get the latest stable version of any dev/test tool I use. I make no effort at backward-compatibility and may add, delete, or change aliases as they benefit me personally. Caveat Programmer!_
 
 **If you want a really well-documented, well-maintained alternative that actually tracks versions of tools, I would recommend you use the [Practicalli Clojure `deps.edn`](https://github.com/practicalli/clojure-deps-edn) project instead!**
 
@@ -93,8 +93,8 @@ There are aliases to pull in and start various REPL-related tools:
 * `:reflect` -- adds Stuart Halloway's reflector utility (best used with Portal)
 
 There are aliases to pull in specific versions of Clojure:
-* `:1.12` -- Clojure 1.12.0-rc2 -- see [changes to Clojure in prerelease versions of 1.12.0](https://clojure.org/releases/devchangelog)
-* `:1.11` -- Clojure 1.11.4 -- see [changes to Clojure in version 1.11.4](https://github.com/clojure/clojure/blob/master/changes.md)
+* `:1.12` -- Clojure 1.12.0 -- see [changes to Clojure in version 1.12.0](https://github.com/clojure/clojure/blob/master/changes.md)
+* `:1.11` -- Clojure 1.11.4
   * `:1.11.3` -- Clojure 1.11.3
   * `:1.11.2` -- Clojure 1.11.2
   * `:1.11.1` -- Clojure 1.11.1
@@ -117,7 +117,7 @@ To work with the Polylith command-line tool:
   * `clojure -M:poly test :dev` -- run tests in the `dev` project context, in a Polylith workspace.
 * `:poly-next` -- the latest SNAPSHOT release of the `poly` tool (currently 0.3.21-SNAPSHOT).
 
-> Note: the _EXPERIMENTAL_ `:add-libs` alias has been removed -- use the [`clojure.repl.deps`](https://clojure.github.io/clojure/branch-master/clojure.repl-api.html#clojure.repl.deps) in Clojure 1.12.0 Alpha 2 or later instead!
+> Note: the _EXPERIMENTAL_ `:add-libs` alias has been removed -- use the [`clojure.repl.deps`](https://clojure.github.io/clojure/branch-master/clojure.repl-api.html#clojure.repl.deps) in Clojure 1.12.0 or later instead!
 
 ## The `:dev/repl` Alias
 
