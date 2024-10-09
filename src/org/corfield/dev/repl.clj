@@ -131,19 +131,42 @@
         (when (seq middleware)
           ["--middleware" (str (mapv second middleware))])
         [repl-name repl-fn]
-        (or (try
+        (or (try ; Figwheel?
               (let [figgy (requiring-resolve 'figwheel.main/-main)]
                 ["Figwheel Main" #(figgy "-b" "dev" "-r")])
               (catch Throwable _))
-            (try ["Rebel Readline" (requiring-resolve 'rebel-readline.main/-main)]
-                 (catch Throwable _))
-            (try [(str "nREPL Server"
-                       (when (seq middleware)
-                         (str " with " (str/join ", " (map first middleware)))))
-                  (let [nrepl (requiring-resolve 'nrepl.cmdline/-main)]
-                    (fn []
-                      (apply nrepl mw-args)))]
-                 (catch Throwable _))
+            (try ; Rebel Readline?
+              (println "looking for rebel...")
+              (let [rebel-main (requiring-resolve 'rebel-readline.main/-main)]
+                (try
+                  (println "looking for nrepl...")
+                  (require 'nrepl.cmdline)
+                  ;; both Rebel Readline and nREPL are on the classpath!
+                  [(str "Rebel Readline + nREPL Server"
+                        (when (seq middleware)
+                          (str " with " (str/join ", " (map first middleware)))))
+                   (fn []
+                     (println "starting combined repl...")
+                     ;; see https://github.com/practicalli/clojure-cli-config/blob/03c91cfd0638d880c32e6be09937e69ea8559cd2/deps.edn#L158-L167
+                     (apply (resolve 'clojure.main/main)
+                            "-e" "(apply require clojure.main/repl-requires)"
+                            "-m" "nrepl.cmdline"
+                            (into (or mw-args [])
+                                  ["--interactive"
+                                   "-f" "rebel-readline.main/-main"])))]
+                  (catch Throwable _
+                    ;; only Rebel Readline is on the classpath:
+                    ["Rebel Readline" rebel-main])))
+              (catch Throwable _))
+            (try ; nREPL?
+              [(str "nREPL Server"
+                    (when (seq middleware)
+                      (str " with " (str/join ", " (map first middleware)))))
+               (let [nrepl (requiring-resolve 'nrepl.cmdline/-main)]
+                 (fn []
+                   (apply nrepl mw-args)))]
+              (catch Throwable _))
+            ;; fallback to plain REPL:
             ["clojure.main" (resolve 'clojure.main/main)])]
     (println "Starting" repl-name "as the REPL...")
     (repl-fn)
