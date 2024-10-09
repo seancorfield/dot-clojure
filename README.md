@@ -21,8 +21,8 @@ TL;DR: add the following dependency and then start a REPL with `clj -M:dev/repl`
 {:dev/repl
  {:extra-deps
   {io.github.seancorfield/dot-clojure
-   {:git/tag "v1.0.2"
-    :git/sha "6a3f903"}}
+   {:git/tag "v1.1.0"
+    :git/sha "6d9ec7f"}}
   :main-opts ["-e" "((requiring-resolve 'org.corfield.dev.repl/start-repl))"]}}
 ```
 
@@ -71,13 +71,18 @@ There are aliases to pull in various useful testing and debugging tools:
 There are aliases to pull in and start various REPL-related tools:
 * `:dev/repl` -- depending on what is on your classpath, start Rebel Readline, with a Socket REPL (if requested -- note that "port 0" will dynamically select an available port and print it out), but `SOCKET_REPL_PORT` env var and `socket-repl-port` property override, saves port to `.socket-repl-port` file for next time;
   * usage:
-    * `clj -M:portal:dev/repl` -- basic REPL with Portal or
+    * `clj -M:dev/repl` -- basic REPL or
+    * `clj -M:portal:dev/repl` -- ...with Portal or
     * `clojure -M:rebel:dev/repl` -- Rebel Readline REPL or
     * `clojure -M:rebel:portal:dev/repl` -- ...with Portal or
     * `clojure -M:nrepl:dev/repl` -- basic nREPL server or
-    * `clojure -M:nrepl:portal:dev/repl` -- basic nREPL server with Portal middleware or
+    * `clojure -M:nrepl:portal:dev/repl` -- ...with Portal (& middleware) or
     * `clojure -M:cider-nrepl:dev/repl` -- CIDER nREPL server or
-    * `clojure -M:cider-nrepl:portal:dev/repl` -- CIDER nREPL server with Portal middleware or
+    * `clojure -M:cider-nrepl:portal:dev/repl` -- ...with Portal (& middleware) or
+    * `clojure -M:rebel:nrepl:dev/repl` -- Rebel Readline REPL + basic nREPL server or
+    * `clojure -M:rebel:nrepl:portal:dev/repl` -- ...with Portal (& middleware) or
+    * `clojure -M:rebel:cider-nrepl:dev/repl` -- Rebel Readline REPL + CIDER nREPL server or
+    * `clojure -M:rebel:cider-nrepl:portal:dev/repl` -- ...with Portal (& middleware) or
   * Also works with Figwheel Main (now that I've started doing ClojureScript!):
     * `clojure -M:portal:fig:build:dev/repl` or
 * `:classes` -- adds the `classes` folder to your classpath to pick up compiled code (e.g., see https://clojure.org/guides/dev_startup_time)
@@ -130,6 +135,8 @@ The `:dev/repl` alias calls `org.corfield.dev.repl/start-repl` in the [`repl.clj
 * Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath, else
 * Starts a CIDER-enhanced [nREPL Server](https://nrepl.org/), if `cider-nrepl` is present on the classpath, else
 * Starts an [nREPL Server](https://nrepl.org/), if present on the classpath.
+
+As of v1.1.0, can start a Rebel Readline REPL and an nREPL Server together.
 
 _Note 1: since the `repl.clj` code uses `requiring-resolve`, it requires at least Clojure 1.10.0!_
 

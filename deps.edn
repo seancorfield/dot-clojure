@@ -59,8 +59,8 @@
   ;;   - clojure -M:fig:build:dev/repl
   :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
              :extra-deps {io.github.seancorfield/dot-clojure
-                          {:git/tag "v1.0.2"
-                           :git/sha "6a3f903"}}
+                          {:git/tag "v1.1.0"
+                           :git/sha "6d9ec7f"}}
              :main-opts ["-e" "((requiring-resolve 'org.corfield.dev.repl/start-repl))"]}
   ;; - in case you need precompiled code on your classpath:
   :classes {:extra-paths ["classes"]}
