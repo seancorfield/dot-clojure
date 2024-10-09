@@ -136,17 +136,14 @@
                 ["Figwheel Main" #(figgy "-b" "dev" "-r")])
               (catch Throwable _))
             (try ; Rebel Readline?
-              (println "looking for rebel...")
               (let [rebel-main (requiring-resolve 'rebel-readline.main/-main)]
                 (try
-                  (println "looking for nrepl...")
                   (require 'nrepl.cmdline)
                   ;; both Rebel Readline and nREPL are on the classpath!
                   [(str "Rebel Readline + nREPL Server"
                         (when (seq middleware)
                           (str " with " (str/join ", " (map first middleware)))))
                    (fn []
-                     (println "starting combined repl...")
                      ;; see https://github.com/practicalli/clojure-cli-config/blob/03c91cfd0638d880c32e6be09937e69ea8559cd2/deps.edn#L158-L167
                      (apply (resolve 'clojure.main/main)
                             "-e" "(apply require clojure.main/repl-requires)"
