@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if test -f .nrepl-port
+then
+  if test -z "$1"
+  then
+    echo ".nrepl-port exists: $(cat .nrepl-port)"
+    exit 1
+  fi
+fi
+
+clojure -M:1.12:portal:test:cider-nrepl:rebel:dev/repl
