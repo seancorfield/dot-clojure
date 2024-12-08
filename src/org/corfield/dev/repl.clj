@@ -175,7 +175,7 @@
   (-> (java.lang.management.ManagementFactory/getRuntimeMXBean)
       (.getUptime)
       (java.time.Duration/ofMillis)
-      (as-> t (map #(% t) [#(.toHoursPart %) #(.toMinutesPart %) #(.toSecondsPart %)])
+      (as-> t (map #(% t) [#(.toHours %) #(.toMinutesPart %) #(.toSecondsPart %)])
         (let [[h & ms] t]
           (map vector
                (into ((juxt #(long (/ % 24)) #(mod % 24)) h) ms)
