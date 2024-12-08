@@ -169,3 +169,17 @@
     (repl-fn)
     ;; ensure a smooth exit after the REPL is closed
     (System/exit 0)))
+
+(in-ns 'user)
+(defn uptime []
+  (-> (java.lang.management.ManagementFactory/getRuntimeMXBean)
+      (.getUptime)
+      (java.time.Duration/ofMillis)
+      (as-> t (map #(% t) [#(.toHoursPart %) #(.toMinutesPart %) #(.toSecondsPart %)])
+        (let [[h & ms] t]
+          (map vector
+               (into ((juxt #(long (/ % 24)) #(mod % 24)) h) ms)
+               [" days, " " hours, " " minutes, " " seconds"])))
+      (->> (filter (comp pos? first))
+           (map #(apply str %)))
+      (clojure.string/join)))
