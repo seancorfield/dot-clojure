@@ -21,8 +21,8 @@ TL;DR: add the following dependency and then start a REPL with `clj -M:dev/repl`
 {:dev/repl
  {:extra-deps
   {io.github.seancorfield/dot-clojure
-   {:git/tag "v1.1.1"
-    :git/sha "c967b4f"}}
+   {:git/tag "v1.1.3"
+    :git/sha "2fce829"}}
   :main-opts ["-e" "((requiring-resolve 'org.corfield.dev.repl/start-repl))"]}}
 ```
 

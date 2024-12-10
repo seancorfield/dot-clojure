@@ -6,7 +6,9 @@ then
   then
     echo ".nrepl-port exists: $(cat .nrepl-port)"
     exit 1
+  else
+    shift
   fi
 fi
 
-clojure -M:1.12:portal:test:cider-nrepl:rebel:dev/repl
+clojure "$@" -M:1.12:portal:test:cider-nrepl:rebel:dev/repl
