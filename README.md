@@ -14,7 +14,7 @@ _Since it is my personal file, it may make assumptions about my own environment.
 
 With that caveat out of the way, here is some basic documentation about my tools and aliases (there are additional examples in the comments in the `deps.edn` file itself). _Note: I have recently cleaned this file up and removed a lot of aliases I no longer use!_
 
-TL;DR: add the following dependency and then start a REPL with `clj -M:dev/repl` (optionally with other aliases to bring in more tooling):
+TL;DR: add the following dependency and then start a REPL with `clj -M:dev/repl` (optionally with other aliases before it to bring in more tooling):
 
 ```clojure
 :aliases
@@ -23,8 +23,12 @@ TL;DR: add the following dependency and then start a REPL with `clj -M:dev/repl`
   {io.github.seancorfield/dot-clojure
    {:git/tag "v1.1.3"
     :git/sha "2fce829"}}
-  :main-opts ["-e" "((requiring-resolve 'org.corfield.dev.repl/start-repl))"]}}
+  :main-opts ["-m" "org.corfield.dev.repl"]}}
 ```
+There is also a `bin/repl` bash script that runs `clojure -M:1.12:portal:test:cider-nrepl:rebel:dev/repl`
+to start an nREPL server with CIDER middleware, and then a Rebel Readline
+interactive REPL, with Portal available (and `clojure.tools.logging`, if
+present, patched to `tap>` all log messages for Portal).
 
 ## Basic Tools
 
@@ -126,7 +130,7 @@ To work with the Polylith command-line tool:
 
 ## The `:dev/repl` Alias
 
-The `:dev/repl` alias calls `org.corfield.dev.repl/start-repl` in the [`repl.clj` file](https://github.com/seancorfield/dot-clojure/blob/develop/src/org/corfield/dev/repl.clj) from this repo. That does a number of things (see the `start-repl` docstring for more details):
+The `:dev/repl` alias calls `org.corfield.dev.repl/-main` in the [`repl.clj` file](https://github.com/seancorfield/dot-clojure/blob/develop/src/org/corfield/dev/repl.clj) from this repo. That does a number of things (see the `-main` docstring for more details):
 
 * Optionally, starts a Socket REPL server (with the port selected via an environment variable, a JVM property, or a dot-file created on a previous run).
 * If both Portal and `org.clojure/tools.logging` are on the classpath, it patch `tools.logging` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry); call `(dev/toggle-logging!)` to turn this `tap>`'ing on and off.
@@ -141,6 +145,8 @@ As of v1.1.0, can start a Rebel Readline REPL and an nREPL Server together.
 _Note 1: since the `repl.clj` code uses `requiring-resolve`, it requires at least Clojure 1.10.0!_
 
 _Note 2: if the Portal middleware is added to nREPL/CIDER, all evaluated results will be `tap>`'d (if the Portal UI is open and listening); my [VS Code/Calva setup](https://github.com/seancorfield/vscode-calva-setup) has additional configuration for working with Portal when the middleware is enabled!_
+
+_Note 3: as of v1.1.3, adds `user/uptime` so you can easily see how long your REPL has been running, in a human-readable format._
 
 ## Use with Figwheel
 

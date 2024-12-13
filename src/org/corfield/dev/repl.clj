@@ -1,7 +1,7 @@
 ;; copyright (c) 2018-2024 sean corfield, all rights reserved
 
 (ns org.corfield.dev.repl
-  "Invoke org.corfield.dev.repl/start-repl to start a REPL based on
+  "Invoke org.corfield.dev.repl/-main to start a REPL based on
   what tooling you have available on your classpath."
   (:require [clojure.repl :refer [demunge]]
             [clojure.string :as str]))
@@ -9,12 +9,6 @@
 (when-not (resolve 'requiring-resolve)
   (throw (ex-info ":dev/repl and repl.clj require at least Clojure 1.10"
                   *clojure-version*)))
-
-(defn up-since
-  "Return the date this REPL (Java process) was started."
-  []
-  (java.util.Date. (- (.getTime (java.util.Date.))
-                      (.getUptime (java.lang.management.ManagementFactory/getRuntimeMXBean)))))
 
 (defn- socket-repl-port
   "Return truthy if it looks like a Socket REPL Server is wanted,
@@ -33,7 +27,7 @@
         (Long/parseLong s-port)
         (catch Throwable _)))))
 
-(defn- start-repl
+(defn -main
   "If Jedi Time is on the classpath, require it (so that Java Time
   objects will support datafy/nav).
 
@@ -52,7 +46,7 @@
   * if Figwheel Main is on the classpath then start that, else
   * if Rebel Readline is on the classpath then start that, else
   * start a plain ol' Clojure REPL."
-  []
+  [& args]
   ;; jedi-time?
   (try
     (require 'jedi-time.core)
