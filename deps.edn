@@ -23,7 +23,11 @@
   ;; polylith tool:
   :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.2.21"}}
          :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
-  :poly-next {:replace-deps {polylith/clj-poly {:mvn/version "0.3.21-SNAPSHOT"}}
+  :poly-next {:replace-deps {polylith/clj-poly #_{:mvn/version "0.3.21-SNAPSHOT"}
+                             ;; cljs-support branch:
+                             {:git/url "https://github.com/polyfy/polylith"
+                              :git/sha "e2a71aeb265fb05e9287ae361ecab136fc7a6718"
+                              :deps/root "projects/poly"}}
               :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   ;; testing and debugging tools (this would normally be overridden
   ;; by a :test alias in the project deps.edn file -- but it's a
@@ -72,6 +76,8 @@
   ;; - see https://github.com/bhauman/rebel-readline
   ;; - start a Rebel Readline REPL:
   :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
+          ;; see https://github.com/fusesource/jansi/issues/301
+          :jvm-opts ["--enable-native-access=ALL-UNNAMED"]
           :main-opts ["-m" "rebel-readline.main"]}
   ;; - see https://nrepl.org/
   ;; - start a basic nREPL server on a random available port:
