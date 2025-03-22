@@ -26,7 +26,7 @@
   :poly-next {:replace-deps {polylith/clj-poly #_{:mvn/version "0.3.21-SNAPSHOT"}
                              ;; cljs-support branch:
                              {:git/url "https://github.com/polyfy/polylith"
-                              :git/sha "e2a71aeb265fb05e9287ae361ecab136fc7a6718"
+                              :git/sha "7d8f41cc8c87a4d4635a0189856227d98787d188"
                               :deps/root "projects/poly"}}
               :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   ;; testing and debugging tools (this would normally be overridden
@@ -63,7 +63,7 @@
   ;;   - clj -M:portal:dev/repl OR clojure -M:rebel:portal:dev/repl
   ;;   - clojure -M:rebel:dev/repl
   ;;   - clojure -M:nrepl:dev/repl
-  ;;   - clojure -M:fig:build:dev/repl
+  ;;   - there's no alias for adding figwheel, that's up to you
   :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
              :extra-deps {io.github.seancorfield/dot-clojure
                           {:git/tag "v1.2.0"
