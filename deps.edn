@@ -1,4 +1,4 @@
-;; copyright (c) 2018-2024 sean corfield, all rights reserved
+;; copyright (c) 2018-2025 sean corfield, all rights reserved
 
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}

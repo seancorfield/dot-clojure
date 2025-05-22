@@ -4,7 +4,7 @@ This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file pro
 
 **Several git dependencies here assume you have at least Clojure CLI 1.11.1.1273!**
 
-In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (was 1.11.3.1463 when I last updated this) -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
+In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (was 1.12.0.1530 when I last updated this) -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
 
 The main alias I use here is `:dev/repl` which starts various combinations of REPL tooling. See [**The `:dev/repl` Alias**](#the-devrepl-alias) below for more details.
 
@@ -29,6 +29,9 @@ There is also a `bin/repl` bash script that runs `clojure -M:1.12:portal:test:ci
 to start an nREPL server with CIDER middleware, and then a Rebel Readline
 interactive REPL, with Portal available (and `clojure.tools.logging`, if
 present, patched to `tap>` all log messages for Portal).
+
+I recently added `-J-Djdk.attach.allowAttachSelf` which assumes JDK 21+ so that
+nREPL can stop evaluation threads.
 
 ## Basic Tools
 
@@ -133,7 +136,8 @@ To work with the Polylith command-line tool:
 The `:dev/repl` alias calls `org.corfield.dev.repl/-main` in the [`repl.clj` file](https://github.com/seancorfield/dot-clojure/blob/develop/src/org/corfield/dev/repl.clj) from this repo. That does a number of things (see the `-main` docstring for more details):
 
 * Optionally, starts a Socket REPL server (with the port selected via an environment variable, a JVM property, or a dot-file created on a previous run).
-* If both Portal and `org.clojure/tools.logging` are on the classpath, it patch `tools.logging` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry); call `(dev/toggle-logging!)` to turn this `tap>`'ing on and off.
+* If both Portal and `org.clojure/tools.logging` are on the classpath, it patches `tools.logging` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry).
+* If both Portal and `com.github.seancorfield/logging4j2` are on the classpath, it patches `logging4j2` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry).
 * If Portal 0.33.0 or later is on the classpath, use the Portal middleware with nREPL (if CIDER or nREPL are on the classpath). If using Portal 0.40.0 or later, this also adds the [Portal Notebook middleware](https://cljdoc.org/d/djblue/portal/0.40.0/doc/editors/vs-code/clojure-notebooks#portalnreplwrap-notebook).
 * Starts [Figwheel Main](https://github.com/bhauman/figwheel-main), if present on the classpath, else
 * Starts [Rebel Readline](https://github.com/bhauman/rebel-readline), if present on the classpath, else
@@ -162,6 +166,6 @@ Connect to the Socket REPL, write your code as `.cljc` files, and you'll have th
 
 # License
 
-Copyright © 2018-2024 Sean Corfield
+Copyright © 2018-2025 Sean Corfield
 
 Distributed under the Apache Software License version 2.0.
