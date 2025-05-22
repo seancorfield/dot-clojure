@@ -1,31 +1,77 @@
 ;; copyright (c) 2018-2024 sean corfield, all rights reserved
 
-(ns org.corfield.dev.repl
-  "Invoke org.corfield.dev.repl/-main to start a REPL based on
+ (ns org.corfield.dev.repl
+   "Invoke org.corfield.dev.repl/-main to start a REPL based on
   what tooling you have available on your classpath."
-  (:require [clojure.repl :refer [demunge]]
-            [clojure.string :as str]))
+   (:require [clojure.repl :refer [demunge]]
+             [clojure.string :as str]))
 
-(when-not (resolve 'requiring-resolve)
-  (throw (ex-info ":dev/repl and repl.clj require at least Clojure 1.10"
-                  *clojure-version*)))
+ (when-not (resolve 'requiring-resolve)
+   (throw (ex-info ":dev/repl and repl.clj require at least Clojure 1.10"
+                   *clojure-version*)))
 
-(defn- socket-repl-port
-  "Return truthy if it looks like a Socket REPL Server is wanted,
+ (defn- socket-repl-port
+   "Return truthy if it looks like a Socket REPL Server is wanted,
   else return nil. The truthy value is the port number to use.
 
   Checks the following for port numbers:
   * SOCKET_REPL_PORT env var - a value of none suppresses it
   * socket-repl-port property - a value of none suppresses it
   * .socket-repl-port file - assumed to contain a port number"
-  []
-  (let [s-port (or (System/getenv "SOCKET_REPL_PORT")
-                   (System/getProperty "socket-repl-port")
-                   (try (slurp ".socket-repl-port") (catch Throwable _)))]
-    (when-not (= "none" s-port)
-      (try
-        (Long/parseLong s-port)
-        (catch Throwable _)))))
+   []
+   (let [s-port (or (System/getenv "SOCKET_REPL_PORT")
+                    (System/getProperty "socket-repl-port")
+                    (try (slurp ".socket-repl-port") (catch Throwable _)))]
+     (when-not (= "none" s-port)
+       (try
+         (Long/parseLong s-port)
+         (catch Throwable _)))))
+
+ (defn- tap>log [frame level throwable message]
+   (let [class-name (symbol (demunge (.getClassName frame)))]
+    ;; only called for enabled log levels:
+     (tap>
+      (with-meta
+        {:form     '()
+         :level    level
+         :result   (or throwable message)
+         :ns       (symbol (or (namespace class-name)
+                                                                        ;; fully-qualified classname - strip class:
+                               (str/replace (name class-name) #"\.[^\.]*$" "")))
+         :file     (.getFileName frame)
+         :line     (.getLineNumber frame)
+         :column   0
+         :time     (java.util.Date.)
+         :runtime  :clj}
+        {:dev.repl/logging true}))))
+
+ (defn- ctl-log*adapter [log-star]
+   (let [log*-fn (deref log-star)]
+     (fn [logger level throwable message]
+       (try
+         (let [^StackTraceElement frame (nth (.getStackTrace (Throwable. "")) 2)]
+           (tap>log frame level throwable message))
+         (catch Throwable _))
+       (log*-fn logger level throwable message))))
+
+ (defn- logging4j2*adapter [log-star]
+   (let [log*-fn (deref log-star)]
+     (fn [logger level & more]
+       (let [[throwable message-parts]
+            ;; drop marker if present; find throwable and everything else:
+             (cond (instance? Throwable (first more))
+                   [(first more) (rest more)]
+                   (instance? Throwable (second more))
+                   [(second more) (rest (rest more))]
+                   :else
+                   [nil more])
+             message (str/join " " message-parts)]
+         (try
+           (let [^StackTraceElement frame (nth (.getStackTrace (Throwable. "")) 3)]
+             (tap>log frame (-> level str str/lower-case keyword)
+                      throwable message))
+           (catch Throwable _))
+         (apply log*-fn logger level more)))))
 
 (defn -main
   "If Jedi Time is on the classpath, require it (so that Java Time
@@ -84,33 +130,24 @@
     ;; if we have Portal on the classpath...
     (require 'portal.console)
     ;; ...then install a tap> ahead of tools.logging:
-    (let [log-star (requiring-resolve 'clojure.tools.logging/log*)
-          log*-fn  (deref log-star)]
+    (let [log-star (requiring-resolve 'clojure.tools.logging/log*)]
       (alter-var-root
        log-star
-       (constantly
-        (fn [logger level throwable message]
-          (try
-            (let [^StackTraceElement frame (nth (.getStackTrace (Throwable. "")) 2)
-                  class-name (symbol (demunge (.getClassName frame)))]
-                ;; only called for enabled log levels:
-              (tap>
-               (with-meta
-                 {:form     '()
-                  :level    level
-                  :result   (or throwable message)
-                  :ns       (symbol (or (namespace class-name)
-                                        ;; fully-qualified classname - strip class:
-                                        (str/replace (name class-name) #"\.[^\.]*$" "")))
-                  :file     (.getFileName frame)
-                  :line     (.getLineNumber frame)
-                  :column   0
-                  :time     (java.util.Date.)
-                  :runtime  :clj}
-                 {:dev.repl/logging true})))
-            (catch Throwable _))
-          (log*-fn logger level throwable message)))))
-    (println "Logging will be tap>'d...")
+       (constantly (ctl-log*adapter log-star))))
+    (println "clojure.tools.logging will be tap>'d...")
+    (catch Throwable _))
+
+  ;; if Portal and logging4j2 are both present,
+  ;; cause all (successful) logging to also be tap>'d:
+  (try
+    ;; if we have Portal on the classpath...
+    (require 'portal.console)
+    ;; ...then install a tap> ahead of logging4j2:
+    (let [log-star (requiring-resolve 'org.corfield.logging4j2.impl/log*)]
+      (alter-var-root
+       log-star
+       (constantly (logging4j2*adapter log-star))))
+    (println "org.corfield.logging4j2 will be tap>'d...")
     (catch Throwable _))
 
   ;; select and start a main REPL:
