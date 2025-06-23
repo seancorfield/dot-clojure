@@ -21,12 +21,12 @@
            :exec-args {:installer :remote}}
 
   ;; polylith tool:
-  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.2.21"}}
+  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.2.22"}}
          :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   :poly-next {:replace-deps {polylith/clj-poly #_{:mvn/version "0.3.21-SNAPSHOT"}
-                             ;; cljs-support branch:
+                             ;; cljs-support branch (as of 6/23/25):
                              {:git/url "https://github.com/polyfy/polylith"
-                              :git/sha "a7ecb9fa138afa2de839ef0ae225ad6e79556b34"
+                              :git/sha "3878955bd3e9349249aa0b2d3a03027e9782afbf"
                               :deps/root "projects/poly"}}
               :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   ;; testing and debugging tools (this would normally be overridden

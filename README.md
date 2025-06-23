@@ -123,12 +123,12 @@ There are aliases to pull in specific versions of Clojure:
 > Note: the `:master` alias has been removed since it is rarely different from the most recent (alpha) release of Clojure.
 
 To work with the Polylith command-line tool:
-* `:poly` -- the latest (stable) release of [Polylith's `poly` tool](https://github.com/polyfy/polylith), as a library from Clojars (previously, this was a git dependency) -- example usage:
+* `:poly` -- the latest (stable) release of [Polylith's `poly` tool](https://github.com/polyfy/polylith), as a library from Clojars -- example usage:
   * `clojure -M:poly shell` -- start an interactive Polylith shell,
   * `clojure -M:poly info :loc` -- display information about a Polylith workspace, including lines of code,
   * `clojure -M:poly create component name:user` -- create a `user` component in a Polylith workspace,
   * `clojure -M:poly test :dev` -- run tests in the `dev` project context, in a Polylith workspace.
-* `:poly-next` -- the latest SNAPSHOT release of the `poly` tool (currently 0.3.21-SNAPSHOT).
+* `:poly-next` -- the latest cljs-support branch of the `poly` tool.
 
 > Note: the _EXPERIMENTAL_ `:add-libs` alias has been removed -- use the [`clojure.repl.deps`](https://clojure.github.io/clojure/branch-master/clojure.repl-api.html#clojure.repl.deps) in Clojure 1.12.0 or later instead!
 
