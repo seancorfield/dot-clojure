@@ -47,9 +47,7 @@
   :eastwood {:extra-deps {jonase/eastwood {:mvn/version "RELEASE"}}
              :main-opts ["-m" "eastwood.lint" "{:source-paths,[\"src\"],:test-paths,[\"test\"]}"]}
   ;; - see https://github.com/NoahTheDuke/splint
-  :splint {:extra-deps {io.github.noahtheduke/splint {:mvn/version "RELEASE"}
-                        ;; requires Clojure 1.11.1 or later:
-                        org.clojure/clojure {:mvn/version "1.11.1"}}
+  :splint {:extra-deps {io.github.noahtheduke/splint {:mvn/version "RELEASE"}}
            :main-opts ["-m" "noahtheduke.splint"]}
   ;; - see https://github.com/athos/clj-check
   :check {:extra-deps {io.github.athos/clj-check
