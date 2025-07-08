@@ -24,9 +24,9 @@
   :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.2.22"}}
          :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   :poly-next {:replace-deps {polylith/clj-poly #_{:mvn/version "0.3.21-SNAPSHOT"}
-                             ;; cljs-support branch (as of 6/23/25):
+                             ;; cljs-support branch (as of 7/8/25):
                              {:git/url "https://github.com/polyfy/polylith"
-                              :git/sha "3878955bd3e9349249aa0b2d3a03027e9782afbf"
+                              :git/sha "ab722ab7e30c2f4922cf152cb36903b60b0aed0c"
                               :deps/root "projects/poly"}}
               :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   ;; testing and debugging tools (this would normally be overridden

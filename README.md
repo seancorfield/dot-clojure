@@ -4,7 +4,7 @@ This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file pro
 
 **Several git dependencies here assume you have at least Clojure CLI 1.11.1.1273!**
 
-In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (was 1.12.1.1538 when I last updated this) -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
+In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (was 1.12.1.1550 when I last updated this) -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
 
 The main alias I use here is `:dev/repl` which starts various combinations of REPL tooling. See [**The `:dev/repl` Alias**](#the-devrepl-alias) below for more details.
 
