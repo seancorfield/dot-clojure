@@ -67,7 +67,8 @@ Deploy jar files (if you don't have a `build.clj` file):
 
 There are aliases to pull in various useful testing and debugging tools:
 * `:test` -- adds both `test` and `src/test/clojure` to your classpath and pulls in the latest stable version of `test.check`
-* `:runner` -- pulls in [Cognitect Labs' `test-runner`](https://github.com/cognitect-labs/test-runner) project and runs any tests it can find
+* `:lazy` -- adds the latest stable release of [NoahTheDuke's Lazytest](https://github.com/NoahTheDuke/lazytest) for more expressive and powerful testing; can be used as `clojure -M:test:lazy` to run just Lazytest tests, or `clojure -X:test:lazy:runner` to run both Lazytest and `clojure.test` tests (via my fork of Cognitect's `test-runner` project)
+* `:runner` -- pulls in my fork of [Cognitect Labs' `test-runner`](https://github.com/cognitect-labs/test-runner) project and runs any tests it can find
 * `:eastwood` -- pulls and runs in the latest stable release of [Eastwood](https://github.com/jonase/eastwood) on your `src` and `test` folders; use with `:test` above
 * `:splint` -- pulls in and runs the latest stable release of [Splint](https://github.com/NoahTheDuke/splint) on your project or specific files
 * `:check` -- pulls in [Athos' Check](https://github.com/athos/clj-check) project to compile all your namespaces to check for syntax errors and reflection warnings like `lein check`

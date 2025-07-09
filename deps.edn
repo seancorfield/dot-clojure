@@ -37,7 +37,13 @@
   ;; use this at the end of your aliases to cancel any main opts in earlier
   ;; aliases, e.g., clojure -M:test:no-main to avoid running tests:
   :no-main {:main-opts []}
+  ;; - see https://github.com/noahtheduke/lazytest
+  ;; - run just lazytest tests: clj -M:test:lazy
+  ;; - run clojure.test and lazytest tests: clj -X:test:lazy:runner
+  :lazy {:extra-deps {io.github.noahtheduke/lazytest {:mvn/version "RELEASE"}}
+         :main-opts ["-m" "lazytest.main"]}
   ;; - see https://github.com/seancorfield/test-runner
+  ;; - automatically runs lazytest tests if :lazy alias is present
   ;; - run your tests: clj -X:test:runner
   :runner {:extra-deps {io.github.seancorfield/test-runner
                         {:git/tag "v0.6.0" :git/sha "d5f18c5"}}
