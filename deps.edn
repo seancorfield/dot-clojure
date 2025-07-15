@@ -78,6 +78,11 @@
                           {:git/tag "v1.3.0"
                            :git/sha "98631b1"}}
              :main-opts ["-m" "org.corfield.dev.repl"]}
+
+  ;; - for JDK 21+, so that nREPL can interrupt long-running evaluations:
+  :allow-attach-self
+  {:jvm-opts ["-Djdk.attach.allowAttachSelf"]}
+
   ;; - in case you need precompiled code on your classpath:
   :classes {:extra-paths ["classes"]}
   ;; - start a Socket REPL on port 50505 (not needed if you use the :dev/repl alias):

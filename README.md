@@ -30,7 +30,8 @@ to start an nREPL server with CIDER middleware, and then a Rebel Readline
 interactive REPL, with Portal available (and `clojure.tools.logging`, if
 present, patched to `tap>` all log messages for Portal).
 
-I recently added `-J-Djdk.attach.allowAttachSelf` which assumes JDK 21+ so that
+I recently added the `:allow-attach-self` alias which sets the JVM property
+`-Djdk.attach.allowAttachSelf` for JDK 21+ so that
 nREPL can stop evaluation threads.
 
 ## Basic Tools
