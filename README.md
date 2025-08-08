@@ -8,7 +8,7 @@ In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here
 
 The main alias I use here is `:dev/repl` which starts various combinations of REPL tooling. See [**The `:dev/repl` Alias**](#the-devrepl-alias) below for more details.
 
-_Since it is my personal file, it may make assumptions about my own environment. For example, it uses `"RELEASE"` for several tools -- and for Clojure itself, currently 1.12.1 -- so I can always get the latest stable version of any dev/test tool I use. I make no effort at backward-compatibility and may add, delete, or change aliases as they benefit me personally. Caveat Programmer!_
+_Since it is my personal file, it may make assumptions about my own environment. I make no effort at backward-compatibility and may add, delete, or change aliases as they benefit me personally. Caveat Programmer!_
 
 **If you want a really well-documented, well-maintained alternative that actually tracks versions of tools, I would recommend you use the [Practicalli Clojure `deps.edn`](https://github.com/practicalli/clojure-deps-edn) project instead!**
 
@@ -73,7 +73,6 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:eastwood` -- pulls and runs in the latest stable release of [Eastwood](https://github.com/jonase/eastwood) on your `src` and `test` folders; use with `:test` above
 * `:splint` -- pulls in and runs the latest stable release of [Splint](https://github.com/NoahTheDuke/splint) on your project or specific files
 * `:check` -- pulls in [Athos' Check](https://github.com/athos/clj-check) project to compile all your namespaces to check for syntax errors and reflection warnings like `lein check`
-* `:expect` -- pulls in the latest stable release of [expectations/clojure-test](https://github.com/clojure-expectations/clojure-test) -- the `clojure.test`-compatible version of Expectations
 * `:bench` -- pulls in the latest stable release of [Criterium](https://github.com/hugoduncan/criterium/) for benchmarking your code
 
 * `:deps+` -- **adds** `tools.deps` to your classpath (the default `:deps` alias **replaces** the default classpath) so you can use `help/doc` on namespaces within your project, e.g., `clojure -X:deps+ help/doc :ns my.app.core`
