@@ -52,7 +52,7 @@ These are installed via `clojure -Ttools install ...` and usable via `clojure -T
 
 And the older `clj-new` tool:
 
-* `clj-new` -- the latest stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates:
+* `clj-new` -- a recent stable release of [clj-new](https://github.com/seancorfield/clj-new) to create new projects from (Leiningen and other) templates:
   * `clojure -Tclj-new app :name myname/myapp` -- creates a new `deps.edn`-based application project (using `tools.build` for the uberjar),
   * `clojure -Tclj-new lib :name myname/mylib` -- creates a new `deps.edn`-based library project (using `tools.build` for the jar),
   * `clojure -Tclj-new template :name myname/mytemplate` -- creates a new `deps.edn`-based template project (using `tools.build` for the jar),
@@ -64,16 +64,16 @@ More tools will be added to this section over time (as more tools add `:tools/us
 ## Basic Aliases
 
 Deploy jar files (if you don't have a `build.clj` file):
-* `:deploy` -- pulls in and runs the latest stable release of Erik Assum's [deps-deploy](https://github.com/slipset/deps-deploy) and deploys the specified JAR file to Clojars, based on your `pom.xml` and the `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment variables; `clojure -X:deploy :artifact '"MyProject.jar"'`
+* `:deploy` -- pulls in and runs a recent stable release of Erik Assum's [deps-deploy](https://github.com/slipset/deps-deploy) and deploys the specified JAR file to Clojars, based on your `pom.xml` and the `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment variables; `clojure -X:deploy :artifact '"MyProject.jar"'`
 
 There are aliases to pull in various useful testing and debugging tools:
 * `:test` -- adds both `test` and `src/test/clojure` to your classpath and pulls in the latest stable version of `test.check`
-* `:lazy` -- adds the latest stable release of [NoahTheDuke's Lazytest](https://github.com/NoahTheDuke/lazytest) for more expressive and powerful testing; can be used as `clojure -M:test:lazy` to run just Lazytest tests, or `clojure -X:test:lazy:runner` to run both Lazytest and `clojure.test` tests (via my fork of Cognitect's `test-runner` project)
+* `:lazy` -- adds a recent stable release of [NoahTheDuke's Lazytest](https://github.com/NoahTheDuke/lazytest) for more expressive and powerful testing; can be used as `clojure -M:test:lazy` to run just Lazytest tests, or `clojure -X:test:lazy:runner` to run both Lazytest and `clojure.test` tests (via my fork of Cognitect's `test-runner` project)
 * `:runner` -- pulls in my fork of [Cognitect Labs' `test-runner`](https://github.com/cognitect-labs/test-runner) project and runs any tests it can find
-* `:eastwood` -- pulls and runs in the latest stable release of [Eastwood](https://github.com/jonase/eastwood) on your `src` and `test` folders; use with `:test` above
-* `:splint` -- pulls in and runs the latest stable release of [Splint](https://github.com/NoahTheDuke/splint) on your project or specific files
+* `:eastwood` -- pulls and runs in a recent stable release of [Eastwood](https://github.com/jonase/eastwood) on your `src` and `test` folders; use with `:test` above
+* `:splint` -- pulls in and runs a recent stable release of [Splint](https://github.com/NoahTheDuke/splint) on your project or specific files
 * `:check` -- pulls in [Athos' Check](https://github.com/athos/clj-check) project to compile all your namespaces to check for syntax errors and reflection warnings like `lein check`
-* `:bench` -- pulls in the latest stable release of [Criterium](https://github.com/hugoduncan/criterium/) for benchmarking your code
+* `:bench` -- pulls in a recent stable release of [Criterium](https://github.com/hugoduncan/criterium/) for benchmarking your code
 
 * `:deps+` -- **adds** `tools.deps` to your classpath (the default `:deps` alias **replaces** the default classpath) so you can use `help/doc` on namespaces within your project, e.g., `clojure -X:deps+ help/doc :ns my.app.core`
 * `:no-main` -- adds an empty `:main-opts` so that you can run `clojure -M:test:no-main ...` in projects that combine the test deps with the test runner (instead of having them separate as this `deps.edn` has them). Because `:main-opts` is "last one wins", this allows you to essentially override (or remove) any `:main-opts` from aliases, so you can manually specify your own main options on the command-line.
@@ -104,7 +104,7 @@ There are aliases to pull in and start various REPL-related tools:
 * `:datomic/dev.datafy` -- adds `datafy`/`nav` support for Datomic objects via [datomic/dev.datafy](https://github.com/Datomic/dev.datafy)
 * `:dbxray` -- adds [donut-party/dbxray](https://github.com/donut-party/dbxray) to help visualize your database structure
 * `:jedi-time` -- adds `datafy`/`nav` support for Java Time objects via [jedi-time](https://github.com/jimpil/jedi-time)
-* `:portal` -- pulls in the latest stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
+* `:portal` -- pulls in a recent stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
 * `:reflect` -- adds Stuart Halloway's reflector utility (best used with Portal)
 
 There are aliases to pull in specific versions of Clojure:
