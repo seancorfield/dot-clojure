@@ -4,12 +4,8 @@
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
  :deps {org.clojure/clojure {:mvn/version "1.12.1"}}
  :aliases
- {;; ADD tools.deps so you can get help within an existing project:
-  ;; clojure -X:deps replaces the deps/paths
-  ;; clojure -X:deps+ ADDS to the deps/paths
-  :deps+ {:extra-deps {org.clojure/tools.deps.cli {:mvn/version "0.11.93"}}
-          :ns-default clojure.tools.deps.cli.api
-          :ns-aliases {help clojure.tools.deps.cli.help}}
+ {;; clojure -X:deps:this help/dir :ns my.project.core
+  :this {:deps {this/project {:local/root "."}}}
 
   ;; jar installation and deployment:
   ;; - see https://github.com/slipset/deps-deploy
