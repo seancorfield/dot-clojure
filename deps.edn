@@ -23,12 +23,14 @@
   ;; polylith tool:
   :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.2.22"}}
          :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
-  :poly-next {:replace-deps {polylith/clj-poly #_{:mvn/version "0.3.21-SNAPSHOT"}
-                             ;; cljs-support branch (as of 7/8/25):
-                             {:git/url "https://github.com/polyfy/polylith"
-                              :git/sha "ab722ab7e30c2f4922cf152cb36903b60b0aed0c"
-                              :deps/root "projects/poly"}}
-              :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
+  :poly-next
+  {:replace-deps {polylith/clj-poly #_{:mvn/version "0.3.21-SNAPSHOT"}
+                  ;; cljs-support branch (as of 7/15/25):
+                  ^:antq/exclude
+                  {:git/url "https://github.com/polyfy/polylith"
+                   :git/sha "da0e5df90466d32554866b81b34ab4c9fc367795"
+                   :deps/root "projects/poly"}}
+   :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   ;; testing and debugging tools (this would normally be overridden
   ;; by a :test alias in the project deps.edn file -- but it's a
   ;; useful default):
