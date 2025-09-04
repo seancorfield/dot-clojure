@@ -73,6 +73,15 @@
           (catch Throwable _))
         (apply log*-fn logger level more)))))
 
+#_{:clj-kondo/ignore [:unused-private-var]}
+(defn- connect-to-nrepl
+  "Credit to https://github.com/alexander-yakushev for this approach."
+  [_host port _config]
+  (let [start-repl (resolve 'rebel-readline.nrepl.main/start-repl)]
+    (println "Connecting Rebel Readline to nREPL server on port"
+             (str port "..."))
+    (start-repl {:port port})))
+
 (defn -main
   "If Jedi Time is on the classpath, require it (so that Java Time
   objects will support datafy/nav).
@@ -92,7 +101,7 @@
   * if Figwheel Main is on the classpath then start that, else
   * if Rebel Readline is on the classpath then start that, else
   * start a plain ol' Clojure REPL."
-  [& args]
+  [& _]
   ;; jedi-time?
   (try
     (require 'jedi-time.core)
@@ -167,11 +176,16 @@
                 ["Figwheel Main" #(figgy "-b" "dev" "-r")])
               (catch Throwable _))
             (try ; Rebel Readline?
-              (let [rebel-main (requiring-resolve 'rebel-readline.main/-main)]
+              (let [rebel-main (requiring-resolve 'rebel-readline.main/-main)
+                    rebel-nrepl (try (require 'rebel-readline.nrepl.main)
+                                     true
+                                     (catch Throwable _))]
                 (try
                   (require 'nrepl.cmdline)
                   ;; both Rebel Readline and nREPL are on the classpath!
-                  [(str "Rebel Readline + nREPL Server"
+                  [(str "Rebel Readline "
+                        (when rebel-nrepl "Client ")
+                        "+ nREPL Server"
                         (when (seq middleware)
                           (str " with " (str/join ", " (map first middleware)))))
                    (fn []
@@ -181,7 +195,9 @@
                             "-m" "nrepl.cmdline"
                             (into (or mw-args [])
                                   ["--interactive"
-                                   "-f" "rebel-readline.main/-main"])))]
+                                   "-f" (if rebel-nrepl
+                                          "org.corfield.dev.repl/connect-to-nrepl"
+                                          "rebel-readline.main/-main")])))]
                   (catch Throwable _
                     ;; only Rebel Readline is on the classpath:
                     ["Rebel Readline" rebel-main])))
@@ -202,7 +218,9 @@
     (System/exit 0)))
 
 (in-ns 'user)
-(defn uptime []
+(require 'clojure.string) ; to satisfy clj-kondo :)
+#_{:clj-kondo/ignore [:unused-private-var]}
+(defn- uptime []
   (-> (java.lang.management.ManagementFactory/getRuntimeMXBean)
       (.getUptime)
       (java.time.Duration/ofMillis)

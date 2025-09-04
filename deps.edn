@@ -84,7 +84,9 @@
   :socket {:jvm-opts ["-Dclojure.server.repl={:address,\"0.0.0.0\",:port,50505,:accept,clojure.core.server/repl}"]}
   ;; - see https://github.com/bhauman/rebel-readline
   ;; - start a Rebel Readline REPL:
-  :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.5"}}
+  :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.5"}
+                       ;; in case we want to use Rebel as an nREPL client:
+                       com.bhauman/rebel-readline-nrepl {:mvn/version "0.1.6"}}
           ;; see https://github.com/fusesource/jansi/issues/301
           :jvm-opts ["--enable-native-access=ALL-UNNAMED"]
           :main-opts ["-m" "rebel-readline.main"]}

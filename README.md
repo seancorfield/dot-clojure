@@ -27,8 +27,8 @@ TL;DR: add the following dependency and then start a REPL with `clj -M:dev/repl`
 ```
 There is also a `bin/repl` bash script that runs `clojure -M:1.12:portal:test:cider-nrepl:rebel:dev/repl`
 to start an nREPL server with CIDER middleware, and then a Rebel Readline
-interactive REPL, with Portal available (and `clojure.tools.logging`, if
-present, patched to `tap>` all log messages for Portal).
+interactive REPL, as a client to that nREPL server, with Portal available (and `clojure.tools.logging`, if
+present, patched to `tap>` all log messages for Portal, also `logging4j2` -- my log4j2 wrapper).
 
 I recently added the `:allow-attach-self` alias which sets the JVM property
 `-Djdk.attach.allowAttachSelf` for JDK 21+ so that
@@ -89,15 +89,15 @@ There are aliases to pull in and start various REPL-related tools:
     * `clojure -M:nrepl:portal:dev/repl` -- ...with Portal (& middleware) or
     * `clojure -M:cider-nrepl:dev/repl` -- CIDER nREPL server or
     * `clojure -M:cider-nrepl:portal:dev/repl` -- ...with Portal (& middleware) or
-    * `clojure -M:rebel:nrepl:dev/repl` -- Rebel Readline REPL + basic nREPL server or
+    * `clojure -M:rebel:nrepl:dev/repl` -- Rebel Readline nREPL client + basic nREPL server or
     * `clojure -M:rebel:nrepl:portal:dev/repl` -- ...with Portal (& middleware) or
-    * `clojure -M:rebel:cider-nrepl:dev/repl` -- Rebel Readline REPL + CIDER nREPL server or
+    * `clojure -M:rebel:cider-nrepl:dev/repl` -- Rebel Readline nREPL client + CIDER nREPL server or
     * `clojure -M:rebel:cider-nrepl:portal:dev/repl` -- ...with Portal (& middleware) or
   * Also works with Figwheel Main (now that I've started doing ClojureScript!):
     * `clojure -M:portal:fig:build:dev/repl` or
 * `:classes` -- adds the `classes` folder to your classpath to pick up compiled code (e.g., see https://clojure.org/guides/dev_startup_time)
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
-* `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL
+* `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL; note that this also loads the Rebel Readline nREPL client library
 * `:nrepl` -- starts a (headless) [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:nrepl`
 * `:cider-nrepl` -- starts a (headless) CIDER-enhanced [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:cider-nrepl`
 
