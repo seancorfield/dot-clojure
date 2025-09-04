@@ -21,8 +21,8 @@ TL;DR: add the following dependency and then start a REPL with `clj -M:dev/repl`
 {:dev/repl
  {:extra-deps
   {io.github.seancorfield/dot-clojure
-   {:git/tag "v1.3.0"
-    :git/sha "98631b1"}}
+   {:git/tag "v1.4.0"
+    :git/sha "e3ffc53"}}
   :main-opts ["-m" "org.corfield.dev.repl"]}}
 ```
 There is also a `bin/repl` bash script that runs `clojure -M:1.12:portal:test:cider-nrepl:rebel:dev/repl`
