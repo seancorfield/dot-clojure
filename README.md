@@ -4,7 +4,7 @@ This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file pro
 
 **Several git dependencies here assume you have at least Clojure CLI 1.11.1.1273!**
 
-In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (was 1.12.1.1561 when I last updated this) -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
+In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (was 1.12.3.1577 when I last updated this) -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
 
 The main alias I use here is `:dev/repl` which starts various combinations of REPL tooling. See [**The `:dev/repl` Alias**](#the-devrepl-alias) below for more details.
 
@@ -108,9 +108,10 @@ There are aliases to pull in and start various REPL-related tools:
 * `:reflect` -- adds Stuart Halloway's reflector utility (best used with Portal)
 
 There are aliases to pull in specific versions of Clojure:
-* `:1.12` -- Clojure 1.12.2 -- see [changes to Clojure in version 1.12.2](https://github.com/clojure/clojure/blob/master/changes.md)
+* `:1.12` -- Clojure 1.12.3 -- see [changes to Clojure in version 1.12.3](https://github.com/clojure/clojure/blob/master/changes.md)
   * `:1.12.0` -- Clojure 1.12.0
   * `:1.12.1` -- Clojure 1.12.1
+  * `:1.12.2` -- Clojure 1.12.2
 * `:1.11` -- Clojure 1.11.4
   * `:1.11.3` -- Clojure 1.11.3
   * `:1.11.2` -- Clojure 1.11.2

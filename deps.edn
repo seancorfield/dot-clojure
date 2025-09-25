@@ -2,7 +2,7 @@
 
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
- :deps {org.clojure/clojure {:mvn/version "1.12.2"}}
+ :deps {org.clojure/clojure {:mvn/version "1.12.3"}}
  :aliases
  {;; clojure -X:deps:this help/dir :ns my.project.core
   :this {:deps {this/project {:local/root "."}}}
@@ -38,7 +38,7 @@
   ;; - see https://github.com/noahtheduke/lazytest
   ;; - run just lazytest tests: clj -M:test:lazy
   ;; - run clojure.test and lazytest tests: clj -X:test:lazy:runner
-  :lazy {:extra-deps {io.github.noahtheduke/lazytest {:mvn/version "1.8.0"}}
+  :lazy {:extra-deps {io.github.noahtheduke/lazytest {:mvn/version "1.9.1"}}
          :main-opts ["-m" "lazytest.main"]}
   ;; - see https://github.com/seancorfield/test-runner
   ;; - automatically runs lazytest tests if :lazy alias is present
@@ -143,7 +143,8 @@
   :1.11.1 {:override-deps {org.clojure/clojure {:mvn/version "1.11.1"}}}
   :1.11.2 {:override-deps {org.clojure/clojure {:mvn/version "1.11.2"}}}
   :1.11.3 {:override-deps {org.clojure/clojure {:mvn/version "1.11.3"}}}
-  ;; latest 1.12 is 1.12.2 but you can ask for earlier versions:
-  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.2"}}}
+  ;; latest 1.12 is 1.12.3 but you can ask for earlier versions:
+  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.3"}}}
   :1.12.0 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0"}}}
-  :1.12.1 {:override-deps {org.clojure/clojure {:mvn/version "1.12.1"}}}}}
+  :1.12.1 {:override-deps {org.clojure/clojure {:mvn/version "1.12.1"}}}
+  :1.12.2 {:override-deps {org.clojure/clojure {:mvn/version "1.12.2"}}}}}
