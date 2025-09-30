@@ -208,7 +208,7 @@
                       (str " with " (str/join ", " (map first middleware)))))
                (let [nrepl (requiring-resolve 'nrepl.cmdline/-main)]
                  (fn []
-                   (apply nrepl mw-args)))]
+                   (apply nrepl (conj mw-args "--interactive"))))]
               (catch Throwable _))
             ;; fallback to plain REPL:
             ["clojure.main" (resolve 'clojure.main/main)])]

@@ -1,0 +1,13 @@
+{:paths ["src"]
+ :aliases
+ {;; clojure -X:deps:this help/dir :ns my.project.core
+  :this {:deps {this/project {:local/root "."}}}
+
+  ;; use this at the end of your aliases to cancel any main opts in earlier
+  ;; aliases, e.g., clojure -M:test:no-main to avoid running tests:
+  :no-main {:main-opts []}
+
+  :runner
+  {:extra-deps {io.github.dmiller/test-runner
+                {:git/tag "v0.5.3clr" :git/sha "ae91dd2"}}
+   :exec-fn cognitect.test-runner.api/test}}}
