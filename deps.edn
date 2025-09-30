@@ -70,8 +70,8 @@
   ;;   - there's no alias for adding figwheel, that's up to you
   :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
              :extra-deps {io.github.seancorfield/dot-clojure
-                          {:git/tag "v1.4.0"
-                           :git/sha "e3ffc53"}}
+                          {:git/tag "v1.4.1"
+                           :git/sha "b5f7199"}}
              :main-opts ["-m" "org.corfield.dev.repl"]}
 
   ;; - for JDK 21+, so that nREPL can interrupt long-running evaluations:
