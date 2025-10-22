@@ -2,9 +2,11 @@
 
 This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file providing useful `clj` aliases drawn from a variety of projects. It is published to GitHub so I can keep all my computers sync'd up -- and to provide a range of examples that folks new to the Clojure CLI might find helpful.
 
-**Several git dependencies here assume you have at least Clojure CLI 1.11.1.1273!**
+**I highly recommend ensuring you have [the latest Clojure CLI](https://clojure.org/releases/tools) installed!**
 
-In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the latest Clojure CLI (was 1.12.3.1577 when I last updated this) -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
+> The latest Clojure CLI was 1.12.3.1577 (Sep 25, 2025) when I last updated this file.
+
+In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the Clojure CLI -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
 
 The main alias I use here is `:dev/repl` which starts various combinations of REPL tooling. See [**The `:dev/repl` Alias**](#the-devrepl-alias) below for more details.
 
@@ -21,16 +23,17 @@ TL;DR: add the following dependency and then start a REPL with `clj -M:dev/repl`
 {:dev/repl
  {:extra-deps
   {io.github.seancorfield/dot-clojure
-   {:git/tag "v1.4.0"
-    :git/sha "e3ffc53"}}
+   {:git/tag "v1.4.1"
+    :git/sha "b5f7199"}}
   :main-opts ["-m" "org.corfield.dev.repl"]}}
 ```
-There is also a `bin/repl` bash script that runs `clojure -M:1.12:portal:test:cider-nrepl:rebel:dev/repl`
+There is also a `bin/repl` bash script that runs
+`clojure "$@" -M:1.12:allow-attach-self:portal:test:cider-nrepl:rebel:dev/repl`
 to start an nREPL server with CIDER middleware, and then a Rebel Readline
 interactive REPL, as a client to that nREPL server, with Portal available (and `clojure.tools.logging`, if
 present, patched to `tap>` all log messages for Portal, also `logging4j2` -- my log4j2 wrapper).
 
-I recently added the `:allow-attach-self` alias which sets the JVM property
+The `:allow-attach-self` alias is a recent addition, which sets the JVM property
 `-Djdk.attach.allowAttachSelf` for JDK 21+ so that
 nREPL can stop evaluation threads.
 

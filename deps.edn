@@ -17,10 +17,10 @@
            :exec-args {:installer :remote}}
 
   ;; polylith tool:
-  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.3.0"}}
+  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.3.30"}}
          :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   :poly-next
-  {:replace-deps {polylith/clj-poly {:mvn/version "0.3.30-SNAPSHOT"}}
+  {:replace-deps {polylith/clj-poly {:mvn/version "0.3.31-SNAPSHOT"}}
    :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   ;; testing and debugging tools (this would normally be overridden
   ;; by a :test alias in the project deps.edn file -- but it's a
@@ -87,13 +87,13 @@
           :main-opts ["-m" "rebel-readline.main"]}
   ;; - see https://nrepl.org/
   ;; - start a basic nREPL server on a random available port:
-  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "1.5.0"}}
+  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "1.5.1"}}
           :main-opts ["-m" "nrepl.cmdline"]}
   ;; - see https://nrepl.org/
   ;; - start a CIDER-enhanced nREPL server on a random available port:
   :cider-nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "0.58.0"}
                              ; until cider-nrepl is updated to this:
-                             nrepl/nrepl {:mvn/version "1.5.0"}}
+                             nrepl/nrepl {:mvn/version "1.5.1"}}
                 :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
 
   ;; - see https://github.com/Datomic/dev.datafy
