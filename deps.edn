@@ -2,7 +2,7 @@
 
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
- :deps {org.clojure/clojure {:mvn/version "1.12.3"}}
+ :deps {org.clojure/clojure {:mvn/version "1.12.4"}}
  :aliases
  {;; clojure -X:deps:this help/dir :ns my.project.core
   :this {:deps {this/project {:local/root "."}}}
@@ -17,16 +17,16 @@
            :exec-args {:installer :remote}}
 
   ;; polylith tool:
-  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.3.30"}}
+  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.3.31"}}
          :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   :poly-next
-  {:replace-deps {polylith/clj-poly {:mvn/version "0.3.31-SNAPSHOT"}}
+  {:replace-deps {polylith/clj-poly {:mvn/version "0.3.32-SNAPSHOT"}}
    :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
   ;; testing and debugging tools (this would normally be overridden
   ;; by a :test alias in the project deps.edn file -- but it's a
   ;; useful default):
   :test {:extra-paths ["test" "src/test/clojure"]
-         :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}}}
+         :extra-deps {org.clojure/test.check {:mvn/version "1.1.2"}}}
   ;; use this at the end of your aliases to cancel any main opts in earlier
   ;; aliases, e.g., clojure -M:test:no-main to avoid running tests:
   :no-main {:main-opts []}
@@ -46,7 +46,7 @@
   :eastwood {:extra-deps {jonase/eastwood {:mvn/version "1.4.3"}}
              :main-opts ["-m" "eastwood.lint" "{:source-paths,[\"src\"],:test-paths,[\"test\"]}"]}
   ;; - see https://github.com/NoahTheDuke/splint
-  :splint {:extra-deps {io.github.noahtheduke/splint {:mvn/version "1.21.0"}}
+  :splint {:extra-deps {io.github.noahtheduke/splint {:mvn/version "1.22.0"}}
            :main-opts ["-m" "noahtheduke.splint"]}
   ;; - see https://github.com/athos/clj-check
   :check {:extra-deps {io.github.athos/clj-check
@@ -109,7 +109,7 @@
   {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.1"}}}
   ;; - see https://github.com/djblue/portal
   :portal
-  {:extra-deps {djblue/portal {:mvn/version "0.61.0"}}}
+  {:extra-deps {djblue/portal {:mvn/version "0.62.0"}}}
   ;; - see https://github.com/stuarthalloway/reflector
   :reflect
   {:extra-deps {io.github.stuarthalloway/reflector
@@ -138,8 +138,9 @@
   :1.11.1 {:override-deps {org.clojure/clojure {:mvn/version "1.11.1"}}}
   :1.11.2 {:override-deps {org.clojure/clojure {:mvn/version "1.11.2"}}}
   :1.11.3 {:override-deps {org.clojure/clojure {:mvn/version "1.11.3"}}}
-  ;; latest 1.12 is 1.12.3 but you can ask for earlier versions:
-  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.3"}}}
+  ;; latest 1.12 is 1.12.4 but you can ask for earlier versions:
+  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.4"}}}
   :1.12.0 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0"}}}
   :1.12.1 {:override-deps {org.clojure/clojure {:mvn/version "1.12.1"}}}
-  :1.12.2 {:override-deps {org.clojure/clojure {:mvn/version "1.12.2"}}}}}
+  :1.12.2 {:override-deps {org.clojure/clojure {:mvn/version "1.12.2"}}}
+  :1.12.3 {:override-deps {org.clojure/clojure {:mvn/version "1.12.3"}}}}}
