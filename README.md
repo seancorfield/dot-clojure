@@ -137,7 +137,7 @@ To work with the Polylith command-line tool:
   * `clojure -M:poly info :loc` -- display information about a Polylith workspace, including lines of code,
   * `clojure -M:poly create component name:user` -- create a `user` component in a Polylith workspace,
   * `clojure -M:poly test :dev` -- run tests in the `dev` project context, in a Polylith workspace.
-* `:poly-next` -- the latest cljs-support branch of the `poly` tool.
+* `:poly-next` -- the latest snapshot of the `poly` tool.
 
 > Note: the _EXPERIMENTAL_ `:add-libs` alias has been removed -- use the [`clojure.repl.deps`](https://clojure.github.io/clojure/branch-master/clojure.repl-api.html#clojure.repl.deps) in Clojure 1.12.0 or later instead!
 
