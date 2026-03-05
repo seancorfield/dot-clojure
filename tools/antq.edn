@@ -1,1 +1,2 @@
-{:lib com.github.liquidz/antq, :coord {:mvn/version "2.11.1276"}}
+{:lib com.github.liquidz/antq,
+ :coord {:git/tag "2.11.1276" :git/sha "0e8d29f"}}
