@@ -66,8 +66,10 @@
   :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
              :extra-deps {io.github.seancorfield/dot-clojure
                           {:git/tag "v1.4.1"
-                           :git/sha "b5f7199"}}
+                           :git/sha "b5f7199"}
+                          org.corfield/rephrase {:mvn/version "0.1.0-SNAPSHOT"}}
              :main-opts ["-m" "org.corfield.dev.repl"]}
+  :rephrase {:extra-deps {org.corfield/rephrase {:mvn/version "0.1.0-SNAPSHOT"}}}
 
   ;; - for JDK 21+, so that nREPL can interrupt long-running evaluations:
   :allow-attach-self

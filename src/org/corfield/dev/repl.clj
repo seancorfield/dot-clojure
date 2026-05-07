@@ -1,4 +1,4 @@
-;; copyright (c) 2018-2025 sean corfield, all rights reserved
+;; copyright (c) 2018-2026 sean corfield, all rights reserved
 
 (ns org.corfield.dev.repl
   "Invoke org.corfield.dev.repl/-main to start a REPL based on
@@ -164,7 +164,8 @@
         middleware
         (into []
               (filter #(try (requiring-resolve (second %)) true (catch Throwable _)))
-              [["Portal"   'portal.nrepl/wrap-portal]
+              [["Rephrase" 'org.corfield.rephrase.nrepl/wrap-rephrase]
+               ["Portal"   'portal.nrepl/wrap-portal]
                ["Notebook" 'portal.nrepl/wrap-notebook]
                ["CIDER"    'cider.nrepl/cider-middleware]])
         mw-args
