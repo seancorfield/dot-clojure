@@ -1,4 +1,4 @@
-;; copyright (c) 2018-2025 sean corfield, all rights reserved
+;; copyright (c) 2018-2026 sean corfield, all rights reserved
 
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
@@ -12,7 +12,7 @@
   ;;   - clj -X:deploy :artifact '"project.jar"'
   ;; - this relies on having a pom.xml file and, for deployment, these two
   ;;   environment variables: CLOJARS_USERNAME, CLOJARS_PASSWORD
-  :deploy {:replace-deps {slipset/deps-deploy {:mvn/version "0.2.2"}}
+  :deploy {:replace-deps {slipset/deps-deploy {:mvn/version "0.2.3"}}
            :exec-fn deps-deploy.deps-deploy/deploy
            :exec-args {:installer :remote}}
 
@@ -33,7 +33,7 @@
   ;; - see https://github.com/noahtheduke/lazytest
   ;; - run just lazytest tests: clj -M:test:lazy
   ;; - run clojure.test and lazytest tests: clj -X:test:lazy:runner
-  :lazy {:extra-deps {io.github.noahtheduke/lazytest {:mvn/version "1.9.1"}}
+  :lazy {:extra-deps {io.github.noahtheduke/lazytest {:mvn/version "2.0.0"}}
          :main-opts ["-m" "lazytest.main"]}
   ;; - see https://github.com/seancorfield/test-runner
   ;; - automatically runs lazytest tests if :lazy alias is present
@@ -46,7 +46,7 @@
   :eastwood {:extra-deps {jonase/eastwood {:mvn/version "1.4.3"}}
              :main-opts ["-m" "eastwood.lint" "{:source-paths,[\"src\"],:test-paths,[\"test\"]}"]}
   ;; - see https://github.com/NoahTheDuke/splint
-  :splint {:extra-deps {io.github.noahtheduke/splint {:mvn/version "1.23.1"}}
+  :splint {:extra-deps {io.github.noahtheduke/splint {:mvn/version "1.24.0"}}
            :main-opts ["-m" "noahtheduke.splint"]}
   ;; - see https://github.com/athos/clj-check
   :check {:extra-deps {io.github.athos/clj-check
@@ -79,9 +79,9 @@
   :socket {:jvm-opts ["-Dclojure.server.repl={:address,\"0.0.0.0\",:port,50505,:accept,clojure.core.server/repl}"]}
   ;; - see https://github.com/bhauman/rebel-readline
   ;; - start a Rebel Readline REPL:
-  :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.5"}
+  :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.7"}
                        ;; in case we want to use Rebel as an nREPL client:
-                       com.bhauman/rebel-readline-nrepl {:mvn/version "0.1.7"}}
+                       com.bhauman/rebel-readline-nrepl {:mvn/version "0.1.8"}}
           ;; see https://github.com/fusesource/jansi/issues/301
           :jvm-opts ["--enable-native-access=ALL-UNNAMED"]
           :main-opts ["-m" "rebel-readline.main"]}
@@ -91,7 +91,7 @@
           :main-opts ["-m" "nrepl.cmdline"]}
   ;; - see https://nrepl.org/
   ;; - start a CIDER-enhanced nREPL server on a random available port:
-  :cider-nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "0.58.0"}
+  :cider-nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "0.59.0"}
                              ; until cider-nrepl is updated to this:
                              nrepl/nrepl {:mvn/version "1.7.0"}}
                 :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
@@ -109,7 +109,7 @@
   {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.1"}}}
   ;; - see https://github.com/djblue/portal
   :portal
-  {:extra-deps {djblue/portal {:mvn/version "0.62.2"}}}
+  {:extra-deps {djblue/portal {:mvn/version "0.64.1"}}}
   ;; - see https://github.com/stuarthalloway/reflector
   :reflect
   {:extra-deps {io.github.stuarthalloway/reflector

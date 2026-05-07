@@ -4,7 +4,7 @@ This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file pro
 
 **I highly recommend ensuring you have [the latest Clojure CLI](https://clojure.org/releases/tools) installed!**
 
-> The latest Clojure CLI was 1.12.4.1582 (Dec 10, 2025) when I last updated this file.
+> The latest Clojure CLI was 1.12.4.1618 (Mar 9, 2026) when I last updated this file.
 
 In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the Clojure CLI -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
 
@@ -176,6 +176,6 @@ Connect to the Socket REPL, write your code as `.cljc` files, and you'll have th
 
 # License
 
-Copyright © 2018-2025 Sean Corfield
+Copyright © 2018-2026 Sean Corfield
 
 Distributed under the Apache Software License version 2.0.
