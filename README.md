@@ -23,8 +23,8 @@ TL;DR: add the following dependency and then start a REPL with `clj -M:dev/repl`
 {:dev/repl
  {:extra-deps
   {io.github.seancorfield/dot-clojure
-   {:git/tag "v1.4.1"
-    :git/sha "b5f7199"}}
+   {:git/tag "v1.4.2"
+    :git/sha "2ac85f5"}}
   :main-opts ["-m" "org.corfield.dev.repl"]}}
 ```
 There is also a `bin/repl` bash script that runs

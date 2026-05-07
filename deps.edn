@@ -65,8 +65,8 @@
   ;;   - there's no alias for adding figwheel, that's up to you
   :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
              :extra-deps {io.github.seancorfield/dot-clojure
-                          {:git/tag "v1.4.1"
-                           :git/sha "b5f7199"}
+                          {:git/tag "v1.4.2"
+                           :git/sha "2ac85f5"}
                           org.corfield/rephrase {:mvn/version "0.1.0-SNAPSHOT"}}
              :main-opts ["-m" "org.corfield.dev.repl"]}
   :rephrase {:extra-deps {org.corfield/rephrase {:mvn/version "0.1.0-SNAPSHOT"}}}
