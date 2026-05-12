@@ -4,7 +4,7 @@ This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file pro
 
 **I highly recommend ensuring you have [the latest Clojure CLI](https://clojure.org/releases/tools) installed!**
 
-> The latest Clojure CLI was 1.12.4.1618 (Mar 9, 2026) when I last updated this file.
+> The latest Clojure CLI was 1.12.5.1638 (May 12, 2026) when I last updated this file.
 
 In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the Clojure CLI -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
 
@@ -109,13 +109,15 @@ There are aliases to pull in and start various REPL-related tools:
 * `:jedi-time` -- adds `datafy`/`nav` support for Java Time objects via [jedi-time](https://github.com/jimpil/jedi-time)
 * `:portal` -- pulls in a recent stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
 * `:reflect` -- adds Stuart Halloway's reflector utility (best used with Portal)
+* `:rephrase` -- adds the latest SNAPSHOT of [rephrase](https://github.com/seancorfield/rephrase), which provides nREPL middleware to rephrase error messages into more beginner-friendly versions. This is automatically added by the `:dev/repl` alias.
 
 There are aliases to pull in specific versions of Clojure:
-* `:1.12` -- Clojure 1.12.4 -- see [changes to Clojure in version 1.12.4](https://github.com/clojure/clojure/blob/master/changes.md)
+* `:1.12` -- Clojure 1.12.5 -- see [changes to Clojure in version 1.12.5](https://github.com/clojure/clojure/blob/master/changes.md)
   * `:1.12.0` -- Clojure 1.12.0
   * `:1.12.1` -- Clojure 1.12.1
   * `:1.12.2` -- Clojure 1.12.2
   * `:1.12.3` -- Clojure 1.12.3
+  * `:1.12.4` -- Clojure 1.12.4
 * `:1.11` -- Clojure 1.11.4
   * `:1.11.3` -- Clojure 1.11.3
   * `:1.11.2` -- Clojure 1.11.2
@@ -155,6 +157,8 @@ The `:dev/repl` alias calls `org.corfield.dev.repl/-main` in the [`repl.clj` fil
 * Starts an [nREPL Server](https://nrepl.org/), if present on the classpath.
 
 As of v1.1.0, can start a Rebel Readline REPL and an nREPL Server together.
+
+As of v1.4.2, includes the `rephrase` nREPL middleware to rephrase error messages into more beginner-friendly versions.
 
 _Note 1: since the `repl.clj` code uses `requiring-resolve`, it requires at least Clojure 1.10.0!_
 
