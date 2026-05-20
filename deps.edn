@@ -67,9 +67,9 @@
              :extra-deps {io.github.seancorfield/dot-clojure
                           {:git/tag "v1.4.2"
                            :git/sha "2ac85f5"}
-                          org.corfield/rephrase {:mvn/version "0.1.0-SNAPSHOT"}}
+                          org.corfield/rephrase {:mvn/version "1.0.0"}}
              :main-opts ["-m" "org.corfield.dev.repl"]}
-  :rephrase {:extra-deps {org.corfield/rephrase {:mvn/version "0.1.0-SNAPSHOT"}}}
+  :rephrase {:extra-deps {org.corfield/rephrase {:mvn/version "1.0.0"}}}
 
   ;; - for JDK 21+, so that nREPL can interrupt long-running evaluations:
   :allow-attach-self

@@ -109,7 +109,7 @@ There are aliases to pull in and start various REPL-related tools:
 * `:jedi-time` -- adds `datafy`/`nav` support for Java Time objects via [jedi-time](https://github.com/jimpil/jedi-time)
 * `:portal` -- pulls in a recent stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
 * `:reflect` -- adds Stuart Halloway's reflector utility (best used with Portal)
-* `:rephrase` -- adds the latest SNAPSHOT of [rephrase](https://github.com/seancorfield/rephrase), which provides nREPL middleware to rephrase error messages into more beginner-friendly versions. This is automatically added by the `:dev/repl` alias.
+* `:rephrase` -- adds the latest stable release of [rephrase](https://github.com/seancorfield/rephrase), which provides nREPL middleware to rephrase error messages into more beginner-friendly versions. This is automatically added by the `:dev/repl` alias.
 
 There are aliases to pull in specific versions of Clojure:
 * `:1.12` -- Clojure 1.12.5 -- see [changes to Clojure in version 1.12.5](https://github.com/clojure/clojure/blob/master/changes.md)
