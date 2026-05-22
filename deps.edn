@@ -12,7 +12,7 @@
   ;;   - clj -X:deploy :artifact '"project.jar"'
   ;; - this relies on having a pom.xml file and, for deployment, these two
   ;;   environment variables: CLOJARS_USERNAME, CLOJARS_PASSWORD
-  :deploy {:replace-deps {slipset/deps-deploy {:mvn/version "0.2.3"}}
+  :deploy {:replace-deps {slipset/deps-deploy {:mvn/version "0.2.4"}}
            :exec-fn deps-deploy.deps-deploy/deploy
            :exec-args {:installer :remote}}
 
@@ -67,9 +67,9 @@
              :extra-deps {io.github.seancorfield/dot-clojure
                           {:git/tag "v1.4.2"
                            :git/sha "2ac85f5"}
-                          org.corfield/rephrase {:mvn/version "1.0.0"}}
+                          org.corfield/rephrase {:mvn/version "1.0.2"}}
              :main-opts ["-m" "org.corfield.dev.repl"]}
-  :rephrase {:extra-deps {org.corfield/rephrase {:mvn/version "1.0.0"}}}
+  :rephrase {:extra-deps {org.corfield/rephrase {:mvn/version "1.0.2"}}}
 
   ;; - for JDK 21+, so that nREPL can interrupt long-running evaluations:
   :allow-attach-self
