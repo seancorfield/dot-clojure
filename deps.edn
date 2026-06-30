@@ -81,9 +81,9 @@
   :socket {:jvm-opts ["-Dclojure.server.repl={:address,\"0.0.0.0\",:port,50505,:accept,clojure.core.server/repl}"]}
   ;; - see https://github.com/bhauman/rebel-readline
   ;; - start a Rebel Readline REPL:
-  :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.7"}
+  :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.11"}
                        ;; in case we want to use Rebel as an nREPL client:
-                       com.bhauman/rebel-readline-nrepl {:mvn/version "0.1.8"}}
+                       com.bhauman/rebel-readline-nrepl {:mvn/version "0.1.11"}}
           ;; see https://github.com/fusesource/jansi/issues/301
           :jvm-opts ["--enable-native-access=ALL-UNNAMED"]
           :main-opts ["-m" "rebel-readline.main"]}
@@ -93,7 +93,7 @@
           :main-opts ["-m" "nrepl.cmdline"]}
   ;; - see https://nrepl.org/
   ;; - start a CIDER-enhanced nREPL server on a random available port:
-  :cider-nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "0.59.0"}
+  :cider-nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "0.61.0"}
                              ; until cider-nrepl is updated to this:
                              nrepl/nrepl {:mvn/version "1.7.0"}}
                 :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
@@ -111,7 +111,7 @@
   {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.1"}}}
   ;; - see https://github.com/djblue/portal
   :portal
-  {:extra-deps {djblue/portal {:mvn/version "0.65.0"}}}
+  {:extra-deps {djblue/portal {:mvn/version "0.66.0"}}}
   ;; - see https://github.com/stuarthalloway/reflector
   :reflect
   {:extra-deps {io.github.stuarthalloway/reflector
