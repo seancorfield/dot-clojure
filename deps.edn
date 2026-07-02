@@ -2,7 +2,7 @@
 
 ;; see https://github.com/seancorfield/dot-clojure
 {:mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
- :deps {org.clojure/clojure {:mvn/version "1.13.0-alpha1"}}
+ :deps {org.clojure/clojure {:mvn/version "1.13.0-alpha2"}}
  :aliases
  {;; clojure -X:deps:this help/dir :ns my.project.core
   :this {:deps {this/project {:local/root "."}}}
@@ -148,5 +148,5 @@
   :1.12.3 {:override-deps {org.clojure/clojure {:mvn/version "1.12.3"}}}
   :1.12.4 {:override-deps {org.clojure/clojure {:mvn/version "1.12.4"}}}
   :1.12.5 {:override-deps {org.clojure/clojure {:mvn/version "1.12.5"}}}
-  ;; latest 1.13 is 1.13.0-alpha1:
-  :1.13 {:override-deps {org.clojure/clojure {:mvn/version "1.13.0-alpha1"}}}}}
+  ;; latest 1.13 is 1.13.0-alpha2:
+  :1.13 {:override-deps {org.clojure/clojure {:mvn/version "1.13.0-alpha2"}}}}}
