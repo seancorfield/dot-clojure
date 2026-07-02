@@ -11,4 +11,4 @@ then
   fi
 fi
 
-clojure "$@" -M:1.13:allow-attach-self:portal:test:cider-nrepl:rebel:dev/repl
+clojure "$@" -M:1.12:allow-attach-self:portal:test:cider-nrepl:rebel:dev/repl
