@@ -2,7 +2,7 @@
 
 This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file providing useful `clj` aliases drawn from a variety of projects. It is published to GitHub so I can keep all my computers sync'd up -- and to provide a range of examples that folks new to the Clojure CLI might find helpful.
 
-**The default Clojure version in use here is 1.13.0-alpha3!**
+**The default Clojure version in use here is 1.13.0-alpha4!**
 
 **I highly recommend ensuring you have [the latest Clojure CLI](https://clojure.org/releases/tools) installed!**
 
@@ -114,7 +114,7 @@ There are aliases to pull in and start various REPL-related tools:
 * `:rephrase` -- adds the latest stable release of [rephrase](https://github.com/seancorfield/rephrase), which provides nREPL middleware to rephrase error messages into more beginner-friendly versions. This is automatically added by the `:dev/repl` alias.
 
 There are aliases to pull in specific versions of Clojure:
-* `:1.13` -- Clojure 1.13.0-alpha3 -- see [changes to Clojure in version 1.13.0-alpha1](https://clojure.org/news/2026/07/02/clojure-1-13-alpha1)
+* `:1.13` -- Clojure 1.13.0-alpha4 -- see [changes to Clojure in version 1.13.0-alpha1](https://clojure.org/news/2026/07/02/clojure-1-13-alpha1)
 * `:1.12` -- Clojure 1.12.5 -- see [changes to Clojure in version 1.12.5](https://github.com/clojure/clojure/blob/master/changes.md)
   * `:1.12.0` -- Clojure 1.12.0
   * `:1.12.1` -- Clojure 1.12.1
