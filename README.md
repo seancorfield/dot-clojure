@@ -114,7 +114,7 @@ There are aliases to pull in and start various REPL-related tools:
 * `:rephrase` -- adds the latest stable release of [rephrase](https://github.com/seancorfield/rephrase), which provides nREPL middleware to rephrase error messages into more beginner-friendly versions. This is automatically added by the `:dev/repl` alias.
 
 There are aliases to pull in specific versions of Clojure:
-* `:1.13` -- Clojure 1.13.0-alpha4 -- see [changes to Clojure in version 1.13.0-alpha1](https://clojure.org/news/2026/07/02/clojure-1-13-alpha1)
+* `:1.13` -- Clojure 1.13.0-alpha4 -- see [changes to Clojure in the 1.13 Alpha releases](https://clojure.org/releases/devchangelog#_release_1_13_x)
 * `:1.12` -- Clojure 1.12.5 -- see [changes to Clojure in version 1.12.5](https://github.com/clojure/clojure/blob/master/changes.md)
   * `:1.12.0` -- Clojure 1.12.0
   * `:1.12.1` -- Clojure 1.12.1
