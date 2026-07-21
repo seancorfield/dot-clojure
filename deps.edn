@@ -93,7 +93,7 @@
           :main-opts ["-m" "nrepl.cmdline"]}
   ;; - see https://nrepl.org/
   ;; - start a CIDER-enhanced nREPL server on a random available port:
-  :cider-nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "0.61.0"}
+  :cider-nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "0.62.2"}
                              ; until cider-nrepl is updated to this:
                              nrepl/nrepl {:mvn/version "1.7.0"}}
                 :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
@@ -111,7 +111,7 @@
   {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.1"}}}
   ;; - see https://github.com/djblue/portal
   :portal
-  {:extra-deps {djblue/portal {:mvn/version "0.66.0"}}}
+  {:extra-deps {djblue/portal {:mvn/version "0.67.0"}}}
   ;; - see https://github.com/stuarthalloway/reflector
   :reflect
   {:extra-deps {io.github.stuarthalloway/reflector
