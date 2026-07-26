@@ -22,6 +22,7 @@
   :poly-next
   {:replace-deps {polylith/clj-poly {:mvn/version "0.3.33-SNAPSHOT"}}
    :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
+
   ;; testing and debugging tools (this would normally be overridden
   ;; by a :test alias in the project deps.edn file -- but it's a
   ;; useful default):
@@ -36,12 +37,14 @@
   :lazy {:extra-deps {io.github.noahtheduke/lazytest {:mvn/version "2.0.0"}}
          :main-opts ["-m" "lazytest.main"]}
   ;; - see https://github.com/seancorfield/test-runner
-  ;; - automatically runs lazytest tests if :lazy alias is present
+  ;; - automatically runs lazytest tests if :lazy alias is also used
   ;; - run your tests: clj -X:test:runner
   :runner {:extra-deps {io.github.seancorfield/test-runner
                         {:git/tag "v0.6.0" :git/sha "d5f18c5"}}
            :exec-fn cognitect.test-runner.api/test
            :exec-args {:dirs ["test" "src/test/clojure"]}}
+
+  ;; linting:
   ;; - see https://github.com/jonase/eastwood#running-eastwood-in-a-repl
   :eastwood {:extra-deps {jonase/eastwood {:mvn/version "1.4.3"}}
              :main-opts ["-m" "eastwood.lint" "{:source-paths,[\"src\"],:test-paths,[\"test\"]}"]}
@@ -52,6 +55,8 @@
   :check {:extra-deps {io.github.athos/clj-check
                        {:git/tag "0.1.0" :git/sha "0ca84df"}}
           :main-opts ["-m" "clj-check.check"]}
+
+  ;; performance:
   ;; - see https://github.com/hugoduncan/criterium/
   ;; - (require '[criterium.core :refer [bench]])
   ;; - (bench (your-expression))
@@ -98,6 +103,7 @@
                              nrepl/nrepl {:mvn/version "1.7.0"}}
                 :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
 
+  ;; datafication tools:
   ;; - see https://github.com/Datomic/dev.datafy
   :datomic/dev.datafy
   {com.datomic/dev.datafy {:git/sha "4a9dffb"
@@ -117,6 +123,14 @@
   {:extra-deps {io.github.stuarthalloway/reflector
                 {:git/url "https://github.com/stuarthalloway/reflector"
                  :sha "93a0c19b4526c1180959e940202928d35e5c3cef"}}}
+
+  ;; other random tooling I'm playing with these days:
+  ;; - see https://datalevin.org/
+  :datalevin/jvm
+  {:extra-deps {org.datalevin/datalevin-embedded {:mvn/version "1.0.0"}}
+   :jvm-opts ["--add-opens=java.base/java.nio=ALL-UNNAMED"
+              "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
+              "--enable-native-access=ALL-UNNAMED"]}
 
   ;; pull in specific versions of Clojure:
   :1.0 {:override-deps {org.clojure/clojure {:mvn/version "1.0.0"}}}
