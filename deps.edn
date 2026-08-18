@@ -34,7 +34,7 @@
   ;; - see https://github.com/noahtheduke/lazytest
   ;; - run just lazytest tests: clj -M:test:lazy
   ;; - run clojure.test and lazytest tests: clj -X:test:lazy:runner
-  :lazy {:extra-deps {io.github.noahtheduke/lazytest {:mvn/version "2.0.0"}}
+  :lazy {:extra-deps {io.github.noahtheduke/lazytest {:mvn/version "2.1.0"}}
          :main-opts ["-m" "lazytest.main"]}
   ;; - see https://github.com/seancorfield/test-runner
   ;; - automatically runs lazytest tests if :lazy alias is also used
@@ -117,20 +117,12 @@
   {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.1"}}}
   ;; - see https://github.com/djblue/portal
   :portal
-  {:extra-deps {djblue/portal {:mvn/version "0.67.1"}}}
+  {:extra-deps {djblue/portal {:mvn/version "0.67.2"}}}
   ;; - see https://github.com/stuarthalloway/reflector
   :reflect
   {:extra-deps {io.github.stuarthalloway/reflector
                 {:git/url "https://github.com/stuarthalloway/reflector"
                  :sha "93a0c19b4526c1180959e940202928d35e5c3cef"}}}
-
-  ;; other random tooling I'm playing with these days:
-  ;; - see https://datalevin.org/
-  :datalevin/jvm
-  {:extra-deps {org.datalevin/datalevin-embedded {:mvn/version "1.0.0"}}
-   :jvm-opts ["--add-opens=java.base/java.nio=ALL-UNNAMED"
-              "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
-              "--enable-native-access=ALL-UNNAMED"]}
 
   ;; pull in specific versions of Clojure:
   :1.0 {:override-deps {org.clojure/clojure {:mvn/version "1.0.0"}}}
