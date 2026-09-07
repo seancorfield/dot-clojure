@@ -6,7 +6,7 @@ This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file pro
 
 **I highly recommend ensuring you have [the latest Clojure CLI](https://clojure.org/releases/tools) installed!**
 
-> The latest Clojure CLI was 1.12.5.1638 (May 12, 2026) when I last updated this file.
+> The latest Clojure CLI was 1.12.6.1673 (September 7th, 2026) when I last updated this file.
 
 In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the Clojure CLI -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
 
@@ -115,12 +115,13 @@ There are aliases to pull in and start various REPL-related tools:
 
 There are aliases to pull in specific versions of Clojure:
 * `:1.13` -- Clojure 1.13.0-alpha6 -- see [changes to Clojure in the 1.13 Alpha releases](https://clojure.org/releases/devchangelog#_release_1_13_x)
-* `:1.12` -- Clojure 1.12.5 -- see [changes to Clojure in version 1.12.5](https://github.com/clojure/clojure/blob/master/changes.md)
+* `:1.12` -- Clojure 1.12.6 -- see [changes to Clojure in version 1.12.6](https://github.com/clojure/clojure/blob/master/changes.md)
   * `:1.12.0` -- Clojure 1.12.0
   * `:1.12.1` -- Clojure 1.12.1
   * `:1.12.2` -- Clojure 1.12.2
   * `:1.12.3` -- Clojure 1.12.3
   * `:1.12.4` -- Clojure 1.12.4
+  * `:1.12.5` -- Clojure 1.12.5
 * `:1.11` -- Clojure 1.11.4
   * `:1.11.3` -- Clojure 1.11.3
   * `:1.11.2` -- Clojure 1.11.2
