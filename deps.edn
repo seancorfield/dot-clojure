@@ -17,11 +17,8 @@
            :exec-args {:installer :remote}}
 
   ;; polylith tool:
-  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.3.32"}}
+  :poly {:replace-deps {polylith/clj-poly {:mvn/version "0.3.33"}}
          :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
-  :poly-next
-  {:replace-deps {polylith/clj-poly {:mvn/version "0.3.33-SNAPSHOT"}}
-   :main-opts ["-m" "polylith.clj.core.poly-cli.core"]}
 
   ;; testing and debugging tools (this would normally be overridden
   ;; by a :test alias in the project deps.edn file -- but it's a
@@ -72,9 +69,9 @@
              :extra-deps {io.github.seancorfield/dot-clojure
                           {:git/tag "v1.4.2"
                            :git/sha "2ac85f5"}
-                          org.corfield/rephrase {:mvn/version "1.0.4"}}
+                          org.corfield/rephrase {:mvn/version "1.0.6"}}
              :main-opts ["-m" "org.corfield.dev.repl"]}
-  :rephrase {:extra-deps {org.corfield/rephrase {:mvn/version "1.0.4"}}}
+  :rephrase {:extra-deps {org.corfield/rephrase {:mvn/version "1.0.6"}}}
 
   ;; - for JDK 21+, so that nREPL can interrupt long-running evaluations:
   :allow-attach-self
