@@ -1,4 +1,5 @@
 {:bracket-pairs true
+ :caught-hook dev.hooks/caught-rephrase
  :doc-at-cursor "M-d"
  :eval-form-at-cursor "M-e"
  :history :project
