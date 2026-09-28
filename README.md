@@ -105,6 +105,7 @@ There are aliases to pull in and start various REPL-related tools:
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL; note that this also loads the Rebel Readline nREPL client library
 * `:nrepl` -- starts a (headless) [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:nrepl`
 * `:cider-nrepl` -- starts a (headless) CIDER-enhanced [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:cider-nrepl`
+* `:repl`, `:serve`, `:attach` -- aliases for the Clojure CLI REPL server and client (see https://github.com/clojure/clojure-cli.repl/).
 
 * `:datomic/dev.datafy` -- adds `datafy`/`nav` support for Datomic objects via [datomic/dev.datafy](https://github.com/Datomic/dev.datafy)
 * `:dbxray` -- adds [donut-party/dbxray](https://github.com/donut-party/dbxray) to help visualize your database structure
