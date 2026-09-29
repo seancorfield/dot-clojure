@@ -5,7 +5,8 @@
  :history :project
  :inspect "M-i"
  :keybindings dev.keybindings/install
- :middleware [dev.timing/middleware dev.heap/middleware]
+ :middleware [dev.middleware/portal
+              dev.timing/middleware dev.heap/middleware]
  :print-hook dev.hooks/pprint-values
  :prompt dev.full-width-prompt/prompt
  :warn-on-reflection true}

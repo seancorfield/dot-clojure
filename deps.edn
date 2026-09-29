@@ -102,13 +102,11 @@
 
   ;; - see https://github.com/clojure/clojure-cli.repl/
   ;; - clojure cli repl aliases:
-  :repl   {:extra-deps {io.github.clojure/clojure-cli.repl-server {:mvn/version "0.1.0"}
-                        org.corfield/rephrase {:mvn/version "1.0.6"}}
+  :repl   {:extra-deps {io.github.clojure/clojure-cli.repl-server {:mvn/version "0.1.0"}}
            ;; this doesn't work:
            :jvm-opts ["--enable-native-access=ALL-UNNAMED"]
            :main-opts ["-m" "clojure-cli.repl.server" "repl"]}
-  :serve  {:extra-deps {io.github.clojure/clojure-cli.repl-server {:mvn/version "0.1.0"}
-                        org.corfield/rephrase {:mvn/version "1.0.6"}}
+  :serve  {:extra-deps {io.github.clojure/clojure-cli.repl-server {:mvn/version "0.1.0"}}
            :main-opts ["-m" "clojure-cli.repl.server"]}
   :attach {:replace-paths []
            :replace-deps {io.github.clojure/clojure-cli.repl-client {:mvn/version "0.1.0"}}
