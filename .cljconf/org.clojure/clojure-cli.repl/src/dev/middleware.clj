@@ -33,25 +33,10 @@
                     :expects #{"eval" "load-file"}
                     :handles {}}))
 
-(def rephrase-mw
-  "Returns the rephrase middleware if available."
+(def rephrase
   (try
     (requiring-resolve 'org.corfield.rephrase.nrepl/wrap-rephrase)
-    (catch Exception _)))
-
-(defn rephrase
-  "If rephrase is on the classpath, wrap the handler with its middleware."
-  [handler]
-  (if rephrase-mw
-    (let [wrapped (rephrase-mw handler)]
-      (fn [msg]
-        (wrapped msg)))
-    handler))
-
-(when rephrase-mw
-  (set-descriptor! #'rephrase
-                   {:requires #{#'caught/wrap-caught}
-                    :expects #{"eval"}}))
+    (catch Exception _ identity)))
 
 #_
 (def cider
