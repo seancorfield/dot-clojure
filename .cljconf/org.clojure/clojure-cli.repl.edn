@@ -5,7 +5,8 @@
  :history :project
  :inspect "M-i"
  :keybindings dev.keybindings/install
- :middleware [dev.middleware/portal #_dev.middleware/cider
+ :middleware [dev.middleware/portal dev.middleware/rephrase
+              #_dev.middleware/cider ; not yet!
               dev.timing/middleware dev.heap/middleware]
  :print-hook dev.hooks/pprint-values
  :prompt dev.full-width-prompt/prompt
