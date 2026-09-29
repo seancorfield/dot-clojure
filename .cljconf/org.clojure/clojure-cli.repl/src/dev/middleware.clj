@@ -14,12 +14,15 @@
            (try ; this just happens to be in the right order for composition:
              (deref (requiring-resolve 'portal.nrepl/middleware))
              (catch Exception _))]
-    ;; unclear why this doesn't work - wrap-portal doesn't work either:
     (let [wrapped (reduce (fn [h m] ((resolve m) h))
                           handler
                           wrapper-list)]
       (fn [msg]
-        (wrapped msg)))
+        (wrapped (cond-> msg
+                   ;; if we have code but no file, assume it's from the REPL:
+                   (and (some? (:code msg))
+                        (nil?  (:file msg)))
+                   (assoc :file "REPL")))))
     handler))
 
 (set-descriptor! #'portal
