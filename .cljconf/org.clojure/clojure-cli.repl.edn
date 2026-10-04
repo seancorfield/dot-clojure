@@ -7,6 +7,12 @@
  :middleware [dev.middleware/portal dev.middleware/rephrase
               #_dev.middleware/cider ; not yet!
               dev.timing/middleware dev.heap/middleware]
+ :paredit/barf-forward "M-,"
+ :paredit/raise "M-r"
+ :paredit/slurp-forward "M-."
+ :paredit/wrap-list "M-p"
+ :paredit/wrap-map "M-c"
+ :paredit/wrap-vector "M-s"
  :print-hook dev.hooks/pprint-values
  :prompt dev.full-width-prompt/prompt
  :warn-on-reflection true}

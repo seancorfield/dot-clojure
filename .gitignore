@@ -2,11 +2,13 @@
 .calva/output-window
 .calva/repl.calva-repl
 .clj-kondo/.cache
+.cljconf/org.clojure/clojure-cli.repl/clojuredocs-export.json
+.cljconf/org.clojure/clojure-cli.repl/history
 .cpcache
 .lsp/.cache
 .nrepl-port
 .portal/vs-code.edn
 .rebel_readline_history
 clj.cp
-tools/tools.edn
 outdated.txt
+tools/tools.edn
