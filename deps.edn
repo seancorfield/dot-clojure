@@ -134,6 +134,10 @@
                 {:git/url "https://github.com/stuarthalloway/reflector"
                  :sha "93a0c19b4526c1180959e940202928d35e5c3cef"}}}
 
+  ;; - when an explicit nop is needed for slf4j:
+  :slf4j-nop
+  {:extra-deps {org.slf4j/slf4j-nop {:mvn/version "2.0.20"}}}
+
   ;; pull in specific versions of Clojure:
   :1.0 {:override-deps {org.clojure/clojure {:mvn/version "1.0.0"}}}
   :1.1 {:override-deps {org.clojure/clojure {:mvn/version "1.1.0"}}}
