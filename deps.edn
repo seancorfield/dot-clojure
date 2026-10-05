@@ -103,7 +103,6 @@
   ;; - clojure cli repl aliases:
   :repl   {:extra-deps {io.github.clojure/clojure-cli.repl-server {:mvn/version "0.1.0"}
                         nrepl/nrepl {:mvn/version "1.8.0"}}
-           :jvm-opts ["--enable-native-access=ALL-UNNAMED"]
            :main-opts ["-m" "clojure-cli.repl.server" "repl"]}
   :serve  {:extra-deps {io.github.clojure/clojure-cli.repl-server {:mvn/version "0.1.0"}
                         nrepl/nrepl {:mvn/version "1.8.0"}}
