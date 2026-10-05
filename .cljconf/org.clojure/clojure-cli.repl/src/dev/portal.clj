@@ -1,6 +1,6 @@
 (ns dev.portal
-  "Called when Portal is known to be on the classpath, to patch logging
-   libraries so they `tap>` logs in a format Portal understands."
+  "Called to patch logging libraries so they `tap>` logs in a format 
+   Portal understands, if Portal is on the classpath."
   (:require [clojure.repl :refer [demunge]]
             [clojure.string :as str]))
 
@@ -54,7 +54,9 @@
   ;; if Portal and clojure.tools.logging are both present,
   ;; cause all (successful) logging to also be tap>'d:
   (try
-    ;; install a tap> ahead of tools.logging:
+    ;; if we have Portal on the classpath...
+    (require 'portal.console)
+    ;; ...then install a tap> ahead of tools.logging:
     (let [log-star (requiring-resolve 'clojure.tools.logging/log*)]
       (alter-var-root
        log-star
@@ -65,7 +67,9 @@
   ;; if Portal and logging4j2 are both present,
   ;; cause all (successful) logging to also be tap>'d:
   (try
-    ;; install a tap> ahead of logging4j2:
+    ;; if we have Portal on the classpath...
+    (require 'portal.console)
+    ;; ...then install a tap> ahead of logging4j2:
     (let [log-star (requiring-resolve 'org.corfield.logging4j2.impl/log*)]
       (alter-var-root
        log-star

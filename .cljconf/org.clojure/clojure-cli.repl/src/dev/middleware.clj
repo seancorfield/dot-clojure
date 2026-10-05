@@ -1,15 +1,12 @@
 (ns dev.middleware
-  (:require [dev.portal :as portal]
-            [nrepl.middleware :refer [set-descriptor!]]
+  (:require [nrepl.middleware :refer [set-descriptor!]]
             [nrepl.middleware.caught :as caught]
             [nrepl.middleware.print :as print]))
 
 (def portal-mw
   "Returns a vector of Portal middleware to be composed, if available."
   (try ; happens to be in the correct order for composition:
-    (let [mw (deref (requiring-resolve 'portal.nrepl/middleware))]
-      (portal/install!)
-      mw)
+    (deref (requiring-resolve 'portal.nrepl/middleware))
     (catch Exception _)))
 
 (defn portal
