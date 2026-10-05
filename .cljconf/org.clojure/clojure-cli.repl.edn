@@ -14,6 +14,7 @@
  :paredit/wrap-list "M-p"
  :paredit/wrap-map "M-c"
  :paredit/wrap-vector "M-s"
+ ;; note: portal middleware overrides the print hook:
  :print-hook dev.hooks/pprint-values
  :prompt dev.full-width-prompt/prompt
  :warn-on-reflection true}
