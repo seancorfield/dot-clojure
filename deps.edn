@@ -8,12 +8,12 @@
   :this {:deps {this/project {:local/root "."}}}
 
   ;; jar installation and deployment:
-  ;; - see https://github.com/slipset/deps-deploy
+  ;; - see https://github.com/babashka/deps-deploy
   ;;   - clj -X:deploy :artifact '"project.jar"'
   ;; - this relies on having a pom.xml file and, for deployment, these two
   ;;   environment variables: CLOJARS_USERNAME, CLOJARS_PASSWORD
-  :deploy {:replace-deps {slipset/deps-deploy {:mvn/version "0.2.5"}}
-           :exec-fn deps-deploy.deps-deploy/deploy
+  :deploy {:replace-deps {io.github.babashka/deps-deploy {:mvn/version "0.0.1"}}
+           :exec-fn babashka.deps-deploy/deploy
            :exec-args {:installer :remote}}
 
   ;; polylith tool:
@@ -42,9 +42,6 @@
            :exec-args {:dirs ["test" "src/test/clojure"]}}
 
   ;; linting:
-  ;; - see https://github.com/jonase/eastwood#running-eastwood-in-a-repl
-  :eastwood {:extra-deps {jonase/eastwood {:mvn/version "1.4.3"}}
-             :main-opts ["-m" "eastwood.lint" "{:source-paths,[\"src\"],:test-paths,[\"test\"]}"]}
   ;; - see https://github.com/NoahTheDuke/splint
   :splint {:extra-deps {io.github.noahtheduke/splint {:mvn/version "1.25.0"}}
            :main-opts ["-m" "noahtheduke.splint"]}
@@ -119,20 +116,12 @@
   {com.datomic/dev.datafy {:git/sha "4a9dffb"
                            :git/tag "v0.1"
                            :git/url "https://github.com/Datomic/dev.datafy"}}
-  ;; - see https://github.com/donut-party/dbxray
-  :dbxray
-  {party.donut/dbxray {:mvn/version "0.0.70"}}
   ;; - see https://github.com/jimpil/jedi-time
   :jedi-time
   {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.1"}}}
   ;; - see https://github.com/djblue/portal
   :portal
   {:extra-deps {djblue/portal {:mvn/version "0.67.2"}}}
-  ;; - see https://github.com/stuarthalloway/reflector
-  :reflect
-  {:extra-deps {io.github.stuarthalloway/reflector
-                {:git/url "https://github.com/stuarthalloway/reflector"
-                 :sha "93a0c19b4526c1180959e940202928d35e5c3cef"}}}
 
   ;; - when an explicit nop is needed for slf4j:
   :slf4j-nop

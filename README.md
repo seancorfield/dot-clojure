@@ -64,13 +64,12 @@ More tools will be added to this section over time (as more tools add `:tools/us
 ## Basic Aliases
 
 Deploy jar files (if you don't have a `build.clj` file):
-* `:deploy` -- pulls in and runs a recent stable release of Erik Assum's [deps-deploy](https://github.com/slipset/deps-deploy) and deploys the specified JAR file to Clojars, based on your `pom.xml` and the `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment variables; `clojure -X:deploy :artifact '"MyProject.jar"'`
+* `:deploy` -- pulls in and runs a recent stable release of Borkdude's [deps-deploy](https://github.com/babashka/deps-deploy) and deploys the specified JAR file to Clojars, based on your `pom.xml` and the `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment variables; `clojure -X:deploy :artifact '"MyProject.jar"'`
 
 There are aliases to pull in various useful testing and debugging tools:
 * `:test` -- adds both `test` and `src/test/clojure` to your classpath and pulls in the latest stable version of `test.check`
 * `:lazy` -- adds a recent stable release of [NoahTheDuke's Lazytest](https://github.com/NoahTheDuke/lazytest) for more expressive and powerful testing; can be used as `clojure -M:test:lazy` to run just Lazytest tests, or `clojure -X:test:lazy:runner` to run both Lazytest and `clojure.test` tests (via my fork of Cognitect's `test-runner` project)
 * `:runner` -- pulls in my fork of [Cognitect Labs' `test-runner`](https://github.com/cognitect-labs/test-runner) project and runs any tests it can find
-* `:eastwood` -- pulls and runs in a recent stable release of [Eastwood](https://github.com/jonase/eastwood) on your `src` and `test` folders; use with `:test` above
 * `:splint` -- pulls in and runs a recent stable release of [Splint](https://github.com/NoahTheDuke/splint) on your project or specific files
 * `:check` -- pulls in [Athos' Check](https://github.com/athos/clj-check) project to compile all your namespaces to check for syntax errors and reflection warnings like `lein check`
 * `:bench` -- pulls in a recent stable release of [Criterium](https://github.com/hugoduncan/criterium/) for benchmarking your code
@@ -90,9 +89,7 @@ There are aliases to pull in and start various REPL-related tools:
 * `:nrepl` -- starts a (headless) [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:nrepl`
 * `:classes` -- adds the `classes` folder to your classpath to pick up compiled code (e.g., see https://clojure.org/guides/dev_startup_time)
 * `:datomic/dev.datafy` -- adds `datafy`/`nav` support for Datomic objects via [datomic/dev.datafy](https://github.com/Datomic/dev.datafy)
-* `:dbxray` -- adds [donut-party/dbxray](https://github.com/donut-party/dbxray) to help visualize your database structure
 * `:jedi-time` -- adds `datafy`/`nav` support for Java Time objects via [jedi-time](https://github.com/jimpil/jedi-time)
-* `:reflect` -- adds Stuart Halloway's reflector utility (best used with Portal)
 
 There are aliases to pull in specific versions of Clojure:
 * `:1.13` -- Clojure 1.13.0-alpha8 -- see [changes to Clojure in the 1.13 Alpha releases](https://clojure.org/releases/devchangelog#_release_1_13_x)
