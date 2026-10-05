@@ -1,5 +1,6 @@
 #!/bin/sh
 
+error_on_nrepl_port=true
 repl_alias=:rephrase:repl
 slf4j=:slf4j-nop
 extra_aliases=""
@@ -9,16 +10,11 @@ while test "$parsing" = "true"
 do
   parsing=false
 
-  if test -f .nrepl-port
+  if test "$1" = "force"
   then
-    if test "$1" = "force"
-    then
-      shift
-      parsing=true
-    else
-      echo ".nrepl-port exists: $(cat .nrepl-port)"
-      exit 1
-    fi
+    error_on_nrepl_port=false
+    shift
+    parsing=true
   fi
 
   # in case we need the older behavior, with cider, before the cli repl is fixed:
@@ -47,5 +43,14 @@ do
     parsing=true
   fi
 done
+
+if test -f .nrepl-port
+then
+  if test "$error_on_nrepl_port" = "true"
+  then
+    echo ".nrepl-port exists: $(cat .nrepl-port)"
+    exit 1
+  fi
+fi
 
 clojure "$@" -M"$slf4j":1.13:allow-attach-self"$extra_aliases":test:portal:cider-nrepl"$repl_alias"
