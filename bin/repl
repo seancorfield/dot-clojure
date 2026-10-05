@@ -11,7 +11,12 @@ then
   fi
 fi
 
-# we sort of want to get to this:
-#clojure "$@" -M:1.13:allow-attach-self:portal:test:cider-nrepl:rephrase:repl
+# in case we need the older behavior, with cider, before the cli repl is fixed:
+repl_alias=:rephrase:repl
+if test "$1" = "cider"
+then
+  shift
+  repl_alias=:rebel:dev/repl
+fi
 
-clojure "$@" -M:1.13:allow-attach-self:portal:test:cider-nrepl:rebel:dev/repl
+clojure "$@" -M:1.13:allow-attach-self:portal:test:cider-nrepl"$repl_alias"

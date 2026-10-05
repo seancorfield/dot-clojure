@@ -60,17 +60,16 @@
   :bench {:extra-deps {criterium/criterium {:mvn/version "0.4.6"}}}
 
   ;; REPL-related tools:
-  ;; - start Figwheel and/or Rebel Readline, with a socket REPL:
-  ;;   - clj -M:portal:dev/repl OR clojure -M:rebel:portal:dev/repl
-  ;;   - clojure -M:rebel:dev/repl
-  ;;   - clojure -M:nrepl:dev/repl
-  ;;   - there's no alias for adding figwheel, that's up to you
+  ;; - deprecated: will be removed soon:
   :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
              :extra-deps {io.github.seancorfield/dot-clojure
                           {:git/tag "v1.4.2"
                            :git/sha "2ac85f5"}
                           org.corfield/rephrase {:mvn/version "1.0.7"}}
              :main-opts ["-m" "org.corfield.dev.repl"]}
+
+  ;; - see https://github.com/seancorfield/rephrase
+  ;; - provides middleware to rephrase exceptions to be more intuitive:
   :rephrase {:extra-deps {org.corfield/rephrase {:mvn/version "1.0.7"}}}
 
   ;; - for JDK 21+, so that nREPL can interrupt long-running evaluations:
@@ -79,7 +78,7 @@
 
   ;; - in case you need precompiled code on your classpath:
   :classes {:extra-paths ["classes"]}
-  ;; - start a Socket REPL on port 50505 (not needed if you use the :dev/repl alias):
+  ;; - start a Socket REPL on port 50505:
   :socket {:jvm-opts ["-Dclojure.server.repl={:address,\"0.0.0.0\",:port,50505,:accept,clojure.core.server/repl}"]}
   ;; - see https://github.com/bhauman/rebel-readline
   ;; - start a Rebel Readline REPL:
