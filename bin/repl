@@ -1,32 +1,51 @@
 #!/bin/sh
 
-if test -f .nrepl-port
-then
-  if test "$1" = "force"
-  then
-    shift
-  else
-    echo ".nrepl-port exists: $(cat .nrepl-port)"
-    exit 1
-  fi
-fi
-
-# in case we need the older behavior, with cider, before the cli repl is fixed:
 repl_alias=:rephrase:repl
-if test "$1" = "cider"
-then
-  shift
-  repl_alias=:rebel:dev/repl
-fi
-
-# since clojure complains about -A and -M together, do our own stitching:
+slf4j=:slf4j-nop
 extra_aliases=""
-prefix=$(echo "$1" | cut -c1-2)
-if test "$prefix" = "-A"
-then
-  aliases=$(echo "$1" | cut -c3-)
-  extra_aliases=":$aliases"
-  shift
-fi
 
-clojure "$@" -M:slf4j-nop:1.13:allow-attach-self"$extra_aliases":test:portal:cider-nrepl"$repl_alias"
+parsing=true
+while test "$parsing" = "true"
+do
+  parsing=false
+
+  if test -f .nrepl-port
+  then
+    if test "$1" = "force"
+    then
+      shift
+      parsing=true
+    else
+      echo ".nrepl-port exists: $(cat .nrepl-port)"
+      exit 1
+    fi
+  fi
+
+  # in case we need the older behavior, with cider, before the cli repl is fixed:
+  if test "$1" = "cider"
+  then
+    repl_alias=:rebel:dev/repl
+    shift
+    parsing=true
+  fi
+
+  # in case we need a repl where slf4j is actually used:
+  if test "$1" = "slf4j"
+  then
+    slf4j=
+    shift
+    parsing=true
+  fi
+
+  # since clojure complains about -A and -M together, do our own stitching:
+  prefix=$(echo "$1" | cut -c1-2)
+  if test "$prefix" = "-A"
+  then
+    aliases=$(echo "$1" | cut -c3-)
+    extra_aliases=":$aliases"
+    shift
+    parsing=true
+  fi
+done
+
+clojure "$@" -M"$slf4j":1.13:allow-attach-self"$extra_aliases":test:portal:cider-nrepl"$repl_alias"
