@@ -79,19 +79,20 @@ There are aliases to pull in various useful testing and debugging tools:
 * `:no-main` -- adds an empty `:main-opts` so that you can run `clojure -M:test:no-main ...` in projects that combine the test deps with the test runner (instead of having them separate as this `deps.edn` has them). Because `:main-opts` is "last one wins", this allows you to essentially override (or remove) any `:main-opts` from aliases, so you can manually specify your own main options on the command-line.
 
 There are aliases to pull in and start various REPL-related tools:
-* `:classes` -- adds the `classes` folder to your classpath to pick up compiled code (e.g., see https://clojure.org/guides/dev_startup_time)
+* `:repl`, `:serve`, `:attach` -- aliases for the [Clojure CLI REPL](https://github.com/clojure/clojure-cli.repl) server and client. **`:repl` is my primary way to start an interactive REPL session, with additional aliases for adding middleware etc.**
+* `:portal` -- pulls in a recent stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
+* `:rephrase` -- adds the latest stable release of [rephrase](https://github.com/seancorfield/rephrase), which provides nREPL middleware to rephrase error messages into more beginner-friendly versions.
+
+* `:cider-nrepl` -- starts a (headless) CIDER-enhanced [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:cider-nrepl`; when used with `:repl` or `:serve` above, will add the CIDER middleware (once the aforementioned bug in the Clojure CLI REPL is fixed).
+
 * `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
 * `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL; note that this also loads the Rebel Readline nREPL client library
 * `:nrepl` -- starts a (headless) [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:nrepl`
-* `:cider-nrepl` -- starts a (headless) CIDER-enhanced [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:cider-nrepl`
-* `:repl`, `:serve`, `:attach` -- aliases for the Clojure CLI REPL server and client (see https://github.com/clojure/clojure-cli.repl/). `:repl` is my primary way to start an interactive REPL session, with additional aliases for adding middleware etc.
-
+* `:classes` -- adds the `classes` folder to your classpath to pick up compiled code (e.g., see https://clojure.org/guides/dev_startup_time)
 * `:datomic/dev.datafy` -- adds `datafy`/`nav` support for Datomic objects via [datomic/dev.datafy](https://github.com/Datomic/dev.datafy)
 * `:dbxray` -- adds [donut-party/dbxray](https://github.com/donut-party/dbxray) to help visualize your database structure
 * `:jedi-time` -- adds `datafy`/`nav` support for Java Time objects via [jedi-time](https://github.com/jimpil/jedi-time)
-* `:portal` -- pulls in a recent stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
 * `:reflect` -- adds Stuart Halloway's reflector utility (best used with Portal)
-* `:rephrase` -- adds the latest stable release of [rephrase](https://github.com/seancorfield/rephrase), which provides nREPL middleware to rephrase error messages into more beginner-friendly versions.
 
 There are aliases to pull in specific versions of Clojure:
 * `:1.13` -- Clojure 1.13.0-alpha8 -- see [changes to Clojure in the 1.13 Alpha releases](https://clojure.org/releases/devchangelog#_release_1_13_x)
