@@ -5,10 +5,11 @@
  :history :project
  :inspect "M-i"
  :keybindings dev.keybindings/install
- :middleware [dev.middleware/portal
-              ^:optional org.corfield.rephrase.nrepl/wrap-rephrase
+ :middleware [dev.heap/middleware
+              dev.timing/middleware
               ^:optional cider.nrepl/cider-middleware
-              dev.timing/middleware dev.heap/middleware]
+              ^:optional org.corfield.rephrase.nrepl/wrap-rephrase
+              ^:optional portal.nrepl/middleware]
  :paredit/barf-forward "M-,"
  :paredit/join "M-j"
  :paredit/kill "M-k"
