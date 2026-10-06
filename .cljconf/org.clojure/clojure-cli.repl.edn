@@ -9,8 +9,14 @@
               #_dev.middleware/cider ; not yet!
               dev.timing/middleware dev.heap/middleware]
  :paredit/barf-forward "M-,"
+ :paredit/join "M-j"
+ :paredit/kill "M-k"
+ :paredit/move-to-prev "M-b"
  :paredit/raise "M-r"
  :paredit/slurp-forward "M-."
+ :paredit/slurp-forward-fully "M-/"
+ :paredit/splice "M-h"
+ :paredit/split "M-l"
  :paredit/wrap-list "M-p"
  :paredit/wrap-map "M-c"
  :paredit/wrap-vector "M-s"
