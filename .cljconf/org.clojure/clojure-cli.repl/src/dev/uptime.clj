@@ -2,7 +2,6 @@
 
 (defn install! []) ; dummy entry point - loading this ns has side-effects
 
-;; from my old dev repl setup:
 (in-ns 'user)
 (require 'clojure.string) ; to satisfy clj-kondo :)
 #_{:clj-kondo/ignore [:unused-private-var]}

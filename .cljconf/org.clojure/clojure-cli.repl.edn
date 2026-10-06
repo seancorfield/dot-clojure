@@ -5,8 +5,9 @@
  :history :project
  :inspect "M-i"
  :keybindings dev.keybindings/install
- :middleware [dev.middleware/portal dev.middleware/rephrase
-              #_dev.middleware/cider ; not yet!
+ :middleware [dev.middleware/portal
+              ^:optional org.corfield.rephrase.nrepl/wrap-rephrase
+              ^:optional cider.nrepl/cider-middleware
               dev.timing/middleware dev.heap/middleware]
  :paredit/barf-forward "M-,"
  :paredit/join "M-j"

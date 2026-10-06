@@ -57,13 +57,6 @@
   :bench {:extra-deps {criterium/criterium {:mvn/version "0.4.6"}}}
 
   ;; REPL-related tools:
-  ;; - deprecated: will be removed soon:
-  :dev/repl {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"]
-             :extra-deps {io.github.seancorfield/dot-clojure
-                          {:git/tag "v1.5.0"
-                           :git/sha "8123cbd"}
-                          org.corfield/rephrase {:mvn/version "1.0.7"}}
-             :main-opts ["-m" "org.corfield.dev.repl"]}
 
   ;; - see https://github.com/seancorfield/rephrase
   ;; - provides middleware to rephrase exceptions to be more intuitive:
@@ -75,16 +68,6 @@
 
   ;; - in case you need precompiled code on your classpath:
   :classes {:extra-paths ["classes"]}
-  ;; - start a Socket REPL on port 50505:
-  :socket {:jvm-opts ["-Dclojure.server.repl={:address,\"0.0.0.0\",:port,50505,:accept,clojure.core.server/repl}"]}
-  ;; - see https://github.com/bhauman/rebel-readline
-  ;; - start a Rebel Readline REPL:
-  :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.11"}
-                       ;; in case we want to use Rebel as an nREPL client:
-                       com.bhauman/rebel-readline-nrepl {:mvn/version "0.1.11"}}
-          ;; see https://github.com/fusesource/jansi/issues/301
-          :jvm-opts ["--enable-native-access=ALL-UNNAMED"]
-          :main-opts ["-m" "rebel-readline.main"]}
   ;; - see https://nrepl.org/
   ;; - start a basic nREPL server on a random available port:
   :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "1.8.0"}}
@@ -98,27 +81,19 @@
 
   ;; - see https://github.com/clojure/clojure-cli.repl/
   ;; - clojure cli repl aliases:
-  :repl   {:extra-deps {io.github.clojure/clojure-cli.repl-server {:mvn/version "0.1.0"}
+  :repl   {:extra-deps {io.github.clojure/clojure-cli.repl-server {:mvn/version "0.1.1"}
                         nrepl/nrepl {:mvn/version "1.8.0"}}
            :main-opts ["-m" "clojure-cli.repl.server" "repl"]}
-  :serve  {:extra-deps {io.github.clojure/clojure-cli.repl-server {:mvn/version "0.1.0"}
+  :serve  {:extra-deps {io.github.clojure/clojure-cli.repl-server {:mvn/version "0.1.1"}
                         nrepl/nrepl {:mvn/version "1.8.0"}}
            :main-opts ["-m" "clojure-cli.repl.server"]}
   :attach {:replace-paths []
-           :replace-deps {io.github.clojure/clojure-cli.repl-client {:mvn/version "0.1.0"}
+           :replace-deps {io.github.clojure/clojure-cli.repl-client {:mvn/version "0.1.1"}
                           nrepl/nrepl {:mvn/version "1.8.0"}}
            :jvm-opts ["--enable-native-access=ALL-UNNAMED"]
            :main-opts ["-m" "clojure-cli.repl.client"]}
 
   ;; datafication tools:
-  ;; - see https://github.com/Datomic/dev.datafy
-  :datomic/dev.datafy
-  {com.datomic/dev.datafy {:git/sha "4a9dffb"
-                           :git/tag "v0.1"
-                           :git/url "https://github.com/Datomic/dev.datafy"}}
-  ;; - see https://github.com/jimpil/jedi-time
-  :jedi-time
-  {:extra-deps {jedi-time/jedi-time {:mvn/version "0.2.1"}}}
   ;; - see https://github.com/djblue/portal
   :portal
   {:extra-deps {djblue/portal {:mvn/version "0.67.2"}}}

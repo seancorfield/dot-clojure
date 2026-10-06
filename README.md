@@ -8,7 +8,7 @@ This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file pro
 
 > The latest Clojure CLI was 1.12.6.1673 (September 7th, 2026) when I last updated this file.
 
-Since the release of the [Clojure CLI REPL](https://github.com/clojure/clojure-cli.repl), my `.cljconf/org.clojure` folder is here, containing my personal configuration based on the [examples provided](https://github.com/clojure/clojure-cli.repl/tree/main/examples/.cljconf/org.clojure). This includes logic to add Portal and `rephrase` middleware if they are on the classpath. _This is replacing my former custom REPL startup code (under the `:dev/repl` alias)._
+Since the release of the [Clojure CLI REPL](https://github.com/clojure/clojure-cli.repl), my `.cljconf/org.clojure` folder is here, containing my personal configuration based on the [examples provided](https://github.com/clojure/clojure-cli.repl/tree/main/examples/.cljconf/org.clojure). This includes logic to add Portal and `rephrase` middleware if they are on the classpath. _This has replaced my former custom REPL startup code._
 
 In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the Clojure CLI -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
 
@@ -27,8 +27,6 @@ There is also a `bin/repl` bash script that runs
 to start an nREPL server with CIDER middleware, and then a client to that nREPL 
 server, with Portal available (and `clojure.tools.logging`, if
 present, patched to `tap>` all log messages for Portal, also `logging4j2` -- my log4j2 wrapper).
-
-> Note: CIDER middleware will not actually be picked up until [this CLI REPL bug](https://github.com/clojure/clojure-cli.repl/issues/2) is fixed.
 
 The `:allow-attach-self` alias sets the JVM property
 `-Djdk.attach.allowAttachSelf` for JDK 21+ so that
@@ -84,12 +82,8 @@ There are aliases to pull in and start various REPL-related tools:
 
 * `:cider-nrepl` -- starts a (headless) CIDER-enhanced [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:cider-nrepl`; when used with `:repl` or `:serve` above, will add the CIDER middleware (once the aforementioned bug in the Clojure CLI REPL is fixed).
 
-* `:socket` -- starts a Socket REPL on port 50505; can be combined with other aliases since this is just a JVM option
-* `:rebel` -- starts a [Rebel Readline](https://github.com/bhauman/rebel-readline) REPL; note that this also loads the Rebel Readline nREPL client library
 * `:nrepl` -- starts a (headless) [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:nrepl`
 * `:classes` -- adds the `classes` folder to your classpath to pick up compiled code (e.g., see https://clojure.org/guides/dev_startup_time)
-* `:datomic/dev.datafy` -- adds `datafy`/`nav` support for Datomic objects via [datomic/dev.datafy](https://github.com/Datomic/dev.datafy)
-* `:jedi-time` -- adds `datafy`/`nav` support for Java Time objects via [jedi-time](https://github.com/jimpil/jedi-time)
 
 There are aliases to pull in specific versions of Clojure:
 * `:1.13` -- Clojure 1.13.0-alpha8 -- see [changes to Clojure in the 1.13 Alpha releases](https://clojure.org/releases/devchangelog#_release_1_13_x)

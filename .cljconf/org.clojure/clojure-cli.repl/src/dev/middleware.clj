@@ -32,27 +32,3 @@
                                 #'caught/wrap-caught}
                     :expects #{"eval" "load-file"}
                     :handles {}}))
-
-(def rephrase
-  (try
-    (requiring-resolve 'org.corfield.rephrase.nrepl/wrap-rephrase)
-    (catch Exception _ identity)))
-
-#_
-(def cider
-  (try
-    (deref (requiring-resolve 'cider.nrepl/cider-middleware))
-    (catch Exception _ identity)))
-
-#_
-(defn cider [handler]
-  (if-let [wrapper-list
-           (try ; in wrong order to compose correctly
-             (deref (requiring-resolve 'cider.nrepl/cider-middleware))
-             (catch Exception _))]
-    (let [wrapped (reduce (fn [h m] ((resolve m) h))
-                          handler
-                          wrapper-list)]
-      (fn [msg]
-        (wrapped msg)))
-    handler))

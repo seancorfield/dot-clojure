@@ -20,7 +20,7 @@
         :column   0
         :time     (java.util.Date.)
         :runtime  :clj}
-       {:dev.repl/logging true}))))
+       {::logging true}))))
 
 (defn- ctl-log*adapter [log-star]
   (let [log*-fn (deref log-star)]
