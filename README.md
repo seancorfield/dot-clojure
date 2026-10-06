@@ -80,7 +80,7 @@ There are aliases to pull in and start various REPL-related tools:
 * `:portal` -- pulls in a recent stable release of the [Portal](https://github.com/djblue/portal) data visualization tool -- see the Portal web site for usage options
 * `:rephrase` -- adds the latest stable release of [rephrase](https://github.com/seancorfield/rephrase), which provides nREPL middleware to rephrase error messages into more beginner-friendly versions.
 
-* `:cider-nrepl` -- starts a (headless) CIDER-enhanced [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:cider-nrepl`; when used with `:repl` or `:serve` above, will add the CIDER middleware (once the aforementioned bug in the Clojure CLI REPL is fixed).
+* `:cider-nrepl` -- starts a (headless) CIDER-enhanced [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:cider-nrepl`; when used with `:repl` or `:serve` above, will add the CIDER middleware.
 
 * `:nrepl` -- starts a (headless) [nREPL server](https://nrepl.org/) on a random available port; `clojure -M:nrepl`
 * `:classes` -- adds the `classes` folder to your classpath to pick up compiled code (e.g., see https://clojure.org/guides/dev_startup_time)
@@ -122,7 +122,7 @@ To work with the Polylith command-line tool:
 
 The updated `hooks.clj` file installs an `uptime` function in the `user` namespace, which allows you to easily see how long your REPL has been running, in a human-readable format.
 
-The updated `middleware.clj` file conditionally provides middleware for Portal and `rephrase` (and CIDER but see the caveat above).
+The updated `middleware.clj` file conditionally provides middleware for Portal (this will not be needed with the next version of Portal that will support `{:all-evals true}` config in nREPL).
 
 * If both Portal and `org.clojure/tools.logging` are on the classpath, it patches `tools.logging` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry).
 * If both Portal and `com.github.seancorfield/logging4j2` are on the classpath, it patches `logging4j2` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry).
