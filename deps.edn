@@ -96,7 +96,7 @@
   ;; datafication tools:
   ;; - see https://github.com/djblue/portal
   :portal
-  {:extra-deps {djblue/portal {:mvn/version "0.68.0"}}}
+  {:extra-deps {djblue/portal {:mvn/version "0.68.1"}}}
 
   ;; - when an explicit nop is needed for slf4j:
   :slf4j-nop
