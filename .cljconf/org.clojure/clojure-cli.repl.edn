@@ -9,6 +9,9 @@
               dev.timing/middleware
               ^:optional cider.nrepl/cider-middleware
               ^:optional org.corfield.rephrase.nrepl/wrap-rephrase
+              ;; add the following setting to ~/.config/nrepl/nrepl.edn
+              ;; {:portal.nrepl/wrap-portal {:all-evals true}}
+              ;; that will tap> all REPL evaluations
               ^:optional portal.nrepl/middleware]
  :paredit/barf-forward "M-,"
  :paredit/join "M-j"
