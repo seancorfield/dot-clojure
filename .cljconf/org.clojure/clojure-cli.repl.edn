@@ -8,7 +8,7 @@
  :middleware [dev.heap/middleware
               dev.timing/middleware
               ^:optional cider.nrepl/cider-middleware
-              ^:optional org.corfield.rephrase.nrepl/wrap-rephrase
+              ^:optional org.corfield.rephrase.nrepl/middleware
               ;; add the following setting to ~/.config/nrepl/nrepl.edn
               ;; {:portal.nrepl/wrap-portal {:all-evals true}}
               ;; that will tap> all REPL evaluations
