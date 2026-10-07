@@ -1,11 +1,7 @@
-(ns dev.uptime)
+(ns dev.uptime
+  (:require [clojure.string :as str]))
 
-(defn install! []) ; dummy entry point - loading this ns has side-effects
-
-(in-ns 'user)
-(require 'clojure.string) ; to satisfy clj-kondo :)
-#_{:clj-kondo/ignore [:unused-private-var]}
-(defn- uptime []
+(defn uptime []
   (-> (java.lang.management.ManagementFactory/getRuntimeMXBean)
       (.getUptime)
       (java.time.Duration/ofMillis)
@@ -18,4 +14,4 @@
                [" days, " " hours, " " minutes, " " seconds"])))
       (->> (filter (comp pos? first))
            (map #(apply str %)))
-      (clojure.string/join)))
+      (str/join)))
