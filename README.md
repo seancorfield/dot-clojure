@@ -38,9 +38,8 @@ nREPL can stop evaluation threads.
 
 These are installed via `clojure -Ttools install ...` and usable via `clojure -T` with the tool name.
 
-* `antq` -- the outdated dependencies checker:
-  * `clojure -Tantq outdated` -- check the current project's dependencies,
-  * `clojure -A:deps -Tantq help/doc` -- for more information and other functions.
+> Note: I have removed `antq` from this section because I have switched over to `antq` installed directly via [`bbin`](https://github.com/babashka/bbin), as I adopt more Babashka-based tooling.
+
 * `clj-watson` -- a software composition analysis scanner, based on the National Vulnerability Database: [clj-watson](https://github.com/clj-holmes/clj-watson)
   * `clojure -Tclj-watson scan :deps-edn-path '"deps.edn"' :output '"stdout"'`
 * `new` -- the latest version of [deps-new](https://github.com/seancorfield/deps-new) to create new CLI/`deps.edn` projects: _[This uses a different (simpler!) templating system to `clj-new`, below, and therefore does not recognize Leiningen or Boot templates!]_
@@ -59,7 +58,13 @@ And the older `clj-new` tool:
   * `clojure -Tclj-new create :template something :name myname/myapp` -- locates a template for `something` and uses it to create a new project (which might be `deps.edn`-based or `lein`-based, depending on the template),
   * `clojure -A:deps -Tclj-new help/doc` -- for more information and other functions.
 
-More tools will be added to this section over time (as more tools add `:tools/usage` to their `deps.edn` files).
+I thought I might continue to add more tools to this section over time, but I'm
+switching more to Babashka-based scripts, and using `bbin` to install them, so
+I'm not sure that's true any more.
+
+In addition, I've started using [`in-1`](https://in-1.cc) to install command-line
+tooling (binaries), since it makes them easy to manage locally (and that's
+how I installed `bbin`).
 
 ## Basic Aliases
 
