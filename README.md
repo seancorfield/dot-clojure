@@ -8,13 +8,13 @@ This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file pro
 
 > The latest Clojure CLI was 1.12.6.1673 (September 7th, 2026) when I last updated this file.
 
-Since the release of the [Clojure CLI REPL](https://github.com/clojure/clojure-cli.repl), my `.cljconf/org.clojure` folder is here, containing my personal configuration based on the [examples provided](https://github.com/clojure/clojure-cli.repl/tree/main/examples/.cljconf/org.clojure). This includes logic to add Portal and `rephrase` middleware if they are on the classpath. _This has replaced my former custom REPL startup code._
+Since the release of the [Clojure CLI REPL](https://github.com/clojure/clojure-cli.repl), my `.cljconf/org.clojure` folder is here, containing my personal configuration based on the [examples provided](https://github.com/clojure/clojure-cli.repl/tree/main/examples/.cljconf/org.clojure). This includes logic to wire logging into Portal, if they are on the classpath. _This has replaced my former custom REPL startup code._
 
 There is also a `.cljconf/org.corfield` folder containing my `deps-new.edn` defaults, which selects Babashka for builds and LazyTest for the test runner.
 
 In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the Clojure CLI -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
 
-The main alias I use here is `:repl` which starts various combinations of REPL tooling via the Clojure CLI REPL.
+The main alias I use here is `:repl` which starts various combinations of REPL tooling via the Clojure CLI REPL, through the use of aliases.
 
 _Since it is my personal file, it may make assumptions about my own environment. I make no effort at backward-compatibility and may add, delete, or change aliases as they benefit me personally. Caveat Programmer!_
 
@@ -127,9 +127,9 @@ To work with the Polylith command-line tool:
 
 ## My Clojure CLI REPL Setup
 
-The updated `hooks.clj` file installs an `uptime` function in the `user` namespace, which allows you to easily see how long your REPL has been running, in a human-readable format.
+The `dev.uptime/uptime` function is auto-required into every namespace, and shows you how long your REPL has been running, in a human-readable format.
 
-The updated `middleware.clj` file conditionally provides middleware for Portal (this will not be needed with the next version of Portal that will support `{:all-evals true}` config in nREPL).
+The `dev.portal/install!` function is configured as `:init` and wires up logging libraries to `tap>` log messages into Portal:
 
 * If both Portal and `org.clojure/tools.logging` are on the classpath, it patches `tools.logging` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry).
 * If both Portal and `com.github.seancorfield/logging4j2` are on the classpath, it patches `logging4j2` to also `tap>` every log message in a format that Portal understands and can display (usually with the ability to go to the file/line listed in the log entry).
