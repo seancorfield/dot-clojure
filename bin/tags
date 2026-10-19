@@ -3,6 +3,12 @@
 (require '[babashka.tasks :refer [shell]]
          '[clojure.string :as str])
 
+(defn- short-sha []
+  (-> {:out :capture}
+      (shell "git rev-parse --short HEAD")
+      :out
+      slurp))
+
 (defn- tag-count [glob]
   (-> {:out :capture}
       (shell "git tag -l" glob)
@@ -20,7 +26,9 @@
   ;; print a count of the non-prerelease tags:
   (let [all (tag-count "*")
         pre (tag-count "*-*")]
-    (println (str m-m (when m-m ".") (- all pre))
-             (if m-m (str "v" m-m "." (- all pre)) ""))))
+    (println (str m-m (when m-m ".") (- all pre)
+                  (if m-m (str " v" m-m "." (- all pre)) "")
+                  " "
+                  (short-sha)))))
 
 (print-version *command-line-args*)
