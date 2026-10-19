@@ -2,6 +2,7 @@
                 [dev.uptime :refer [uptime]]]
  :bracket-pairs true
  :doc-at-cursor "M-d"
+ :echo-editor-code false
  :eval-form-at-cursor "M-e"
  :follow-editor-ns true
  :history :project
