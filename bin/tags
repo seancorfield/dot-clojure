@@ -18,7 +18,7 @@
       count))
 
 (defn- fetch-remote-tags [remote]
-  (shell {:out :ignore} "git fetch --tags" remote))
+  (shell {:out :ignore :err :ignore} "git fetch --tags" remote))
 
 (defn- print-version [[m-m remote]]
   ;; ensure we have fetched all tags from the origin:
