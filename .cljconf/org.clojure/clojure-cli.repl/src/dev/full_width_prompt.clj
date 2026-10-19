@@ -17,7 +17,7 @@
   {:retro {:ns {:fg :bright-white :bg :blue}
            :ok {:fg :black :bg :green}
            :err {:fg :bright-white :bg :red}
-           :time {:fg :bright-white :bg :bright-black}
+           :time {:fg :black :bg :yellow}
            :heap {:fg :black :bg :cyan}
            :clock {:fg :bright-white :bg :magenta}
            :arrow {:fg :bright-green}}

@@ -3,7 +3,9 @@
  :bracket-pairs true
  :doc-at-cursor "M-d"
  :eval-form-at-cursor "M-e"
+ :follow-editor-ns true
  :history :project
+ :init dev.portal/install!
  :inspect "M-i"
  :keybindings dev.keybindings/install
  :middleware [dev.heap/middleware
@@ -14,18 +16,24 @@
               ;; {:portal.nrepl/wrap-portal {:all-evals true}}
               ;; that will tap> all REPL evaluations
               ^:optional portal.nrepl/middleware]
+ :paredit/barf-backward "M->"
  :paredit/barf-forward "M-,"
  :paredit/join "M-j"
- :paredit/kill "M-k"
- :paredit/move-to-prev "M-b"
- :paredit/raise "M-r"
+ :paredit/kill "M-K"
+ :paredit/move-to-prev "M-B"
+ :paredit/raise "M-p M-r"
+ :paredit/slurp-backward "M-<"
+ :paredit/slurp-backward-fully "M-?"
  :paredit/slurp-forward "M-."
  :paredit/slurp-forward-fully "M-/"
- :paredit/splice "M-h"
- :paredit/split "M-l"
- :paredit/wrap-list "M-p"
- :paredit/wrap-map "M-c"
- :paredit/wrap-vector "M-s"
+ :paredit/splice "M-k SPC"
+ :paredit/splice-killing-backward "M-k <home>"
+ :paredit/splice-killing-forward "M-k <end>"
+ :paredit/split "M-s"
+ :paredit/wrap-list "M-P"
+ :paredit/wrap-map "M-C"
+ ;; :paredit/wrap-set unused
+ :paredit/wrap-vector "M-S"
  ;; note: portal middleware overrides the print hook:
  :print-hook dev.hooks/pprint-values
  :prompt dev.full-width-prompt/prompt

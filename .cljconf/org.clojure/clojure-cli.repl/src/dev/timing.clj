@@ -4,7 +4,7 @@
 
 (defn middleware [handler]
   (fn [{:keys [op transport] :as msg}]
-    (if (= op "eval")
+    (if (#{"eval" "load-file"} op)
       (let [start (System/nanoTime)]
         (handler (assoc msg :transport
                         (reify transport/Transport
