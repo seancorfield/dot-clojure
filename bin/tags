@@ -1,0 +1,26 @@
+#!/usr/bin/env bb
+
+(require '[babashka.tasks :refer [shell]]
+         '[clojure.string :as str])
+
+(defn- tag-count [glob]
+  (-> {:out :capture}
+      (shell "git tag -l" glob)
+      :out
+      slurp
+      str/split-lines
+      count))
+
+(defn- fetch-remote-tags [remote]
+  (shell {:out :ignore} "git fetch --tags" remote))
+
+(defn- print-version [[m-m remote]]
+  ;; ensure we have fetched all tags from the origin:
+  (fetch-remote-tags (or remote "origin"))
+  ;; print a count of the non-prerelease tags:
+  (let [all (tag-count "*")
+        pre (tag-count "*-*")]
+    (println (str m-m (when m-m ".") (- all pre))
+             (if m-m (str "v" m-m "." (- all pre)) ""))))
+
+(print-version *command-line-args*)
