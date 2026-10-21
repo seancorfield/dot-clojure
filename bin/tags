@@ -18,17 +18,23 @@
       count))
 
 (defn- fetch-remote-tags [remote]
+  ;; push first, to ensure we don't lose any local tags:
+  (shell {:out :ignore :err :ignore} "git push --tags" remote)
+  ;; then fetch all tags from the remote:
   (shell {:out :ignore :err :ignore} "git fetch --tags" remote))
 
 (defn- print-version [[m-m remote]]
   ;; ensure we have fetched all tags from the origin:
-  (fetch-remote-tags (or remote "origin"))
+  (when remote
+    (fetch-remote-tags remote))
   ;; print a count of the non-prerelease tags:
   (let [all (tag-count "*")
         pre (tag-count "*-*")]
     (println (str m-m (when m-m ".") (- all pre)
                   (if m-m (str " v" m-m "." (- all pre)) "")
                   " "
-                  (short-sha)))))
+                  (short-sha))))
+  (when-not remote
+    (println "If that release count seems incorrect, try specifying a remote.")))
 
 (print-version *command-line-args*)
