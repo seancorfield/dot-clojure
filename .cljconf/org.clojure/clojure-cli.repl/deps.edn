@@ -1,1 +1,7 @@
-{:paths ["src"]}
+{:paths ["src"]
+ :aliases
+ {:clojure-cli.repl/server
+  {:extra-deps {compliment/compliment {:mvn/version "0.8.2"}
+                nrepl/nrepl {:mvn/version "1.8.0"}}}
+  :clojure-cli.repl/client
+  {:extra-deps {nrepl/nrepl {:mvn/version "1.8.0"}}}}}
