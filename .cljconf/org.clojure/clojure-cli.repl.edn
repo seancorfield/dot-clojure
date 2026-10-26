@@ -6,7 +6,7 @@
  :eval-form-at-cursor "M-e"
  :follow-editor-ns true
  :history :project
- :init dev.portal/install!
+ :init dev.setup/install!
  :inspect "M-i"
  :keybindings dev.keybindings/install
  :middleware [dev.heap/middleware
