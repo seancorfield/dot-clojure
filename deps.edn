@@ -112,24 +112,8 @@
   :1.7 {:override-deps {org.clojure/clojure {:mvn/version "1.7.0"}}}
   :1.8 {:override-deps {org.clojure/clojure {:mvn/version "1.8.0"}}}
   :1.9 {:override-deps {org.clojure/clojure {:mvn/version "1.9.0"}}}
-  ;; latest 1.10 is 1.10.3 but you can ask for earlier versions:
   :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.3"}}}
-  :1.10.0 {:override-deps {org.clojure/clojure {:mvn/version "1.10.0"}}}
-  :1.10.1 {:override-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
-  :1.10.2 {:override-deps {org.clojure/clojure {:mvn/version "1.10.2"}}}
-  ;; latest 1.11 is 1.11.4 but you can ask for earlier versions:
   :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.4"}}}
-  :1.11.0 {:override-deps {org.clojure/clojure {:mvn/version "1.11.0"}}}
-  :1.11.1 {:override-deps {org.clojure/clojure {:mvn/version "1.11.1"}}}
-  :1.11.2 {:override-deps {org.clojure/clojure {:mvn/version "1.11.2"}}}
-  :1.11.3 {:override-deps {org.clojure/clojure {:mvn/version "1.11.3"}}}
-  ;; latest 1.12 is 1.12.6 but you can ask for earlier versions:
   :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.6"}}}
-  :1.12.0 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0"}}}
-  :1.12.1 {:override-deps {org.clojure/clojure {:mvn/version "1.12.1"}}}
-  :1.12.2 {:override-deps {org.clojure/clojure {:mvn/version "1.12.2"}}}
-  :1.12.3 {:override-deps {org.clojure/clojure {:mvn/version "1.12.3"}}}
-  :1.12.4 {:override-deps {org.clojure/clojure {:mvn/version "1.12.4"}}}
-  :1.12.5 {:override-deps {org.clojure/clojure {:mvn/version "1.12.5"}}}
   ;; latest 1.13 is 1.13.0-alpha11:
   :1.13 {:override-deps {org.clojure/clojure {:mvn/version "1.13.0-alpha11"}}}}}

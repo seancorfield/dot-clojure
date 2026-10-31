@@ -1,6 +1,9 @@
 # dot-clojure
 
-This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file providing useful `clj` aliases drawn from a variety of projects. It is published to GitHub so I can keep all my computers sync'd up -- and to provide a range of examples that folks new to the Clojure CLI might find helpful.
+This is my personal `.config/clojure/` (or `.clojure/`) configuration, including 
+my `deps.edn` file providing useful `clj` aliases drawn from a variety of projects. 
+It is published to GitHub so I can keep all my computers sync'd up -- and to 
+provide a range of examples that folks new to the Clojure CLI might find helpful.
 
 **The default Clojure version in use here is 1.13.0-alpha11!**
 
@@ -8,21 +11,33 @@ This is my personal `.config/clojure/deps.edn` (or `.clojure/deps.edn`) file pro
 
 > The latest Clojure CLI was 1.12.6.1673 (September 7th, 2026) when I last updated this file.
 
-Since the release of the [Clojure CLI REPL](https://github.com/clojure/clojure-cli.repl), my `.cljconf/org.clojure` folder is here, containing my personal configuration based on the [examples provided](https://github.com/clojure/clojure-cli.repl/tree/main/examples/.cljconf/org.clojure). This includes logic to wire logging into Portal, if they are on the classpath. _This has replaced my former custom REPL startup code._
+Since the release of the [Clojure CLI REPL](https://github.com/clojure/clojure-cli.repl), 
+my `.cljconf/org.clojure` folder is also here, containing my personal configuration 
+based on the [examples provided](https://github.com/clojure/clojure-cli.repl/tree/main/examples/.cljconf/org.clojure). 
+This includes logic to wire logging into Portal, if they are on the classpath. 
+_This has replaced my former custom REPL startup code._
 
-There is also a `.cljconf/org.corfield` folder containing my `deps-new.edn` defaults, which selects Babashka for builds and LazyTest for the test runner.
+There is also a `.cljconf/org.corfield` folder containing my `deps-new.edn` 
+defaults, which selects Babashka for builds and LazyTest for the test runner.
 
-In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, containing the tools that I've installed globally, via the Clojure CLI -- see [Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
+In addition, my `.config/clojure/tools/` (`.clojure/tools/`) folder is also here, 
+containing the tools that I've installed globally, via the Clojure CLI -- see 
+[Tool installation and invocation](https://clojure.org/reference/clojure_cli#tool_install) 
+in the Clojure CLI Reference. As I add global tools, I am removing them as aliases.
 
-The main alias I use here is `:repl` which starts various combinations of REPL tooling via the Clojure CLI REPL, through the use of aliases.
+The main alias I use here is `:repl` which starts various combinations of REPL 
+tooling via the Clojure CLI REPL, through the use of aliases.
 
 _Since it is my personal file, it may make assumptions about my own environment. I make no effort at backward-compatibility and may add, delete, or change aliases as they benefit me personally. Caveat Programmer!_
 
 **If you want a really well-documented, well-maintained alternative that actually tracks versions of tools, I would recommend you use the [Practicalli Clojure `deps.edn`](https://github.com/practicalli/clojure-deps-edn) project instead!**
 
-With that caveat out of the way, here is some basic documentation about my tools and aliases (there are additional examples in the comments in the `deps.edn` file itself). _Note: I have recently cleaned this file up and removed a lot of aliases I no longer use!_
+With that caveat out of the way, here is some basic documentation about my tools 
+and aliases (there are additional examples in the comments in the `deps.edn` file 
+itself). _Note: I have recently cleaned this file up and removed a lot of aliases I no longer use!_
 
-I start a REPL using `clojure -M:repl` with several additional aliases to bring in various tooling, such as Portal, `rephrase`, and CIDER nREPL middleware.
+I start a REPL using `clojure -M:repl` with several additional aliases to bring 
+in various tooling, such as Portal, `rephrase`, and CIDER nREPL middleware.
 
 There is also a `bin/repl` bash script that runs
 `clojure "$@" -M:1.13:allow-attach-self:portal:test:cider-nrepl:rephrase:repl`
@@ -36,9 +51,12 @@ nREPL can stop evaluation threads.
 
 ## Basic Tools
 
-These are installed via `clojure -Ttools install ...` and usable via `clojure -T` with the tool name.
+These are installed via `clojure -Ttools install ...` and usable via `clojure -T` 
+with the tool name.
 
-> Note: I have removed `antq` from this section because I have switched over to `antq` installed directly via [`bbin`](https://github.com/babashka/bbin), as I adopt more Babashka-based tooling.
+> Note: I have removed `antq` from this section because I have switched over to 
+`antq` installed directly via [`bbin`](https://github.com/babashka/bbin), as I 
+adopt more Babashka-based tooling.
 
 * `clj-watson` -- a software composition analysis scanner, based on the National Vulnerability Database: [clj-watson](https://github.com/clj-holmes/clj-watson)
   * `clojure -Tclj-watson scan :deps-edn-path '"deps.edn"' :output '"stdout"'`
@@ -95,26 +113,10 @@ There are aliases to pull in and start various REPL-related tools:
 There are aliases to pull in specific versions of Clojure:
 * `:1.13` -- Clojure 1.13.0-alpha11 -- see [changes to Clojure in the 1.13 Alpha releases](https://clojure.org/releases/devchangelog#_release_1_13_x)
 * `:1.12` -- Clojure 1.12.6 -- see [changes to Clojure in version 1.12.6](https://github.com/clojure/clojure/blob/master/changes.md)
-  * `:1.12.0` -- Clojure 1.12.0
-  * `:1.12.1` -- Clojure 1.12.1
-  * `:1.12.2` -- Clojure 1.12.2
-  * `:1.12.3` -- Clojure 1.12.3
-  * `:1.12.4` -- Clojure 1.12.4
-  * `:1.12.5` -- Clojure 1.12.5
 * `:1.11` -- Clojure 1.11.4
-  * `:1.11.3` -- Clojure 1.11.3
-  * `:1.11.2` -- Clojure 1.11.2
-  * `:1.11.1` -- Clojure 1.11.1
-  * `:1.11.0` -- Clojure 1.11.0
 * `:1.10` -- Clojure 1.10.3
-  * `:1.10.2` -- Clojure 1.10.2
-  * `:1.10.1` -- Clojure 1.10.1
-  * `:1.10.0` -- Clojure 1.10.0
 * `:1.9` -- Clojure 1.9.0
-* `:1.8` -- Clojure 1.8.0
 * ... back to `:1.0` (note: `:1.5` is actually Clojure 1.5.1 to avoid a bug in Clojure 1.5.0, and `:1.2` is 1.2.1)
-
-> Note: the `:master` alias has been removed since it is rarely different from the most recent (alpha) release of Clojure.
 
 To work with the Polylith command-line tool:
 * `:poly` -- the latest (stable) release of [Polylith's `poly` tool](https://github.com/polyfy/polylith), as a library from Clojars -- example usage:
