@@ -5,6 +5,8 @@
 .cljconf/org.clojure/clojure-cli.repl/.calva/repl.calva-repl
 .cljconf/org.clojure/clojure-cli.repl/clojuredocs-export.json
 .cljconf/org.clojure/clojure-cli.repl/history
+.cljr-clojure-main
+.cljr/clojure-main/
 .cpcache
 .lsp/.cache
 .nrepl-port
@@ -13,5 +15,3 @@
 clj.cp
 outdated.txt
 tools/tools.edn
-.cljr-clojure-main
-.cljr/clojure-main/

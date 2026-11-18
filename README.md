@@ -112,7 +112,7 @@ There are aliases to pull in and start various REPL-related tools:
 
 There are aliases to pull in specific versions of Clojure:
 * `:1.13` -- Clojure 1.13.0-alpha11 -- see [changes to Clojure in the 1.13 Alpha releases](https://clojure.org/releases/devchangelog#_release_1_13_x)
-* `:1.12` -- Clojure 1.12.6 -- see [changes to Clojure in version 1.12.6](https://github.com/clojure/clojure/blob/master/changes.md)
+* `:1.12` -- Clojure 1.12.7 -- see [changes to Clojure in version 1.12.7](https://github.com/clojure/clojure/blob/master/changes.md)
 * `:1.11` -- Clojure 1.11.4
 * `:1.10` -- Clojure 1.10.3
 * `:1.9` -- Clojure 1.9.0
@@ -125,7 +125,7 @@ To work with the Polylith command-line tool:
   * `clojure -M:poly create component name:user` -- create a `user` component in a Polylith workspace,
   * `clojure -M:poly test :dev` -- run tests in the `dev` project context, in a Polylith workspace.
 
-> Note: the _EXPERIMENTAL_ `:add-libs` alias has been removed -- use the [`clojure.repl.deps`](https://clojure.github.io/clojure/branch-master/clojure.repl-api.html#clojure.repl.deps) in Clojure 1.12.0 or later instead!
+> Note: the _EXPERIMENTAL_ `:add-libs` alias has been removed -- use the [`clojure.repl.deps`](https://clojure.github.io/clojure/clojure.repl-api.html#clojure.repl.deps) functions in Clojure 1.12.0 or later instead!
 
 ## My Clojure CLI REPL Setup
 
