@@ -13,3 +13,5 @@
 clj.cp
 outdated.txt
 tools/tools.edn
+.cljr-clojure-main
+.cljr/clojure-main/
