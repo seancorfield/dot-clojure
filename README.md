@@ -9,7 +9,7 @@ provide a range of examples that folks new to the Clojure CLI might find helpful
 
 **I highly recommend ensuring you have [the latest Clojure CLI](https://clojure.org/releases/tools) installed!**
 
-> The latest Clojure CLI was 1.12.6.1673 (September 7th, 2026) when I last updated this file.
+> The latest Clojure CLI was 1.12.7.1681 (November 18th, 2026) when I last updated this file.
 
 Since the release of the [Clojure CLI REPL](https://github.com/clojure/clojure-cli.repl), 
 my `.cljconf/org.clojure` folder is also here, containing my personal configuration 
